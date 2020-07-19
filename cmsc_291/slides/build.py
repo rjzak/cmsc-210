@@ -16,11 +16,14 @@ def build_directory(location: str):
         build_dir.mkdir(parents=True)
     yield build_dir
 
+
 def static_dir_path() -> str:
     return str(Path(__file__).parent / "static_files")
 
+
 def images_dir_path() -> str:
     return str(Path(__file__).parent / "images")
+
 
 def copy_static_files(location: str = "build"):   
     with build_directory(location) as build_dir:
@@ -28,4 +31,3 @@ def copy_static_files(location: str = "build"):
                  (images_dir_path(), str(build_dir / "images")))
         for src, dest in pairs:
             copytree(src, dest)
-
