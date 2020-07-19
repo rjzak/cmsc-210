@@ -3,7 +3,6 @@ from pathlib import Path
 from shutil import copytree, rmtree
 
 
-
 def reset_build_dir(location: str = "build"):
     build_dir = Path(__file__).parent.parent.parent / location
     if build_dir.exists():

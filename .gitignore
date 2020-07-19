@@ -109,3 +109,6 @@ build/
 
 # Mac junk
 .DS_Store
+
+# Github pages exclusions
+!docs/dist/
