@@ -5,13 +5,13 @@ from .template import build_index
 
 logger = logging.getLogger("cmsc_291")
 
-def build():
+def build(location: str = "build"):
     logging.basicConfig(level=logging.DEBUG, format="%(levelname)s:%(message)s")
-    reset_build_dir()
+    reset_build_dir(location)
     logger.info("Copying static files...") 
-    copy_static_files()
+    copy_static_files(location)
     logger.info("Rendering templates...") 
-    build_index()
+    build_index(location)
 
 
 if __name__ == "__main__":

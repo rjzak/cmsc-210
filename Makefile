@@ -29,6 +29,9 @@ help:
 build: ## build HTML slides from sources
 	@python -c "from cmsc_291.slides import build; build()"
 
+build-gh-pages: ## build HTML slides from sources to the Github Pages directory (docs)
+	@python -c "from cmsc_291.slides import build; build(location='docs')"
+
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
 clean-build: ## remove build artifacts
