@@ -1,0 +1,475 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 1{% endblock %}
+{% block slides %}
+<section id="course-name">
+		<h2>Special Topics in Computer Science:</h2>
+		<h3>Continued Computer Science for Non-majors</h3>
+	</section>
+
+<section id="title">
+	<h2>Lecture 1</h2>
+	<h3>Course overview & Python review</h3>
+</section>
+
+<section id="about-me">
+	<h2>Your professor:</h2>
+	<div class="container">
+		<div class="left">
+			<ul class="medium">
+				<li>Graduated from Johns Hopkins, where I studied music and English literature</li>
+				<li>I've worked everywhere from startups and established companies as a software engineer</li>
+				<li>I've been in healthcare, government, publishing & media, and&mdash;currently&mdash;mineral exploration</li>
+				<li>Outside of work, I love music: listening, playing, and writing it.</li>
+			</ul>		
+		</div>
+		<div class="right">
+			<img width="300" src="images/instructor_photo.jpg" style="margin: 0px">
+			<p>James Stevenson</p>
+		</div>
+	</div>
+</section>
+
+<section id="about-you">
+	<h2>Now it's your turn:</h2>
+	<ul>
+		<li>Your name</li>
+		<li>Year</li>
+		<li>Major (and minor if applicable)</li>
+		<li>One thing that you like and/or like to do</li>
+	</ul>
+</section>
+
+<section id="course-overview-1">
+	<h2>Course basics</h2>
+	<ul>
+		<li>For all majors other than CS/CE and pre-CS/CE</li>
+		<li>Prerequisites:
+			<ol>
+				<li><a href="https://www.csee.umbc.edu/courses/undergraduate/201/">CMSC 201</a> (with a C or better)</li>
+				<li><a href="https://catalog.umbc.edu/preview_course.php?catoid=25&coid=76382">MATH 150</a> or <a href="https://catalog.umbc.edu/preview_course.php?catoid=25&coid=76385">MATH 155</a> (with a C or better)</li>
+			</ol>
+		</li>
+		<li>Is <em>not</em> equivalent to <a href="https://www.csee.umbc.edu/courses/undergraduate/202/">CMSC 202</a>, Computer Science II</li>
+		<li>Does <em>not</em> count as a CMSC elective for CS majors</li>
+		<li>3 credits, no lab</li>
+		<li>In short, this class is worth nothing outside of the 3 credits.  Oh and, the educational value of course.</li>
+	</ul>
+</section>
+
+<section id="course-overview-2">
+	<ul>
+		<li>We'll use Blackboard</li>
+		<li>Our TA is TBD.</li>
+		<li>This course is mostly Python</li>
+	</ul>
+</section>
+
+<section id="course-overview-3">
+	<h2>When do I use...</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>UMBC gl system?</th><th>My own computer + Github?</th>
+			</tr>							
+		</thead>
+		<tbody>
+			<tr>
+				<td>When you submit a <strong>project</strong>.</td>
+				<td>When you submit an <strong>assignment</strong>.</td>
+			</tr>
+		</tbody>
+	</table>
+</section>				
+
+<section id="grading">
+	<h2>Grading scheme</h2>
+	<p>There are <em>seven assignments</em>, mostly programming and they are due approximately every other week.</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Type</th><th>Points Each</th><th>Subtotal</th>
+			</tr>							
+		</thead>
+		<tbody>
+			<tr><td>Assignment 1</td><td>50</td><td>50</td></tr>
+			<tr><td>Assignment 2</td><td>100</td><td>100</td></tr>
+			<tr><td>Assignments 3 - 7</td><td>150</td><td>750</td></tr>
+			<tr><td colspan="2"><strong>Total</strong></td><td><strong>1,000</strong></td></tr>
+		</tbody>
+	</table>
+</section>			
+
+<section id="final-exam">
+	<h2>Final exam</h2>
+	<p>There isn't one. But we will meet for some activity, TBD.</p>
+</section>
+
+<section id="submissions-and-late-policy">
+	<h2>Submissions & lateness policy</h2>
+	<ul>
+		<li>Assignments will be due on Monday mornings at <code>11:59:59.999999</code>, unless otherwise announced.</li>
+		<li>Late assignments will receive a <strong>zero</strong>.</li>
+	</ul>
+</section>
+
+<section id="academic-integrity-1">
+	<h2>Academic integrity</h2>
+	<ul>
+		<li><em>Never</em> submit work done by someone else as your own.</li>
+		<li>If it's another student's work, you will both get a zero on the assignment, at minimum.</li>
+		<li>I must report integrity violations to UMBC’s Academic Misconduct Reporting Database.</li>
+		<li>Read the UMBC Undergraduate Student <a href="https://aetp.umbc.edu/files/2015/09/iii-1.10.03.pdf">Academic Conduct Policy</a></li>
+	</ul>
+</section>
+
+<section id="academic-integrity-2">
+	<h2>There are ways to get help if you're struggling!</h2>
+	<ul>
+		<li>You can talk to your classmates about concepts</li>
+		<li>You can talk to your TA or come to my office hours (check Blackboard for these)</li>
+		<li>You can compare the output of your program to someone else's ("Did I do this right?")</li>
+		<li>You can work on <strong>practice</strong> problems together.</li>
+		<li>You can get help if your computer is having problems at the <a href="https://doit.umbc.edu/tsc/">Technology Support Center</a></li>
+	</ul>
+</section>
+
+<section id="assignments">
+	<h2>First assignment</h2>
+	<p>Get familiar with Blackboard and do some basic admin there...</p>
+	<ul>
+		<li>First Day Survey (under Assignments)</li>
+		<li>Hardware/Software Questionnaire (under Assignments)</li>
+		<li>Course Syllabus Acknowledgement (under Discussions)</li>
+	</ul>
+</section>
+
+<section id="course-objectives">
+	<h3>Course objectives</h3>
+	<h2>1. Become a better software engineer</h2>
+	<ul>
+		<li>Learn Python: more and better</li>
+		<li>Develop and structure more complex programs</li>
+		<li>Understand software engineering fundamentals:
+			<ul>
+				<li>tooling</li>
+				<li>design</li>
+				<li>distribution</li>
+				<li>debugging</li>
+				<li>testing</li>
+				<li>version control</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+
+<section id="course-objectives">
+	<h3>Course objectives</h3>
+	<h2>2. Build useful things</h2>
+	<ul>
+		<li>Acquire, analyze, and visualize data</li>
+		<li>Build a graphical user interface (GUI)</li>
+		<li>Build a web application</li>
+	</ul>
+</section>
+
+<section id="why-bother">
+	<h2>Why?</h3>
+	<p>The skills you learn here can help you in future courses, in research and internships, and in your career.</p>
+</section>				
+
+<section id="questions">
+	<h2>Any questions?</h3>
+</section>	
+
+<section id="python-categorized">
+	<p>Python is a interpreted, dynamically-typed, and strongly-typed language with garbage collection and signifigant whitespace.</p>
+</section>
+
+<section id="interpreted">
+	<div class="container">
+		<div class="left">
+			<h3>Interpreted <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
+			<ul>
+				<li>Program ☞ Source Code</li>
+				<li>To run the program, you require an interpreter</li>
+				<li>Examples: Python, JavaScript</li>
+			</ul>
+		</div>
+		<div class="right">
+			<h3>Compiled</h3>
+			<ul>
+				<li>Program ☞ Executable</li>
+				<li>No interpreter needed to run the program.</li>
+				<li>Examples: C++, Java</li>
+			</ul>
+		</div>
+</section>
+
+<section id="dynamically-typed">
+	<div class="container">
+		<div class="left">
+			<h3>Dynamic Types <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
+			<ul>
+				<li>Types are checked at runtime.</li>
+			</ul>
+		</div>
+		<div class="right">
+			<h3>Static Types</h3>
+			<ul>
+				<li>Types checked at compile time (or before running).</li>
+			</ul>
+		</div>
+</section>
+
+<section id="strongly-typed">
+	<div class="container">
+		<div class="left">
+			<h3>Strong Types <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
+			<ul>
+				<li>Compiler or interpreter will not try to correct type errors by coercing types.</li>
+			</ul>
+			<pre><code data-trim data-noescape class="python">
+				>>> 1 + "1"
+				TypeError
+			</code></pre>
+		</div>
+		<div class="right">
+			<h3>Weak Types</h3>
+			<ul>
+				<li>Compiler or interpreter may implicitly coerce types to avoid type errors.</li>
+			</ul>
+			<pre><code data-trim data-noescape class="python">
+				>>> 1 + "1"
+				"11"
+			</code></pre>							
+		</div>
+</section>
+
+<section id="garbage-collection">
+	<div class="container">
+		<div class="left">
+			<h3>Automatic memory management <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
+			<ul>
+				<li>Memory is managed for you by the Python runtime.</li>
+				<li>The garbage collector reclaims memory when no longer needed.</li>
+			</ul>
+		</div>
+		<div class="right">
+			<h3>Manual memory management</h3>
+			<ul>
+				<li>It's up to you to manage you own memory.</li>
+				<li>The programmer is responsible for allocating and de-allocating memory.</li>
+			</ul>
+		</div>
+</section>
+
+<section id="signifigant-whitespace">
+	<div class="container">
+		<div class="left">
+			<h3>Blocks expressed by indentation <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
+			<pre><code class="hlpython" data-trim data-line-numbers>
+				if some_number == 2:
+					print("It's two!")
+				print("All done.")
+			</code></pre>
+		</div>
+		<div class="right">
+			<h3>Blocks are surronded by characters</h3>
+			<pre><code class="hljs" data-trim data-line-numbers>
+				if (some_number == 2) {
+					print("It's two!")
+				}
+				print("All done.")
+			</code></pre>							
+		</div>
+</section>
+
+<section id="numeric-types">
+	<h2>Numeric Types</h2>					
+	<pre><code class="hlpython" data-trim data-line-numbers>
+			# Integer (whole number)
+			a = 255
+			# Float (decimal type)
+			b = 255.1
+			c = float(255)  # Or c = 255.0
+		</code></pre>
+</section>
+
+<section id="numeric-operations">
+	<h2>Numeric Operations</h2>
+	<ul>
+		<li>Addition (<code>+</code>)</li>
+		<li>Subtraction (<code>-</code>)</li>
+		<li>Multiplication (<code>*</code>)</li>
+		<li>Divison (<code>/</code>, this always gives you a float)</li>
+		<li>"Floor" division (<code>//</code>, this always gives you an int)</li>
+		<li>Modulo (<code>%</code>, gives you the remainder)</li>
+		<li>Rounding (<code>round(1 / 3, 2)</code>)</li>
+	</ul>
+</section>
+
+<section id="string-types">
+	<h2>String Type</h2>					
+	<pre><code class="hlpython" data-trim data-line-numbers>
+			a = "I am a string"
+			b = 'I am a string'  
+			c = """I am a string""" # a, b, and c are equal.
+			# Backslashes used for escaping:
+			d = "I am a string \"with a quote\"."
+			e = """I am a 
+			multiline string."""
+		</code></pre>
+</section>				
+<section id="string-operations">
+	<h3>String Operations</h3>
+	<ul style="font-size: 85%; width: 400px">
+		<li>Concatenation <pre><code>"left " + "right"</code></pre></li>
+		<li>Changing case <pre><code>"a string".upper().lower()</code></pre></li>
+		<li>Stripping <pre><code>" a string ".strip()</code></pre></li>
+		<li>Splitting <pre><code>"A, B, C".split(", ")</code></pre></li>
+		<li>Joining <pre><code>", ".join(["A", "B", "C"])</code></pre></li>
+	</ul>
+</section>
+
+<section id="control-structures-decision">
+	<h3>Control structures: decision</h3>					
+	<pre><code class="hlpython" data-trim data-line-numbers>
+		# Simple:
+		if a == 2:
+			print("A is 2.")
+		
+		# Complex:
+		if a == 2:
+			print("A is 2.")
+		elif a == 3:
+			print("A is 3.")
+		else:
+			print("A is not 2 or 3.")
+		</code></pre>
+</section>
+
+<section id="control-structures-iteration">
+	<h3>Control structures: iteration</h3>					
+	<pre><code class="hlpython" data-trim data-line-numbers>
+		# WHILE: keep looping until some condition is met.
+		a = 1
+		while a < 4:
+			a = a + 1
+
+		# FOR: go through each item in an iterable.							
+		b = 0
+		for number in [1, 2, 3]:
+			b = b + number
+		</code></pre>
+</section>
+
+<section id="lists">
+	<h3>Iterables: lists</h3>
+	<ul style="font-size: 75%; width: 600px">
+		<li>Compound type</li>
+		<li>Mutable: 
+			<pre><code data-trim data-line-numbers>
+				>>> my_list = [1, 2, 3]
+				>>> my_list.append(4)
+				>>> my_list
+				[1, 2, 3, 4]
+			</code></pre>
+		</li>
+		<li>Ordered</li>
+		<li>Random access to any element or subset
+			<pre><code data-trim data-line-numbers>
+				>>> my_list = [1, 2, 3, 4]
+				>>> my_list[0]
+				1
+				>>> my_list[1]
+				2
+				>>> my_list[-1]
+				4
+				>>> my_list[0:2]
+				[1, 2]
+				</code></pre>
+		</li>
+	</ul>							
+</section>
+
+<section id="lists-2">
+	<h3>Iterables: more lists</h3>
+	<ul style="font-size: 75%; width: 600px">
+		<li>Lists have a length
+			<pre><code data-trim data-line-numbers>
+				>>> my_list = [1, 2, 3]
+				>>> len(my_list)
+				>>> 3
+			</code></pre>
+		</li>
+		<li>Can test for membership:</li>
+			<pre><code data-trim data-line-numbers>
+				>>> my_list = [1, 2, 3, 4]
+				>>> 4 in my_list
+				True
+				>>> 5 in my_list
+				False
+				</code></pre>
+		</li>
+	</ul>							
+</section>				
+
+<section id="dictionaries">
+	<h3>Dictionaries</h3>				
+	<ul>
+		<li>Compound type</li>
+		<li>Unordered set of key-value pairs</li>
+		<li>Keys must be unique</li>
+		<li>Keys must be of an immutable and hashable type</li>
+		<li>Values do not have to be unique</li>
+		<li>Values may be immutable or mutable</li>
+	</ul>
+</section>
+
+<section id="dictionaries-2">
+	<pre><code class="hlpython" data-trim data-line-numbers>
+		pals = {
+			"Bob": 2,
+			"Carol": 1,
+			"Kim": 0
+		}
+
+		# How many times have I hung out with Bob?					
+		pals["Bob"]  # I know Bob is in there
+		pals.get("Bob")  # I don't know
+		pals.get("Bob", 0)  # I want a default number.
+
+		# Bob and I are no longer pals :-(
+		def pals["Bob"]  
+
+		# I want a list of my friends' names
+		pals.keys()
+		
+		# How many times have I hung out with all friends?
+		sum(pals.values())
+
+		# Am I pals with Bob?
+		"Bob" in pals
+		</code></pre>
+</section>
+
+<section id="functions">
+	<h3>Functions</h3>
+	<ul style="width: 600px; font-size: 75%">
+		<li>Allow us to name a block of code (the same way we might nave a value using a variable)</li>
+		<li>Take <em>zero or more</em> values as arguments</li>
+		<li>Return <em>one</em> value</li>
+		<li>Allow us to organize our programs and avoid code duplication.</li>
+		<li>Are defined using the <code>def</code> keyword</li>
+		<li>The <em>body</em> of the function follows the definition and is indented
+			<pre><code class="hlpython" data-trim data-line-numbers>
+				def add_numbers(number_a, number_b):
+					sum = number_a + number_b
+					return sum
+				
+				add_numbers(5, 4)
+			</code></pre>
+		</li>
+	</ul>	
+</section>	
+{% endblock %}

@@ -1,0 +1,27 @@
+.medium {
+    font-size: 18px;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+    width: 50%
+}
+.right {
+    float: right;
+    width: 50%
+}
+p, ul {
+    font-size: 90%;
+}
+
+.bad {
+    color: #A82121;
+}
+
+.good {
+    color: #25904A;
+}

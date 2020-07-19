@@ -1,0 +1,311 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 2{% endblock %}
+{% block slides %}
+<section id="title">
+	<h2>Lecture 2</h2>
+	<h3>Fancy Python</h3>
+</section>
+
+<section id="zen-of-python">
+	<img src="images/zen.png">
+</section>
+
+
+<section id="zen-of-python-2">
+	<pre><code class="hlpython" data-trim>
+		>>> import this
+		The Zen of Python, by Tim Peters
+
+		Beautiful is better than ugly.
+		Explicit is better than implicit.
+		Simple is better than complex.
+		Complex is better than complicated.
+		Flat is better than nested.
+		Sparse is better than dense.
+		Readability counts.
+		Special cases aren't special enough to break the rules.
+		Although practicality beats purity.
+		Errors should never pass silently.
+		Unless explicitly silenced.
+		In the face of ambiguity, refuse the temptation to guess.
+		There should be one-- and preferably only one --obvious way to do it.
+		Although that way may not be obvious at first unless you're Dutch.
+		Now is better than never.
+		Although never is often better than *right* now.
+		If the implementation is hard to explain, it's a bad idea.
+		If the implementation is easy to explain, it may be a good idea.
+		Namespaces are one honking great idea -- let's do more of those!
+	</code></pre>						
+</section>
+
+<section id="zen-of-python-2">
+		<ul>
+			<li>Readability and clarity matters.</li>
+			<li>Strive keep things as simple as they can be.</li>
+			<li>Be explicit about what you're doing. Ambiguity is to be avoided.</li>
+			<li>Working code beats what's in your head</li>
+			<li>...but if you should be able to explain what you're doing to someone else clearly</li>
+			<li>...and sometimes you have to step away and reset.</li>
+		</ul>
+</section>
+
+<section id="announcements">
+	<h2>Announcements</h2>
+	<p>Python Coding Standards posted <a href="#">in Blackboard</a></p>
+	<p>Installfest this Thursday! Bring your computer to class.</p>
+	<img src="images/computer-fire.gif">
+</section>
+
+<section id="more-data-structures">
+	<p>Lists and dictionaries are useful, but there are some other data structures that will come in handy too...</p>
+	<h2>Two more data structures:</h2>
+</section>
+
+<section id="tuples">
+	<h2>Tuples</h2>
+	<ul>
+		<li>Tuples are sequences of values. They are iterable.</li>
+		<li><code>my_tuple = (1, 2, 3, 4, 5)</code></li>
+		<li>Immutable (unlike lists), but otherwise act the same</li>
+		<li>Heterogenous types are OK: <code>("A", 55, True)</code></li>
+		<li>Less memory (and sometimes) faster than lists.</li>
+		<li>One-item tuples are a little weird: <code>(1, )</code></li>
+	</ul>
+</section>
+
+<section id="sets">
+	<h2>Sets</h2>
+	<ul>
+		<li>Same concept as a mathematical set.</li>
+		<li>They are iterable, <em>but not ordered</em>.</li>
+		<li><code>my_set = {1, 2, 3}</code></li>
+		<li>...or: <code>my_set = set([1, 2, 3])</code></li>
+		<li>Heterogenous types are OK: <code>{"A", 55, True}</code></li>
+		<li>They are mutable.</li>
+		<li>Provide a much faster answer to "is this thing in that sequence?" than tuples or lists.</li>
+	</ul>
+</section>
+
+<section id="set-operations">
+	<table class="medium">
+		<thead>
+			<tr>
+				<th>Operation</th>
+				<th>Symbol</th>
+				<th>Syntax</th>
+				<th>Alternative Syntax</th>
+			</tr>							
+		</thead>
+		<tbody>
+			<tr>
+				<td>union</td>
+				<td>A ∪ B</td>
+				<td><code>A | B</code></td>
+				<td><code>A.union(B)</code></td>
+			</tr>
+			<tr>
+				<td>intersection</td>
+				<td>A ∩ B,</td>
+				<td><code>A & B</code></td>
+				<td><code>A.intersection(B)</code></td>
+			</tr>
+			<tr>
+				<td>difference</td>
+				<td>A \ B</td>
+				<td><code>A - B</code></td>
+				<td><code>A.difference(B)</code></td>
+			</tr>
+			<tr>
+				<td>symmetric difference</td>
+				<td>A ⊖ B</td>
+				<td><code>A ^ B</code></td>
+				<td><code>A.symmetric_difference(B)</code></td>
+			</tr>																				
+			<tr>
+				<td>super set</td>
+				<td>A ⊇ B</td>
+				<td><code>A >= B</code></td>
+				<td><code>A.issuperset(B)</code></td>
+			</tr>														
+
+		</tbody>
+	</table>
+</section>
+
+<section id="modules-1">
+	<h2>Python Modules</h2>
+</section>				
+
+<section id="modules-2">
+	<h2>Execution model:</h2>
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# cats.py
+
+		def feed(name, oz, kind):
+			print(f"$name has been fed $oz ounces of $kind.")
+
+		def change_litter():
+			print("Litter box is changed.")
+		
+		feed("Percy", 4, "Lil' Bits")
+		change_litter()
+	</code></pre>
+	<pre><code class="hlshell" data-trim>
+		python cats.py
+	</code></pre>					
+</section>
+
+<section id="modules-3">
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# dogs.py
+
+		def feed(name, oz, kind):
+			print(f"$name has been fed $oz ounces of $kind.")
+
+		def walk():
+			print("Let's go for a walk!")
+		
+		feed("Teddy", 8, "Ol' Stinky")
+		walk()
+	</code></pre>
+	<pre><code class="hlshell" data-trim>
+		python dogs.py
+	</code></pre>					
+	<pre><code class="hlshell" data-trim>
+		>>> import dogs
+	</code></pre>					
+
+</section>
+
+<section id="modules-4">
+	<img src="images/modules_1_screengrab.png">
+</section>
+
+<section id="modules-5">
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# animals.py
+
+		def feed(name, oz, kind):
+			print(f"$name has been fed $oz ounces of $kind.")
+	</code></pre>				
+</section>
+
+<section id="modules-6">
+	<img src="images/modules_2_screengrab.png">
+</section>
+
+
+<section id="modules-7">
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# dogs.py
+		from animals import feed
+
+		def walk():
+			print("Let's go for a walk!")
+		
+		feed("Teddy", 8, "Ol' Stinky")
+		walk()
+	</code></pre>
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# cats.py
+		from animals import feed
+
+		def change_litter():
+			print("Litter box is changed.")
+		
+		feed("Percy", 4, "Lil' Bits")
+		change_litter()
+	</code></pre>						
+</section>
+
+<section id="modules-8">
+	<h2>Importing has side effects:</h2>
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		>>> import cats
+		Percy has been fed 4 ounces of Lil' Bits
+		Litter box is changed.
+	</code></pre>
+</section>
+
+<section id="modules-9">
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# dogs.py
+		from animals import feed
+
+		def walk():
+			print("Let's go for a walk!")
+		
+		if __name__ == "__main__":
+			feed("Teddy", 8, "Ol' Stinky")
+			walk()
+	</code></pre>
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# cats.py
+		from animals import feed
+
+		def change_litter():
+			print("Litter box is changed.")
+		
+		if __name__ == "__main__":
+			feed("Percy", 4, "Lil' Bits")
+			change_litter()
+	</code></pre>						
+</section>
+<section id="modules-10">
+	<pre><code class="hlshell" data-trim>
+		python dogs.py
+		Teddy has been fed 8 ounces of Ol' Stinky
+		Let's go for a walk!
+	</code></pre>					
+	<pre><code class="hlshell" data-trim>
+		>>> import dogs
+	</code></pre>	
+</section>	
+
+<section id="modules-11">
+	<h2>Submodules</h2>
+	<img src="images/modules_3_screengrab.png">
+</section>	
+
+<section id="modules-12">
+	<h2>Importing submodules:</h2>
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# dogs.py
+		from animals.food import feed
+		from animals.sleep import short_nap
+
+		def walk():
+			print("Let's go for a walk!")
+		
+		if __name__ == "__main__":
+			feed("Teddy", 8, "Ol' Stinky")
+			walk()
+			short_nap()
+	</code></pre>					
+</section>
+
+<section id="modules-13">
+	<h2>Alternative import:</h2>
+	<pre class="medium"><code class="hlpython" data-trim data-line-numbers>
+		# dogs.py
+		from animals import food, sleep
+
+		def walk():
+			print("Let's go for a walk!")
+		
+		if __name__ == "__main__":
+			food.feed("Teddy", 8, "Ol' Stinky")
+			walk()
+			sleep.short_nap()
+	</code></pre>					
+</section>
+
+<section id="modules-14">
+	<pre class="medium"><code class="hlpython" data-trim>
+	from animals import food
+	
+	food.feed("Percy", 4, "Lil' Bits")
+	</code></pre>
+	<p>Modules are actually kind of like dictionaries, but with different syntax. Instead of <code>food["feed"]</code> you do <code>food.feed</code>.</p>
+</section>
+{% endblock %}

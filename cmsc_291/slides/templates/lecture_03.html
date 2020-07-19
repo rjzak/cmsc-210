@@ -1,0 +1,407 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 3{% endblock %}
+{% block slides %}
+<section id="title">
+	<h2>Lecture 3</h2>
+	<h3>Local Development, Command-line Interfaces, &amp; Git</h3>
+</section>
+
+<section id="local-dev">
+	<h2>What is local development?</h2>
+    <ul>
+    <li>It's how most software is written</li>
+    <li>...but probably not how <em>you</em> wrote software.</li>
+    <li>You write, test, build, &amp; run software on your own computer.</li>
+    <li>You share and publish your code using a version-control system (VCS).</li>
+    </ul>
+</section>
+
+<section id="remote-dev">
+    <p>By contrast, what you did in CMSC 201, using SSH to connect 
+        to a Linux server (GL) where you would edit and run your files is called
+        <em>remote development</em>.</p>
+    <img src="images/umbc_gl.png">
+</section>
+
+<section id="local-vs-remote-dev">
+	<table class="medium">
+		<thead>
+			<tr>
+                <th>Remote <div style="float: right">VS.</div></th>
+                <th>Local</th>
+			</tr>							
+		</thead>
+		<tbody style="vertical-align: top;">
+			<tr>
+                <td><span class="good">Pro</span>: Everything is installed for you by the administrator.</td>
+                <td><span class="bad">Con</span>: It's up to you to learn to install and configure what you need to run your code.</td>                
+            </tr>
+            <tr>
+                <td><span class="good">Pro</span>: Backups are handled for you.</td>
+                <td><span class="bad">Con</span>: You're responsible for backups.</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><span class="good">Pro</span>: ...but a VCS provides powerful ways to backup &amp; share code once you learn it (<em>more on that later...</em>)</td>
+            </tr>
+            <tr>
+                <td><span class="bad">Con</span>: You can't develop without an internet connection</td>
+                <td><span class="good">Pro</span>: You can devlop with no or slow interent</td>
+            </tr>
+            <tr>
+                <td><span class="bad">Con</span>: Using emacs over SSH is a primitive, painstaking, slow way to program</td>
+                <td><span class="good">Pro</span>: You have and incredibly rich set of tools to help you write code.</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><span class="good">Pro</span>: you can configure you development environment however you like</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><span class="bad">Con</span>: you can configure you development environment however you like</td>
+            </tr>
+
+        </tbody>
+	</table>
+</section>
+
+<section id="local-dev-continued">
+    <h2>But what is local development?</h2>
+    <ul>
+        <li>Is it working on the commmmand line?</li>
+        <li>Or using programs with a graphical user interface?</li>
+        <li>Yes!</li>
+    </ul>
+</section>
+
+<section id="command-line-1">
+    <h2>Let's start with the command line.</h2>
+</section>
+
+<section id="command-line-2">
+    <h3>You have two options on OS X</h3>
+    <ul>
+        <li>The terminal program that comes with OS X:
+            <img src="images/os_x_terminal_icon.png" style="vertical-align: middle"> 
+        </li>
+        <li>
+            iTerm (download from <a href="https://iterm2.com">iterm2.com</a>):
+            <img src="images/iterm_icon.png" style="vertical-align: middle">    
+        </li>
+        <li>They run the same shell (BASH) but iTerm looks nicer and has more features.</li>
+
+
+    </ul>
+</section>
+
+<section id="command-line-3">
+    <h3>You have two options on Windows</h3>
+    <ul>
+        <li>The commmand prompt (aka CMD):<br>
+            <img src="images/win_cmd.png"> 
+        </li>
+        <li>
+            PowerShell:<br>
+            <img src="images/win_powershell.png">    
+        </li>
+    </ul>
+</section>
+
+<section id="command-line-4">
+    <ul>
+        <li>Command Prompt
+            <ul>
+                <li>is an interface used to basically execute older DOS (Disk Operating System) commands</li>
+                <li>allows the execution of batch files (.BAT)</li>
+            </ul>
+        </li>
+        <li>PowerShell
+            <ul>
+                <li>Runs a totally different shell</li>
+                <li>is available by default (i.e. doesn’t need to be installed) starting with Windows 10</li>
+                <li>can run Command Prompt commands, but the opposite is not necessarily true</li>
+                <li>a lot of commands share names and behaviors with Unix commands</li>
+                <li>is also a scripting language</li>
+            </ul>
+        </li>        
+    </ul>
+</section>
+<section id="command-line-5">
+    <table class="medium" style="width: 100%">
+        <col style="width:16%">
+        <col style="width:28%">
+        <col style="width:28%">
+        <col style="width:28%">        
+        <thead>
+            <tr>
+                <th>Purpose</th>
+                <th>Windows</th>
+                <th>Mac</th>
+                <th>Linux</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Get help</td>
+                <td><pre><code data-trim class="bash hljs">
+                    help command
+                    command /?
+                </code></pre></td>
+                <td><pre><code data-trim class="bash hljs">
+                man command
+                command --help
+                </code></pre></td>
+                <td><pre><code data-trim class="bash hljs">
+                man command
+                command --help
+                </code></pre></td>
+            </tr>
+            <tr>
+                <td>Show current<br>directory</td>
+                <td><pre><code data-trim class="bash hljs">cd</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">pwd</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">pwd</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Change<br>directory</td>
+                <td><pre><code data-trim class="bash hljs">cd new_dir_path</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">cd new_dir_path</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">cd new_dir_path</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Show files in<br>directory</td>
+                <td><pre><code data-trim class="bash hljs">dir</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">ls</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">ls</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Create a<br>new directory</td>
+                <td><pre><code data-trim class="bash hljs">mkdir new_dir</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">mkdir new_dir</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">mkdir new_dir</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Delete a<br>directory</td>
+                <td><pre><code data-trim class="bash hljs">rmdir new_dir_path</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">rmdir new_dir_path</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">rmdir new_dir_path</code></pre></td>            
+            </tr>                                                 
+        </tbody>
+    </table>
+</section>
+
+<section id="command-line-6">
+    <table class="medium" style="width: 100%">
+        <col style="width:16%">
+        <col style="width:28%">
+        <col style="width:28%">
+        <col style="width:28%">        
+        <thead>
+            <tr>
+                <th>Purpose</th>
+                <th>Windows</th>
+                <th>Mac</th>
+                <th>Linux</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Show total<br>file content</td>
+                <td><pre><code data-trim class="bash hljs">type some_file.txt</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">cat some_file.txt</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">cat some_file.txt</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Page through<br>file contents</td>
+                <td><pre><code data-trim class="bash hljs">more large_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">more large_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">more large_file</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Create a<br>new file</td>
+                <td><pre><code data-trim class="bash hljs">echo "text" > new_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">echo "text" > new_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">echo "text" > new_file</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Add to<br>a file</td>
+                <td><pre><code data-trim class="bash hljs">echo "text" >> existing_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">echo "text" >> existing_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">echo "text" >> existing_file</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Rename/Move<br> a file</td>
+                <td><pre><code data-trim class="bash hljs">
+                    # Rename in place
+                    ren old_file new_file  
+                    mv old_file new_file
+                </code></pre></td>
+                <td><pre><code data-trim class="bash hljs">mv old_file new_file</code></pre></td>            
+                <td><pre><code data-trim class="bash hljs">mv old_file new_file</code></pre></td>
+            </tr>
+            <tr>
+                <td>Copy a file</td>
+                <td><pre><code data-trim class="bash hljs">copy old_file new_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">cp old_file new_file</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">cp old_file new_file</code></pre></td>            
+            </tr>                                                 
+        </tbody>
+    </table>    
+</section>
+
+<section id="command-line-7">
+    <table class="medium" style="width: 100%">
+        <col style="width:16%">
+        <col style="width:28%">
+        <col style="width:28%">
+        <col style="width:28%">        
+        <thead>
+            <tr>
+                <th>Purpose</th>
+                <th>Windows</th>
+                <th>Mac</th>
+                <th>Linux</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Python<br>
+                (interactive shell or REPL)</td>
+                <td><pre><code data-trim class="bash hljs">python</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">python3</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">python</code></pre></td>            
+            </tr>
+            <tr>
+                <td>Running a<br>
+                    Python script</td>
+                <td><pre><code data-trim class="bash hljs">python some_script.py</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">python3 some_script.py</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">python some_script.py</code></pre></td>            
+            </tr>                                              
+        </tbody>
+    </table>    
+</section>
+<section id="2-vs-3">
+    <h3>Python 2 VS. 3</h3>
+    <img  src="images/python2_vs_python3.png">
+</section>
+
+<section id="vcs-title" data-background-image="images/branch-background.png">
+    <h2>Version Control Systems</h2>
+    <p>What are they? What are the good for?</p>
+</section>
+<section id="vcs-intro">
+    <p>A version control system (VCS) is...</p>
+    <ul style="font-size: 75%;">
+        <li>A tool that manages files + directories and how they change over time</li>
+        <li>A tool that allows you to recover older versions of your data and examine its history</li>
+        <li>A tool that allows you to group a collection of files and directories together into a single repository (or <em>repo</em> for short).</li>
+        <li>A tool that allows you to syncronize your copy of a repo with a remote copy (push and pull)</li>
+        <li>A tool that allows you to fork and merge branches from your repo.</li>
+    </ul>
+</section>
+<section id="vcs-uses">
+    <p>A VCS is good for...</p>
+    <ul>
+        <li>Allowing you to access a history of your project from its earliest beginning to the present state</li>
+        <li>Allowing you to experiment with changes to your code and back out of these if necessary</li>
+        <li>Allowing a team of software engineers collaborate on a single codebase without stepping on each other's code</li>
+        <li>Allowing a team of software engineers to develop separate components or functionality independently.</li>
+    </ul>
+</section>
+<section id="git-intro">
+<h2>Git <img src="images/git-logo.png" height="100"></h2>
+<p><em>“The information manager from hell”</em><br>
+    <span style="text-align: right">— Linus Torvalds</span>
+</p>
+</section>
+
+<section id="git-concepts">
+    <h3>Git: key concepts</h3>
+</section>
+
+<section id="git-concepts-repo">
+<p><strong>repository/repo</strong>: a database containing all the information needed to retain and manage the revisions and history of a project (this is hidden in <code>.git/objects</code>, <em>don't touch!</em>)</p>
+</section>
+
+<section id="git-concepts-hash">
+    <p><strong>hash</strong>: a unique identifier for each and every version of an object Git tracks. Example: <code>9da581d910c9c4ac93557ca4859e767f5caf5169</code>.  The hash is generated from the contents of a file, becuase Git tracks file content, not file names</p>
+</section>
+
+<section id="git-concepts-commit">
+    <p><strong>commit</strong>: a set of one or more changes to your repo that are grouped together and uniquely identified. Think of it like a snapshot you take of your project that is saved forever or like a save point in a video game.</p>
+    <p>Each commit will also have its own hash. The user, commimt date, and an optional comment will be stored in the repo as well.</p>
+    
+</section>
+
+<section id="git-concepts-head">
+    <p><strong>head</strong>: the latest commit in your history</p>
+</section>
+
+<section id="git-concepts-branch">
+    <p><strong>branch</strong>: a way of launching a separate line of development within a project. Think of it as an alternate timeline, but you can merge it back to the original</p>
+    <p><strong>master</strong>: every project has at least one branch, and it's this one. Think of it as the "original" timeline and you can branch and rejoin it as many times as you want</p>
+</section>
+
+<section id="git-concepts-remote">
+    <p><strong>remote/origin</strong>: a clone of your repo that exists on some other machine</p>
+    <p><strong>clone</strong>: a copy of a repository. A clone contains <em>all</em> the objects from the original, meaning the whole history of the repo is contained in every clone</p>
+</section>
+
+<section id="working-directory">
+    <p><strong>working copy/working directory</strong>: a clone of your repo that exists on <em>your</em> machine. You do your work—creating, editing or removing files and folders—in the working directory</p>
+</section>
+
+<section id="git-push-pull">
+    <p><strong>push</strong>: push your commit(s) from your working copy to a remote</p>
+    <p><strong>pull</strong>: pull someone else's commit(s) from a remote to your working copy</p>
+</section>
+
+<section id="git-staging-area">
+    <p><strong>staging area</strong>: part of the repository that stores information about what will go into your next commit</p>
+</section>
+
+<section id="git-workflow">
+    <p>In git you have to stage files before you commit them.</p>
+    <p><img src="images/git-workflow.png"></p>
+    <p style="font-size: 70%">Think of <code>git-add</code> as being like writing in pencil. <code>git commit</code> is like writing in pen.</p>
+</section>
+
+<section id="git-workflow-2">
+    <h3>Working in Git</h2>
+    <ol start="0" style="font-size: 90%;">
+        <li>Create a new repo (<code>git init</code>) or clone an existing one (<code>git clone</code>).</li>
+        <li>Make some changes until you reach a good save-point.</li>
+        <li>Stage the changes (<code>git add</code>)</li>
+        <li>Commit the changes (<code>git commit</code>)</li>
+        <li>Push the changes to the remote (<code>git push</code>)</li>
+        <li>Go back to step 1.</li>
+    </ol>
+</section>
+
+<section id="git-workflow-2">
+    <h3>Git Tips</h2>
+    <ol style="font-size: 90%;">
+        <li>Comit your work often.</li>
+        <li>Try to write useful commit messages.</li>
+        <li>Git commimts are more-or-less immutable. Try very hard to avoid commiting passwords, private keys, or anything else sensitive to your repo becuase it will be discoverable.</li>
+    </ol>
+</section>
+
+<section id="github-intro">
+    <h2><img src="images/github-logo.png" height="100"></h2>
+    <p>Git and GitHub: software engineering's power couple.</p>
+</section>
+
+<section id="github-intro">
+    <h3>What is Github useful for?</h3>
+    <ul>
+        <li>A place to store your remote that anyone can access</li>
+        <li>Provides security for your remote</li>
+        <li>Provides a browser-based interface for repos browsing</li>
+        <li>Provides issues, wikis, & pull-request tools for projects</li>
+    </ul>
+</section>
+
+{% endblock %}
+
