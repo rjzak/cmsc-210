@@ -4,6 +4,87 @@
 <section id="title">
 	<h2>Lecture 5</h2>
     <h2>Object-Oriented Programming &amp; Debugging</h2>
+</section>
+<section id="oop">
     <h3>(OOP)</h3>
+</section>
+<section id="announcements">
+    <h2>Announcements</h3>
+    <ul>
+        <li>Assignment two will be out soon.</li>
+        <li>That is all.</li>
+    </ul>
+</section>
+<section id="product-types-review-1">
+    <p>Remember how we talked about how tuples, dictionaries, and classes share some similarities?<br>And how they can all be used define heterogenous types?</p>
+</section>
+<section id="product-types-review-2">
+    <p>But I also said:</p>
+    <p><span style="font-size: 125%; font-style: italic;">"Think of classes as tuples/dictionaries+++"</span><div style="text-align: right">—me</span></p>
+</section>
+<section id="product-types-review-3">
+    <p>Notice how our class has methods that belong to it.
+    <p>These methods operate on the data that the instance contains.</p>
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        class Transfer:
+
+            def __init__(self, sender, reciever, amount, date=datetime.now()):
+                self.sender = sender
+                self.reciever = reciever
+                self.amount = amount
+                self.date = date
+                self.processing_fee_applied = False
+
+            def days_ago(self):
+                time_delta = datetime.now() - self.date
+                return time_delta.days
+
+            def apply_processing_fee(fee=Decimal("0.25")):
+                self.amount = self.amount + fee
+                self.processing_fee_applied = True
+    </code></pre>      
+</section>
+<section id="encapsulation-1">
+    <h3>This is called <em>encapsulation</em>.</h3>
+    <ul>
+        <li>Lets us bundle data <em>with</em> methods that operate on it</li>
+        <li>Methods provide an interface to simplify computations on object data:
+            <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+                def days_ago(self):
+                    time_delta = datetime.now() - self.date
+                    return time_delta.days
+            </code></pre>               
+        </li>
+        <li>Methods hide complicated, internal implementation details:
+            <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+                def apply_processing_fee(fee=Decimal("0.25")):
+                    self.amount = self.amount + fee
+                    self.processing_fee_applied = True
+        </code></pre>                
+        </li>
+   </ul>
+</section>
+<section id="encapsulation-2">
+    <p>In a nutshell, encapsulation means binding data and behaviors together in a single unit: the class.</p>
+    <!-- Keeping things that go together in the same place makes life easier. Your data and your behaviors are always grouped together. -->
+    <img src="images/capsule.png" width="350">
+</section>
+<section id="encapsulation-3">
+    <img src="images/encapsulation-strength-scale.png" width="500">
+    <p>In Python (unlike some languages) class variables can never be 100% encapsulated.</p>
+</section>
+<section id="encapsulation-4">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        # Given:
+        t1 = Transfer("Bob", "Sally", Decimal(35.50), datetime(2019, 10, 1))       
+        
+        # Valid:
+        t1.amount = Decimal("10000000000.02")
+        # Valid:
+        del t1.sender
+
+        # In fact...
+        t1.any_property_you_feel_like = 12345
+    </code></pre>    
 </section>
 {% endblock %}
