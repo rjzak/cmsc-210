@@ -1,6 +1,7 @@
 {% extends "slides_base.html" %}
 {% block title %}CMSC 291: Lecture 5{% endblock %}
 {% block slides %}
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet"> 
 <section id="title">
 	<h2>Lecture 5</h2>
     <h2>Object-Oriented Programming &amp; Debugging</h2>
@@ -86,5 +87,196 @@
         # In fact...
         t1.any_property_you_feel_like = 12345
     </code></pre>    
+</section>
+
+<section id="inheritance">
+    <h2>Inheritance</h2>
+</section>
+<section id="pet-store">
+    <p>Let's say you're opening a pet store. The pet store of the future, where everything is run by computer...</p>
+    <h3 style="font-family: 'Gugi', Courier;">RoboPet</h3>
+</section>
+<section id="pet-store-cats-attrs">
+    <p>We will sell cats, so out system must track them and care for them. What are some attributes of cats?</p>
+    <img src="images/cat.svg" width=200 height=200>
+    <ul>
+        <li>Age</li>
+        <li>Weight</li>
+        <li>Sex</li>
+        <li>Breed</li>
+    </ul>
+</section>
+<section id="pet-store-cats-methods">
+    <p>How do we care for cats?</p>
+    <img src="images/cat.svg" width=200 height=200>
+    <ul>
+        <li>Feed them</li>
+        <li>Brush them</li>
+        <li>Change their litter</li>
+    </ul>
+</section>
+<section id="cat-class">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        class Cat:
+
+            def __init__(self, age, weight, sex, breed):
+                self.age = age
+                self.weight = weight
+                self.sex = sex
+                self.breed = breed
+
+            def feed(self, scoops=1):
+                ...
+
+            def brush():
+                ...
+            
+            def change_litter(self):
+                ...
+    </code></pre>      
+</section>
+<section id="pet-store-dogs-attrs">
+    <p>We will also sell dogs, so our system must track them and care for them too. What are some dog attributes?</p>
+    <img src="images/dog.svg" width=200 height=200>
+    <ul>
+        <li>Age</li>
+        <li>Weight</li>
+        <li>Sex</li>
+        <li>Breed</li>
+        <li>Is housebroken?</li>
+    </ul>
+</section>
+<section id="pet-store-dogs-methods">
+    <p>How do we care for dogs?</p>
+    <img src="images/dog.svg" width=200 height=200>
+    <ul>
+        <li>Feed them</li>
+        <li>Brush them</li>
+        <li>Walk them</li>
+    </ul>
+</section>
+<section id="dog-class">
+    <pre style="font-size: 40%"><code class="hlpython" data-trim data-line-numbers>
+        class Dog:
+
+            def __init__(self, age, weight, sex, breed, housebroken=True):
+                self.age = age
+                self.weight = weight
+                self.sex = sex
+                self.breed = breed
+                self.housebroken = housebroken
+
+            def feed(self, scoops=1):
+                ...
+
+            def brush():
+                ...
+            
+            def walk(self):
+                ...
+    </code></pre>      
+</section>
+<section id="dry-explained">
+	<table>
+		<thead>
+			<tr>
+				<th><img src="images/cat.svg" width=100 height=100></th><th><img src="images/dog.svg" width=100 height=100></th>
+			</tr>							
+		</thead>
+		<tbody style="vertical-align: top; font-size: 75%;">
+            <tr><td colspan="2">Attributes</td></tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li style="color:crimson">Age</li>
+                        <li style="color:crimson">Weight</li>
+                        <li style="color:crimson">Sex</li>
+                        <li style="color:crimson">Breed</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li style="color:crimson">Age</li>
+                        <li style="color:crimson">Weight</li>
+                        <li style="color:crimson">Sex</li>
+                        <li style="color:crimson">Breed</li>
+                        <li>Is housebroken?</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr><td colspan="2">Methods</td></tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li style="color:crimson">Feed</li>
+                        <li style="color:crimson">Brush</li>
+                        <li>Change litter</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li style="color:crimson">Feed</li>
+                        <li style="color:crimson">Brush</li>
+                        <li>Walk</li>
+                    </ul>
+                </td>
+            </tr>            
+		</tbody>
+	</table>
+</section>
+<section id="dry" data-background-image="images/desert.jpg">
+    <h2>D.R.Y.</h2>
+</section>
+<section id="inheritance-diagram">
+    <img src="images/inheritance-diagram.png" height=400>
+</section>
+<section id="animal-class">
+    <pre style="font-size: 40%"><code class="hlpython" data-trim data-line-numbers>
+        class Animal:
+
+            def __init__(self, age, weight, sex, breed):
+                self.age = age
+                self.weight = weight
+                self.sex = sex
+                self.breed = breed
+
+            def feed(self, scoops=1):
+                ...
+
+            def brush():
+                ...            
+    </code></pre>      
+</section>
+<section id="cat-class-with-inheritance">
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        class Cat(Animal):
+           
+            def change_litter(self):
+                ...
+    </code></pre>      
+</section>
+<section id="dog-class-with-inheritance">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        class Dog(Animal):
+
+            def __init__(self, age, weight, sex, breed, housebroken=True):
+                super().__init__(age, weight, sex, breed)
+                self.housebroken = housebroken
+            
+            def walk(self):
+                ...
+    </code></pre>      
+</section>
+<section id="super">
+    <p>In Python, the <code>super</code> function will return the <em>parent</em> class of the current class.</p>
+    <pre><code class="hlpython" data-trim>
+        class Child(Parent):
+
+            def some_method(self):
+                # Super gives us access to the Parent object.
+                parent_obj = super()
+
+    </code></pre>
+    <p></p>
 </section>
 {% endblock %}
