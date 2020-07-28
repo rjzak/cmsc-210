@@ -10,18 +10,29 @@
         <link rel="shortcut icon" href="images/favicon.ico">
         <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">        
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet"> 
+<style>
+    .emphasized-block {
+        background-color: slategrey;
+        color: #fff;
+        padding: 20px;
+    }
+    section p.quote {
+        font-size: 70%;
+        margin-top: 50px;
+        text-align: right;
+    }
+</style>
+
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet"> 
 <section id="title">
 	<h2>Lecture 5</h2>
     <h2>Object-Oriented Programming &amp; Debugging</h2>
-</section>
-<section id="oop">
-    <h3>(OOP)</h3>
 </section>
 <section id="announcements">
     <h2>Announcements</h3>
@@ -29,6 +40,9 @@
         <li>Assignment two will be out soon.</li>
         <li>That is all.</li>
     </ul>
+</section>
+<section id="oop">
+    <h3>(OOP)</h3>
 </section>
 <section id="product-types-review-1">
     <p>Remember how we talked about how tuples, dictionaries, and classes share some similarities?<br>And how they can all be used define heterogenous types?</p>
@@ -108,15 +122,15 @@
 </section>
 <section id="pet-store">
     <p>Let's say you're opening a pet store. The pet store of the future, where everything is run by computer...</p>
-    <h3 style="font-family: 'Gugi', Courier;">RoboPet</h3>
+    <h3 style="font-family: 'Gugi', Courier; color: darkviolet;">RoboPet</h3>
 </section>
 <section id="pet-store-cats-attrs">
-    <p>We will sell cats, so out system must track them and care for them. What are some attributes of cats?</p>
+    <p>We will sell cats, so our system must track them and care for them. What are some attributes of cats?</p>
     <img src="images/cat.svg" width=200 height=200>
     <ul>
         <li>Age</li>
         <li>Weight</li>
-        <li>Sex</li>
+        <li>Name</li>
         <li>Breed</li>
     </ul>
 </section>
@@ -125,7 +139,7 @@
     <img src="images/cat.svg" width=200 height=200>
     <ul>
         <li>Feed them</li>
-        <li>Brush them</li>
+        <li>Groom them</li>
         <li>Change their litter</li>
     </ul>
 </section>
@@ -133,16 +147,16 @@
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         class Cat:
 
-            def __init__(self, age, weight, sex, breed):
+            def __init__(self, age, weight, name, breed):
                 self.age = age
                 self.weight = weight
-                self.sex = sex
+                self.name = name
                 self.breed = breed
 
             def feed(self, scoops=1):
                 ...
 
-            def brush():
+            def groom(self):
                 ...
             
             def change_litter(self):
@@ -155,7 +169,7 @@
     <ul>
         <li>Age</li>
         <li>Weight</li>
-        <li>Sex</li>
+        <li>Name</li>
         <li>Breed</li>
         <li>Is housebroken?</li>
     </ul>
@@ -165,7 +179,7 @@
     <img src="images/dog.svg" width=200 height=200>
     <ul>
         <li>Feed them</li>
-        <li>Brush them</li>
+        <li>Groom them</li>
         <li>Walk them</li>
     </ul>
 </section>
@@ -173,17 +187,17 @@
     <pre style="font-size: 40%"><code class="hlpython" data-trim data-line-numbers>
         class Dog:
 
-            def __init__(self, age, weight, sex, breed, housebroken=True):
+            def __init__(self, age, weight, name, breed, housebroken=True):
                 self.age = age
                 self.weight = weight
-                self.sex = sex
+                self.name = name
                 self.breed = breed
                 self.housebroken = housebroken
 
             def feed(self, scoops=1):
                 ...
 
-            def brush():
+            def groom(self):
                 ...
             
             def walk(self):
@@ -204,7 +218,7 @@
                     <ul>
                         <li style="color:crimson">Age</li>
                         <li style="color:crimson">Weight</li>
-                        <li style="color:crimson">Sex</li>
+                        <li style="color:crimson">Name</li>
                         <li style="color:crimson">Breed</li>
                     </ul>
                 </td>
@@ -212,7 +226,7 @@
                     <ul>
                         <li style="color:crimson">Age</li>
                         <li style="color:crimson">Weight</li>
-                        <li style="color:crimson">Sex</li>
+                        <li style="color:crimson">Name</li>
                         <li style="color:crimson">Breed</li>
                         <li>Is housebroken?</li>
                     </ul>
@@ -223,14 +237,14 @@
                 <td>
                     <ul>
                         <li style="color:crimson">Feed</li>
-                        <li style="color:crimson">Brush</li>
+                        <li style="color:crimson">Groom</li>
                         <li>Change litter</li>
                     </ul>
                 </td>
                 <td>
                     <ul>
                         <li style="color:crimson">Feed</li>
-                        <li style="color:crimson">Brush</li>
+                        <li style="color:crimson">Groom</li>
                         <li>Walk</li>
                     </ul>
                 </td>
@@ -246,52 +260,213 @@
 </section>
 <section id="animal-class">
     <pre style="font-size: 40%"><code class="hlpython" data-trim data-line-numbers>
-        class Animal:
+class Animal:
 
-            def __init__(self, age, weight, sex, breed):
-                self.age = age
-                self.weight = weight
-                self.sex = sex
-                self.breed = breed
+    def __init__(self, age, weight, name, breed):
+        self.age = age
+        self.weight = weight
+        self.name = name
+        self.breed = breed
 
-            def feed(self, scoops=1):
-                ...
+    def feed(self, scoops=1):
+        # Pour food into bowl.
 
-            def brush():
-                ...            
+    def groom(self):
+        # Brushy-brushy time            
     </code></pre>      
 </section>
 <section id="cat-class-with-inheritance">
+    <p>Subclasses <em>automatically</em> have the methods of the superclass.</p>
     <pre><code class="hlpython" data-trim data-line-numbers>
-        class Cat(Animal):
-           
-            def change_litter(self):
-                ...
+
+class Cat(Animal):
+
+    def change_litter(self):
+        # Yuck!
     </code></pre>      
 </section>
 <section id="dog-class-with-inheritance">
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
-        class Dog(Animal):
+class Dog(Animal):
 
-            def __init__(self, age, weight, sex, breed, housebroken=True):
-                super().__init__(age, weight, sex, breed)
-                self.housebroken = housebroken
-            
-            def walk(self):
-                ...
+    def __init__(self, age, weight, name, breed, housebroken=True):
+        super().__init__(age, weight, name, breed)
+        self.housebroken = housebroken
+    
+    def walk(self):
+        # Walk the dog around the neighborhood.
     </code></pre>      
 </section>
 <section id="super">
-    <p>In Python, the <code>super</code> function will return the <em>parent</em> class of the current class.</p>
+    <p>In Python, the <code>super</code> function will return the <em>parent</em> class instance of the current class.</p>
     <pre><code class="hlpython" data-trim>
-        class Child(Parent):
+class Child(Parent):
 
-            def some_method(self):
-                # Super gives us access to the Parent object.
-                parent_obj = super()
+    def some_method(self):
+        # Super gives us access to the Parent object.
+        parent_obj = super()
 
     </code></pre>
     <p></p>
+</section>
+
+<section id="interfaces">
+    <h3>Interfaces</h3>
+    <pre style="font-size: 40%"><code class="hlpython" data-trim data-line-numbers>
+class Animal:
+
+    def groom(self):
+        raise NotImplementedError("Must implement this method on the child object.")            
+
+class Cat(Animal):
+
+    def groom(self):
+        # Bushy brushy...
+
+class Dog(Animal):
+
+    def groom(self):
+        # Bath time!
+        # Dry up!
+
+    </code></pre>      
+</section>
+
+<section id="inheritance-reasons">
+    <p>Inheritance lets us abstract common behavior while still being able to encapsulate attributes and methods within a class.</p>
+    <ul>
+        <li>Implement shared functionality only once.</li>
+        <li>Maps to how we think about the world: "X is a Y"</li>
+    </ul>
+    
+</section>
+
+<section id="polymorphism">
+    <h2>Polymorphism</h2>
+    <p>Sounds fancy, but it's not.<p>
+</section>
+
+<section id="polymorphism-is">
+    <ul>
+        <li>Encapsulation &amp; inehritance provide the building blocks</li>
+        <li>Different behaviors based on subclass being used...</li>
+        <li>...and without having to care what specific subclass.</li>
+    </ul>
+</section>
+<section id="polymorphism-and-interfaces">
+        <p>Think back to interfaces:</p>
+        <pre style="font-size: 40%"><code class="hlpython" data-trim data-line-numbers>
+class Animal:
+
+    def __init__(self, age, weight, name, breed):
+        self.age = age
+        self.weight = weight
+        self.name = name
+        self.breed = breed
+
+    def feed(self, scoops=1):
+        # Pour food into bowl.    
+    
+    def groom(self):
+        raise NotImplementedError("Must implement this method on the child object.")
+        </code></pre>
+        <p>Interfaces provide a sort of contract: <em>These are the properties and behaviors any animal must have.</em></p>
+</section>
+<section id="polymorphism-live-coding-setup-1">
+    <h3 style="font-family: 'Gugi', Courier; color: darkviolet;">RoboPet</h3>
+    <p>The robots were a success. But we can't scale up the business if we need a robot for each pet.</p>
+    <p>We come up with a new concept: <strong>a virtual pen</strong></p>
+
+</section>
+<section id="polymorphism-live-coding-setup-2">
+    <h3 style="font-family: 'Gugi', Courier; color: darkviolet;">RoboPet</h3>
+    <ul>
+        <li>Each pen can hold up to 4 pets.</li>
+        <li>Our animals are very well-behaved, so cats and dogs can live in the same pen.</li>
+        <li>Each pen will be managed by one robot.</li>
+        <li>We only need &frac14; as many robots now.</li>
+    </ul>
+</section>
+<section id="polymorphism-live-coding-setup-3">
+    <h3 style="font-family: 'Gugi', Courier; color: darkviolet;">RoboPet</h3>
+    <pre style="font-size: 40%"><code class="hlpython" data-trim data-line-numbers>
+class Pen:
+
+        def __init__(???):
+            """ What do we do now?"""
+    </code></pre>
+    <p>Let's code...</p>
+</section>
+<section id="polymorphism-irl">
+    <h2>Polymorphisnm IRL</h2>
+    <p>The <a href="https://docs.python.org/3/glossary.html#term-file-object">file object</a> is a real-life example of polymorphism.</p>
+    <ul>
+        <li>I want to open a file, and use the object returned to go through a file line-by-line.</li>
+        <li>The file might be an an actual file on disk.</li>
+        <li>Or it might be stored-in memory.</li>
+        <li>Or it might be data I'm reading from a network socket.</li>
+        <li>Or it might be URL that I fetch fromm the web.</li>
+    </ul>
+</section>
+<section id="before-oop">
+    <p>Before OOP, the main question was “What should the program do and in what order?”</p>
+    <p>This is called procedural programming.</p>
+</section>
+<section id="procedural-design">
+    <ol>
+        <li>Split your program up into a set of tasks and subtasks </li>
+        <li>Write functions that perform the tasks.</li>
+        <li>Instruct the computer to perform the tasks in sequence </li>
+    </ol>
+</section>
+<section id="after-oop">
+    <p>Then someone asked: "What if we started by thinking it terms of the objects that model our domain instead?"
+        <div style="float: right">
+            <img src="images/alan-kay.jpg" width=250 style="display: block">
+            <small><a href="https://en.wikipedia.org/wiki/Alan_Kay">Alan Kay</a></small>
+        </div>
+    </p>   
+</section>
+<section id="oop-design">
+    <ol>
+        <li>Start by thinking about the classes that describe your domain </li>
+        <li>Think about the properties each class needs </li>
+        <li>Think about the behaviors each class should have</li>
+    </ol>
+</section>
+<section id="summing-up-oop">
+    <h2>How to make objects useful in a world like this?</h2>
+    <ul>
+        <li>Classes are blueprints for objects</li>
+        <li>Encapsulation</li>
+        <li>Inheritance</li>
+        <li>Polymorphism</li>
+    </ul>
+</section>
+<section id="anti-oop">
+    <h3>OOP &amp; its discontents</h3>
+    <p class="quote"><em>Java is the most distressing thing to happen to computing since MS-DOS.</em><br>
+    <span>&mdash;Alan Kay</span></p>    
+</section>
+<section id="king-noun">
+    <p class="emphasized-block">The tyrrany of "King Noun".</p>
+    <p class="quote"><em>Sometimes, the elegant implementation is just a function.<br>Not a method. Not a class. Not a framework. Just a function.</em><br>
+        <span>&mdash;<a href="https://en.wikipedia.org/wiki/John_Carmack">John Carmack</a></span></p>
+</section>
+<section id="state-of-confusion">
+        <p class="emphasized-block">State gets atomized among a million objects, making it hard to understand holistically.</p>
+        <p class="quote"><em>The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. 
+            You wanted a banana but what you got was a gorilla holding the banana and the entire jungle.</em><br>
+        <span>&mdash;<a href="https://en.wikipedia.org/wiki/Joe_Armstrong_(programmer)">Joe Armstrong</a></span></p>
+</section>
+<section id="inheritance-problems">
+    <p class="emphasized-block">Inheritance hierarchies don't map<br>to real-world all that well.</p>
+    <p class="quote"><em>Object-oriented programming is an exceptionally bad idea<br>which could only have originated in California</em><br>
+    <span>&mdash;<a href="https://en.wikipedia.org/wiki/Edsger_W._Dijkstra">Edsger W. Dijkstra</a></span></p>
+</section>
+<section id="oop-final-thought">
+    <p>One of the nice things about Python is that it's not dogmatic.<img src="images/zen.png" height=50 style="vertical-align: middle;"></p>
+    <p>Practicality beats purity; use OOP where it helps and fall back to simpler, procedural code when it makes sense.</p>
 </section>
 </div>
 		</div>

@@ -13,7 +13,7 @@ env = Environment(
 )
 
 
-SOURCES = ("index.html", "calendar.html", "lecture_01.html", "lecture_02.html", "lecture_03.html", "lecture_04.html", "lecture_05.html")
+SOURCES = ("index.html", "calendar.html", "lecture_01.html", "lecture_02.html", "lecture_03.html", "lecture_04.html", "lecture_05.html", "lecture_06.html")
 
 def build_index(location: str = "build") -> None:
     for source in SOURCES:
