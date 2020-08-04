@@ -56,7 +56,7 @@
     </ul>   
 </section>
 <section id="free-data">
-    <p>Some random, open data sets:</p>
+    <p>Some random, free data sets:</p>
     <ul class="medium">
         <li><a href="https://www.census.gov/data.html">US Census data</a></li>
         <li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Taxi Trips</a></li>
@@ -143,10 +143,12 @@
     for char in row:
         if char == '"':
           quote_open = not quote_open
-        if char = ",":
+        elif char = ",":
             if not quote_open:
                 columns.append(current_column)
                 current_column = ""
+        else:
+            current_column += char
     columns.append(current_column)
     </code></pre>
     <pre class="fragment fade-up" style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
@@ -161,7 +163,7 @@
 </section>
 <section id="data-formats-csv-parsing-5">
     <h3>In the real world, parsing CSV data is very complicated.</h3>
-    <h3>Don't do it</h3>
+    <h3>Don't do it.</h3>
 </section>
 <section id="data-formats-csv-parsing-6">
     <p>Standard library to the rescue:</p>
