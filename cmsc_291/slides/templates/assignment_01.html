@@ -1,0 +1,135 @@
+{% extends "document_base.html" %}
+{% block title %}CMSC 291: Assignment One{% endblock %}
+{% block body %}
+<h1>Assignment 1</h1>
+<h2>Basic Statistical Analysis</h2>
+<hr>
+<p><strong>Due Date</strong>: Monday, February 17th, 11:59:59PM
+<p><strong>Value</strong>: 50 points<br>
+(5 points for following CMSC 291 Coding Standards,<br>
+45 points for overall design, functionality, and completeness)</p>
+<p><strong>Collaboration</strong>: For Assignment 1, <em>collaboration is not allowed</em>; you must work individually. You may still see your TA and come to office hours for help, but you may not work with any other CMSC 291 students. You may post questions on Slack, <strong>but you may not post code</strong>.</p>
+<h2>Objectives</h2>
+<ul>
+        <li>To learn to submit assignments through Github classroom</li>
+        <li>To refresh your memory regarding Python syntax and proper program design</>
+        <li>To become familiar with CMSC 291 Python coding standards</li>
+</ul>
+<h2>Instructions</h2>
+<h3>Naming</h3>
+<p>Your assignment file must be called <code>assignment1.py</code>.</p>
+<h3>Comments &amp; Coding Standards</h3>
+<ul>
+        <li>Include a complete file header comment at the top of your file.</li>
+        <li>Include a complete function header comment at the top of each function, just below the function header.</li>
+        <li>Make sure to follow the CMSC 291 Coding Standards.</li>
+</ul>
+<h3>The Task</h3>
+<p>This assignment deals with some basic descriptive statistics; specifically, mean, median and standard deviation. 
+To compute the standard deviation, you calculate the difference between each value and the mean (the variance), and square it. 
+Then you find the average of all of these squared variances and take the square root of it.</p>
+<p>The data that you will be working with is real. It is the weight and brain data from 28 animal species.</p>
+<p>Your program will read in one filename supplied at the command line and produce a variety of statistics based on the data present.</p>
+<h3>Test Data</h3>
+<p>You are provided with test data files containing final CMSC 201 grades as integer values, all of which are greater than or equal to zero. 
+The files are what are called <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma-separated value</a> or <code>.csv</code> files.
+That is, they consist of values that are separated from each other, or delimited, by commas. These files will be included in your git template. </p>
+<h3>Pre-defined Python Library Usage</h3>
+<p>You will need to import the Python pre-defined <code>math</code> library for this assignment in order to use the <code>sqrt()</code> (square root) function. </p>
+<p>You may also import the Python statistics library if you wish. You can use the <code>mean()</code>, <code>median()</code>, and <code>stdev()</code>
+ functions <em>for the purpose of checking the correctness of your functions</em> (i.e. that they get the same results). 
+ But remove the calls to these functions and the import statistics statement <em>before turning in your assignment</em>. 
+ For this assignment, you may not import any other Python libraries.</p>
+<h3>User Input</h3>
+<p>For this assignment, you may assume that the user will enter valid filenames into prompts for input.</p>
+<p>If the user enters a different type of data than you asked for (for example, a file that isn't present), your program may crash. This is acceptable.</p>
+<h3>Sample Output</h3>
+<p>The sample output is available as a separate file in your project template. 
+The format of your output does not have to exactly match the sample output, but it should be similar and neat.</p>
+<h3>Program Design Notes</h3>
+<p>You are not required to turn a design in for this assignment. However, you will benefit greatly from taking the time to do a proper one!</p>
+<p>In CMSC 201, we discussed top-down design. That is, beginning with your main function’s design and breaking it down into smaller and smaller pieces (functions). 
+This is a good approach. The bulleted items below should be of help. Before coding, take the time to thoroughly think through the program logic.</p>
+<ul>
+        <li>Understand what the inputs to and the outputs from the overall program are.</li>
+        <li>Then, pseudo-code the program’s main() function. This will help you to understand the program’s logic at a high level and help you to decide on the functions to implement.</li>
+        <li>Draw a functional hierarchy chart of the functions that you intend to implement. Include the inputs to and outputs from each.</li>
+        <li>Think about how to separate program input, processing, and output code.</li>
+        <li>Look for duplicate code. This could be a sign that a block of code should be implemented as a function.</li>
+        <li>Look for code that, while only called once, should be pulled out as a separate function. 
+        Think if making the block into a function would simplify your code or if you or someone else might want to use that block of code in another program. 
+        Reuse does not simply mean within the same program!</li>
+        <li>Think about your statistical functions. Can any of them use others?</li>
+</ul>
+<h3>Implementation and Testing Notes</h3>
+<p>Take an incremental approach to the implementation and testing of your program. 
+That is, do not use the “big bang” approach of implementing all or large parts of your program before you test it. <span style="color: orangered;">Test as you go!</span></p>
+<p>A top-down approach can also be taken when implementing and testing your program. 
+(Some people prefer bottom-up, but top-down is recommended.) The bulleted items below should be of help.</p>
+<ul>
+        <li>After you have finished your program design, implement your <code>main()</code> function. 
+        You’ll need to create function “stubs” for any functions that <code>main()</code> calls. 
+        Have the stubs simply print a message such as, “Function X called.” You may also need return statements – just return any constant of the appropriate type.</li>
+        <li>Test <code>main()</code> to make sure that there are no syntax errors (of course!) and that its logic works as expected. Are all function calls working?</li>
+        <li> Now, implement and test each function one at a time. 
+        Begin with functions that deal with user and file input. After all, if these don’t work, the rest of your program certainly won’t!</li>
+        <li>Move on to functions that deal with output. You’ll need to be able to see if your program is computing the correct values as you build it up.</li>
+        <li>Last, implement and test the functions that perform computations and other tasks.</li>
+</ul>
+
+<p>You may find that you need to adjust your program design as you implement. That’s natural. However, if you find yourself making major adjustments, you need to go back and rethink your overall design. Don’t worry – it happens!</p>
+<h3>Other Notes</h3>
+<p>If you find that your algorithm for a statistical function requires you to sort the list of data, the function must first copy the data to a temporary list before sorting.
+That way, when the function returns, the original list sent into the function has not been corrupted.</p>
+<p>If you do find that you need to sort, you may use the Python built-in <a href="https://docs.python.org/3/library/stdtypes.html#list.sort"><code>sort()</code></a> 
+or <a href="https://docs.python.org/3/library/functions.html#sorted"><code>sorted()</code></a> function. 
+Look at your Python references (discussed in Lecture 02) for how to use this function. 
+You may also need to use <a href="https://docs.python.org/3/library/functions.html#min"><code>min()</code></a> and/or <a href="https://docs.python.org/3/library/functions.html#max"><code>max()</code></a>, which is allowed.</p>
+
+<p>As we have not yet discussed Program Assumptions (part of the file header comment), you may use the following exactly as written in your file header comment. 
+Make sure that you read through the assumptions; they impact how you design your program.</p>
+<pre><code>
+Program Assumptions:
+  - Each data file will be a comma-separated file with a single record of integer
+       integer values >= 0
+  - Each data file will contain > 2 values
+  - Each file's data forms a normal distribution (i.e. unimodal).
+  - The user will always enter at least one filename
+  - The user will always enter a valid filename (i.e. the file exists)
+  - The file will always have three columns
+  - The first row will always be the names of the columns
+</code></pre>
+<h2>Submitting Your Assignment</h2>
+<p>We will cover the use of github in class and provide walkthroughs for submitting assignments.</p>
+<h2>Grading Rubric</h2>
+<p>Your computed values will be compared to the sample output OR the output of the statistics library for grading.</p>
+<table class="table">
+        <tbody>
+                <tr>
+                        <td>Following coding standards</td>
+                        <td>10 points</td>
+                </tr>
+                <tr>
+                        <td>Correctly reading the csv file</td>
+                        <td>20 points</td>
+                </tr>
+                <tr>
+                        <td>Correctly computing the median</td>
+                        <td>20 points</td>
+                </tr>
+                <tr>
+                        <td>Correctly computing the mean</td>
+                        <td>20 points</td>
+                </tr>
+                <tr>
+                        <td>Correctly computing the standard deviation</td>
+                        <td>30 points</td>
+                </tr>
+
+        </tbody>
+
+</table>
+
+       
+        
+{% endblock %}

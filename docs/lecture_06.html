@@ -21,7 +21,199 @@
 	<h2>Lecture 6</h2>
     <h2>Data formats &amp; Plotting</h2>
 </section>
-
+<section id="announcements">
+    <h2>Announcements</h3>
+    <ul>
+        <li>Assignment two is due next Monday.</li>
+    </ul>
+</section>
+<section id="data-acquisition">
+    <h2>Acquiring Data</h2>
+    <p>How do we get data?</p>
+</section>
+<section id="structured-data-defintion">
+    <h2>Structured Data...</h2>
+    <ul>
+        <li>Is Quantitative</li>
+        <li>Has a defined length and format</li>
+        <li>Is Machine-readable</li>
+    </ul>
+</section>
+<section id="structured-data-examples">
+    <h2>Structured Data Examples</h2>
+    <ul>
+        <li>Tabular or spreadsheet-like data in which each column may be a different type (string, numeric, date, or otherwise).</li>
+        <li>Data from a database</li>
+        <li>Data interchange formats: <code>JSON</code> or <code>XML</code></li>
+        <li>Time series data, multidimensional arrays (matrices)</li>
+        <li>Data retrieved from web-based APIs</li>
+    </ul>
+</section>
+<section id="unstructured-data-defintion">
+    <h2>Unstructured data</h2>
+    <ul>
+        <li>Information that is not organized in a pre-defined manner</li>
+        <li>Generally designed for humans, not machines.</li>
+        <li>Books and other documents. Prose in general...</li>
+        <li>Images, audio, and video files</li>
+        <li>Sometimes machines can learn the structure within</li>
+    </ul>
+</section>
+<section id="structured-data-sources">
+    <h2>Sources of data</h2>
+    <ul>
+    <li><a href="https://www.data.gov/">Governments</a></li>
+        <li><a href="http://news.mit.edu/2020/mit-toyota-release-visual-open-data-accelerate-autonomous-driving-research-0618">Institutions of research and learning</a></li>
+        <li><a href="https://github.com/Microsoft/FERPlus">Crowd-sourced</a></li>
+        <li><a href="https://www.experian.com/">Private companies</a></li>
+    </ul>   
+</section>
+<section id="free-data">
+    <p>Some random, open data sets:</p>
+    <ul class="medium">
+        <li><a href="https://www.census.gov/data.html">US Census data</a></li>
+        <li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Taxi Trips</a></li>
+        <li><a href="https://www.weather.gov/documentation/services-web-api">Forecast data for the entire US</a></li>
+        <li><a href="https://registry.opendata.aws/landsat-8/">Landsat 8 (satellite imagery of all land on Earth)</a></li>    
+        <li><a href="https://portals.broadinstitute.org/ccle/about">Cancer cell line genomic data</a></li>
+        <li><a href="https://data.cms.gov/d/s2uc-8wxp">COVID-19 Nursing Home Data</a></li>
+        <li><a href="https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/">200,000+  Jeopardy! Questions</a></li>
+        <li><a href="https://www.fda.gov/food/compliance-enforcement-food/cfsan-adverse-event-reporting-system-caers">Food poisoning complaints in the US</a></li>
+        <li><a href="https://www.kaggle.com/dansbecker/nba-shot-logs">NBA shot logs for the 2014-2015 season</a></li>
+        <li><a href="https://pokemondb.net/">Database of Pokémon creatures from the entire game series.</a></li>
+        <li><a href="https://doi.pangaea.de/10.1594/PANGAEA.909132">Historical yields for major crops since 1981</a></li>
+        <li><a href="https://www.aminer.org/citation">Citation graph for 629,814 papers and 632,752 citations</a></li>
+        <li><a href="https://data.gov.uk/dataset/452bee2c-28ea-4a2f-8005-16b9afdd8ba9/abandoned-shopping-trolleys-in-bristol-rivers">Survey of abandoned shopping carts in Bristol, UK rivers</a></li>
+        <li><a href="https://www.backblaze.com/b2/hard-drive-test-data.html">Data and failure rates for 130k hard drives</a></li>
+        <li><a href="https://pigeon-ndb.com/">American Racing Pigeon Union Race Result Database</a></li>
+        <li><a href="http://www.cropyields.ac.uk/project.php">Middle English Crop Yields: 1211-1491</a>
+    </ul>
+</section>
+<section id="data-formats">
+    <h2>Common data formats</h2>
+</section>
+<section id="data-formats-csv">
+    <h3>CSV (comma-separated values)</h3>
+    <ul>
+        <li>Designed for tabular data (think spreadsheets)</li>
+        <li>Human-readable</li>
+        <li>Ubiquitous</li>
+        <li>Don't parse it yourself.</li>
+    </ul>
+</section>
+<section id="data-formats-csv-parsing-1">
+    <p>Let's look at the best-seller list:</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Title</th>
+                <th>Units Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>The Heart is a Lonely Blacksmith</td>
+                <td>11293</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Hush Hush, Sweet Bruce</td>
+                <td>9853</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>"Freedom," I Yodeled</td>
+                <td>5071</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>C:\Windows\For\Morons</td>
+                <td>3124</td>
+            </tr>                         
+        </tbody>
+    </table>
+</section>
+<section id="data-formats-csv-parsing-2">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+     >>> row = '1,The Heart is a Lonely Blacksmith,11293'
+     >>> row.split(",")
+     ["1", "The Heart is a Lonely Blacksmith", "11293"]
+    </code></pre>
+    <pre class="fragment fade-up" style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        >>> row = '2,Hush Hush, Sweet Bruce,9853'
+        >>> row.split(",")
+        ["2", "Hush Hush", " Sweet Bruce", "9853"]
+       </code></pre>    
+</section>
+<section id="data-formats-csv-parsing-3">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    row = '2,"Hush Hush, Sweet Bruce",9853'
+    quote_open = False
+    columns = []
+    current_column = ""
+    for char in row:
+        if char == '"':
+          quote_open = not quote_open
+        if char = ",":
+            if not quote_open:
+                columns.append(current_column)
+                current_column = ""
+    columns.append(current_column)
+    </code></pre>
+    <pre class="fragment fade-up" style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    row_3 = '3,""Freedom," I Yodeled",5071'
+    </code></pre>
+</section>
+<section id="data-formats-csv-parsing-4">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    row = '3,"\"Freedom,\" I Yodeled",5071'
+    </code></pre>
+    <p class="fragment fade-up">😱</p>
+</section>
+<section id="data-formats-csv-parsing-5">
+    <h3>In the real world, parsing CSV data is very complicated.</h3>
+    <h3>Don't do it</h3>
+</section>
+<section id="data-formats-csv-parsing-6">
+    <p>Standard library to the rescue:</p>
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        import csv
+        
+        with open("data_file.csv") as file_handle:
+            reader = csv.reader(file_handle)
+            for row in reader:
+                # Example row: 
+                #    ["1", "The Heart is a Lonely Blacksmith", "11293"]
+                rank = int(row[0])
+                title = row[1],
+                units_sold = int(row[2])
+    </code></pre>
+</section>
+<section id="data-formats-csv-parsing-t">
+    <p>CSVs often header header rows</p>
+    <pre style="font-size: 50%"><code data-trim>
+        rank,title,units Sold
+        1,The Heart is a Lonely Blacksmith,11293
+        2,"Hush Hush, Sweet Bruce",9853
+        3,"""Freedom,"" I Yodeled",5071
+    </code></pre>
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        import csv
+        
+        with open("data_file.csv") as file_handle:
+            reader = csv.DictReader(file_handle)
+            for row in reader:
+                # Example row: 
+                #    {"rank": "1", 
+                #     "title": "The Heart is a Lonely Blacksmith", 
+                #     "units sold": "11293"}
+                rank = int(row["rank"])
+                title = row["title"],
+                units_sold = int(row["units sold"])
+    </code></pre>    
+</section>
 </div>
 		</div>
 		<script src="dist/jquery.js"></script>
