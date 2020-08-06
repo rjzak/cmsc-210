@@ -27,10 +27,6 @@
         <li>Assignment two is due next Monday.</li>
     </ul>
 </section>
-<section id="data-acquisition">
-    <h2>Acquiring Data</h2>
-    <p>How do we get data?</p>
-</section>
 <section id="structured-data-defintion">
     <h2>Structured Data...</h2>
     <ul>
@@ -95,13 +91,14 @@
 <section id="data-formats-csv">
     <h3>CSV (comma-separated values)</h3>
     <ul>
-        <li>Designed for tabular data (think spreadsheets)</li>
+        <li>From the days when spreadsheets roamed the land 🦕</li>
+        <li>Designed for tabular data</li>
         <li>Human-readable</li>
         <li>Ubiquitous</li>
         <li>Don't parse it yourself.</li>
     </ul>
 </section>
-<section id="data-formats-csv-parsing-1">
+<section id="data-formats-csv-tabular-data">
     <p>Let's look at the best-seller list:</p>
     <table class="table">
         <thead>
@@ -135,7 +132,7 @@
         </tbody>
     </table>
 </section>
-<section id="data-formats-csv-parsing-2">
+<section id="data-formats-csv-parsing-problems-1">
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
      >>> row = '1,The Heart is a Lonely Blacksmith,11293'
      >>> row.split(",")
@@ -147,7 +144,7 @@
         ["2", "Hush Hush", " Sweet Bruce", "9853"]
        </code></pre>    
 </section>
-<section id="data-formats-csv-parsing-3">
+<section id="data-formats-csv-parsing-problems-2">
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
     row = '2,"Hush Hush, Sweet Bruce",9853'
     quote_open = False
@@ -168,17 +165,17 @@
     row_3 = '3,""Freedom," I Yodeled",5071'
     </code></pre>
 </section>
-<section id="data-formats-csv-parsing-4">
+<section id="data-formats-csv-parsing-problems-3">
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
     row = '3,"\"Freedom,\" I Yodeled",5071'
     </code></pre>
     <p class="fragment fade-up">😱</p>
 </section>
-<section id="data-formats-csv-parsing-5">
+<section id="data-formats-csv-parsing-problems-4">
     <h3>In the real world, parsing CSV data is very complicated.</h3>
     <h3>Don't do it.</h3>
 </section>
-<section id="data-formats-csv-parsing-6">
+<section id="data-formats-csv-parsing-stdlib">
     <p>Standard library to the rescue:</p>
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         import csv
@@ -193,8 +190,8 @@
                 units_sold = int(row[2])
     </code></pre>
 </section>
-<section id="data-formats-csv-parsing-t">
-    <p>CSVs often header header rows</p>
+<section id="data-formats-csv-parsing-headers">
+    <p>CSVs often have header rows</p>
     <pre style="font-size: 50%"><code data-trim>
         rank,title,units Sold
         1,The Heart is a Lonely Blacksmith,11293
@@ -216,6 +213,139 @@
                 units_sold = int(row["units sold"])
     </code></pre>    
 </section>
+<section id="data-formats-csv-limitations">
+    <h3>Problems with CSV</h3>
+    <ul>
+        <li>Data needs to be tabular or it won't work well.</li>
+        <li>Has no notion of types: everything is a string</li>
+        <li>There isn't a standard for it.</li>
+    </ul>
+</section>
+<section id="data-formats-json">
+    <h3>JSON (JavaScript Object Notation)</h3>
+    <ul>
+        <li>More recent format</li>
+        <li>Standard in web-based data sources</li>
+        <li>A much more free-form data format than CSV</li>
+        <li>Data can be nested</li>
+        <li>Human-readable</li>
+    </ul>
+</section>
+<section id="data-formats-json-types">
+    <p>Basic types (unlike CSV)</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+        "string"
+        3.14
+        null
+        false
+    </code></pre>
+    <p>Lists</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+    [1, "A", true]
+    </code></pre>
+    <p>Objects</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+    {"a": 1, "b": 2, "c": 3}
+    </code></pre>
+</section>
+<section id="data-formats-json-example">
+    <pre style="font-size: 50%"><code class="hljson" data-trim data-line-numbers>
+        [
+        {
+          "position": 1,
+          "title": "The Heart is a Lonely Blacksmith",
+          "units sold": 11293
+        },
+        {
+          "position": 2,
+          "title": "Hush Hush, Sweet Bruce",
+          "units sold": 9853
+        },
+        {
+          "position": 3,
+          "title": "Freedom,\" I Yodeled\"",
+          "units sold": 5071
+        },
+        {
+          "position": 4,
+          "title": "C:\\Windows\\For\\Morons",
+          "units sold": 3124
+        }
+      ]
+    </code></pre>
+</section>
+<section id="data-formats-json-types">
+    <p>Nested &amp; complex data</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+    {"name": "Ted",
+    "places_lived": ["Switzerland", "Canada", "Mexico"],
+    "pet": null,
+    "siblings": [{"name": "Martine", "age": 24, "pets": ["Rolf"]},
+                 {"name": "Fred", "age": 31,
+                  "pets": ["Boto", "Formica", "Rover"]}]
+   }
+   </code></pre>
+</section>
+<section id="data-formats-json-parsing">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    import json
+
+    json_data = """{"name": "Ted",
+        "places_lived": ["Switzerland", "Canada", "Mexico"],
+        "pet": null,
+        "siblings": [{"name": "Martine", "age": 24, "pets": ["Rolf"]},
+                    {"name": "Fred", "age": 31,
+                    "pets": ["Boto", "Formica", "Rover"]}]}"""
+
+    ted_data = json.loads(json_data)
+    </code></pre>
+</section>
+<section id="data-formats-json-parsing-result">
+    Our <code>ted_data</code> variable is a Python dictionary:
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        {'name': 'Ted',
+        'pet': None,
+        'places_lived': ['Switzerland', 'Canada', 'Mexico'],
+        'siblings': [{'age': 24, 'name': 'Martine', 'pets': ['Rolf']},
+                     {'age': 31,
+                      'name': 'Fred',
+                      'pets': ['Boto', 'Formica', 'Rover']}]}
+    </code></pre>
+</section>
+<section id="data-formats-wrap-up">
+    <p>Although JSON and CSV are very common, there are an almost endless array of data formats. The one to chose will depend on many factors:</p>
+    <ul>
+        <li>Language you are using</li>
+        <li>Whether the format needs to be human-readable</li>
+        <li>How fast the the format should be to read and write</li>
+        <li>The structure of the data</li>
+        <li>The size of the data</li>
+        <li>The systems that need to interoperate with the data</li>
+    </ul>
+</section>
+<section id="baby-names">
+    <h2>Let's look at some real data!</h2>
+    <p>The Social Security Administration maintains data on the most popular names in the US since 1880!</p>
+    <p>You can <a href="https://www.ssa.gov/oact/babynames/limits.html">download the data!</a></p>
+</section>
+<section id="baby-names-ideas">
+    <ul>
+        <li>What is the most popular name for a given year?</li>
+        <li>What is the most unpopular name for a given year?</li>
+        <li>How has a given name changed in popularity over time?</li>
+    </ul>
+</section>
+<section id="data-analysis-question">
+    <p>Why are we seeing a drop in popularity for all the names we looked at?</p>
+</section>
+<section id="data-analysis-question">
+    <ul>
+        <li>Diversity of names has increased</li>
+        <li>Diversity of spellings has increased</li>
+        <li>Birth rate has decreased</li>
+    </ul>
+</section>
+
 </div>
 		</div>
 		<script src="dist/jquery.js"></script>
