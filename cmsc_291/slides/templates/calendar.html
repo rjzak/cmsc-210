@@ -1,28 +1,6 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>CMSC 291: Lecture 1</title>
-        <link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/solarized.css">
-		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
-        <link rel="stylesheet" href="dist/base.css">
-        <style>
-            .reveal {
-                font-size: 120%;
-            }
-        </style>
-	</head>
-	<body>
-    <div class="reveal">
-        <h1>CMSC 291 Course Calendar</h1>
-        <iframe src="https://calendar.google.com/calendar/embed?src=c0dhpqfg8usidrc7avp33u6k00%40group.calendar.google.com&ctz=America%2FNew_York" style="border: 0" width="1200" height="800" frameborder="0" scrolling="no"></iframe>
-
-    </div>
-    <script>
-        
-    </script>
-	</body>
-</html>
-
-
+{% extends "document_base.html" %}
+{% block title %}CMSC 291: Course Calendar{% endblock %}
+{% block body %}
+<h1>CMSC 291 Course Calendar</h1>
+<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23fdf6e3&amp;ctz=America%2FNew_York&amp;src=YzBkaHBxZmc4dXNpZHJjN2F2cDMzdTZrMDBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23EF6C00&amp;showTitle=0&amp;showNav=1" style="border-width:0" width="1130" height="800" frameborder="0" scrolling="no"></iframe>
+{% endblock %}

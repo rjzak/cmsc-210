@@ -12,6 +12,10 @@
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 		
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+
+
 	</head>
 	<body>
     <div class="container">
@@ -19,120 +23,119 @@
 <div>
     <p><img title="" src="images/umbc_logo.png" alt="" width="400" /></p>
     </div>
-    <p>CMSC 291</p>
-    <p>Spring 2020</p>
-    <p>Python Coding Standards</p>
+    <h2>CMSC 291: Fall 2020</h2>
+    <h1>Python Coding Standards</h1>
     <p>The purpose of these coding standards is to make programs readable and maintainable. In the &ldquo;real world&rdquo; you may need to update your own code more than 6 months after having written the original &ndash; or worse, you might need to update someone else&rsquo;s. For this reason, every programming department has a set of standards or conventions that programmers are expected to follow.</p>
     <p>Neatness counts!</p>
     <p>At UMBC, the following standards have been created and are followed in CMSC 291. They are based heavily on the <a href="https://www.google.com/url?q=https://www.python.org/dev/peps/pep-0008/&amp;sa=D&amp;ust=1596681592837000&amp;usg=AOvVaw2uuPsn-tgEpThYx6JdQvNu">Python Enhancement Standard (PEP) 8</a>&nbsp;for code style. This is the standard followed in industry for Python source code.</p>
     <p>Part of every project and homework grade is how well these standards are followed.</p>
     <p>It is your responsibility to understand these standards. If you have questions, ask your TA or instructor.</p>
-    <p>Naming Conventions</p>
+    <h2>Naming Conventions</h2>
     <ul>
     <li>Use meaningful variable names!!</li>
-    </ul>
-    <ul>
-    <li>For example, if your program needs a variable to represent the radius of a circle, call it&nbsp;radius, not&nbsp;r&nbsp;and not&nbsp;rad.</li>
-    <li>The use of obvious, common, meaningful abbreviations is permitted. For example, &lsquo;number&rsquo; can be abbreviated as&nbsp;num&nbsp;as in&nbsp;num_students.</li>
+    <li>For example, if your program needs a variable to represent the radius of a circle, call it <code>radius</code>, not <code>r</code> and not <code>rad</code>.</li>
+    <li>The use of obvious, common, meaningful abbreviations is permitted. For example, &lsquo;number&rsquo; can be abbreviated as <code>num</code>&nbsp;as in&nbsp;<code>num_students</code>.</li>
     <li>The use of single letter variables is forbidden&nbsp;except in loops.</li>
+    <li>Names of constants should be in all caps with underscores between words:
+        <pre><code class="language-python">EURO_TO_USD = 1.20</code></pre>
+    </li>
+    <li>Begin variable and function names with lowercase letters. Separate &ldquo;words&rdquo; within names with underscores:
+        <pre><code class="language-python">grand_total</code></pre>
+    </li>
+    <li>Class names should begin with an uppercase letter and use camel case:
+        <pre><code class="language-python">ThisIsAClassName</code></pre>
+    </li>
+    <li>Class method names follow the same convention as function names.
+        <pre><code class="language-python">this_is_a_method_name</code></pre>
+    </li>
     </ul>
-    <ul>
-    <li>Names of constants should be in all caps with underscores between &ldquo;words.&rdquo;</li>
-    </ul>
-    <ul>
-    <li>EURO_TO_USD = 1.20</li>
-    </ul>
-    <ul>
-    <li>Begin variable and function names with lowercase letters. Separate &ldquo;words&rdquo; within names with underscores.</li>
-    </ul>
-    <ul>
-    <li>&nbsp;grand_total</li>
-    </ul>
-    <ul>
-    <li>Class names should begin with an uppercase letter and use camel case.</li>
-    </ul>
-    <ul>
-    <li>ThisIsAClassName</li>
-    </ul>
-    <ul>
-    <li>Class method names follow the same convention as function names.</li>
-    </ul>
-    <p>this_is_a_method_name</p>
-    <p>Use of Whitespace</p>
+    <h2>Use of Whitespace</h2>
     <p>The prudent use of whitespace goes a long way to making your program readable. Horizontal whitespace (spaces between characters) will make it easier to read your code. Vertical whitespace (blank lines between lines of code) will help you to organize it.</p>
     <ul>
-    <li>Use blank lines to separate major parts of a program or function.</li>
-    <li>Indentation should be 4 spaces long. Using Tab in emacs will accomplish this.</li>
-    <li>Use spaces around all operators.</li>
+        <li>Use blank lines to separate major parts of a program or function.</li>
+        <li>Indentation should be 4 spaces long. Using Tab in emacs will accomplish this.</li>
+        <li>Use spaces around all operators.</li>
+    <li>For example, write <code>x = y + 5</code>, NOT <code>x=y+5</code>.</li>
+    <li>Lines of code should be no longer than 120 characters. Code that &ldquo;wraps&rdquo; around a line is difficult to read.</li>
     </ul>
-    <ul>
-    <li>For example, write x = y + 5, NOT x=y+5.</li>
-    </ul>
-    <ul>
-    <li>Lines of code should be no longer than 79 characters (the default size of an emacs window). Code that &ldquo;wraps&rdquo; around a line is difficult to read.</li>
-    </ul>
-    <p>Line Length</p>
-    <p>Avoid lines of code longer than 79 characters, since they&rsquo;re not handled well by many terminals, and often make your code more difficult to read. If a line of your code is longer than 80 characters, you may be doing too much in one line of code, or you may have nested too deep with loops and conditionals.</p>
-    <p>If you have a line of code that is unavoidably longer than 79 characters, you can continue the code on the next line by putting a &ldquo;\&rdquo; (backslash) after a breakpoint in the code (e.g., after a &ldquo;+&rdquo;, after a comma, etc.). If you&rsquo;re using emacs, it will automatically indent the rest of the line of code following the backslash.</p>
+    <h2>Line Length</h2>
+    <p>Avoid lines of code longer than 120 characters, since they&rsquo;re not handled well by many terminals, and often make your code more difficult to read. If a line of your code is longer than 120 characters, you may be doing too much in one line of code, or you may have nested too deep with loops and conditionals.</p>
+    <p>If you have a line of code that is unavoidably longer than 120 characters, you can continue the code on the next line by putting a &ldquo;\&rdquo; (backslash) after a breakpoint in the code (e.g., after a &ldquo;+&rdquo;, after a comma, etc.). If you&rsquo;re using emacs, it will automatically indent the rest of the line of code following the backslash.</p>
     <p>For example:</p>
-    <p> choice = int(input("Please enter a number between "&nbsp;+ str(min<br />n) + " and "&nbsp;+ str(maxx) + ", inclusive: "))</p>
+    <pre><code class="language-python">
+        choice = int(input("Please enter a number between " + str(minn) + " and " + str(maxx) + ", inclusive: "))
+    </code></pre>
     <p>Can become:</p>
-    <p> choice = int(input("Please enter a number between "&nbsp;+ \<br /> str(minn) + " and "&nbsp;+ str(maxx) + ", inclusive: "))</p>
-    <p>File Organization</p>
+    <pre><code class="language-python">
+    choice = int(input("Please enter a number between " + \
+        str(minn) + " and " + str(maxx) + ", inclusive: "))
+    </code></pre>
+    <h2>File Organization</h2>
     <p>The Python file itself should be organized to make it easy to find specific functions or information. From top to bottom, your Python files should have: </p>
     <ol start="1">
-    <li>a full header comment</li>
-    <li>any constants used by the program, blank if there are no constants</li>
-    <li>all function definitions, blank if there are no functions </li>
-    <li>the line: if __name__ == "__main__":<sup><a href="#ftnt1">[1]</a></sup></li>
-    <li>the code that will execute when the file is run, indented once</li>
+        <li>a full header comment</li>
+        <li>any constants used by the program, blank if there are no constants</li>
+        <li>all function definitions, blank if there are no functions </li>
+        <li id="ftnt_ref1">the line: <code>if __name__ == "__main__":</code><sup><a href="#ftnt1">[1]</a></sup></li>
+        <li>the code that will execute when the file is run, indented once</li>
     </ol>
-    <p>Sample Code</p>
-    <p>"""</p>
-    <p>File: lab2.py</p>
-    <p>Author: Jane Smith</p>
-    <p>Date: 9/3/19</p>
-    <p>Section: 01</p>
-    <p>Email: jsmith500@umbc.edu</p>
-    <p>Description: This program shows the layout of code in a Python file, and greets the user with the name of the programmer</p>
-    <p>Program Assumptions: (We&rsquo;ll talk about these in class.)</p>
-    <p>"""</p>
-    <p>TOTALLY_NORMAL_HUMAN_NAME = "Yxcronor"</p>
-    <p>def where_is_the_cat(cat, location_tried):</p>
-    <p> """</p>
-    <p> A function to look for the cat</p>
-    <p> Preconditions: (We will talk about these in class.)</p>
-    <p> Postconditions: (We will talk about these in class.)</p>
-    <p> :param&nbsp;cat: the name of the cat to look for</p>
-    <p> :param&nbsp;location_tried: the integer IDs I'll look in</p>
-    <p> :return: the integer ids for places I looked</p>
-    <p> """</p>
-    <p> print("I don't know,", TOTALLY_NORMAL_HUMAN_NAME)</p>
-    <p> return location_tried</p>
-    <p>if __name__ == '__main__':</p>
-    <p> # introduces the programmer</p>
-    <p> print("Hello, my name is perfectly reasonable. \</p>
-    <p> Say, do you know where the cat is?")</p>
-    <p> where_is_the_cat("Jules", [1, 2])</p>
-    <p>Class Files</p>
-    <p>Every class should be contained in an appropriately named file with a .py&nbsp;file extension. Give the file the same name as the class. For example, if the class&rsquo;s name is CellPhone, the file it is in should be named cellphone.py. Other files (modules) that use the class will use an import&nbsp;statement to access the class&rsquo;s methods. For example,</p>
-    <p> import cellphone</p>
+    <h2>Sample Code</h2>
+    <pre><code class="language-python">
+    """
+    File: lab2.py
+    Author: Jane Smith
+    Date: 9/3/19
+    Section: 01
+    Email: jsmith500@umbc.edu
+    Description: This program shows the layout of code in a Python file, and greets the user with the name of the programmer
+    Program Assumptions: (We&rsquo;ll talk about these in class.)
+    """
+
+    TOTALLY_NORMAL_HUMAN_NAME = "Yxcronor"
+    
+    def where_is_the_cat(cat, location_tried):
+        """
+        A function to look for the cat
+        Preconditions: (We will talk about these in class.)
+        Postconditions: (We will talk about these in class.)
+        :param cat: the name of the cat to look for
+        :param location_tried: the integer IDs I'll look in
+        :return: the integer ids for places I looked
+        """
+        print("I don't know,", TOTALLY_NORMAL_HUMAN_NAME)
+        return location_tried
+    
+    if __name__ == '__main__':
+        # introduces the programmer
+        print("Hello, my name is perfectly reasonable. \
+        Say, do you know where the cat is?")
+        where_is_the_cat("Jules", [1, 2])
+     </code></pre>
+    <h2>Class Files</h2>
+    <p>Every class should be contained in an appropriately named file with a <code>.py</code>&nbsp;file extension. Give the file the same name as the class. 
+        For example, if the class&rsquo;s name is <code>CellPhone</code>, the file it is in should be named <code>cellphone.py</code>. 
+        Other files (modules) that use the class will use an import&nbsp;statement to access the class&rsquo;s methods. For example,</p>
+        <pre><code class="language-python">import cellphone</code></pre>
     <p>Later in the module,</p>
-    <p> cellphone.turnOn()</p>
-    <p>Use of Constants</p>
-    <p>To improve readability, you should use constants whenever you are dealing with hard-coded values. Your code shouldn't have any &ldquo;magic numbers,&rdquo; or numbers whose meaning is unknown. Your code should also avoid &ldquo;magic strings,&rdquo; or strings that have a specific use within the program (e.g., choices a user could make such as &ldquo;yes&rdquo;, &ldquo;STOP&rdquo;, etc.).</p>
+    <pre><code class="language-python">cellphone.turnOn()</code></pre>
+    <h2>Use of Constants</h2>
+    <p>To improve readability, you should use constants whenever you are dealing with hard-coded values. 
+        Your code shouldn't have any &ldquo;magic numbers,&rdquo; or numbers whose meaning is unknown. 
+        Your code should also avoid &ldquo;magic strings,&rdquo; or strings that have a specific use within the program 
+        (e.g., choices a user could make such as &ldquo;yes&rdquo;, &ldquo;STOP&rdquo;, etc.).</p>
     <p>For example:</p>
-    <p> total = subtotal + subtotal * .06</p>
-    <p>In the code above, .06&nbsp;is a magic number. What is it? The number itself tells us nothing; at the very least, this code would require a comment. However, if we use a constant, the number's meaning becomes obvious, the code becomes more readable, and no comment is required.</p>
-    <p>Constants are typically declared near the top of the program so that if their value ever changes they are easy to locate to modify. Constants may be placed before the if __name__ == "__main__":&nbsp;statement &ndash; this makes them global constants, which means everything in the file has access to them. (Global variables are only allowed for constants!)</p>
+    <pre><code class="language-python">total = subtotal + subtotal * .06</code></pre>
+    <p>In the code above, <code>.06</code>&nbsp;is a magic number. What is it? The number itself tells us nothing; at the very least, this code would require a comment. However, if we use a constant, the number's meaning becomes obvious, the code becomes more readable, and no comment is required.</p>
+    <p>Constants are typically declared near the top of the program so that if their value ever changes they are easy to locate to modify.
+         Constants may be placed before the <code>if __name__ == "__main__":</code>&nbsp;statement &ndash; this makes them global constants, 
+         which means everything in the file has access to them. (Global variables are only allowed for constants!)</p>
     <p>Here&rsquo;s the updated code:</p>
-    <p>TAX_RATE = .06</p>
-    <p>if __name__ == '__main__':</p>
-    <p> # lots of code goes here</p>
-    <p> total = subtotal + subtotal * TAX_RATE</p>
-    <p> # other code goes here</p>
-    <p> print("Maryland has a sales tax rate of", TAX_RATE, "percent")</p>
-    <p>Comments</p>
+    <pre><code class="language-python">if __name__ == '__main__':
+    # lots of code goes here
+    total = subtotal + subtotal * TAX_RATE
+    # other code goes here
+    print("Maryland has a sales tax rate of", TAX_RATE, "percent")</code></pre>
+    <h2>Comments</h2>
     <p>Programmers rely on comments to help document the project and parts of the project.</p>
     <p>Generally, we categorize comments as one of three types:</p>
     <ol start="1">
@@ -141,7 +144,7 @@
     <li>In-Line Comments</li>
     </ol>
     <p>(1) and (2) will use triple quotes (""") A.K.A. docstrings. (3) will use pound signs (#).</p>
-    <p>1. File Header Comments</p>
+    <h3>1. File Header Comments</h3>
     <p>Every file should contain a comment at the top describing the contents of the file and other pertinent information. This "file header comment" MUST include the following information.</p>
     <ul>
     <li>The file name</li>
@@ -153,82 +156,84 @@
     <li>Program assumptions (We&rsquo;ll talk about these in class.)</li>
     </ul>
     <p>For example:</p>
-    <p>"""</p>
-    <p>File: lab2.py</p>
-    <p>Author: YOUR NAME</p>
-    <p>Date: THE DATE</p>
-    <p>Section: YOUR SECTION NUMBER</p>
-    <p>Email: YOUREMAIL@umbc.edu</p>
-    <p>Description: This program shows the layout of code in a Python file, and greets the user with the name of the programmer</p>
-    <p>Program Assumptions: (We&rsquo;ll talk about these in class.)</p>
-    <p>"""</p>
-    <p>2. Function Header Comments</p>
+    <pre><code class="language-python">"""
+File: lab2.py
+Author: YOUR NAME
+Date: THE DATE
+Section: YOUR SECTION NUMBER
+Email:  YOUREMAIL@umbc.edu
+Description:  This program shows the layout of code in a Python file, and greets the user with the name of the programmer
+Program Assumptions: (We’ll talk about these in class.)
+"""</code></pre>
+    <h3>2. Function Header Comments</h3>
     <p>Every single function must&nbsp;have a header comment that includes the following:</p>
     <ul>
     <li>A description of what the function does</li>
-    </ul>
-    <ul>
     <li>Preconditions (We&rsquo;ll talk about these in class.)</li>
     <li>Postconditions (We&rsquo;ll talk about these in class.)</li>
-    </ul>
-    <ul>
-    <li>:param parameter_name (name, type and short description)</li>
-    <li>:return: description of what is returned</li>
+    <li><code>:param parameter_name</code> (name, type and short description)</li>
+    <li><code>:return:</code> description of what is returned</li>
     </ul>
     <p>For example:</p>
-    <p>def where_is_the_cat(cat, location_tried):</p>
-    <p> """</p>
-    <p> A function to look for the cat</p>
-    <p> Preconditions: (We&rsquo;ll talk about these in class.)</p>
-    <p> Postconditions: (We&rsquo;ll talk about these in class.)</p>
-    <p> :param&nbsp;cat: the name of the cat to look for</p>
-    <p> :param&nbsp;location_tried: the integer IDs I'll look in</p>
-    <p> :return: the integer ids for places I looked</p>
-    <p> """</p>
-    <p> print("I don't know,", TOTALLY_NORMAL_HUMAN_NAME)</p>
-    <p> return location_tried</p>
-    <p>3. In-Line Comments</p>
+<pre><code class="lang-python">def where_is_the_cat(cat, location_tried):
+    """
+    A function to look for the cat
+    Preconditions: (We’ll talk about these in class.)
+    Postconditions: (We’ll talk about these in class.)
+    :param cat: the name of the cat to look for
+    :param location_tried: the integer IDs I'll look in
+    :return: the integer ids for places I looked
+    """
+    print("I don't know,", TOTALLY_NORMAL_HUMAN_NAME)
+    return location_tried</code></pre>
+    <h3>3. In-Line Comments</h3>
     <p>In-line comments are comments within the code itself. They are normally comments for the line(s) of code directly below them.</p>
     <p>Well-structured code will be broken into logical sections that perform a simple task. Each of these sections of code (often starting with an 'if' statement, or a loop) should be documented.</p>
     <ul>
     <li>Any &ldquo;confusing looking&rdquo; code should also be commented.</li>
-    <li>Do not&nbsp;comment every line of code. Trivial comments (e.g., # increment x&nbsp;) clutter up your code and are worse than no comments at all.</li>
+    <li>Do not&nbsp;comment every line of code. Trivial comments (e.g., <code># increment x</code>&nbsp;) clutter up your code and are worse than no comments at all.</li>
     <li>In-line comments are used to clarify what&nbsp;your code does, not how&nbsp;it does it.</li>
     </ul>
     <p>An in-line comment appears above&nbsp;the code to which it applies. It is also indented to the same level&nbsp;as the code it is a comment for; comments that are not correctly indented make the code less&nbsp;readable.</p>
     <p>For example:</p>
-    <p># go over the list of numbers given by the user</p>
-    <p>for&nbsp;num in&nbsp;userNumList:</p>
-    <p> # if it's odd, print it, if it's even, do nothing</p>
-    <p> if&nbsp;num % 2 == 1:</p>
-    <p> print(num)</p>
-    <p>4. Class Comments</p>
+    <pre><code class="lang-python">
+# go over the list of numbers given by the user
+for num in userNumList:
+
+    # if it's odd, print it, if it's even, do nothing
+    if num % 2 == 1:
+        print(num)        
+    </code></pre>
+    <h3>4. Class Comments</h3>
     <p>A class file should begin with a file header comment with almost the identical format to that given in the File Header Comment section above. The one difference is the omission of the Program Assumptions line.</p>
     <p>For example:</p>
-    <p>"""</p>
-    <p>File: cellphone.py</p>
-    <p>Author: YOUR NAME</p>
-    <p>Date: THE DATE</p>
-    <p>Section: YOUR SECTION NUMBER</p>
-    <p>Email: YOUREMAIL@umbc.edu</p>
-    <p>Description: This class represents the functionality of a cellphone.</p>
-    <p>"""</p>
+    <pre><code class="lang-python">
+"""
+File: cellphone.py
+Author: YOUR NAME
+Date: THE DATE
+Section: YOUR SECTION NUMBER
+Email:  YOUREMAIL@umbc.edu
+Description:  This class represents the functionality of a cellphone.
+"""        
+    </code></pre>    
     <p>Accessor (getter) and setter (mutator) methods need no header comments. </p>
     <p>The main method needs no header comment. Comment the main method&rsquo;s body as you would a function&rsquo;s body.</p>
     <p>All other methods should contain comments identical to function header comments described in the Function Header Comments section above. Their bodies should be commented as you would a function&rsquo;s body.</p>
-    <p>Global Variable Usage</p>
+    <h2>Global Variable Usage</h2>
     <p>Do not&nbsp;use global variables! Use of global variables is forbidden. (If you still think that you need to use a global variable, talk to your instructor. You probably don&rsquo;t.)</p>
-    <p>Built-In Functions and Functionality</p>
-    <p>Python has many useful language features, built-in modules, and built-in functions that easily let a programmer perform a variety of tasks. In CMSC 291, you may use any built in functionality that is not forbidden in the assignment.</p>
-    <p>Break and Continue</p>
-    <p>Using break, pass, or continue&nbsp;is not&nbsp;allowed in any of your code for this class. Using these statements damages the readability of your code. Readability is a quality necessary for easy code maintenance. Using any of these will lead to an immediate deduction of points.</p>
+    <h2>Built-In Functions and Functionality</h2>
+    <p>Python has many useful language features, <a href="https://docs.python.org/3/library/index.html">built-in modules</a>, and built-in functions that easily let a programmer perform a variety of tasks. In CMSC 291, you may use any built in functionality that is not forbidden in the assignment.</p>
+    <h2>Break and Continue</h2>
+    <p>Using <code>break</code>, <code>pass</code>, or <code>continue</code>&nbsp;is not&nbsp;allowed in any of your code for this class. Using these statements damages the readability of your code. Readability is a quality necessary for easy code maintenance. Using any of these will lead to an immediate deduction of points.</p>
     <div>
-    <p>CMSC 201 &ndash; Computer Science I for Majors Page </p>
-    </div>
     <hr />
     <div>
-    <p><a href="#ftnt_ref1">[1]</a>&nbsp;This line is not required for the python code to execute, but we require it for reasons that may not be clear until near the end of the course. It is a standard widely followed in Python development.</p>
+    <p id="ftnt1"><a href="#ftnt_ref1">[1]</a>&nbsp;This line is not required for the python code to execute, but we require it for reasons that may not be clear until later on in the course. It is a standard widely followed in Python development.</p>
     </div>
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
     
     </div>      
 	</body>
