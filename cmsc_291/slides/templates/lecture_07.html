@@ -1,0 +1,331 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 7{% endblock %}
+
+{% block extra_style %}
+<style>
+.two-col .html-code {
+    float: left;
+    width: 60%;
+}
+.two-col .html-code pre {
+    font-size: 40%
+}
+.two-col .html-rendered {
+    float: right;
+    width: 40%;
+    font-size: 90%
+}
+</style>
+{% endblock %}
+
+{% block slides %}
+<section id="title">
+	<h2>Lecture 7: HTML & CSS</h2>
+    <p>The backbone of the web.</p>
+    <img src="images/interblag.png">
+</section>
+<section id="markup-language">
+    <h2>HTML is a "markup language"</h2>
+    <p>What that means is that HTML is a way to markup content with additional information.  That information can be:</p>
+    <ol>   
+        <li>Organization: tables, lists, paragraphs</li>
+        <li>Semantics:  section headers, form inputs, navigation</li>
+        <li>Typography: size, bold, italic, color, typeface</li>
+    </ol>    
+</section>
+<section id="html-is-old">
+    <img src="images/the_90s.jpg" height="155">
+    <ul>
+        <li>Dates from the early 90s&mdash;and has not changed all that much since then</li>
+        <li>Was originally designed as a way to publish <em>documents</em> on the web</li>
+        <li>It's killler feature was <strong>hypertext</strong> (i.e. text documents with links in them).</li>
+        <li>Most of the focus was on words. Maybe images. Video, audio, and interactive elements were simply not possible.</li>
+    </ul>
+</section>
+<section id="tags">
+    <p>To mark up an element in a webpage, you surround it with tags.  
+        The tags are surrounded in angle brackets <strong>&lt;</strong> and <strong>&gt;</strong>. 
+        The closing tag is surrounded by a <strong>&lt;/</strong> and a <strong>&gt;</strong>
+        <pre><code data-trim class="hlhtml">
+        This is <strong>an example</strong> of some marked up text.
+    </code></pre>
+</section>
+<section id="document-structure">
+    <p>The basic structure of an HTML document</p>
+<pre><code data-trim class="hlhtml">    
+&lt;html&gt;
+    &lt;head&gt;
+        [imports and metadata]
+    &lt;head&gt;
+    &lt;body&gt;
+        [the content of your page]
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</section>
+<section id="tag-categories">
+    <ul>
+        <li>&lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;...&lt;h6&gt; are all headers. Header text will be larger and go on its own line.</li>
+    
+        <li>&lt;p&gt; surrounds a paragraph to properly space it on a page</li>
+        <li>&lt;em&gt; and &lt;strong&gt; will italicize and bold text, respectively.</li>
+        <li>&lt;span&gt; is used to surround text that you want to modify the appearance of with CSS (we'll get to that later)</li>
+        <li>&lt;br&gt; is for a line break.  Putting html on a new line won't work.</li>
+    </ul>
+</section>
+<section id="all-elements">
+    <a href="http://html5doctor.com/"><img src="images/html_elements.png"></a>
+</section>
+<section class="two-col" id="html-tables">
+    <p>Tables have the following structure:</p>
+    <div class="html-code">
+        <pre><code data-trim>
+        &lt;table&gt;
+            &lt;thead&gt;
+              &lt;tr&gt;
+                  &lt;th&gt;Header 1&lt;/th&gt;
+                  &lt;th&gt;Header 2&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Cell 1&lt;/td&gt;&lt;td&gt;Cell 2&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Cell 3&lt;/td&gt;&lt;td&gt;Cell 4&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tbody&gt; 
+        &lt;/table&gt;            
+        </code></pre>
+    </div>
+    <div class="html-rendered">
+        <table class="table">
+            <thead>
+              <tr>
+                  <th>Header 1</th>
+                  <th>Header 2</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cell 1</td><td>Cell 2</td>
+                </tr>
+                <tr>
+                    <td>Cell 3</td><td>Cell 4</td>
+                </tr>
+            </tbody> 
+        </table>
+    </div>
+</section>
+<section class="two-col" id="html-lists">
+    <p>Lists have the following structure:</p>
+    <div class="html-code"><pre><code data-trim>
+      &lt;ul&gt;
+        &lt;li&gt;First item&lt;/li&gt;
+        &lt;li&gt;Second item&lt;/li&gt;
+      &lt;/ul&gt;
+      
+      &lt;ol&gt;
+        &lt;li&gt;First item&lt;/li&gt;
+        &lt;li&gt;Second item&lt;/li&gt;
+      &lt;/ol&gt;
+    </code></pre>
+    </div>
+    <div class="html-rendered">
+        <ul>
+            <li>First item</li>
+            <li>Second item</li>
+          </ul>
+          
+          <ol>
+            <li>First item</li>
+            <li>Second item</li>
+          </ol>
+    </div>
+</section>
+<section id="html-link">
+    <p>Links&mdash;called anchors in HTML&mdash;are the first html tag that we're going to use attributes for. 
+    Attributes are key-value pairs that occur inside the &lt; &gt;'s.</p>
+    <pre><code data-trim>
+        &lt;a href="http://example.com"&gt;Some descriptive text&lt;/a&gt;
+    </code></pre>
+    <p>
+        <a href="http://example.com">Some descriptive text</a>
+    </p>
+<p>In this case, the href attribute allows you to specify what the URL the link will connect to is.</p>
+
+</section>
+<section class="two-col" id="html-images">
+    <p>Images</p>
+    <div class="html-code"><pre><code data-trim>
+      &lt;img src="images/wonderful-sloth.gif"&gt;
+    </code></pre>
+    </div>
+    <div class="html-rendered">
+        <img src="images/wonderful-sloth.gif">
+    </div>
+</section>
+<section class="two-col" id="html-forms">
+    <p>Forms</p>
+    <div class="html-code"><pre><code data-trim>
+        &lt;input type="text" placeholder="Enter email"&gt;
+        &lt;input type="checkbox"&gt;
+        &lt;select class="form-control"&gt;
+          &lt;option&gt;1&lt;/option&gt;
+          &lt;option&gt;2&lt;/option&gt;
+          &lt;option&gt;3&lt;/option&gt;
+          &lt;option&gt;4&lt;/option&gt;
+          &lt;option&gt;5&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;button type="submit"&gt;Push me&lt;/button&gt;
+    </code></pre>
+    </div>
+    <div class="html-rendered">
+        <input type="text" placeholder="What's your name?">
+        <input type="checkbox" class="form-check-input">
+        
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Push me</button>
+    </div>
+</section>
+<section class="two-col" id="html-div">
+    <p>Grouping</p>
+    <div class="html-code"><pre><code class="hlhtml" data-trim>
+      &lt;p&gt;I am a paragraph.&lt;/p&gt;
+      &lt;div&gt;I am a div.&lt;/div&gt;
+      &lt;section&gt;I am a section.&lt;/section&gt;
+    </code></pre>
+    </div>
+    <div class="html-rendered">
+        <p>I am a paragraph.</p>
+        <p>I am a div.</p>
+        <p>I am a section.</p>
+    </div>
+</section>
+<section class="two-col" id="html-div-explanation">
+    <p>Notice that tags like &lt;div&gt; don't really <em>do</em> anything to the the presentation.</p>
+    <ul>
+        <li>Tags like &lt;div&gt; have no semantic meaning</li>
+        <li>Instead, they are often used as a kind of blank container which we can use to group HTML content</li>
+        <li>These containers give us something to point to for styling content with CSS</li>
+        <li>(More on CSS coming in the next class)</li>
+    </ul>
+</section>
+<section class="two-col" id="html-commments">
+    <p>HTML Commments</p>
+    <div class="html-code"><pre><code class="hlhtml" data-trim>
+      &lt;!-- Comment on a single line --&gt;
+      &lt;!--
+          Comments on
+          multiple lines
+                          --&gt;
+    </code></pre>
+    </div>
+    <div class="html-rendered">
+        <p style="color: rgba(0, 0, 0, 0.05); font-weight: bold; font-variant: small-caps; font-size: 120%;">Nothing here...</p>
+    </div>
+</section>
+<section class="two-col" id="inline">
+    <p>Inline vs. Block: Inline Elements</p>
+    <div class="html-code"><pre><code class="hlhtml" data-trim>
+        &lt;p&gt;Doge is a slang term for "dog" 
+        that is primarily associated with pictures 
+        of Shiba Inus. &lt;img src="doge.jpg"&gt;
+        Photos may be photoshopped to change the 
+        dog's face or captioned with interior 
+        monologues in Comic Sans font.&lt;/p&gt;
+      </code></pre>
+      </div>
+      <div class="html-rendered">
+          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus 
+              <img src="images/doge.jpg" style="vertical-align: middle;" height="50"> Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font. </p>
+      </div>    
+</section>
+<section class="two-col" id="block">
+    <p>Inline vs. Block: Block Elements</p>
+    <div class="html-code"><pre><code class="hlhtml" data-trim>
+        &lt;p&gt;Doge is a slang term for "dog" 
+        that is primarily associated with pictures 
+        of Shiba Inus. &lt;div&gt;&lt;img src="doge.jpg"&gt;&lt;/div&gt;
+        Photos may be photoshopped to change the 
+        dog's face or captioned with interior 
+        monologues in Comic Sans font.&lt;/p&gt;
+      </code></pre>
+      </div>
+      <div class="html-rendered">
+          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus 
+              <div><img src="images/doge.jpg" style="vertical-align: middle;" height="50"></div> Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font. </p>
+      </div>    
+</section>
+<section id="inline-vs-block">
+    <p><strong>Block elements</strong> take up the full width available on a page, effectively blocking 
+    out any other elements from sitting next to on either side.</p>
+    <p><strong>Inline elements</strong> only take up as much width as is required to display the contents 
+        of the element, thereby allowing other elements to be in-line with it.</p>
+    </section>
+    <section id="inline-vs-block-2">
+        <p>Common <strong>block tags</strong> are &lt;div&gt;, &lt;p&gt;, &lt;h1..6&gt;, &lt;ul&gt;, &lt;li&gt;</p>
+        <p>Common <strong>Inline tags</strong> are &lt;a&gt;, &lt;img&gt;, &lt;span&gt;, &lt;em&gt;, &lt;strong&gt;</p>
+    </section>
+    <section id="whole-page">
+        <pre><code class="hlhtml" data-trim>
+            &lt;!doctype html&gt;
+            &lt;html lang="en"&gt;
+              &lt;head&gt;
+                &lt;title&gt;Hello, world!&lt;/title&gt;
+              &lt;/head&gt;
+              &lt;body&gt;
+                &lt;h1&gt;Hello, world!&lt;/h1&gt;
+                &lt;p&gt;Here is a very small and simple document.&lt;/p&gt;
+                &lt;h2&gt;Links I like:&lt;/h2&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="http://google.com/"&gt;Google&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="http://amazon.com/"&gt;Amazon&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="http://netflix.com"&gt;Netflix&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/body&gt;
+            &lt;/html&gt;
+        </code></pre>
+    </section>    
+    <section id="page-link">
+        <p>Let's <a href="simple-page.html">look at that page</a>...</p>
+        <p class="fragment fade-up">Default styling is pretty primitive...</p>
+    </section>
+    <section id="tree">
+        <img src="images/HTML-tree.png">
+    </section>
+    <section id="dom">
+        <h3>Document Object Model (DOM)</h3>
+        <ol>
+            <li>Browser parses HTML file</li>
+            <li>Further resources are downloaded</li>
+            <li>Construct a tree representation of the document</li>
+            <li>The layout engine draws the objects on screen</li>
+            <li>Any user-supplied styling is applied</li>
+        </ol>
+    </section>
+    <section id="js">
+        <p>The DOM is also an interface for manipulating the HTML programatically via JavaScript, which lets us</p>
+        <ul>
+            <li>Create and insert new nodes into the tree</li>
+            <li>Remove nodes from the tree</li>
+            <li>Change the text content and attributes of nodes</li>
+            <li>Attach listeners to nodes that do something on user interaction</li>
+        </ul>
+    </section>
+    <section id="html-examples">
+        <h3>Let's look at some real-world HTML!</h3>
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a></li>
+            <li><a href="https://www.youtube.com/">YouTube</a></li>
+            <li><a href="https://www.google.com/">Google</a></li>
+        </ul>
+
+    </section>
+{% endblock %}
