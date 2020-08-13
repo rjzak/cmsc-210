@@ -1,0 +1,92 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 8{% endblock %}
+
+{% block extra_style %}
+<style>
+.two-col .html-code {
+    float: left;
+    width: 60%;
+}
+.two-col .html-code pre {
+    font-size: 40%
+}
+.two-col .html-rendered {
+    float: right;
+    width: 40%;
+    font-size: 90%
+}
+#content-vs-presentation h4 { text-transform: none;}
+#content-vs-presentation em { color:rebeccapurple }
+</style>
+{% endblock %}
+
+{% block slides %}
+<section id="title">
+	<h2>Lecture 8: HTML & CSS, Part II</h2>
+    <p>CSS</p>
+    <img src="images/css-joke.png">
+</section>
+<section id="tree">
+    <p>Remember the DOM!</p>
+    <img src="images/HTML-tree.png">
+</section>
+<section id="dom-layers">
+    <p>Browsers expose two layers/tools to web<br>developers to do things with the DOM</p>
+    <ul>
+        <li>JavaScript</li>
+        <li>Cascading Style Sheets (CSS)</li>
+    </ul>
+</section>
+<section id="css-facts">
+    <ul>
+        <li>Not a programming language; a "stylesheet language"</li>
+        <li>Initial release of CSS circa 1996 (the web is already  approx. 5 years old at this point)</li>
+        <li>Wasn't widely (and correctly) supported by browsers till early 2000s</li>
+        <li>CSS support among browsers has gotten pretty good.</li>
+    </ul>
+</section>
+<section id="content-vs-presentation">
+        <p>Designed to allow separation of <strong>content</strong> from <strong>presentation</strong></p>
+        <hr>
+        <h4>HTML → adding <em>semantic meaning</em>&nbsp;&nbsp;to a text document</h4>
+        <h4>CSS → adding <em>presentational information</em>&nbsp;&nbsp;to an HTML document</h4>        
+</section>
+<section id="content-vs-presentation-example">
+    <p>Consider <code>&lt;h1&gt;</code>: it's for indicating the most important heading.
+        "Important" doesn't imply anything about color, typeface, size, etc.</p>
+</section>
+<section id="presentation-context">
+    <h2>Context & Presentation May Vary</h2>
+    <div>
+        <img src="images/phone-icon.png" height="200">
+        <img src="images/monitor-icon.png" height="200">
+        <img src="images/book-icon.png" height="200">
+    </div>
+    <h2>...but content stays the same.</h2>
+</section>
+<section id="how-css-works">
+    <p>How does CSS work?</p>
+    <ul>
+        <li>write a rule that matches some part of the DOM tree</li>
+        <li>specify attributes that style the matched nodes</li>
+        <li>Style is applied to <em>all</em> children</li>
+        <li>More specific rules always override less specific ones</li>
+        <li>Soure of rule also determines precedence...</li>
+        <li>(...that's the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade">cascading part</a>)</li>
+    </ul>
+</section>
+<section id="rule-1-definition">
+    <p>RULE: Text in unordered lists should be green!</p>
+    <img src="images/HTML-tree-green.png">
+</section>
+<section id="rule-1-result">
+    <img src="images/simple-page-green.png">
+</section>
+<section id="rule-2-definition">
+    <p>RULE: The last &lt;li&gt; in a list should be orange.</p>
+    <img src="images/HTML-tree-green-orange.png">
+</section>
+<section id="rule-2-result">
+    <img src="images/simple-page-green-orange.png">
+</section>
+{% endblock %}
