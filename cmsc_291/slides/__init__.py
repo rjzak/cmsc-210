@@ -7,7 +7,7 @@ logger = logging.getLogger("cmsc_291")
 
 def build(location: str = "build"):
     logging.basicConfig(level=logging.DEBUG, format="%(levelname)s:%(message)s")
-    reset_build_dir(location)
+    #reset_build_dir(location)
     logger.info("Copying static files...") 
     copy_static_files(location)
     logger.info("Rendering templates...") 
