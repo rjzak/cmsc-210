@@ -73,9 +73,17 @@
 
 <section id="course-overview-2">
 	<ul>
-		<li>We'll use Blackboard</li>
-		<li>Our TA is TBD.</li>
-		<li>This course is mostly Python</li>
+		<li>Our TA is Agatha Turyahikayo.</li>
+		<li>Course website: <a href="https://mazelife.github.io/cmsc-291/">https://mazelife.github.io/cmsc-291/</a></li>
+		<li>We'll use Blackboard for a few things here and there.</li>
+		<li>Office hours are on <strong>Mondays</strong> from 5:30 - 6:45</li>
+			<ul>
+				<li>Office hours are <strong>by appointment only</strong>
+				<li>Please let me know by noon the day of if you'd like to meet.</li>
+			</ul>
+		</li>
+		
+
 	</ul>
 </section>
 
@@ -84,12 +92,15 @@
 	<table>
 		<thead>
 			<tr>
-				<th>UMBC gl system?</th><th>My own computer + Github?</th>
+				<th>UMBC gl system?</th>
+				<th>Blackboard?</th>
+				<th>My own computer + Github?</th>
 			</tr>							
 		</thead>
 		<tbody>
 			<tr>
-				<td>When you submit a <strong>project</strong>.</td>
+				<td>Never</td>
+				<td>Surveys & practice problems</td>
 				<td>When you submit an <strong>assignment</strong>.</td>
 			</tr>
 		</tbody>
@@ -116,13 +127,13 @@
 
 <section id="final-exam">
 	<h2>Final exam</h2>
-	<p>There isn't one. But we will meet for some activity, TBD.</p>
+	<p>There isn't one. But we may meet for some activity, TBD.</p>
 </section>
 
 <section id="submissions-and-late-policy">
 	<h2>Submissions & lateness policy</h2>
 	<ul>
-		<li>Assignments will be due on Monday mornings at <code>11:59:59.999999</code>, unless otherwise announced.</li>
+		<li>Assignments will be due on Wednesday before midnight, unless otherwise announced.</li>
 		<li>Late assignments will receive a <strong>zero</strong>.</li>
 	</ul>
 </section>
@@ -141,7 +152,7 @@
 	<h2>There are ways to get help if you're struggling!</h2>
 	<ul>
 		<li>You can talk to your classmates about concepts</li>
-		<li>You can talk to your TA or come to my office hours (check Blackboard for these)</li>
+		<li>You can talk to your TA or come to my office hours</li>
 		<li>You can compare the output of your program to someone else's ("Did I do this right?")</li>
 		<li>You can work on <strong>practice</strong> problems together.</li>
 		<li>You can get help if your computer is having problems at the <a href="https://doit.umbc.edu/tsc/">Technology Support Center</a></li>
@@ -149,12 +160,13 @@
 </section>
 
 <section id="assignments">
-	<h2>First assignment</h2>
+	<h2>Assignment Zero</h2>
 	<p>Get familiar with Blackboard and do some basic admin there...</p>
 	<ul>
 		<li>First Day Survey (under Assignments)</li>
 		<li>Hardware/Software Questionnaire (under Assignments)</li>
 		<li>Course Syllabus Acknowledgement (under Discussions)</li>
+		<li>Should be quick</li>
 	</ul>
 </section>
 
@@ -180,31 +192,36 @@
 <section id="course-objectives">
 	<h3>Course objectives</h3>
 	<h2>2. Build useful things</h2>
-	<ul>
-		<li>Acquire, analyze, and visualize data</li>
-		<li>Build a graphical user interface (GUI)</li>
-		<li>Build a web application</li>
-	</ul>
+	<ol>
+		<li>Data: acquisition, exploration, & visualization</li>
+		<li>HTML and CSS</li>
+		<li>Web scraping</li>
+		<li>Web application development</li>
+		<li>Machine learning</li>
+	</ol>	
 </section>
 
 <section id="why-bother">
 	<h2>Why?</h3>
 	<p>The skills you learn here can help you in future courses, in research and internships, and in your career.</p>
-</section>				
-
-<section id="questions">
-	<h2>Any questions?</h3>
 </section>	
 
+<section id="questions">
+	<h2>What questions do you have?</h3>
+</section>	
+
+<section id="questions">
+	<h2>Let's review some Python</h3>
+</section>	
 <section id="python-categorized">
-	<p>Python is a interpreted, dynamically-typed, and strongly-typed language with garbage collection and signifigant whitespace.</p>
+	<p>Python is an interpreted, dynamically-typed, and strongly-typed programming language with garbage collection and signifigant whitespace.</p>
 </section>
 
 <section id="interpreted">
 	<div class="container">
 		<div class="left">
 			<h3>Interpreted <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
-			<ul>
+			<ul class="fragment">
 				<li>Program ☞ Source Code</li>
 				<li>To run the program, you require an interpreter</li>
 				<li>Examples: Python, JavaScript</li>
@@ -212,7 +229,7 @@
 		</div>
 		<div class="right">
 			<h3>Compiled</h3>
-			<ul>
+			<ul class="fragment">
 				<li>Program ☞ Executable</li>
 				<li>No interpreter needed to run the program.</li>
 				<li>Examples: C++, Java</li>
@@ -224,13 +241,13 @@
 	<div class="container">
 		<div class="left">
 			<h3>Dynamic Types <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
-			<ul>
+			<ul class="fragment">
 				<li>Types are checked at runtime.</li>
 			</ul>
 		</div>
 		<div class="right">
 			<h3>Static Types</h3>
-			<ul>
+			<ul class="fragment">
 				<li>Types checked at compile time (or before running).</li>
 			</ul>
 		</div>
@@ -240,23 +257,27 @@
 	<div class="container">
 		<div class="left">
 			<h3>Strong Types <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
-			<ul>
-				<li>Compiler or interpreter will not try to correct type errors by coercing types.</li>
-			</ul>
-			<pre><code data-trim data-noescape class="python">
-				>>> 1 + "1"
-				TypeError
-			</code></pre>
+			<div class="fragment">
+				<ul>
+					<li>Compiler or interpreter will not try to correct type errors by coercing types.</li>
+				</ul>
+				<pre><code data-trim data-noescape class="python">
+					>>> 1 + "1"
+					TypeError
+				</code></pre>
+			</div>
 		</div>
 		<div class="right">
 			<h3>Weak Types</h3>
-			<ul>
-				<li>Compiler or interpreter may implicitly coerce types to avoid type errors.</li>
-			</ul>
-			<pre><code data-trim data-noescape class="python">
-				>>> 1 + "1"
-				"11"
-			</code></pre>							
+			<div class="fragment">
+				<ul>
+					<li>Compiler or interpreter may implicitly coerce types to avoid type errors.</li>
+				</ul>
+				<pre><code data-trim data-noescape class="python">
+					>>> 1 + "1"
+					"11"
+				</code></pre>
+			</div>
 		</div>
 </section>
 
@@ -264,14 +285,14 @@
 	<div class="container">
 		<div class="left">
 			<h3>Automatic memory management <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
-			<ul>
+			<ul class="fragment">
 				<li>Memory is managed for you by the Python runtime.</li>
 				<li>The garbage collector reclaims memory when no longer needed.</li>
 			</ul>
 		</div>
 		<div class="right">
 			<h3>Manual memory management</h3>
-			<ul>
+			<ul class="fragment">
 				<li>It's up to you to manage you own memory.</li>
 				<li>The programmer is responsible for allocating and de-allocating memory.</li>
 			</ul>
@@ -282,7 +303,7 @@
 	<div class="container">
 		<div class="left">
 			<h3>Blocks expressed by indentation <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
-			<pre><code class="hlpython" data-trim data-line-numbers>
+			<pre class="fragment"><code class="hlpython" data-trim data-line-numbers>
 				if some_number == 2:
 					print("It's two!")
 				print("All done.")
@@ -290,7 +311,7 @@
 		</div>
 		<div class="right">
 			<h3>Blocks are surronded by characters</h3>
-			<pre><code class="hljs" data-trim data-line-numbers>
+			<pre class="fragment"><code class="hljs" data-trim data-line-numbers>
 				if (some_number == 2) {
 					print("It's two!")
 				}
@@ -455,7 +476,7 @@
 		pals.get("Bob", 0)  # I want a default number.
 
 		# Bob and I are no longer pals :-(
-		def pals["Bob"]  
+		del pals["Bob"]  
 
 		# I want a list of my friends' names
 		pals.keys()
@@ -486,7 +507,17 @@
 			</code></pre>
 		</li>
 	</ul>	
-</section>	
+</section>
+<section id="further-review">
+	<p>If you still feel shaky...</p>
+	<ul>
+		<li><em>Learn Python the Hard Way</em>. <a href="https://learnpythonthehardway.org/python3/ex3.html">Numbers and Math</a></li>
+		<li><em>Google for Education</em>. <a href="https://developers.google.com/edu/python/strings">Python Strings</a></li>
+		<li><em>Python for Beginners</em>. <a href="https://www.pythonforbeginners.com/control-flow-2/python-for-and-while-loops/">Python For and While Loops</a></li>
+		<li><em>Google for Education</em>. <a href="https://developers.google.com/edu/python/lists">Python Lists</a></li>
+		<li><em>Python-Course.eu</em>. <a href="https://www.python-course.eu/dictionaries.php">Dictionaries</a></li>
+	</ul>
+</section>
 </div>
 		</div>
 		<script src="dist/jquery.js"></script>
