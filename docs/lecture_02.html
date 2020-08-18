@@ -12,48 +12,80 @@
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 		
+<style>
+	.zen-of-python img {
+		display: block;
+		float: left;
+		width: 220px;
+		margin-right: 25px;
+	}
+	p { text-align: left;}
+</style>
+
+
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-<section id="title">
-	<h2>Lecture 2</h2>
-	<h3>Fancy Python</h3>
+<section id="title" data-background-color="rgb(84, 84, 84)" data-background-image="images/python_logo.png" data-background-size="1400px">
+	<h2 style="color: #ffffff">Lecture 2</h2>
+	<h3 style="color: #ffffff">&nbsp;&nbsp;New Python Tricks</h3>
 </section>
 
 <section id="zen-of-python">
 	<img src="images/zen.png">
+	<p class="fragment">The Zen of Python</p>
 </section>
 
-
 <section id="zen-of-python-2">
+	<h2>20 guiding principles about Python</h2>
 	<pre><code class="hlpython" data-trim>
 		>>> import this
 		The Zen of Python, by Tim Peters
-
-		Beautiful is better than ugly.
-		Explicit is better than implicit.
-		Simple is better than complex.
-		Complex is better than complicated.
-		Flat is better than nested.
-		Sparse is better than dense.
-		Readability counts.
-		Special cases aren't special enough to break the rules.
-		Although practicality beats purity.
-		Errors should never pass silently.
-		Unless explicitly silenced.
-		In the face of ambiguity, refuse the temptation to guess.
-		There should be one-- and preferably only one --obvious way to do it.
-		Although that way may not be obvious at first unless you're Dutch.
-		Now is better than never.
-		Although never is often better than *right* now.
-		If the implementation is hard to explain, it's a bad idea.
-		If the implementation is easy to explain, it may be a good idea.
-		Namespaces are one honking great idea -- let's do more of those!
 	</code></pre>						
 </section>
 
-<section id="zen-of-python-2">
+<section id="zen-of-python-3" class="zen-of-python">
+	<img src="images/kanbun_bijin.jpg">
+	<p>Beautiful is better than ugly.</p>
+	<p class="fragment">Explicit is better than implicit.</p>
+	<p class="fragment">Simple is better than complex.</p>
+	<p class="fragment">Complex is better than complicated.</p>
+</section>
+
+<section id="zen-of-python-4" class="zen-of-python">
+	<img src="images/samurai.jpg">
+	<p>Flat is better than nested.</p>
+	<p class="fragment">Sparse is better than dense.</p>
+	<p class="fragment">Readability counts.</p>
+</section>
+
+<section id="zen-of-python-5" class="zen-of-python">
+	<img src="images/toyokuni.jpg">
+	<p>Special cases aren't special<br>enough to break the rules.</p>
+	<p class="fragment">...Although practicality beats purity.</p>
+	<p class="fragment">Errors should never pass silently.</p>
+	<p class="fragment">...Unless explicitly silenced.</p>
+</section>
+
+<section id="zen-of-python-6" class="zen-of-python">
+	<img src="images/jakuchu.jpg">
+	<p>In the face of ambiguity, refuse the temptation to guess.</p>
+	<p class="fragment">There should be one&mdash;and preferably only one&mdash;obvious way to do it.</p>
+	<p class="fragment">...Although that way may not be obvious at first unless you're Dutch.</p>
+</section>
+
+<section id="zen-of-python-7" class="zen-of-python">
+	<img src="images/kiyotada.jpg">
+	<p>Now is better than never.</p>
+	<p class="fragment">Although never is often better than <em>right</em> now.</p>
+	<p class="fragment">If the implementation is hard to<br>explain, it's a bad idea.</p>
+	<p class="fragment">If the implementation is easy to<br>explain, it may be a good idea.</p>
+	<p class="fragment">Namespaces are one honking great<br>idea&mdash;let's do more of those!</p>
+</section>
+
+<section id="zen-of-python-summary">
+		<h3>In summary:</h3>
 		<ul>
 			<li>Readability and clarity matters.</li>
 			<li>Strive keep things as simple as they can be.</li>
@@ -66,8 +98,11 @@
 
 <section id="announcements">
 	<h2>Announcements</h2>
-	<p>Python Coding Standards posted <a href="coding_standards.html">on the course website</a></p>
-	<p>Installfest this Thursday! Bring your computer to class.</p>
+	<ul>
+		<li>Python Coding Standards are posted <a href="coding_standards.html">on the course website</a>. Have a look!</li>
+		<li>Assignment #1 is out tomorrow (Wednesday, 09/02)</li>
+		<li>Installfest this Thursday! Have your computer ready.</li>
+	</ul>
 	<img src="images/computer-fire.gif">
 </section>
 
@@ -165,9 +200,14 @@
 		feed("Percy", 4, "Lil' Bits")
 		change_litter()
 	</code></pre>
+	<p>What is happening when we do this?</p>
 	<pre><code class="hlshell" data-trim>
 		python cats.py
 	</code></pre>					
+</section>
+
+<section class="percy">
+	<img src="images/percy.jpeg" width="600">
 </section>
 
 <section id="modules-3">
