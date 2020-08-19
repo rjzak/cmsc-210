@@ -8,7 +8,7 @@
 		width: 220px;
 		margin-right: 25px;
 	}
-	p { text-align: left;}
+	.zen-of-python-2 p { text-align: left;}
 </style>
 
 {% endblock %}
@@ -28,7 +28,7 @@
 	<pre><code class="hlpython" data-trim>
 		>>> import this
 		The Zen of Python, by Tim Peters
-	</code></pre>						
+	</code></pre>
 </section>
 
 <section id="zen-of-python-3" class="zen-of-python">
@@ -130,7 +130,7 @@
 				<th>Symbol</th>
 				<th>Syntax</th>
 				<th>Alternative Syntax</th>
-			</tr>							
+			</tr>
 		</thead>
 		<tbody>
 			<tr>
@@ -156,21 +156,63 @@
 				<td>A ⊖ B</td>
 				<td><code>A ^ B</code></td>
 				<td><code>A.symmetric_difference(B)</code></td>
-			</tr>																				
+			</tr>
 			<tr>
 				<td>super set</td>
 				<td>A ⊇ B</td>
 				<td><code>A >= B</code></td>
 				<td><code>A.issuperset(B)</code></td>
-			</tr>														
+			</tr>
 
 		</tbody>
 	</table>
 </section>
 
+<section id=string-formatting">
+    <p>Sometimes you want to put variables inside of strings:</p>
+    <pre class="medium"><code class="hlpython" data-trim>
+        name = "John Doe"
+        age = 99
+    </code></pre>
+    <p>I want to print out a message like: "Hello my name is John Doe and I am 99 years old."</p>
+</section>
+
+<section id=string-formatting-bad">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim>
+        name = "John Doe"
+        age = 99
+        print("Hello my name is " + name + " and I am " + str(age) + " years old.")
+    </code></pre>
+    <p class="fragment fade-up" color="red">Don't do it this way.</p>
+</section>
+
+<section id=string-formatting-good">
+    <p>f-strings to the rescue!</p>
+    <pre class="medium"><code class="hlpython" data-trim>
+        name = "John Doe"
+        age = 99
+        print(f"Hello my name is {name} and I am {age} years old.")
+    </code></pre>
+</section>
+
+<section id=string-formatting-also-good">
+    <p>The <code>format()</code> method can be useful for more complex cases:</p>
+    <pre class="medium"><code class="hlpython" data-trim>
+    cost = 1200.48
+    tax = 0.085
+    message = "Cost ${total:,} with tax, which is {tax}%".format(
+        total=round(1200.48 * (0.08 + 1), 2),
+        tax=tax * 100
+    )
+    # The value of message is:
+    # 'This items costs $1,296.52 with tax, which is 8.5%'
+    </code></pre>
+</section>
+
+
 <section id="modules-1">
 	<h2>Python Modules</h2>
-</section>				
+</section>
 
 <section id="modules-2">
 	<h2>Execution model:</h2>
@@ -182,14 +224,14 @@
 
 		def change_litter():
 			print("Litter box is changed.")
-		
+
 		feed("Percy", 4, "Lil' Bits")
 		change_litter()
 	</code></pre>
 	<p>What is happening when we do this?</p>
 	<pre><code class="hlshell" data-trim>
 		python cats.py
-	</code></pre>					
+	</code></pre>
 </section>
 
 <section class="percy">
@@ -205,19 +247,19 @@
 
 			def walk():
 				print("Let's go for a walk!")
-			
+
 			feed("Teddy", 8, "Ol' Stinky")
 			walk()
 		</code></pre>
 		<pre><code class="hlshell" data-trim>
 			python dogs.py
-		</code></pre>					
+		</code></pre>
 		<pre><code class="hlshell" data-trim>
 			>>> import dogs
 		</code></pre>
 </section>
 <section class="teddy">
-			<video controls="controls" width="800" height="600" 
+			<video controls="controls" width="800" height="600"
 		   name="Teddy Being Awesome" src="images/teddy.mov"></video>
 </section>
 
@@ -231,7 +273,7 @@
 
 		def feed(name, oz, kind):
 			print(f"$name has been fed $oz ounces of $kind.")
-	</code></pre>				
+	</code></pre>
 </section>
 
 <section id="modules-6">
@@ -246,7 +288,7 @@
 
 		def walk():
 			print("Let's go for a walk!")
-		
+
 		feed("Teddy", 8, "Ol' Stinky")
 		walk()
 	</code></pre>
@@ -256,10 +298,10 @@
 
 		def change_litter():
 			print("Litter box is changed.")
-		
+
 		feed("Percy", 4, "Lil' Bits")
 		change_litter()
-	</code></pre>						
+	</code></pre>
 </section>
 
 <section id="modules-8">
@@ -278,7 +320,7 @@
 
 		def walk():
 			print("Let's go for a walk!")
-		
+
 		if __name__ == "__main__":
 			feed("Teddy", 8, "Ol' Stinky")
 			walk()
@@ -289,27 +331,27 @@
 
 		def change_litter():
 			print("Litter box is changed.")
-		
+
 		if __name__ == "__main__":
 			feed("Percy", 4, "Lil' Bits")
 			change_litter()
-	</code></pre>						
+	</code></pre>
 </section>
 <section id="modules-10">
 	<pre><code class="hlshell" data-trim>
 		python dogs.py
 		Teddy has been fed 8 ounces of Ol' Stinky
 		Let's go for a walk!
-	</code></pre>					
+	</code></pre>
 	<pre><code class="hlshell" data-trim>
 		>>> import dogs
-	</code></pre>	
-</section>	
+	</code></pre>
+</section>
 
 <section id="modules-11">
 	<h2>Submodules</h2>
 	<img src="images/modules_3_screengrab.png">
-</section>	
+</section>
 
 <section id="modules-12">
 	<h2>Importing submodules:</h2>
@@ -320,12 +362,12 @@
 
 		def walk():
 			print("Let's go for a walk!")
-		
+
 		if __name__ == "__main__":
 			feed("Teddy", 8, "Ol' Stinky")
 			walk()
 			short_nap()
-	</code></pre>					
+	</code></pre>
 </section>
 
 <section id="modules-13">
@@ -336,20 +378,23 @@
 
 		def walk():
 			print("Let's go for a walk!")
-		
+
 		if __name__ == "__main__":
 			food.feed("Teddy", 8, "Ol' Stinky")
 			walk()
 			sleep.short_nap()
-	</code></pre>					
+	</code></pre>
 </section>
 
 <section id="modules-14">
 	<pre class="medium"><code class="hlpython" data-trim>
 	from animals import food
-	
+
 	food.feed("Percy", 4, "Lil' Bits")
 	</code></pre>
 	<p>Modules are actually kind of like dictionaries, but with different syntax. Instead of <code>food["feed"]</code> you do <code>food.feed</code>.</p>
 </section>
+
+
+
 {% endblock %}
