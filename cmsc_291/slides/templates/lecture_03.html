@@ -5,7 +5,10 @@
 	<h2>Lecture 3</h2>
 	<h3>Local Development, Command-line Interfaces, &amp; Git</h3>
 </section>
-
+<section id="announcements">
+	<h2>Assignment 1 is due next week</h2>
+    <h3>September 16, before midnight</h3>
+</section>
 <section id="local-dev">
 	<h2>What is local development?</h2>
     <ul>
@@ -17,7 +20,7 @@
 </section>
 
 <section id="remote-dev">
-    <p>By contrast, what you did in CMSC 201, using SSH to connect 
+    <p>By contrast, what you did in CMSC 201, using SSH to connect
         to a Linux server (GL) where you would edit and run your files is called
         <em>remote development</em>.</p>
     <img src="images/umbc_gl.png">
@@ -29,12 +32,12 @@
 			<tr>
                 <th>Remote <div style="float: right">VS.</div></th>
                 <th>Local</th>
-			</tr>							
+			</tr>
 		</thead>
 		<tbody style="vertical-align: top;">
 			<tr>
                 <td><span class="good">Pro</span>: Everything is installed for you by the administrator.</td>
-                <td><span class="bad">Con</span>: It's up to you to learn to install and configure what you need to run your code.</td>                
+                <td><span class="bad">Con</span>: It's up to you to learn to install and configure what you need to run your code.</td>
             </tr>
             <tr>
                 <td><span class="good">Pro</span>: Backups are handled for you.</td>
@@ -46,7 +49,7 @@
             </tr>
             <tr>
                 <td><span class="bad">Con</span>: You can't develop without an internet connection</td>
-                <td><span class="good">Pro</span>: You can devlop with no or slow interent</td>
+                <td><span class="good">Pro</span>: You can develop with no or slow internet</td>
             </tr>
             <tr>
                 <td><span class="bad">Con</span>: Using emacs over SSH is a primitive, painstaking, slow way to program</td>
@@ -68,7 +71,7 @@
 <section id="local-dev-continued">
     <h2>But what is local development?</h2>
     <ul>
-        <li>Is it working on the commmmand line?</li>
+        <li>Is it working on the command line?</li>
         <li>Or using programs with a graphical user interface?</li>
         <li>Yes!</li>
     </ul>
@@ -82,11 +85,11 @@
     <h3>You have two options on OS X</h3>
     <ul>
         <li>The terminal program that comes with OS X:
-            <img src="images/os_x_terminal_icon.png" style="vertical-align: middle"> 
+            <img src="images/os_x_terminal_icon.png" style="vertical-align: middle">
         </li>
         <li>
             iTerm (download from <a href="https://iterm2.com">iterm2.com</a>):
-            <img src="images/iterm_icon.png" style="vertical-align: middle">    
+            <img src="images/iterm_icon.png" style="vertical-align: middle">
         </li>
         <li>They run the same shell (BASH) but iTerm looks nicer and has more features.</li>
 
@@ -97,12 +100,12 @@
 <section id="command-line-3">
     <h3>You have two options on Windows</h3>
     <ul>
-        <li>The commmand prompt (aka CMD):<br>
-            <img src="images/win_cmd.png"> 
+        <li>The command prompt (aka CMD):<br>
+            <img src="images/win_cmd.png">
         </li>
         <li>
             PowerShell:<br>
-            <img src="images/win_powershell.png">    
+            <img src="images/win_powershell.png">
         </li>
     </ul>
 </section>
@@ -118,26 +121,24 @@
         <li>PowerShell
             <ul>
                 <li>Runs a totally different shell</li>
-                <li>is available by default (i.e. doesn’t need to be installed) starting with Windows 10</li>
+                <li>is available by default (i.e. doesn't need to be installed) starting with Windows 10</li>
                 <li>can run Command Prompt commands, but the opposite is not necessarily true</li>
                 <li>a lot of commands share names and behaviors with Unix commands</li>
                 <li>is also a scripting language</li>
             </ul>
-        </li>        
+        </li>
     </ul>
 </section>
 <section id="command-line-5">
     <table class="medium" style="width: 100%">
         <col style="width:16%">
-        <col style="width:28%">
-        <col style="width:28%">
-        <col style="width:28%">        
+        <col style="width:38%">
+        <col style="width:38%">
         <thead>
             <tr>
                 <th>Purpose</th>
                 <th>Windows</th>
-                <th>Mac</th>
-                <th>Linux</th>
+                <th>Mac or Linux</th>
             </tr>
         </thead>
         <tbody>
@@ -151,41 +152,32 @@
                 man command
                 command --help
                 </code></pre></td>
-                <td><pre><code data-trim class="bash hljs">
-                man command
-                command --help
-                </code></pre></td>
             </tr>
             <tr>
                 <td>Show current<br>directory</td>
                 <td><pre><code data-trim class="bash hljs">cd</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">pwd</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">pwd</code></pre></td>            
             </tr>
             <tr>
                 <td>Change<br>directory</td>
                 <td><pre><code data-trim class="bash hljs">cd new_dir_path</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">cd new_dir_path</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">cd new_dir_path</code></pre></td>            
             </tr>
             <tr>
                 <td>Show files in<br>directory</td>
                 <td><pre><code data-trim class="bash hljs">dir</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">ls</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">ls</code></pre></td>            
             </tr>
             <tr>
                 <td>Create a<br>new directory</td>
                 <td><pre><code data-trim class="bash hljs">mkdir new_dir</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">mkdir new_dir</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">mkdir new_dir</code></pre></td>            
             </tr>
             <tr>
                 <td>Delete a<br>directory</td>
                 <td><pre><code data-trim class="bash hljs">rmdir new_dir_path</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">rmdir new_dir_path</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">rmdir new_dir_path</code></pre></td>            
-            </tr>                                                 
+            </tr>
         </tbody>
     </table>
 </section>
@@ -193,15 +185,13 @@
 <section id="command-line-6">
     <table class="medium" style="width: 100%">
         <col style="width:16%">
-        <col style="width:28%">
-        <col style="width:28%">
-        <col style="width:28%">        
+        <col style="width:38%">
+        <col style="width:38%">
         <thead>
             <tr>
                 <th>Purpose</th>
                 <th>Windows</th>
-                <th>Mac</th>
-                <th>Linux</th>
+                <th>Mac & Linux</th>
             </tr>
         </thead>
         <tbody>
@@ -209,44 +199,38 @@
                 <td>Show total<br>file content</td>
                 <td><pre><code data-trim class="bash hljs">type some_file.txt</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">cat some_file.txt</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">cat some_file.txt</code></pre></td>            
             </tr>
             <tr>
                 <td>Page through<br>file contents</td>
                 <td><pre><code data-trim class="bash hljs">more large_file</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">more large_file</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">more large_file</code></pre></td>            
             </tr>
             <tr>
                 <td>Create a<br>new file</td>
                 <td><pre><code data-trim class="bash hljs">echo "text" > new_file</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">echo "text" > new_file</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">echo "text" > new_file</code></pre></td>            
             </tr>
             <tr>
                 <td>Add to<br>a file</td>
                 <td><pre><code data-trim class="bash hljs">echo "text" >> existing_file</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">echo "text" >> existing_file</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">echo "text" >> existing_file</code></pre></td>            
             </tr>
             <tr>
                 <td>Rename/Move<br> a file</td>
                 <td><pre><code data-trim class="bash hljs">
                     # Rename in place
-                    ren old_file new_file  
+                    ren old_file new_file
                     mv old_file new_file
                 </code></pre></td>
-                <td><pre><code data-trim class="bash hljs">mv old_file new_file</code></pre></td>            
                 <td><pre><code data-trim class="bash hljs">mv old_file new_file</code></pre></td>
             </tr>
             <tr>
                 <td>Copy a file</td>
                 <td><pre><code data-trim class="bash hljs">copy old_file new_file</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">cp old_file new_file</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">cp old_file new_file</code></pre></td>            
-            </tr>                                                 
+            </tr>
         </tbody>
-    </table>    
+    </table>
 </section>
 
 <section id="command-line-7">
@@ -254,7 +238,7 @@
         <col style="width:16%">
         <col style="width:28%">
         <col style="width:28%">
-        <col style="width:28%">        
+        <col style="width:28%">
         <thead>
             <tr>
                 <th>Purpose</th>
@@ -269,17 +253,17 @@
                 (interactive shell or REPL)</td>
                 <td><pre><code data-trim class="bash hljs">python</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">python3</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">python</code></pre></td>            
+                <td><pre><code data-trim class="bash hljs">python</code></pre></td>
             </tr>
             <tr>
                 <td>Running a<br>
                     Python script</td>
                 <td><pre><code data-trim class="bash hljs">python some_script.py</code></pre></td>
                 <td><pre><code data-trim class="bash hljs">python3 some_script.py</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">python some_script.py</code></pre></td>            
-            </tr>                                              
+                <td><pre><code data-trim class="bash hljs">python some_script.py</code></pre></td>
+            </tr>
         </tbody>
-    </table>    
+    </table>
 </section>
 <section id="2-vs-3">
     <h3>Python 2 VS. 3</h3>
@@ -288,7 +272,7 @@
 
 <section id="vcs-title" data-background-image="images/branch-background.png">
     <h2>Version Control Systems</h2>
-    <p>What are they? What are the good for?</p>
+    <p>What are they? What are they good for?</p>
 </section>
 <section id="vcs-intro">
     <p>A version control system (VCS) is...</p>
@@ -296,7 +280,7 @@
         <li>A tool that manages files + directories and how they change over time</li>
         <li>A tool that allows you to recover older versions of your data and examine its history</li>
         <li>A tool that allows you to group a collection of files and directories together into a single repository (or <em>repo</em> for short).</li>
-        <li>A tool that allows you to syncronize your copy of a repo with a remote copy (push and pull)</li>
+        <li>A tool that allows you to synchronize your copy of a repo with a remote copy (push and pull)</li>
         <li>A tool that allows you to fork and merge branches from your repo.</li>
     </ul>
 </section>
@@ -325,13 +309,15 @@
 </section>
 
 <section id="git-concepts-hash">
-    <p><strong>hash</strong>: a unique identifier for each and every version of an object Git tracks. Example: <code>9da581d910c9c4ac93557ca4859e767f5caf5169</code>.  The hash is generated from the contents of a file, becuase Git tracks file content, not file names</p>
+    <p><strong>hash</strong>: a unique identifier for each and every version of an object Git tracks.
+        Example: <code>9da581d910c9c4ac93557ca4859e767f5caf5169</code>.
+        The hash is generated from the contents of a file, because Git tracks file content, not file names</p>
 </section>
 
 <section id="git-concepts-commit">
     <p><strong>commit</strong>: a set of one or more changes to your repo that are grouped together and uniquely identified. Think of it like a snapshot you take of your project that is saved forever or like a save point in a video game.</p>
-    <p>Each commit will also have its own hash. The user, commimt date, and an optional comment will be stored in the repo as well.</p>
-    
+    <p>Each commit will also have its own hash. The user, commit date, and an optional comment will be stored in the repo as well.</p>
+
 </section>
 
 <section id="git-concepts-head">
@@ -368,7 +354,7 @@
 </section>
 
 <section id="git-workflow-2">
-    <h3>Working in Git</h2>
+    <h3>Working in Git</h3>
     <ol start="0" style="font-size: 90%;">
         <li>Create a new repo (<code>git init</code>) or clone an existing one (<code>git clone</code>).</li>
         <li>Make some changes until you reach a good save-point.</li>
@@ -379,12 +365,12 @@
     </ol>
 </section>
 
-<section id="git-workflow-2">
-    <h3>Git Tips</h2>
+<section id="git-workflow-3">
+    <h3>Git Tips</h3>
     <ol style="font-size: 90%;">
-        <li>Comit your work often.</li>
+        <li>Commit your work often.</li>
         <li>Try to write useful commit messages.</li>
-        <li>Git commimts are more-or-less immutable. Try very hard to avoid commiting passwords, private keys, or anything else sensitive to your repo becuase it will be discoverable.</li>
+        <li>Git commits are more-or-less immutable. Try very hard to avoid committing passwords, private keys, or anything else sensitive to your repo because it will be discoverable.</li>
     </ol>
 </section>
 
@@ -393,7 +379,7 @@
     <p>Git and GitHub: software engineering's power couple.</p>
 </section>
 
-<section id="github-intro">
+<section id="github-uses">
     <h3>What is Github useful for?</h3>
     <ul>
         <li>A place to store your remote that anyone can access</li>
@@ -402,6 +388,11 @@
         <li>Provides issues, wikis, & pull-request tools for projects</li>
     </ul>
 </section>
-
+<section id="github-project">
+    <h3>Let's look at a real Github <a href="https://github.com/mazelife/cmsc-291">project</a></h3>
+</section>
+<section id="final-questions">
+    <h2>Final Questions?</h2>
+</section>
 {% endblock %}
 
