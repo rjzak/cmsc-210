@@ -23,7 +23,7 @@
 <section id="types-101-1">
 	<h2>A quick refresher on types...</h2>
 </section>
-<section id="types-101-1">
+<section id="types-101-2">
     <h3>primitive types</h3>
     <ul>
         <li><code>int</code></li>
@@ -32,7 +32,7 @@
         <li><code>bool</code></li>
     </ul>
 </section>
-<section id="types-101-2">
+<section id="types-101-3">
     <h3>composite types</h3>
     <ul>
         <li><code>list</code></li>
@@ -41,7 +41,7 @@
         <li><code>tuple</code>*</li>
     </ul>
 </section>
-<section id="types-101-3">
+<section id="types-101-4">
     <p>Up until this point, you have been introduced to data types as they grew in the woods and just exist as a fact of the universe.</p>
     <p>This is actually not the case.  Data types are something that programmers create to organize the way that their code is used.</p>
 </section>
@@ -50,8 +50,8 @@
     <ul>
         <li>It has a fixed size</li>
         <li>It is immutable</li>
-        <li>It is designed to hold heterogenous types</li>
-        <li>You access its consituent parts based on their position in the tuple</li>
+        <li>It is designed to hold heterogeneous types</li>
+        <li>You access its constituent parts based on their position in the tuple</li>
     </ul>
 </section>
 <section id="tuples-as-types">
@@ -80,11 +80,11 @@
     <h3>Extracting values from our type</h3>
     <pre><code class="hlpython" data-trim>
         sender = transfer[0]
-        reciever = transfer[1]
+        receiver = transfer[1]
         amount = transfer[2]
         date = transfer[3]
         # Or use tuple unpacking...
-        sender, reciever, amount, date = transfer
+        sender, receiver, amount, date = transfer
     </code></pre>
 </section>
 <section id="tuples-advatages">
@@ -113,34 +113,34 @@
     <pre><code class="hlpython" data-trim>
         t1 = Transfer("Bob", "Sally", Decimal(35.50), datetime(2020, 10, 1))
         # alternative method, with keyword arguments
-        t1 = Transfer(sender="Bob", 
-                      reciever="Sally",
+        t1 = Transfer(sender="Bob",
+                      receiver="Sally",
                       amount=Decimal(35.50),
                       date=datetime(2020, 10, 1))
         t1.sender  # "Bob"
         t1.date  # datetime(2020, 10, 1)
         # Assignment update the value!
-        t1.amount  = Decimal(36.50)  
-        t1.amount  # Is now Decimal(36.50)  
+        t1.amount  = Decimal(36.50)
+        t1.amount  # Is now Decimal(36.50)
     </code></pre>
 </section>
 <section id="classes-vs-dicts">
     <p>Classes act a little bit like dictionaries:</p>
     <pre><code class="hlpython" data-trim>
-        t1 = Transfer(sender="Bob", 
-                      reciever="Sally",
+        t1 = Transfer(sender="Bob",
+                      receiver="Sally",
                       amount=Decimal(35.50),
                       date=datetime(2020, 10, 1))
         # Gives you "Bob"
-        t1.sender  
+        t1.sender
     </code></pre>
     <pre><code class="hlpython" data-trim>
         t2 = {"sender": "Bob",
-              "reciever": "Sally",
+              "receiver": "Sally",
               "amount": Decimal(35.50),
               "date": datetime(2020, 10, 1)}
         # Also gives you "Bob"
-        t2["sender"] 
+        t2["sender"]
     </code></pre>
 </section>
 <section id="product-types">
@@ -149,10 +149,10 @@
     \[\begin{aligned}
     str \times str \times \Bbb{Q} \times date
     \end{aligned} \]
-    <p class="meidum">The product of all possible strings, all possible strings, all possible rationals, and all possible dates makes up the domain of this type.</p>
+    <p class="medium">The product of all possible strings, all possible strings, all possible rationals, and all possible dates makes up the domain of this type.</p>
 </section>
 <section id="classes-or-tuples">
-    <p>In cases where you have a collection of heterogenous values that have meaning together, a tuple or a class or a dictionary is useful.</p>
+    <p>In cases where you have a collection of heterogeneous values that have meaning together, a tuple or a class or a dictionary is useful.</p>
     <p>The semantics may vary:</p>
     <pre><code class="hlpython" data-trim>
         # With tuple:
@@ -160,7 +160,7 @@
         # With dictionary:
         transfer["sender"]
         # With class:
-        tansfer.sender
+        transfer.sender
     </code></pre>
     <p>...but each of these give us the same thing: the username of the person that sent the transfer.</p>
 </section>
@@ -169,13 +169,13 @@
     <!-- For simple types with a few attributes, tuple vs. class might not matter. But in Python, classes can actually do much more that just store associated data. -->
 </section>
 <section id="transfer-class">
-    <p>Minimal, complete defintion of our transfer type as a class:</p>
+    <p>Minimal, complete definition of our transfer type as a class:</p>
     <pre><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date):
+            def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.sender = reciever
+                self.sender = receiver
                 self.amount = amount
                 self.date = date
 
@@ -186,9 +186,9 @@
     <pre><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date):
+            def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.sender = reciever
+                self.sender = receiver
                 self.amount = amount
                 self.date = date
     </code></pre>
@@ -202,12 +202,12 @@
     <pre><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date):
+            def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.sender = reciever
+                self.sender = receiver
                 self.amount = amount
                 self.date = date
-        
+
         t1 = Transfer("Bob", "Matt", Decimal(5), datetime(2020, 2, 1))
     </code></pre>
     <ul>
@@ -232,9 +232,9 @@
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date):
+            def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.reciever = reciever
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
     </code></pre>
@@ -255,9 +255,9 @@
     <pre><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date):
+            def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.reciever = reciever
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
 
@@ -274,9 +274,9 @@
     <pre><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date):
+            def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.reciever = reciever
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
 
@@ -286,16 +286,16 @@
 
             def apply_processing_fee(self):
                 self.amount = self.amount + Decimal("0.25")
-    </code></pre>    
+    </code></pre>
 </section>
 <section id="methods-improved">
     <p>We can make this a bit better...</p>
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date=datetime.now()):
+            def __init__(self, sender, receiver, amount, date=datetime.now()):
                 self.sender = sender
-                self.reciever = reciever
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
                 self.processing_fee_applied = False
@@ -307,28 +307,28 @@
             def apply_processing_fee(fee=Decimal("0.25")):
                 self.amount = self.amount + fee
                 self.processing_fee_applied = True
-    </code></pre>    
+    </code></pre>
 </section>
 <section id="usage">
     <p>Using our class:</p>
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         t1 = Transfer("Bob", "Sally", Decimal(35.50), datetime(2019, 10, 1))
-        
-        t2 = Transfer(sender="Sally", 
-                      reciever="Matt",
+
+        t2 = Transfer(sender="Sally",
+                      receiver="Matt",
                       amount=Decimal(5.25))
-        
-        # This will be "Sally": 
-        t1.reciever  
+
+        # This will be "Sally":
+        t1.receiver
         # This will be True:
         t1.date < t2.date
         # This will be 0:
-        t2.days_ago()  
+        t2.days_ago()
 
         t1.apply_processing_fee():
         # This will be $35.50 + $0.25 = $35.75:
-        t1.amount  
-    </code></pre>    
+        t1.amount
+    </code></pre>
 </section>
 <section id="oop">
     <h2>But wait! There's more...</h2>

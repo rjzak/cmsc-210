@@ -1,16 +1,24 @@
 {% extends "slides_base.html" %}
 {% block title %}CMSC 291: Lecture 6{% endblock %}
+{% block extra_style %}
+<style>
+    .pink-block {
+    background-color: #d11b85;
+    color: #ffffff;
+    padding: 0 10px; }
 
+</style>
+{% endblock %}
 
 {% block slides %}
-<section id="title">
-	<h2>Lecture 6</h2>
-    <h2>Data formats &amp; Plotting</h2>
+<section id="title" data-background-image="images/imaginary-plots.png">
+    <h2><span class="pink-block">Lecture 6 </span></h2>
+    <h2><span class="pink-block">Data formats &amp; Plotting</span></h2>
 </section>
 <section id="announcements">
-    <h2>Announcements</h3>
+    <h2>Announcements</h2>
     <ul>
-        <li>Assignment two is due next Monday.</li>
+        <li>Assignment two is due next Wednesday (Oct 7, 2020).</li>
     </ul>
 </section>
 <section id="structured-data-defintion">
@@ -48,7 +56,7 @@
         <li><a href="http://news.mit.edu/2020/mit-toyota-release-visual-open-data-accelerate-autonomous-driving-research-0618">Institutions of research and learning</a></li>
         <li><a href="https://github.com/Microsoft/FERPlus">Crowd-sourced</a></li>
         <li><a href="https://www.experian.com/">Private companies</a></li>
-    </ul>   
+    </ul>
 </section>
 <section id="free-data">
     <p>Some random, free data sets:</p>
@@ -56,7 +64,7 @@
         <li><a href="https://www.census.gov/data.html">US Census data</a></li>
         <li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Taxi Trips</a></li>
         <li><a href="https://www.weather.gov/documentation/services-web-api">Forecast data for the entire US</a></li>
-        <li><a href="https://registry.opendata.aws/landsat-8/">Landsat 8 (satellite imagery of all land on Earth)</a></li>    
+        <li><a href="https://registry.opendata.aws/landsat-8/">Landsat 8 (satellite imagery of all land on Earth)</a></li>
         <li><a href="https://portals.broadinstitute.org/ccle/about">Cancer cell line genomic data</a></li>
         <li><a href="https://data.cms.gov/d/s2uc-8wxp">COVID-19 Nursing Home Data</a></li>
         <li><a href="https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/">200,000+  Jeopardy! Questions</a></li>
@@ -71,8 +79,8 @@
         <li><a href="http://www.cropyields.ac.uk/project.php">Middle English Crop Yields: 1211-1491</a></li>
     </ul>
 </section>
-<section id="data-formats">
-    <h2>Common data formats</h2>
+<section id="data-formats" data-background-image="images/eniac.jpeg">
+    <h2 style="color: #8bdf37; background: black;">Common data formats</h2>
 </section>
 <section id="data-formats-csv">
     <h3>CSV (comma-separated values)</h3>
@@ -114,7 +122,7 @@
                 <td>4</td>
                 <td>C:\Windows\For\Morons</td>
                 <td>3124</td>
-            </tr>                         
+            </tr>
         </tbody>
     </table>
 </section>
@@ -128,7 +136,7 @@
         >>> row = '2,Hush Hush, Sweet Bruce,9853'
         >>> row.split(",")
         ["2", "Hush Hush", " Sweet Bruce", "9853"]
-       </code></pre>    
+       </code></pre>
 </section>
 <section id="data-formats-csv-parsing-problems-2">
     <pre class="python" style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
@@ -165,11 +173,11 @@
     <p>Standard library to the rescue:</p>
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         import csv
-        
+
         with open("data_file.csv") as file_handle:
             reader = csv.reader(file_handle)
             for row in reader:
-                # Example row: 
+                # Example row:
                 #    ["1", "The Heart is a Lonely Blacksmith", "11293"]
                 rank = int(row[0])
                 title = row[1],
@@ -186,18 +194,18 @@
     </code></pre>
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         import csv
-        
+
         with open("data_file.csv") as file_handle:
             reader = csv.DictReader(file_handle)
             for row in reader:
-                # Example row: 
-                #    {"rank": "1", 
-                #     "title": "The Heart is a Lonely Blacksmith", 
+                # Example row:
+                #    {"rank": "1",
+                #     "title": "The Heart is a Lonely Blacksmith",
                 #     "units sold": "11293"}
                 rank = int(row["rank"])
                 title = row["title"],
                 units_sold = int(row["units sold"])
-    </code></pre>    
+    </code></pre>
 </section>
 <section id="data-formats-csv-limitations">
     <h3>Problems with CSV</h3>
@@ -260,7 +268,7 @@
       ]
     </code></pre>
 </section>
-<section id="data-formats-json-types">
+<section id="data-formats-json-types-2">
     <p>Nested &amp; complex data</p>
     <pre style="font-size: 50%"><code class="hljson" data-trim>
     {"name": "Ted",
@@ -321,10 +329,13 @@
         <li>How has a given name changed in popularity over time?</li>
     </ul>
 </section>
+<section id="time-for-code">
+    <h2>Let's write some code! 💻</h2>
+</section>
 <section id="data-analysis-question">
     <p>Why are we seeing a drop in popularity for all the names we looked at?</p>
 </section>
-<section id="data-analysis-question">
+<section id="data-analysis-answer">
     <ul>
         <li>Diversity of names has increased</li>
         <li>Diversity of spellings has increased</li>

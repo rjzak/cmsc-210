@@ -78,7 +78,7 @@
     """
 
     TOTALLY_NORMAL_HUMAN_NAME = "Yxcronor"
-    
+
     def where_is_the_cat(cat, location_tried):
         """
         A function to look for the cat
@@ -90,7 +90,7 @@
         """
         print("I don't know,", TOTALLY_NORMAL_HUMAN_NAME)
         return location_tried
-    
+
     if __name__ == '__main__':
         # introduces the programmer
         print("Hello, my name is perfectly reasonable. \
@@ -98,22 +98,22 @@
         where_is_the_cat("Jules", [1, 2])
      </code></pre>
     <h2>Class Files</h2>
-    <p>Every class should be contained in an appropriately named file with a <code>.py</code>&nbsp;file extension. Give the file the same name as the class. 
-        For example, if the class&rsquo;s name is <code>CellPhone</code>, the file it is in should be named <code>cellphone.py</code>. 
+    <p>Every class should be contained in an appropriately named file with a <code>.py</code>&nbsp;file extension. Give the file the same name as the class.
+        For example, if the class&rsquo;s name is <code>CellPhone</code>, the file it is in should be named <code>cellphone.py</code>.
         Other files (modules) that use the class will use an import&nbsp;statement to access the class&rsquo;s methods. For example,</p>
         <pre><code class="language-python">import cellphone</code></pre>
     <p>Later in the module,</p>
     <pre><code class="language-python">cellphone.turnOn()</code></pre>
     <h2>Use of Constants</h2>
-    <p>To improve readability, you should use constants whenever you are dealing with hard-coded values. 
-        Your code shouldn't have any &ldquo;magic numbers,&rdquo; or numbers whose meaning is unknown. 
-        Your code should also avoid &ldquo;magic strings,&rdquo; or strings that have a specific use within the program 
+    <p>To improve readability, you should use constants whenever you are dealing with hard-coded values.
+        Your code shouldn't have any &ldquo;magic numbers,&rdquo; or numbers whose meaning is unknown.
+        Your code should also avoid &ldquo;magic strings,&rdquo; or strings that have a specific use within the program
         (e.g., choices a user could make such as &ldquo;yes&rdquo;, &ldquo;STOP&rdquo;, etc.).</p>
     <p>For example:</p>
     <pre><code class="language-python">total = subtotal + subtotal * .06</code></pre>
     <p>In the code above, <code>.06</code>&nbsp;is a magic number. What is it? The number itself tells us nothing; at the very least, this code would require a comment. However, if we use a constant, the number's meaning becomes obvious, the code becomes more readable, and no comment is required.</p>
     <p>Constants are typically declared near the top of the program so that if their value ever changes they are easy to locate to modify.
-         Constants may be placed before the <code>if __name__ == "__main__":</code>&nbsp;statement &ndash; this makes them global constants, 
+         Constants may be placed before the <code>if __name__ == "__main__":</code>&nbsp;statement &ndash; this makes them global constants,
          which means everything in the file has access to them. (Global variables are only allowed for constants!)</p>
     <p>Here&rsquo;s the updated code:</p>
     <pre><code class="language-python">if __name__ == '__main__':
@@ -188,7 +188,7 @@ for num in userNumList:
 
     # if it's odd, print it, if it's even, do nothing
     if num % 2 == 1:
-        print(num)        
+        print(num)
     </code></pre>
     <h3>4. Class Comments</h3>
     <p>A class file should begin with a file header comment with almost the identical format to that given in the File Header Comment section above. The one difference is the omission of the Program Assumptions line.</p>
@@ -201,8 +201,8 @@ Date: THE DATE
 Section: YOUR SECTION NUMBER
 Email:  YOUREMAIL@umbc.edu
 Description:  This class represents the functionality of a cellphone.
-"""        
-    </code></pre>    
+"""
+    </code></pre>
     <p>Accessor (getter) and setter (mutator) methods need no header comments. </p>
     <p>The main method needs no header comment. Comment the main method&rsquo;s body as you would a function&rsquo;s body.</p>
     <p>All other methods should contain comments identical to function header comments described in the Function Header Comments section above. Their bodies should be commented as you would a function&rsquo;s body.</p>
@@ -212,7 +212,20 @@ Description:  This class represents the functionality of a cellphone.
     <p>Python has many useful language features, <a href="https://docs.python.org/3/library/index.html">built-in modules</a>, and built-in functions that easily let a programmer perform a variety of tasks. In CMSC 291, you may use any built in functionality that is not forbidden in the assignment.</p>
     <h2>Break and Continue</h2>
     <p>Using <code>break</code>, <code>pass</code>, or <code>continue</code>&nbsp;is not&nbsp;allowed in any of your code for this class. Using these statements damages the readability of your code. Readability is a quality necessary for easy code maintenance. Using any of these will lead to an immediate deduction of points.</p>
-    <div>
+    <h2>Reading and Writing Files</h2>
+<p>It is good practice to use the <code>with</code> keyword when dealing with file objects. The advantage is that the file is properly closed after you are done with it, even if an exception is raised at some point.</p>
+<p>Do this:</p>
+<pre><code class="lang-python">with open('workfile') as f:
+    read_data = f.read()
+print(f"File contents: {read_data}")
+</code></pre>
+<p>Not this:</p>
+<pre><code class="lang-python">f = open('workfile')
+read_data = f.read()
+f.close()
+print(f"File contents: {read_data}")
+</code></pre>
+
     <hr />
     <div>
     <p id="ftnt1"><a href="#ftnt_ref1">[1]</a>&nbsp;This line is not required for the python code to execute, but we require it for reasons that may not be clear until later on in the course. It is a standard widely followed in Python development.</p>
@@ -221,3 +234,4 @@ Description:  This class represents the functionality of a cellphone.
     hljs.initHighlightingOnLoad();
     </script>
     {% endblock %}
+

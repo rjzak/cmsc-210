@@ -105,8 +105,6 @@ ENV/
 .vscode/
 .idea/
 
-# Slides build directory
-build/
 
 # Mac junk
 .DS_Store

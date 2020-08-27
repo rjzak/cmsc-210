@@ -2,7 +2,7 @@
 {% block title %}CMSC 291: Lecture 5{% endblock %}
 
 {% block extra_style %}
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 <style>
     .emphasized-block {
         background-color: slategrey;
@@ -23,7 +23,7 @@
     <h2>Object-Oriented Programming</h2>
 </section>
 <section id="announcements">
-    <h2>Announcements</h3>
+    <h2>Announcements</h2>
     <ul>
         <li>Assignment two will be out soon.</li>
         <li>That is all.</li>
@@ -33,11 +33,14 @@
     <h3>(OOP)</h3>
 </section>
 <section id="product-types-review-1">
-    <p>Remember how we talked about how tuples, dictionaries, and classes share some similarities?<br>And how they can all be used define heterogenous types?</p>
+    <p>Remember how we talked about how tuples, dictionaries, and classes share some similarities?<br>And how they can all be used define heterogeneous types?</p>
 </section>
 <section id="product-types-review-2">
     <p>But I also said:</p>
-    <p><span style="font-size: 125%; font-style: italic;">"Think of classes as tuples/dictionaries+++"</span><div style="text-align: right">—me</span></p>
+    <p>
+        <span style="font-size: 125%; font-style: italic;">"Think of classes as tuples/dictionaries+++"</span>
+        <div style="text-align: right">—me</div>
+    </p>
 </section>
 <section id="product-types-review-3">
     <p>Notice how our class has methods that belong to it.
@@ -45,9 +48,9 @@
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         class Transfer:
 
-            def __init__(self, sender, reciever, amount, date=datetime.now()):
+            def __init__(self, sender, receiver, amount, date=datetime.now()):
                 self.sender = sender
-                self.reciever = reciever
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
                 self.processing_fee_applied = False
@@ -59,7 +62,7 @@
             def apply_processing_fee(fee=Decimal("0.25")):
                 self.amount = self.amount + fee
                 self.processing_fee_applied = True
-    </code></pre>      
+    </code></pre>
 </section>
 <section id="encapsulation-1">
     <h3>This is called <em>encapsulation</em>.</h3>
@@ -70,14 +73,14 @@
                 def days_ago(self):
                     time_delta = datetime.now() - self.date
                     return time_delta.days
-            </code></pre>               
+            </code></pre>
         </li>
         <li>Methods hide complicated, internal implementation details:
             <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
                 def apply_processing_fee(fee=Decimal("0.25")):
                     self.amount = self.amount + fee
                     self.processing_fee_applied = True
-        </code></pre>                
+        </code></pre>
         </li>
    </ul>
 </section>
@@ -93,8 +96,8 @@
 <section id="encapsulation-4">
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
         # Given:
-        t1 = Transfer("Bob", "Sally", Decimal(35.50), datetime(2019, 10, 1))       
-        
+        t1 = Transfer("Bob", "Sally", Decimal(35.50), datetime(2019, 10, 1))
+
         # Valid:
         t1.amount = Decimal("10000000000.02")
         # Valid:
@@ -102,7 +105,7 @@
 
         # In fact...
         t1.any_property_you_feel_like = 12345
-    </code></pre>    
+    </code></pre>
 </section>
 
 <section id="inheritance">
@@ -146,10 +149,10 @@
 
             def groom(self):
                 ...
-            
+
             def change_litter(self):
                 ...
-    </code></pre>      
+    </code></pre>
 </section>
 <section id="pet-store-dogs-attrs">
     <p>We will also sell dogs, so our system must track them and care for them too. What are some dog attributes?</p>
@@ -187,17 +190,17 @@
 
             def groom(self):
                 ...
-            
+
             def walk(self):
                 ...
-    </code></pre>      
+    </code></pre>
 </section>
 <section id="dry-explained">
 	<table>
 		<thead>
 			<tr>
 				<th><img src="images/cat.svg" width=100 height=100></th><th><img src="images/dog.svg" width=100 height=100></th>
-			</tr>							
+			</tr>
 		</thead>
 		<tbody style="vertical-align: top; font-size: 75%;">
             <tr><td colspan="2">Attributes</td></tr>
@@ -236,7 +239,7 @@
                         <li>Walk</li>
                     </ul>
                 </td>
-            </tr>            
+            </tr>
 		</tbody>
 	</table>
 </section>
@@ -260,8 +263,8 @@ class Animal:
         # Pour food into bowl.
 
     def groom(self):
-        # Brushy-brushy time            
-    </code></pre>      
+        # Brushy-brushy time
+    </code></pre>
 </section>
 <section id="cat-class-with-inheritance">
     <p>Subclasses <em>automatically</em> have the methods of the superclass.</p>
@@ -271,7 +274,7 @@ class Cat(Animal):
 
     def change_litter(self):
         # Yuck!
-    </code></pre>      
+    </code></pre>
 </section>
 <section id="dog-class-with-inheritance">
     <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
@@ -280,10 +283,10 @@ class Dog(Animal):
     def __init__(self, age, weight, name, breed, housebroken=True):
         super().__init__(age, weight, name, breed)
         self.housebroken = housebroken
-    
+
     def walk(self):
         # Walk the dog around the neighborhood.
-    </code></pre>      
+    </code></pre>
 </section>
 <section id="super">
     <p>In Python, the <code>super</code> function will return the <em>parent</em> class instance of the current class.</p>
@@ -304,7 +307,7 @@ class Child(Parent):
 class Animal:
 
     def groom(self):
-        raise NotImplementedError("Must implement this method on the child object.")            
+        raise NotImplementedError("Must implement this method on the child object.")
 
 class Cat(Animal):
 
@@ -317,7 +320,7 @@ class Dog(Animal):
         # Bath time!
         # Dry up!
 
-    </code></pre>      
+    </code></pre>
 </section>
 
 <section id="inheritance-reasons">
@@ -326,7 +329,7 @@ class Dog(Animal):
         <li>Implement shared functionality only once.</li>
         <li>Maps to how we think about the world: "X is a Y"</li>
     </ul>
-    
+
 </section>
 
 <section id="polymorphism">
@@ -353,8 +356,8 @@ class Animal:
         self.breed = breed
 
     def feed(self, scoops=1):
-        # Pour food into bowl.    
-    
+        # Pour food into bowl.
+
     def groom(self):
         raise NotImplementedError("Must implement this method on the child object.")
         </code></pre>
@@ -413,7 +416,7 @@ class Pen:
             <img src="images/alan-kay.jpg" width=250 style="display: block">
             <small><a href="https://en.wikipedia.org/wiki/Alan_Kay">Alan Kay</a></small>
         </div>
-    </p>   
+    </p>
 </section>
 <section id="oop-design">
     <ol>
@@ -434,16 +437,16 @@ class Pen:
 <section id="anti-oop">
     <h3>OOP &amp; its discontents</h3>
     <p class="quote"><em>Java is the most distressing thing to happen to computing since MS-DOS.</em><br>
-    <span>&mdash;Alan Kay</span></p>    
+    <span>&mdash;Alan Kay</span></p>
 </section>
 <section id="king-noun">
-    <p class="emphasized-block">The tyrany of "King Noun".</p>
+    <p class="emphasized-block">The tyranny of "King Noun".</p>
     <p class="quote"><em>Sometimes, the elegant implementation is just a function.<br>Not a method. Not a class. Not a framework. Just a function.</em><br>
         <span>&mdash;<a href="https://en.wikipedia.org/wiki/John_Carmack">John Carmack</a></span></p>
 </section>
 <section id="state-of-confusion">
         <p class="emphasized-block">State gets atomized among a million objects, making it hard to understand holistically.</p>
-        <p class="quote"><em>The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them. 
+        <p class="quote"><em>The problem with object-oriented languages is they’ve got all this implicit environment that they carry around with them.
             You wanted a banana but what you got was a gorilla holding the banana and the entire jungle.</em><br>
         <span>&mdash;<a href="https://en.wikipedia.org/wiki/Joe_Armstrong_(programmer)">Joe Armstrong</a></span></p>
 </section>
