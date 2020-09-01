@@ -102,7 +102,7 @@
 <section id="announcements">
 	<h2>Announcements</h2>
 	<ul>
-		<li>Python Coding Standards are posted <a href="coding_standards.html">on the course website</a>. Have a look!</li>
+        <li>Questions about <a href="coding_standards.html">Python Coding Standards</a>, the <a href="https://docs.google.com/document/d/1cvGLQznbhoxMKBWzZeOqzpQWyv2WdPuWRvKsqATwrL0/edit?usp=sharing">Syllabus</a> or anything else?</li>
 		<li>Assignment #1 is out tomorrow (Wednesday, 09/02)</li>
 		<li>Installfest this Thursday! Have your computer ready.</li>
 	</ul>
@@ -218,7 +218,7 @@
     cost = 1200.48
     tax = 0.085
     message = "Cost ${total:,} with tax, which is {tax}%".format(
-        total=round(1200.48 * (0.08 + 1), 2),
+        total=round(cost * (tax + 1), 2),
         tax=tax * 100
     )
     # The value of message is:
@@ -237,7 +237,7 @@
 		# cats.py
 
 		def feed(name, oz, kind):
-			print(f"$name has been fed $oz ounces of $kind.")
+			print(f"{name} has been fed {oz} ounces of {kind}.")
 
 		def change_litter():
 			print("Litter box is changed.")
@@ -260,7 +260,7 @@
 			# dogs.py
 
 			def feed(name, oz, kind):
-				print(f"$name has been fed $oz ounces of $kind.")
+				print(f"{name} has been fed {oz} ounces of {kind}.")
 
 			def walk():
 				print("Let's go for a walk!")
@@ -412,7 +412,26 @@
 	<p>Modules are actually kind of like dictionaries, but with different syntax. Instead of <code>food["feed"]</code> you do <code>food.feed</code>.</p>
 </section>
 
-
+<section id="circular_imports">
+    <h2>Avoid circular imports!</h2>
+	<pre class="medium"><code class="hlpython" data-trim>
+	# cats.py
+    from animals import food
+	</code></pre>
+	<pre class="medium"><code class="hlpython" data-trim>
+	# food.py
+    from cats import change_litter
+	</code></pre>
+</section>
+<section id="why-modules">
+    <h2>Why modules?</h2>
+    <ul>
+        <li>Break up huge files into smaller ones that are easier to deal with</li>
+        <li>Organize our program into functional units</li>
+        <li>Encourage reusability</li>
+        <li>Create libraries</li>
+    </ul>
+</section>
 
 </div>
 		</div>
