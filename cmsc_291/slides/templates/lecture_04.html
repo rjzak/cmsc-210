@@ -48,6 +48,11 @@
         <li>The date of the transfer (<code>???</code>)</li>
     </ol>
 </section>
+<section id="floats-are-scary">
+    <p>What will this expression evaluate to?</p>
+    <pre><code class="hlpython" data-trim>
+        1.2 - 1.0</code></pre>
+</section>
 <section id="tuples-typedef">
     <pre><code class="hlpython" data-trim>Tuple[str, str, Decimal, datetime]</code></pre>
 </section>
@@ -160,7 +165,7 @@
 
             def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.sender = receiver
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
 
@@ -173,7 +178,7 @@
 
             def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.sender = receiver
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
     </code></pre>
@@ -189,7 +194,7 @@
 
             def __init__(self, sender, receiver, amount, date):
                 self.sender = sender
-                self.sender = receiver
+                self.receiver = receiver
                 self.amount = amount
                 self.date = date
 
