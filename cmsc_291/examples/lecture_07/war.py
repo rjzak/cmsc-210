@@ -1,4 +1,5 @@
 """
+Let's implement a simple card game: https://en.wikipedia.org/wiki/War_(card_game)
 * Player
  - name
  - score
