@@ -132,6 +132,8 @@ class Game:
                     return
                 self.player_1.play()
                 self.player_2.play()
+            points += 1
+
 
 game = Game()
 game.play()
