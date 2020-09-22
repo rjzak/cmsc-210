@@ -1,5 +1,5 @@
 {% extends "slides_base.html" %}
-{% block title %}CMSC 291: Lecture 7{% endblock %}
+{% block title %}CMSC 291: Lecture 8{% endblock %}
 
 {% block extra_style %}
 <style>
@@ -27,11 +27,11 @@
 <section id="markup-language">
     <h2>HTML is a "markup language"</h2>
     <p>What that means is that HTML is a way to markup content with additional information.  That information can be:</p>
-    <ol>   
+    <ol>
         <li>Organization: tables, lists, paragraphs</li>
         <li>Semantics:  section headers, form inputs, navigation</li>
         <li>Typography: size, bold, italic, color, typeface</li>
-    </ol>    
+    </ol>
 </section>
 <section id="html-is-old">
     <img src="images/the_90s.jpg" height="155">
@@ -43,8 +43,8 @@
     </ul>
 </section>
 <section id="tags">
-    <p>To mark up an element in a webpage, you surround it with tags.  
-        The tags are surrounded in angle brackets <strong>&lt;</strong> and <strong>&gt;</strong>. 
+    <p>To mark up an element in a webpage, you surround it with tags.
+        The tags are surrounded in angle brackets <strong>&lt;</strong> and <strong>&gt;</strong>.
         The closing tag is surrounded by a <strong>&lt;/</strong> and a <strong>&gt;</strong>
         <pre><code data-trim class="hlhtml">
         This is <strong>an example</strong> of some marked up text.
@@ -52,7 +52,7 @@
 </section>
 <section id="document-structure">
     <p>The basic structure of an HTML document</p>
-<pre><code data-trim class="hlhtml">    
+<pre><code data-trim class="hlhtml">
 &lt;html&gt;
     &lt;head&gt;
         [imports and metadata]
@@ -66,7 +66,7 @@
 <section id="tag-categories">
     <ul>
         <li>&lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;...&lt;h6&gt; are all headers. Header text will be larger and go on its own line.</li>
-    
+
         <li>&lt;p&gt; surrounds a paragraph to properly space it on a page</li>
         <li>&lt;em&gt; and &lt;strong&gt; will italicize and bold text, respectively.</li>
         <li>&lt;span&gt; is used to surround text that you want to modify the appearance of with CSS (we'll get to that later)</li>
@@ -94,8 +94,8 @@
                 &lt;tr&gt;
                     &lt;td&gt;Cell 3&lt;/td&gt;&lt;td&gt;Cell 4&lt;/td&gt;
                 &lt;/tr&gt;
-            &lt;/tbody&gt; 
-        &lt;/table&gt;            
+            &lt;/tbody&gt;
+        &lt;/table&gt;
         </code></pre>
     </div>
     <div class="html-rendered">
@@ -113,7 +113,7 @@
                 <tr>
                     <td>Cell 3</td><td>Cell 4</td>
                 </tr>
-            </tbody> 
+            </tbody>
         </table>
     </div>
 </section>
@@ -124,7 +124,7 @@
         &lt;li&gt;First item&lt;/li&gt;
         &lt;li&gt;Second item&lt;/li&gt;
       &lt;/ul&gt;
-      
+
       &lt;ol&gt;
         &lt;li&gt;First item&lt;/li&gt;
         &lt;li&gt;Second item&lt;/li&gt;
@@ -136,7 +136,7 @@
             <li>First item</li>
             <li>Second item</li>
           </ul>
-          
+
           <ol>
             <li>First item</li>
             <li>Second item</li>
@@ -144,7 +144,7 @@
     </div>
 </section>
 <section id="html-link">
-    <p>Links&mdash;called anchors in HTML&mdash;are the first html tag that we're going to use attributes for. 
+    <p>Links&mdash;called anchors in HTML&mdash;are the first html tag that we're going to use attributes for.
     Attributes are key-value pairs that occur inside the &lt; &gt;'s.</p>
     <pre><code data-trim>
         &lt;a href="http://example.com"&gt;Some descriptive text&lt;/a&gt;
@@ -183,7 +183,7 @@
     <div class="html-rendered">
         <input type="text" placeholder="What's your name?">
         <input type="checkbox" class="form-check-input">
-        
+
         <select class="form-control" id="exampleFormControlSelect1">
           <option>1</option>
           <option>2</option>
@@ -234,39 +234,39 @@
 <section class="two-col" id="inline">
     <p>Inline vs. Block: Inline Elements</p>
     <div class="html-code"><pre><code class="hlhtml" data-trim>
-        &lt;p&gt;Doge is a slang term for "dog" 
-        that is primarily associated with pictures 
+        &lt;p&gt;Doge is a slang term for "dog"
+        that is primarily associated with pictures
         of Shiba Inus. &lt;img src="doge.jpg"&gt;
-        Photos may be photoshopped to change the 
-        dog's face or captioned with interior 
+        Photos may be photoshopped to change the
+        dog's face or captioned with interior
         monologues in Comic Sans font.&lt;/p&gt;
       </code></pre>
       </div>
       <div class="html-rendered">
-          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus 
+          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus
               <img src="images/doge.jpg" style="vertical-align: middle;" height="50"> Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font. </p>
-      </div>    
+      </div>
 </section>
 <section class="two-col" id="block">
     <p>Inline vs. Block: Block Elements</p>
     <div class="html-code"><pre><code class="hlhtml" data-trim>
-        &lt;p&gt;Doge is a slang term for "dog" 
-        that is primarily associated with pictures 
+        &lt;p&gt;Doge is a slang term for "dog"
+        that is primarily associated with pictures
         of Shiba Inus. &lt;div&gt;&lt;img src="doge.jpg"&gt;&lt;/div&gt;
-        Photos may be photoshopped to change the 
-        dog's face or captioned with interior 
+        Photos may be photoshopped to change the
+        dog's face or captioned with interior
         monologues in Comic Sans font.&lt;/p&gt;
       </code></pre>
       </div>
       <div class="html-rendered">
-          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus 
+          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus
               <div><img src="images/doge.jpg" style="vertical-align: middle;" height="50"></div> Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font. </p>
-      </div>    
+      </div>
 </section>
 <section id="inline-vs-block">
-    <p><strong>Block elements</strong> take up the full width available on a page, effectively blocking 
+    <p><strong>Block elements</strong> take up the full width available on a page, effectively blocking
     out any other elements from sitting next to on either side.</p>
-    <p><strong>Inline elements</strong> only take up as much width as is required to display the contents 
+    <p><strong>Inline elements</strong> only take up as much width as is required to display the contents
         of the element, thereby allowing other elements to be in-line with it.</p>
     </section>
     <section id="inline-vs-block-2">
@@ -292,7 +292,7 @@
               &lt;/body&gt;
             &lt;/html&gt;
         </code></pre>
-    </section>    
+    </section>
     <section id="page-link">
         <p>Let's <a href="simple-page.html">look at that page</a>...</p>
         <p class="fragment fade-up">Default styling is pretty primitive...</p>
@@ -302,7 +302,7 @@
     </section>
     <section id="sgml">
         <h3>Browsers will try <em>really</em> hard to make a valid tree.</h3>
-    </section>    
+    </section>
     <section id="dom">
         <h3>Document Object Model (DOM)</h3>
         <ol>

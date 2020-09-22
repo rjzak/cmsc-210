@@ -1,7 +1,17 @@
-{% extends "slides_base.html" %}
-{% block title %}CMSC 291: Lecture 9{% endblock %}
-
-{% block extra_style %}
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 9</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
 <style>
 .two-col .html-code {
     float: left;
@@ -18,9 +28,11 @@
 #content-vs-presentation h4 { text-transform: none;}
 #content-vs-presentation em { color:rebeccapurple }
 </style>
-{% endblock %}
 
-{% block slides %}
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
 <section id="title">
 	<h2>Lecture 8: HTML & CSS, Part II</h2>
     <p>CSS</p>
@@ -201,4 +213,25 @@
     <img src="images/simple-page-stylish.png" height="500">
 </section>
 
-{% endblock %}
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>

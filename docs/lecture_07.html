@@ -13,336 +13,349 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 		
 <style>
-.two-col .html-code {
-    float: left;
-    width: 60%;
-}
-.two-col .html-code pre {
-    font-size: 40%
-}
-.two-col .html-rendered {
-    float: right;
-    width: 40%;
-    font-size: 90%
-}
+    .pink-block {
+    background-color: #d11b85;
+    color: #ffffff;
+    padding: 0 10px; }
+
 </style>
 
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-<section id="title">
-	<h2>Lecture 7: HTML & CSS</h2>
-    <p>The backbone of the web.</p>
-    <img src="images/interblag.png">
+<section id="title" data-background-image="images/imaginary-plots.png">
+    <h2><span class="pink-block">Lecture 6 </span></h2>
+    <h2><span class="pink-block">Data formats &amp; Plotting</span></h2>
 </section>
-<section id="markup-language">
-    <h2>HTML is a "markup language"</h2>
-    <p>What that means is that HTML is a way to markup content with additional information.  That information can be:</p>
-    <ol>   
-        <li>Organization: tables, lists, paragraphs</li>
-        <li>Semantics:  section headers, form inputs, navigation</li>
-        <li>Typography: size, bold, italic, color, typeface</li>
-    </ol>    
-</section>
-<section id="html-is-old">
-    <img src="images/the_90s.jpg" height="155">
+<section id="announcements">
+    <h2>Announcements</h2>
     <ul>
-        <li>Dates from the early 90s&mdash;and has not changed all that much since then</li>
-        <li>Was originally designed as a way to publish <em>documents</em> on the web</li>
-        <li>It's killler feature was <strong>hypertext</strong> (i.e. text documents with links in them).</li>
-        <li>Most of the focus was on words. Maybe images. Video, audio, and interactive elements were simply not possible.</li>
+        <li>Assignment two is due next Wednesday (Oct 7, 2020).</li>
     </ul>
 </section>
-<section id="tags">
-    <p>To mark up an element in a webpage, you surround it with tags.  
-        The tags are surrounded in angle brackets <strong>&lt;</strong> and <strong>&gt;</strong>. 
-        The closing tag is surrounded by a <strong>&lt;/</strong> and a <strong>&gt;</strong>
-        <pre><code data-trim class="hlhtml">
-        This is <strong>an example</strong> of some marked up text.
-    </code></pre>
-</section>
-<section id="document-structure">
-    <p>The basic structure of an HTML document</p>
-<pre><code data-trim class="hlhtml">    
-&lt;html&gt;
-    &lt;head&gt;
-        [imports and metadata]
-    &lt;head&gt;
-    &lt;body&gt;
-        [the content of your page]
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-</section>
-<section id="tag-categories">
+<section id="structured-data-defintion">
+    <h2>Structured Data...</h2>
     <ul>
-        <li>&lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;...&lt;h6&gt; are all headers. Header text will be larger and go on its own line.</li>
-    
-        <li>&lt;p&gt; surrounds a paragraph to properly space it on a page</li>
-        <li>&lt;em&gt; and &lt;strong&gt; will italicize and bold text, respectively.</li>
-        <li>&lt;span&gt; is used to surround text that you want to modify the appearance of with CSS (we'll get to that later)</li>
-        <li>&lt;br&gt; is for a line break.  Putting html on a new line won't work.</li>
+        <li>Is Quantitative</li>
+        <li>Has a defined length and format</li>
+        <li>Is Machine-readable</li>
     </ul>
 </section>
-<section id="all-elements">
-    <a href="http://html5doctor.com/"><img src="images/html_elements.png"></a>
+<section id="structured-data-examples">
+    <h2>Structured Data Examples</h2>
+    <ul>
+        <li>Tabular or spreadsheet-like data in which each column may be a different type (string, numeric, date, or otherwise).</li>
+        <li>Data from a database</li>
+        <li>Data interchange formats: <code>JSON</code> or <code>XML</code></li>
+        <li>Time series data, multidimensional arrays (matrices)</li>
+        <li>Data retrieved from web-based APIs</li>
+    </ul>
 </section>
-<section class="two-col" id="html-tables">
-    <p>Tables have the following structure:</p>
-    <div class="html-code">
-        <pre><code data-trim>
-        &lt;table&gt;
-            &lt;thead&gt;
-              &lt;tr&gt;
-                  &lt;th&gt;Header 1&lt;/th&gt;
-                  &lt;th&gt;Header 2&lt;/th&gt;
-              &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-                &lt;tr&gt;
-                    &lt;td&gt;Cell 1&lt;/td&gt;&lt;td&gt;Cell 2&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                    &lt;td&gt;Cell 3&lt;/td&gt;&lt;td&gt;Cell 4&lt;/td&gt;
-                &lt;/tr&gt;
-            &lt;/tbody&gt; 
-        &lt;/table&gt;            
-        </code></pre>
-    </div>
-    <div class="html-rendered">
-        <table class="table">
-            <thead>
-              <tr>
-                  <th>Header 1</th>
-                  <th>Header 2</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Cell 1</td><td>Cell 2</td>
-                </tr>
-                <tr>
-                    <td>Cell 3</td><td>Cell 4</td>
-                </tr>
-            </tbody> 
-        </table>
-    </div>
+<section id="unstructured-data-defintion">
+    <h2>Unstructured data</h2>
+    <ul>
+        <li>Information that is not organized in a pre-defined manner</li>
+        <li>Generally designed for humans, not machines.</li>
+        <li>Books and other documents. Prose in general...</li>
+        <li>Images, audio, and video files</li>
+        <li>Sometimes machines can learn the structure within</li>
+    </ul>
 </section>
-<section class="two-col" id="html-lists">
-    <p>Lists have the following structure:</p>
-    <div class="html-code"><pre><code data-trim>
-      &lt;ul&gt;
-        &lt;li&gt;First item&lt;/li&gt;
-        &lt;li&gt;Second item&lt;/li&gt;
-      &lt;/ul&gt;
-      
-      &lt;ol&gt;
-        &lt;li&gt;First item&lt;/li&gt;
-        &lt;li&gt;Second item&lt;/li&gt;
-      &lt;/ol&gt;
+<section id="structured-data-sources">
+    <h2>Sources of data</h2>
+    <ul>
+    <li><a href="https://www.data.gov/">Governments</a></li>
+        <li><a href="http://news.mit.edu/2020/mit-toyota-release-visual-open-data-accelerate-autonomous-driving-research-0618">Institutions of research and learning</a></li>
+        <li><a href="https://github.com/Microsoft/FERPlus">Crowd-sourced</a></li>
+        <li><a href="https://www.experian.com/">Private companies</a></li>
+    </ul>
+</section>
+<section id="free-data">
+    <p>Some random, free data sets:</p>
+    <ul class="medium">
+        <li><a href="https://www.census.gov/data.html">US Census data</a></li>
+        <li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Taxi Trips</a></li>
+        <li><a href="https://www.weather.gov/documentation/services-web-api">Forecast data for the entire US</a></li>
+        <li><a href="https://registry.opendata.aws/landsat-8/">Landsat 8 (satellite imagery of all land on Earth)</a></li>
+        <li><a href="https://portals.broadinstitute.org/ccle/about">Cancer cell line genomic data</a></li>
+        <li><a href="https://data.cms.gov/d/s2uc-8wxp">COVID-19 Nursing Home Data</a></li>
+        <li><a href="https://www.reddit.com/r/datasets/comments/1uyd0t/200000_jeopardy_questions_in_a_json_file/">200,000+  Jeopardy! Questions</a></li>
+        <li><a href="https://www.fda.gov/food/compliance-enforcement-food/cfsan-adverse-event-reporting-system-caers">Food poisoning complaints in the US</a></li>
+        <li><a href="https://www.kaggle.com/dansbecker/nba-shot-logs">NBA shot logs for the 2014-2015 season</a></li>
+        <li><a href="https://pokemondb.net/">Database of Pokémon creatures from the entire game series.</a></li>
+        <li><a href="https://doi.pangaea.de/10.1594/PANGAEA.909132">Historical yields for major crops since 1981</a></li>
+        <li><a href="https://www.aminer.org/citation">Citation graph for 629,814 papers and 632,752 citations</a></li>
+        <li><a href="https://data.gov.uk/dataset/452bee2c-28ea-4a2f-8005-16b9afdd8ba9/abandoned-shopping-trolleys-in-bristol-rivers">Survey of abandoned shopping carts in Bristol, UK rivers</a></li>
+        <li><a href="https://www.backblaze.com/b2/hard-drive-test-data.html">Data and failure rates for 130k hard drives</a></li>
+        <li><a href="https://pigeon-ndb.com/">American Racing Pigeon Union Race Result Database</a></li>
+        <li><a href="http://www.cropyields.ac.uk/project.php">Middle English Crop Yields: 1211-1491</a></li>
+    </ul>
+</section>
+<section id="data-formats" data-background-image="images/eniac.jpeg">
+    <h2 style="color: #8bdf37; background: black;">Common data formats</h2>
+</section>
+<section id="data-formats-csv">
+    <h3>CSV (comma-separated values)</h3>
+    <ul>
+        <li>From the days when spreadsheets roamed the land 🦕</li>
+        <li>Designed for tabular data</li>
+        <li>Human-readable</li>
+        <li>Ubiquitous</li>
+        <li>Don't parse it yourself.</li>
+    </ul>
+</section>
+<section id="data-formats-csv-tabular-data">
+    <p>Let's look at the best-seller list:</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Title</th>
+                <th>Units Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>The Heart is a Lonely Blacksmith</td>
+                <td>11293</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Hush Hush, Sweet Bruce</td>
+                <td>9853</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>"Freedom," I Yodeled</td>
+                <td>5071</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>C:\Windows\For\Morons</td>
+                <td>3124</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<section id="data-formats-csv-parsing-problems-1">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+     >>> row = '1,The Heart is a Lonely Blacksmith,11293'
+     >>> row.split(",")
+     ["1", "The Heart is a Lonely Blacksmith", "11293"]
     </code></pre>
-    </div>
-    <div class="html-rendered">
-        <ul>
-            <li>First item</li>
-            <li>Second item</li>
-          </ul>
-          
-          <ol>
-            <li>First item</li>
-            <li>Second item</li>
-          </ol>
-    </div>
+    <pre class="fragment fade-up" style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        >>> row = '2,Hush Hush, Sweet Bruce,9853'
+        >>> row.split(",")
+        ["2", "Hush Hush", " Sweet Bruce", "9853"]
+       </code></pre>
 </section>
-<section id="html-link">
-    <p>Links&mdash;called anchors in HTML&mdash;are the first html tag that we're going to use attributes for. 
-    Attributes are key-value pairs that occur inside the &lt; &gt;'s.</p>
-    <pre><code data-trim>
-        &lt;a href="http://example.com"&gt;Some descriptive text&lt;/a&gt;
+<section id="data-formats-csv-parsing-problems-2">
+    <pre class="python" style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    row = '2,"Hush Hush, Sweet Bruce",9853'
+    quote_open = False
+    columns = []
+    current_column = ""
+    for char in row:
+        if char == '"':
+          quote_open = not quote_open
+        elif char = ",":
+            if not quote_open:
+                columns.append(current_column)
+                current_column = ""
+        else:
+            current_column += char
+    columns.append(current_column)
     </code></pre>
-    <p>
-        <a href="http://example.com">Some descriptive text</a>
-    </p>
-<p>In this case, the href attribute allows you to specify what the URL the link will connect to is.</p>
+    <pre class="fragment fade-up" style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    row_3 = '3,""Freedom," I Yodeled",5071'
+    </code></pre>
+</section>
+<section id="data-formats-csv-parsing-problems-3">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    row = '3,"\"Freedom,\" I Yodeled",5071'
+    </code></pre>
+    <p class="fragment fade-up">😱</p>
+</section>
+<section id="data-formats-csv-parsing-problems-4">
+    <h3>In the real world, parsing CSV data is very complicated.</h3>
+    <h3>Don't do it.</h3>
+</section>
+<section id="data-formats-csv-parsing-stdlib">
+    <p>Standard library to the rescue:</p>
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        import csv
 
-</section>
-<section class="two-col" id="html-images">
-    <p>Images</p>
-    <div class="html-code"><pre><code data-trim>
-      &lt;img src="images/wonderful-sloth.gif"&gt;
+        with open("data_file.csv") as file_handle:
+            reader = csv.reader(file_handle)
+            for row in reader:
+                # Example row:
+                #    ["1", "The Heart is a Lonely Blacksmith", "11293"]
+                rank = int(row[0])
+                title = row[1],
+                units_sold = int(row[2])
     </code></pre>
-    </div>
-    <div class="html-rendered">
-        <img src="images/wonderful-sloth.gif">
-    </div>
 </section>
-<section class="two-col" id="html-forms">
-    <p>Forms</p>
-    <div class="html-code"><pre><code data-trim>
-        &lt;input type="text" placeholder="Enter email"&gt;
-        &lt;input type="checkbox"&gt;
-        &lt;select class="form-control"&gt;
-          &lt;option&gt;1&lt;/option&gt;
-          &lt;option&gt;2&lt;/option&gt;
-          &lt;option&gt;3&lt;/option&gt;
-          &lt;option&gt;4&lt;/option&gt;
-          &lt;option&gt;5&lt;/option&gt;
-        &lt;/select&gt;
-        &lt;button type="submit"&gt;Push me&lt;/button&gt;
+<section id="data-formats-csv-parsing-headers">
+    <p>CSVs often have header rows</p>
+    <pre style="font-size: 50%"><code data-trim>
+        rank,title,units Sold
+        1,The Heart is a Lonely Blacksmith,11293
+        2,"Hush Hush, Sweet Bruce",9853
+        3,"""Freedom,"" I Yodeled",5071
     </code></pre>
-    </div>
-    <div class="html-rendered">
-        <input type="text" placeholder="What's your name?">
-        <input type="checkbox" class="form-check-input">
-        
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Push me</button>
-    </div>
-</section>
-<section class="two-col" id="html-div">
-    <p>Grouping</p>
-    <div class="html-code"><pre><code class="hlhtml" data-trim>
-      &lt;p&gt;I am a paragraph.&lt;/p&gt;
-      &lt;div&gt;I am a div.&lt;/div&gt;
-      &lt;section&gt;I am a section.&lt;/section&gt;
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        import csv
+
+        with open("data_file.csv") as file_handle:
+            reader = csv.DictReader(file_handle)
+            for row in reader:
+                # Example row:
+                #    {"rank": "1",
+                #     "title": "The Heart is a Lonely Blacksmith",
+                #     "units sold": "11293"}
+                rank = int(row["rank"])
+                title = row["title"],
+                units_sold = int(row["units sold"])
     </code></pre>
-    </div>
-    <div class="html-rendered">
-        <p>I am a paragraph.</p>
-        <p>I am a div.</p>
-        <p>I am a section.</p>
-    </div>
 </section>
-<section class="two-col" id="html-div-explanation">
-    <p>Notice that tags like &lt;div&gt; don't really <em>do</em> anything to the the presentation.</p>
+<section id="data-formats-csv-limitations">
+    <h3>Problems with CSV</h3>
     <ul>
-        <li>Tags like &lt;div&gt; have no semantic meaning</li>
-        <li>Instead, they are often used as a kind of blank container which we can use to group HTML content</li>
-        <li>These containers give us something to point to for styling content with CSS</li>
-        <li>(More on CSS coming in the next class)</li>
+        <li>Data needs to be tabular or it won't work well.</li>
+        <li>Has no notion of types: everything is a string</li>
+        <li>There isn't a standard for it.</li>
     </ul>
 </section>
-<section class="two-col" id="html-commments">
-    <p>HTML Commments</p>
-    <div class="html-code"><pre><code class="hlhtml" data-trim>
-      &lt;!-- Comment on a single line --&gt;
-      &lt;!--
-          Comments on
-          multiple lines
-                          --&gt;
+<section id="data-formats-json">
+    <h3>JSON (JavaScript Object Notation)</h3>
+    <ul>
+        <li>More recent format</li>
+        <li>Standard in web-based data sources</li>
+        <li>A much more free-form data format than CSV</li>
+        <li>Data can be nested</li>
+        <li>Human-readable</li>
+    </ul>
+</section>
+<section id="data-formats-json-types">
+    <p>Basic types (unlike CSV)</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+        "string"
+        3.14
+        null
+        false
     </code></pre>
-    </div>
-    <div class="html-rendered">
-        <p style="color: rgba(0, 0, 0, 0.05); font-weight: bold; font-variant: small-caps; font-size: 120%;">Nothing here...</p>
-    </div>
+    <p>Lists</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+    [1, "A", true]
+    </code></pre>
+    <p>Objects</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+    {"a": 1, "b": 2, "c": 3}
+    </code></pre>
 </section>
-<section class="two-col" id="inline">
-    <p>Inline vs. Block: Inline Elements</p>
-    <div class="html-code"><pre><code class="hlhtml" data-trim>
-        &lt;p&gt;Doge is a slang term for "dog" 
-        that is primarily associated with pictures 
-        of Shiba Inus. &lt;img src="doge.jpg"&gt;
-        Photos may be photoshopped to change the 
-        dog's face or captioned with interior 
-        monologues in Comic Sans font.&lt;/p&gt;
-      </code></pre>
-      </div>
-      <div class="html-rendered">
-          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus 
-              <img src="images/doge.jpg" style="vertical-align: middle;" height="50"> Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font. </p>
-      </div>    
+<section id="data-formats-json-example">
+    <pre style="font-size: 50%"><code class="hljson" data-trim data-line-numbers>
+        [
+        {
+          "position": 1,
+          "title": "The Heart is a Lonely Blacksmith",
+          "units sold": 11293
+        },
+        {
+          "position": 2,
+          "title": "Hush Hush, Sweet Bruce",
+          "units sold": 9853
+        },
+        {
+          "position": 3,
+          "title": "Freedom,\" I Yodeled\"",
+          "units sold": 5071
+        },
+        {
+          "position": 4,
+          "title": "C:\\Windows\\For\\Morons",
+          "units sold": 3124
+        }
+      ]
+    </code></pre>
 </section>
-<section class="two-col" id="block">
-    <p>Inline vs. Block: Block Elements</p>
-    <div class="html-code"><pre><code class="hlhtml" data-trim>
-        &lt;p&gt;Doge is a slang term for "dog" 
-        that is primarily associated with pictures 
-        of Shiba Inus. &lt;div&gt;&lt;img src="doge.jpg"&gt;&lt;/div&gt;
-        Photos may be photoshopped to change the 
-        dog's face or captioned with interior 
-        monologues in Comic Sans font.&lt;/p&gt;
-      </code></pre>
-      </div>
-      <div class="html-rendered">
-          <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus 
-              <div><img src="images/doge.jpg" style="vertical-align: middle;" height="50"></div> Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font. </p>
-      </div>    
+<section id="data-formats-json-types-2">
+    <p>Nested &amp; complex data</p>
+    <pre style="font-size: 50%"><code class="hljson" data-trim>
+    {"name": "Ted",
+    "places_lived": ["Switzerland", "Canada", "Mexico"],
+    "pet": null,
+    "siblings": [{"name": "Martine", "age": 24, "pets": ["Rolf"]},
+                 {"name": "Fred", "age": 31,
+                  "pets": ["Boto", "Formica", "Rover"]}]
+   }
+   </code></pre>
 </section>
-<section id="inline-vs-block">
-    <p><strong>Block elements</strong> take up the full width available on a page, effectively blocking 
-    out any other elements from sitting next to on either side.</p>
-    <p><strong>Inline elements</strong> only take up as much width as is required to display the contents 
-        of the element, thereby allowing other elements to be in-line with it.</p>
-    </section>
-    <section id="inline-vs-block-2">
-        <p>Common <strong>block tags</strong> are &lt;div&gt;, &lt;p&gt;, &lt;h1..6&gt;, &lt;ul&gt;, &lt;li&gt;</p>
-        <p>Common <strong>Inline tags</strong> are &lt;a&gt;, &lt;img&gt;, &lt;span&gt;, &lt;em&gt;, &lt;strong&gt;</p>
-    </section>
-    <section id="whole-page">
-        <pre><code class="hlhtml" data-trim>
-            &lt;!doctype html&gt;
-            &lt;html lang="en"&gt;
-              &lt;head&gt;
-                &lt;title&gt;Hello, world!&lt;/title&gt;
-              &lt;/head&gt;
-              &lt;body&gt;
-                &lt;h1&gt;Hello, world!&lt;/h1&gt;
-                &lt;p&gt;Here is a very small and simple document.&lt;/p&gt;
-                &lt;h2&gt;Links I like:&lt;/h2&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;a href="http://google.com/"&gt;Google&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href="http://amazon.com/"&gt;Amazon&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href="http://netflix.com"&gt;Netflix&lt;/a&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/body&gt;
-            &lt;/html&gt;
-        </code></pre>
-    </section>    
-    <section id="page-link">
-        <p>Let's <a href="simple-page.html">look at that page</a>...</p>
-        <p class="fragment fade-up">Default styling is pretty primitive...</p>
-    </section>
-    <section id="tree">
-        <img src="images/HTML-tree.png">
-    </section>
-    <section id="sgml">
-        <h3>Browsers will try <em>really</em> hard to make a valid tree.</h3>
-    </section>    
-    <section id="dom">
-        <h3>Document Object Model (DOM)</h3>
-        <ol>
-            <li>Browser parses HTML file</li>
-            <li>Further resources are downloaded</li>
-            <li>Construct a tree representation of the document</li>
-            <li>The layout engine draws the objects on screen</li>
-            <li>Any user-supplied styling is applied</li>
-        </ol>
-    </section>
-    <section id="js">
-        <p>The DOM is also an interface for manipulating the HTML programatically via JavaScript, which lets us</p>
-        <ul>
-            <li>Create and insert new nodes into the tree</li>
-            <li>Remove nodes from the tree</li>
-            <li>Change the text content and attributes of nodes</li>
-            <li>Attach listeners to nodes that do something on user interaction</li>
-        </ul>
-    </section>
-    <section id="html-examples">
-        <h3>Let's look at some real-world HTML!</h3>
-        <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a></li>
-            <li><a href="https://www.youtube.com/">YouTube</a></li>
-            <li><a href="https://www.google.com/">Google</a></li>
-        </ul>
+<section id="data-formats-json-parsing">
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+    import json
 
-    </section>
+    json_data = """{"name": "Ted",
+        "places_lived": ["Switzerland", "Canada", "Mexico"],
+        "pet": null,
+        "siblings": [{"name": "Martine", "age": 24, "pets": ["Rolf"]},
+                    {"name": "Fred", "age": 31,
+                    "pets": ["Boto", "Formica", "Rover"]}]}"""
+
+    ted_data = json.loads(json_data)
+    </code></pre>
+</section>
+<section id="data-formats-json-parsing-result">
+    Our <code>ted_data</code> variable is a Python dictionary:
+    <pre style="font-size: 50%"><code class="hlpython" data-trim data-line-numbers>
+        {'name': 'Ted',
+        'pet': None,
+        'places_lived': ['Switzerland', 'Canada', 'Mexico'],
+        'siblings': [{'age': 24, 'name': 'Martine', 'pets': ['Rolf']},
+                     {'age': 31,
+                      'name': 'Fred',
+                      'pets': ['Boto', 'Formica', 'Rover']}]}
+    </code></pre>
+</section>
+<section id="data-formats-wrap-up">
+    <p>Although JSON and CSV are very common, there are an almost endless array of data formats. The one to chose will depend on many factors:</p>
+    <ul>
+        <li>Language you are using</li>
+        <li>Whether the format needs to be human-readable</li>
+        <li>How fast the the format should be to read and write</li>
+        <li>The structure of the data</li>
+        <li>The size of the data</li>
+        <li>The systems that need to interoperate with the data</li>
+    </ul>
+</section>
+<section id="baby-names">
+    <h2>Let's look at some real data!</h2>
+    <p>The Social Security Administration maintains data on the most popular names in the US since 1880!</p>
+    <p>You can <a href="https://www.ssa.gov/oact/babynames/limits.html">download the data!</a></p>
+</section>
+<section id="baby-names-ideas">
+    <ul>
+        <li>What is the most popular name for a given year?</li>
+        <li>What is the most unpopular name for a given year?</li>
+        <li>How has a given name changed in popularity over time?</li>
+    </ul>
+</section>
+<section id="time-for-code">
+    <h2>Let's write some code! 💻</h2>
+</section>
+<section id="data-analysis-question">
+    <p>Why are we seeing a drop in popularity for all the names we looked at?</p>
+</section>
+<section id="data-analysis-answer">
+    <ul>
+        <li>Diversity of names has increased</li>
+        <li>Diversity of spellings has increased</li>
+        <li>Birth rate has decreased</li>
+    </ul>
+</section>
+
 </div>
 		</div>
 		<script src="dist/jquery.js"></script>

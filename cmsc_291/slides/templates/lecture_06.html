@@ -1,0 +1,240 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 8{% endblock %}
+{% block extra_style %}
+<style>
+    .blue-block { color: #0064ac; }
+</style>
+{% endblock %}
+
+{% block slides %}
+<section id="title" data-background-image="images/packages.jpg">
+    <h2><span class="blue-block">Lecture 8 </span></h2>
+    <h2><span class="blue-block">Python Packaging</span></h2>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li>Assignment two is due Wednesday, Oct 7 (i.e. in two weeks).</li>
+        <li>Grades for assignment 1 are up in Blackboard. Agatha will also push a commit to each person's assignment repo with the grade.</li>
+    </ul>
+</section>
+<section id="package-universe">
+    <p>There are open source packages for:</p>
+    <ul>
+        <li>charting and data visualization</li>
+        <li>web application frameworks</li>
+        <li>manipulating images</li>
+        <li>machine learning, natural language processing, and computer vision</li>
+        <li>calculus, linear algebra, and statistics</li>
+        <li>connecting to databases</li>
+        <li>game programming</li>
+        <li>mapping</li>
+        <li>geology, astronomy, biological computation</li>
+        <li>robotics</li>
+        <li>...and more!</li>
+    </ul>
+</section>
+<section id="package-definition">
+    <h2>What's a package?</h2>
+    <ul>
+        <li>python module designed to be installed somewhere</li>
+        <li>Can be small (one file) or huge (hundreds of files)</li>
+        <li>May contain non-python code</li>
+        <li>May rely on non-python software already being installed</li>
+        <li>May rely on other python packages</li>
+    </ul>
+</section>
+<section id="dependencies">
+    <p>When a package relies on other software, we say that other software is a <em>dependency</em> of the package.</p>
+</section>
+<section>
+    <p>There are multiple ways to make a Python package.<br>The most common one is called a <em>source distribution</em> (a.k.a an sdist).</p>
+</section>
+<section id="sdist">
+    <h3>What's in a source distribution?</h3>
+    <ul>
+        <li>The python code (one or more <code>.py</code> files)</li>
+        <li>The README (if there is one)</li>
+        <li>The <code>setup.py</code> file (more on that in a sec...)</li>
+        <li>Any other files you specify</li>
+    </ul>
+    <p>All the files above are archived in a single file (a Tar or Zip archive usually)</p>
+</section>
+<section id="setuptools">
+    <ul>
+        <li>Python has a standard library component called setuptools</li>
+        <li>Setuptools knows how to build a source distribution from a python project.</li>
+        <li>And if given a source distribution, knows how to install it in your environment</li>
+        <li>How does it know how to do this?</li>
+    </ul>
+</section>
+<section id="setup.py">
+    <h3>The <code>setup.py</code> file</h3>
+    <pre><code data-trim data-line-numbers>
+from setuptools import setup
+
+setup(
+    name='cmsc-291',
+    version='1.0.0',
+    url='https://github.com/umbc/cmsc291.git',
+    author='James Stevenson',
+    author_email='author@gmail.com',
+    description='All code written in CMSC-291',
+    packages=["cmsc291"],
+    install_requires=['dependencyA == 1.11.1',
+                      'dependencyB >= 1.5.0'],
+)
+
+    </code></pre>
+</section>
+<section id="minimal-package">
+    <img height="700" src="images/minimal-package.png">
+</section>
+<section id="installation">
+    <h3>How does installation work?</h3>
+    <ul>
+        <li>setuptools unzips the archive</li>
+        <li>setuptools then copies all packages defined in <code>setup.py</code> to a place where the
+            Python interpreter will find it.</li>
+    </ul>
+</section>
+<section id="where-python-looks">
+    <p>The python interpreter can tell you where it looks:</p>
+    <pre><code data-trim data-line-numbers>
+import sys
+>>> print('\n'.join(sys.path))
+
+/opt/anaconda3/envs/cmsc-291/lib/python38.zip
+/opt/anaconda3/envs/cmsc-291/lib/python3.8
+/opt/anaconda3/envs/cmsc-291/lib/python3.8/lib-dynload
+/opt/anaconda3/envs/cmsc-291/lib/python3.8/site-packages
+    </code></pre>
+    <p>When using the Python distribution supplied with conda, <code>site-packages</code> is where most things will go.</p>
+</section>
+<section id="srcdist">
+    <p style="text-align: center">
+        <img src="images/file-icon.png" width="300"><br>
+        <code style="margin-top: -43px; display: block;">cmsc-291-1.0.0.tar.gz</code>
+    </p>
+    <p>If you have a source distribution, python can install it for you.<br>
+        But where do you get a source distribution?
+    </p>
+</section>
+<section id="pypi">
+    <a href="https://pypi.org/"><img src="images/pypi.png"></a>
+</section>
+<section id="pypi-facts">
+    <h3>The Python Package Index</h3>
+    <ul>
+        <li>Maintained by the Python Software Foundation (+ corporate donors)</li>
+        <li>Has over 200k python packages</li>
+        <li>Is free to use</li>
+        <li>Anyone can publish to it</li>
+        <li><a href="https://en.wikipedia.org/wiki/Sturgeon%27s_law">Sturgeon's law</a> applies</li>
+        <li>But there are many extremely high-quality packages there too.</li>
+    </ul>
+</section>
+<section id="pypi-example">
+    <p>Let's take a look at <a href="https://pypi.org/project/seaborn/">an example</a>.</p>
+</section>
+<section id="pip">
+    <p>To install a package from the package index, use a tool called pip in the terminal:</p>
+    <pre><code data-trim data-line-numbers>
+        # Install the latest version of the "seaborn" package:
+        pip install seaborn
+
+        # Install a specific version of the "seaborn" package:
+        pip install seaborn==0.11.0
+    </code></pre>
+</section>
+<section id="pip-facts">
+    <p>pip is:</p>
+    <ul>
+        <li>The most popular tool for installing Python packages</li>
+        <li>Included with modern versions of Python</li>
+        <li>Wraps setup tools</li>
+        <li>Knows how to get things from the Python Packge Index</li>
+        <li>Works with Conda</li>
+        <li>If a project has dependencies, it will install those too.</li>
+    </ul>
+</section>
+<section id="pip-via-PyCharm">
+    <p>You can also access pip through PyCharm if you don't want to use the terminal</p>
+    <ol>
+        <li>Preferences</li>
+        <li>Project > Project Interpreter</li>
+        <li>Click the "+"</li>
+        <li>Search for the package you want</li>
+        <li>Click "Install"</li>
+    </ol>
+</section>
+<section id="requirements">
+<h2>How do I specify dependencies in my project?</h2>
+<p>The best way depends on the answer to this question:</p>
+<p><em>Is my project, itself, a package that I want to share?</em></p>
+</section>
+<section id="requirements-in-setup">
+    <p>If your project is a package you are planning to share or publish to PyPI:</p>
+    <pre><code data-trim data-line-numbers>
+from setuptools import setup
+
+setup(
+    name='cmsc-291',
+    version='1.0.0',
+    description='All code written in CMSC-291',
+    packages=['cmsc291'],
+    install_requires=['seaborn == 0.11.0',
+                      'scikit-learn == 0.23' ],
+)
+    </code></pre>
+</section>
+<section id="requirements-in-requirements">
+    <p>If your project is <strong>just for you</strong>:</p>
+    <p>Create a <code>requirements.txt</code> in the project root:</p>
+    <pre><code data-trim data-line-numbers>
+seaborn == 0.11.0
+scikit-learn == 0.23
+    </code></pre>
+</section>
+<section id="requirements-parsing">
+    <p>pip knows how to read these:</p>
+    <pre><code data-trim data-line-numbers>
+        pip install -r requirements.txt
+    </code></pre>
+</section>
+<section>
+    <p>Setuptools also knows how to upload a package to PyPI:</p>
+    <pre><code data-trim data-line-numbers>
+        # Only run this the first time you upload your package:
+        python setup.py register
+
+        # Push the current version to PyPI:
+        python setup.py upload
+    </code></pre>
+</section>
+<section id="pycharm-helpers">
+    <p>PyCharm will also ask you if you want to install the project's requirements when it sees these.</p>
+    <img src="images/pycharm-requirements-install.png">
+</section>
+<section id="quickref">
+    <h2>Quick Reference</h2>
+    <ul>
+        <li>Have a root folder for your projects that includes a README</li>
+        <li>There should be <em>one</em> top-level module inside the root folder
+            <ul>
+                <li>A single Python file if it's small</li>
+                <li>A directory with <code>__init__.py</code> and all the rest if it's not.</li>
+            </ul>
+        </li>
+
+
+        <li>If you plan to share the code or need to package it to install somewhere else, include a <code>setup.py</code></li>
+        <li>If your project has dependencies, include those in <code>setup.py</code> if you need one or <code>requirements.txt</code> otherwise.</li>
+    </ul>
+</section>
+
+<section id="questions">
+    <h2>What questions do you have?</h2>
+</section>
+
+{% endblock %}
