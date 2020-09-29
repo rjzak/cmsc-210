@@ -1,8 +1,8 @@
-import csv 
+import csv
 import seaborn as sns
 
 """
-In a given year: 
+In a given year:
 
     * What is the most popular name?
     * What is the rank for any given name?

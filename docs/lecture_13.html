@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 9</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+.two-col .html-code {
+    float: left;
+    width: 60%;
+}
+.two-col .html-code pre {
+    font-size: 40%
+}
+.two-col .html-rendered {
+    float: right;
+    width: 40%;
+    font-size: 90%
+}
+#content-vs-presentation h4 { text-transform: none;}
+#content-vs-presentation em { color:rebeccapurple }
+</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title">
+	<h2>Lecture 8: HTML & CSS, Part II</h2>
+    <p>CSS</p>
+    <img src="images/css-joke.png">
+</section>
+<section id="tree">
+    <p>Remember the DOM!</p>
+    <img src="images/HTML-tree.png">
+</section>
+<section id="dom-layers">
+    <p>Browsers expose two ways for web<br>developers to do things with the DOM</p>
+    <ul>
+        <li>JavaScript: interaction</li>
+        <li>Cascading Style Sheets (CSS): styling</li>
+    </ul>
+</section>
+<section id="css-facts">
+    <ul>
+        <li>Not a programming language; a "stylesheet language"</li>
+        <li>Initial release of CSS circa 1996 (the web is already  approx. 5 years old at this point)</li>
+        <li>Wasn't widely (and correctly) supported by browsers till early 2000s</li>
+        <li>CSS support among browsers has gotten pretty good.</li>
+    </ul>
+</section>
+<section id="content-vs-presentation">
+        <p>Designed to allow separation of <strong>content</strong> from <strong>presentation</strong></p>
+        <hr>
+        <h4>HTML → adding <em>semantic meaning</em>&nbsp;&nbsp;to a text document</h4>
+        <h4>CSS → adding <em>presentational information</em>&nbsp;&nbsp;to an HTML document</h4>
+</section>
+<section id="content-vs-presentation-example">
+    <p>Consider <code>&lt;h1&gt;</code>: it's for indicating the most important heading.
+        "Important" doesn't imply anything about color, typeface, size, etc.</p>
+</section>
+<section id="presentation-context">
+    <h2>Context & Presentation May Vary</h2>
+    <div>
+        <img src="images/phone-icon.png" height="200">
+        <img src="images/monitor-icon.png" height="200">
+        <img src="images/book-icon.png" height="200">
+    </div>
+    <h2>...but content stays the same.</h2>
+</section>
+<section id="how-css-works">
+    <p>How does CSS work?</p>
+    <ul>
+        <li>write a rule that matches some part of the DOM tree</li>
+        <li>specify attributes that style the matched nodes</li>
+        <li>Style is applied to <em>all</em> children</li>
+        <li>More specific rules always override less specific ones</li>
+        <li>Soure of rule also determines precedence...</li>
+        <li>(...that's the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade">cascading part</a>)</li>
+    </ul>
+</section>
+<section id="rule-1-definition">
+    <p>RULE: Text in unordered lists should be green!</p>
+    <img src="images/HTML-tree-green.png">
+</section>
+<section id="rule-1-result">
+    <img src="images/simple-page-green.png">
+</section>
+<section id="rule-2-definition">
+    <p>RULE: The last &lt;li&gt; in a list should be orange.</p>
+    <img src="images/HTML-tree-green-orange.png">
+</section>
+<section id="rule-2-result">
+    <img src="images/simple-page-green-orange.png">
+</section>
+<section id="selectors-universal">
+        <p>Universal selector</p>
+        <pre class="css"><code data-trim>
+            * {
+                color: green;
+            }
+        </code></pre>
+    <img src="images/HTML-tree.png" height="400">
+</section>
+<section id="selectors-element">
+        <p>Element selector</p>
+        <pre class="css"><code data-trim>
+            li {
+                color: green;
+            }
+        </code></pre>
+    <img src="images/HTML-tree.png" height="400">
+</section>
+<section id="selectors-group">
+    <p>Grouping selectors</p>
+    <pre class="css"><code data-trim>
+        li, h2, p {
+            color: green;
+        }
+    </code></pre>
+    <img src="images/HTML-tree.png" height="400">
+</section>
+<section id="selectors-descendant">
+    <p>Selecting descendants</p>
+    <pre class="css"><code data-trim>
+        ul li {
+            color: green;
+        }
+    </code></pre>
+    <img src="images/HTML-tree.png" height="400">
+</section>
+<section id="selectors-child">
+    <p>Selecting children</p>
+    <pre class="css"><code data-trim>
+        li > a {
+            color: green;
+        }
+    </code></pre>
+    <img src="images/HTML-tree.png" height="400">
+</section>
+<section id="selectors-pseudoclasses">
+    <p>Pseudo classes</p>
+    <pre class="css"><code data-trim>
+        a:hover, li:last-child {
+            color: green;
+        }
+    </code></pre>
+    <img src="images/HTML-tree.png" height="400">
+</section>
+<section id="motivation-for-class-and-id">
+    <h3>Is there a way I can designate<br>elements in my HTML for styling?</h3>
+    <h2 class="fragment fade-in" style="color:seagreen">YES!</h2>
+</section>
+<section id="element-id">
+    <p>The <code>id</code> attribute is used to specify a <em>unique</em> identifier for a <em>single</em> HTML element</p>
+    <pre class="html"><code data-trim>
+        &lt;a href="email:gl26499@umbc.edu" id="email-link"&gt;email me!&lt;/a&gt;
+    </code></pre>
+</section>
+<section id="element-class">
+    <p>The <code>class</code> attribute is used to specify a class or grouping for one or more HTML elements</p>
+    <pre class="html"><code data-trim>
+        &lt;p class="important" &gt;Here's some important text!&lt;/p&gt;
+        &lt;p&gt;Here's some regular tex!&lt;/p&gt;
+        &lt;p class="important" &gt;And more important text!&lt;/p&gt;
+    </code></pre>
+</section>
+<section id="class-and-id-reveiw">
+    <ul>
+        <li><code>id</code> is meant for targeting a single element</li>
+        <li><code>class</code> is meant for targeting multiple elements</li>
+    </ul>
+</section>
+<section id="semantic-naming">
+    <p>Remember: HTML is intended to add <em>semantic</em> meaning to documents, so try to chose you names accordingly.</p>
+    <ul>
+        <li>Good class names: <code>important</code>, <code>logo</code>, <code>warning</code>, <code>signup-button</code></li>
+        <li>Bad class names: <code>abc123</code>, <code>redText</code>, <code>paragraph</code>, <code>bold</code></li>
+    </ul>
+</section>
+<section id="selectors-id">
+    <p>ID selectors</p>
+    <pre class="css"><code data-trim>
+        button#login {
+            background-color: #c10547
+        }
+    </code></pre>
+    <p style="font-size: 60%">(<code>#c10547</code> is a <a href="https://www.color-hex.com/color/c10547">hexadecimal color code</a> for <span style="color: #c10547">magenta</span>)</p>
+</section>
+<section id="selectors-class">
+    <p>class selectors</p>
+    <pre class="css"><code data-trim>
+        .pagination {
+            width: 500px;
+        }
+    </code></pre>
+    <p style="font-size: 60%">Units of measurement should generally be in pixels (<code>px</code>). There are others, but they are more complex to work with.</p>
+</section>
+<section id="ugly-doc">
+    <h3>Remember this ugly thing?</h3>
+    <img src="images/simple-page-green.png" height="300">
+    <h3 class="fragment fade-in">Let's make it look nicer...</h3>
+</section>
+<section id="nice-doc">
+    <img src="images/simple-page-stylish.png" height="500">
+</section>
+
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>

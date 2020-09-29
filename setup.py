@@ -8,8 +8,7 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 requirements = [
-    "Jinja2==2.11.2",
-    "seaborn==0.10.1"
+    "Jinja2==2.11.2"
  ]
 
 setup_requirements = [ ]

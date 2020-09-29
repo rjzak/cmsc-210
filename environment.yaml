@@ -1,0 +1,9 @@
+name: cmsc-291
+dependencies:
+  - python=3.8
+  - numpy
+  - pandas
+  - seaborn
+  - Jinja2
+  - ipython
+  - jupyterlab

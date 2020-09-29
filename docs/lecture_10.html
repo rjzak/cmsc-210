@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 10</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+#title h2 span {
+    background-color: rgba(251, 87, 118, 0.93);
+    color: white;
+    padding: 0px 15px;
+}
+#eda-history h3 {
+    background-color: #626262;
+    color: #ffffff;
+    margin-top: 500px;
+}
+#eda-and-python span {
+    color: #2360bf;
+}
+
+</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title" data-background-image="images/eda-wallpaper.png">
+    <h2><span>Exploratory Data Analysis</span></h2>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li>Assignment two is due next week,<br> Wednesday (Oct 7, 2020)</li>
+    </ul>
+</section>
+<section id="eda-intro">
+    <h2>Exploratory data analysis</h2>
+    <ul>
+        <li>Using statistics to analyze data sets and summarize their main characteristics</li>
+        <li>Favors visual methods</li>
+        <li>Usually a preliminary step to more complex approaches (like modeling, hypothesis testing, etc.)</li>
+        <li>Looking at the data suggests hypotheses to test</li>
+        <li>sometimes gets lumped in with "data mining"</li>
+    </ul>
+</section>
+<section id="eda-history" data-background-image="images/john-tukey.jpg">
+    <h3>Invented by John Tukey in the 1970s</h3>
+</section>
+<section id="eda-and-python">
+    <h3>What's this got to do with Python? <img src="images/python_logo.png" width="40" style="vertical-align: text-bottom;"></h3>
+    <ul>
+        <li>It's a fantastic language to do EDA with.</li>
+        <li>Has packages for:
+            <ul>
+                <li><em>visualization</em>: <span>Seaborn</span>, Bokeh, Matplotlib</li>
+                <li><em>analysis</em>: <span>Pandas</span></li>
+                <li><em>statistics</em>: Statsmodels</li>
+                <li><em>(fast) computation</em>: Numpy</li>
+                <li><em>science</em>: SciPy, Astropy, Biopython, GeoPandas</li>
+                <li><em>machine learning/AI</em>: <span>scikit-learn</span>, TensorFlow, PyTorch</li>
+                <li><em>explore/share/publish</em>: <span>Jupyter Lab</span></li>
+            </ul>
+        </li>
+        <li>Most of these integrate with each other.</li>
+    </ul>
+</section>
+<section id="new-packages">
+    <h3>Today, we'll look at and use two of these</h3>
+    <ul>
+        <li>Seaborn you've seen</li>
+        <li><strong>Pandas</strong> for data analysis</li>
+        <li><strong>Jupyter Lab</strong> for "notebook" computing</li>
+    </ul>
+</section>
+<section id="pandas">
+    <h3><a href="https://pandas.pydata.org/">Pandas</a>&nbsp;<img src="images/pandas-logo.png" height="100" style="vertical-align: text-bottom;"></h3>
+    <ul>
+        <li>Library for doing data analysis (not just EDA) in Python</li>
+        <li>Two concepts: DataFrame &amp; Series (a.k.a table &amp; column)</li>
+        <li>Ubiquitous</li>
+        <li>What is does:
+            <ul>
+                <li>Importing from common file formats (like CSV &amp JSON!)</li>
+                <li>Cleaning and reshaping</li>
+                <li>Summarizing, grouping, &amp; aggregating</li>
+                <li>Joining with other data</li>
+                <li>Plotting</li>
+            </ul>
+        </li>
+        <li><code>pip install pandas</code></li>
+    </ul>
+</section>
+<section id="jupyter">
+    <h3><a href="https://jupyter.org/">Jupyter Notebooks</a>&nbsp;<img src="images/jupyter-logo.png" height="80" style="vertical-align: text-bottom;"></h3>
+    <ul>
+        <li>interactive data science/exploration environment</li>
+        <li>Main concept: the "notebook"</li>
+        <li>Combine text, code, and visualization in one place</li>
+        <li>Share analysis colleages and coworkers</li>
+        <li>Explore data quickly and easily in Python</li>
+        <li>Integrates with Pandas and Seaborn seamlessly</li>
+        <li>Work inside a web browser</li>
+        <li><code>pip install jupyterlab</code></li>
+    </ul>
+</section>
+<section id="eda-again">
+    <h3>Now that we've talked about tools,<br>let's get back to EDA!</h3>
+</section>
+<section id="anscombe">
+    <p>There's a reason EDA focuses on <em>visualizing</em> the data and not just computing descriptive statistics</p>
+    <img src="images/anscombes-quartet.png" height="300">
+    <p>These <a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">four data sets</a> have the same mean, variance, correlation, and linear regression coefficients!</p>
+</section>
+
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
