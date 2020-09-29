@@ -1,0 +1,7 @@
+To run this code, install seaborn:
+
+    $> pip install seaborn
+
+
+When you start up you Python interpreter in PyCharm, be sure to run ""%pylab".
+This command will activate the backend that displays our charts in a popup window.
