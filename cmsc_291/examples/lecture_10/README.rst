@@ -1,9 +1,9 @@
 Doing Exploratory Data Analysis With Pandas and Jupyter Notebooks
 =================================================================
 
-To get started, make sure you install these three libraries::
+To get started, make sure you install these four libraries::
 
-    $> pip install pandas jupyterlab seaborn
+    $> pip install pandas jupyterlab seaborn probscale
 
 Next you'll want to start up the `Jupyter Lab <https://jupyterlab.readthedocs.io/en/latest/>`_ webserver::
 
