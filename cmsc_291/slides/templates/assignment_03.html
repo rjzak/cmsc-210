@@ -1,0 +1,136 @@
+{% extends "document_base.html" %}
+{% block title %}CMSC 291: Assignment Three{% endblock %}
+{% block extra_style %}
+<style>
+    .inset {
+        margin: 50px;
+        border: 1px solid black;
+        padding: 50px;
+        background: rgba(0.5, 0.5, 0.5, .05);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1>Assignment 3</h1>
+<h2>Ramen Time</h2>
+<hr>
+<img src="images/ramen.jpg" width="500" style="float: right">
+<p><strong>Due Date</strong>: Wednesday, October 28th, 11:59:59 PM
+<p><strong>Value</strong>: 150 points<br>
+<p><strong>Github</strong>: <a href="https://github.com/cmsc-291-fall-2020/assignment3">https://github.com/cmsc-291-fall-2020/assignment3</a></p>
+<p><strong>Collaboration</strong>: For Assignment 3, <em>collaboration is not allowed</em>; you must work individually. You may still see your TA and come to office hours for help, but you may not work with any other CMSC 291 students. You may post questions on Slack, <strong>but you may not post code</strong>.</p>
+<h2>Objectives:</h2>
+<ul>
+    <li>To practice submitting assignments through Github classroom</li>
+    <li>To become familiar with CMSC 291 Python coding standards</li>
+    <li>To learn how to acquire, explore, and visualize real-world datasets</li>
+    <li>To gain experience with Seaborn, Pandas, and Jupyter Notebooks</li>
+    <li>To learn how to filter, aggregate, join, and visualize Pandas DataFrames.</li>
+</ul>
+
+<h2>Instructions</h2>
+
+<h3>The Task</h3>
+
+<p>In this assignment, you have been given two datasets. The first is a dataset from
+    <a href="https://www.theramenrater.com">The Ramen Rater</a>, a product review website for the hardcore instant ramen
+    enthusiast (or "ramenphile"), with over 2500 reviews to date. This file is located in the project repo at
+    <code>notebooks/ramen-ratings.csv</code>. Each record in the dataset is a single ramen product review.
+    The columns—Brand, Variety (the product name), Country, and Style (Cup? Bowl? Tray?)—are pretty self-explanatory.
+    The "Stars" column indicates the ramen rating, as assessed by the reviewer, on a 5-point scale.
+</p>
+<p>In addition to this dataset, there is also a CSV file (<code>notebooks/noodle-consumption</code>) which comes
+    from <a href="https://instantnoodles.org/en/noodles/market.html">WINA</a>, the World Instant Noodles Association,
+    which lists the global demand, by country, for instant noodles in 2015, 2016, 2017, 2018, and 2019. The unit in this
+    table is "Millions of Servings"
+</p>
+
+<p>In this assignment you will be asked to produce a <strong>Jupyter Notebook</strong> that provides answers to the
+    following questions by using Python and Pandas. If a data visualization is requested, use Seaborn for this.
+
+</p>
+
+<ol>
+    <li>What <strong>brand</strong>, <em>on average</em>, has the highest ratings for instant ramen? And what is that average rating?</li>
+    <li>What <strong>country</strong>, <em>on average</em>, has the highest ratings for instant ramen? And what is that average rating?</li>
+    <li>If I want the best chance of getting good ramen, which of the following style of product—"Cup", "Pack", "Tray", or
+        "Bowl Style"—should I pick? (Assume I don't know anything else about the product.) Create a box plot that demonstrates this empirically.</li>
+    <li>Are ramen ratings <a href="https://statisticsbyjim.com/basics/normal-distribution/">normally distributed</a>? Demonstrate your answer graphically.</li>
+    <li>Do you think there is any correlation between a country's demand for instant noodles and the quality of its instant ramen? Demonstrate your answer graphically.</li>
+    <li>Extra credit: Does having the word "spicy", "hot", or "chili" in the product name (the "Variety" column) make it more likely that the rating will be higher?</li>
+</ol>
+
+<h3>Pre-defined Python Library Usage</h3>
+<p>You may import <em>anything</em>.  At all. May the force of all of Python be with you. You will definitely need
+    to use <a href="https://seaborn.pydata.org/">Seaborn</a>, <a href="https://pandas.pydata.org/">Pandas</a>, and
+    <a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyter Notebooks</a>. Installation instructions can be
+found in the project's README.</p>
+
+<h3>Submitting Your Assignment</h3>
+<p>We will cover the use of github in class and provide walkthroughs for submitting assignments. The github project
+    already contains a Jupyter notebook called "Ramen-Time.ipynb". Please do all your work in there and remember to save the notebook contents in Jupyter Lab.</p>
+
+<h3>Coding Standards</h3>
+<p>Because we are using a notebook rather than a traditional Python file, some sections of the coding standards <strong>do
+    not apply</strong> here. You can ignore:</p>
+
+<ul>
+    <li>File Organization</li>
+    <li>Sample Code</li>
+    <li>Class Files</li>
+    <li>File Header Comments</li>
+    <li>Class Comments</li>
+</ul>
+
+<p>However, for each of the five required questions in the assignment, include a
+    <a href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Working%20With%20Markdown%20Cells.html">markdown cell</a>
+    in the notebook that explicitly answers the question. For example:</p>
+
+<p class="inset">
+    Question 2:<br>
+    The country that has the highest average rating is XYZ. The rating is 9.99.
+</p>
+
+<p>This cell should immediately follow the Python code (and visualization, if any) you created to answer the question.</p>
+
+<h4>Visualization Standards</h4>
+<p>Make sure that any labels, legends, etc. in your charts are reasonable.
+    Good rule of thumb: if you were including this chart in a research paper, how would you label this data?</p>
+
+
+
+<h2>Grading Rubric</h2>
+<table class="table">
+        <tbody>
+                <tr>
+                    <td>Following <a href="coding_standards.html">coding standards</a></td>
+                    <td>20 points</td>
+                </tr>
+                <tr>
+                    <td>Correctly answering question 1</td>
+                    <td>20 points</td>
+                </tr>
+                <tr>
+                    <td>Correctly answering question 2</td>
+                    <td>20 points</td>
+                </tr>
+                <tr>
+                    <td>Correctly answering question 3</td>
+                    <td>30 points; 15 for the answer, 15 for the chart</td>
+                </tr>
+                <tr>
+                    <td>Correctly answering question 4</td>
+                    <td>30 points; 15 for the answer, 15 for the chart</td>
+                </tr>
+                <tr>
+                    <td>Correctly answering question 5</td>
+                    <td>30 points; 15 for the answer, 15 for the chart</td>
+                </tr>
+                <tr>
+                    <td>Extra credit question</td>
+                    <td>20 points</td>
+                </tr>
+        </tbody>
+</table>
+{% endblock %}

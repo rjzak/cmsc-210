@@ -111,3 +111,5 @@ ENV/
 
 # Github pages exclusions
 !docs/dist/
+
+.ipynb_checkpoints
