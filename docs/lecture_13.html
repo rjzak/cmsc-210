@@ -38,18 +38,40 @@
     <p>CSS</p>
     <img src="images/css-joke.png">
 </section>
+<section id="whole-page">
+    <p>Remember our <a href="simple-page.html">simple page</a>?</p>
+    <pre><code class="hlhtml" data-trim>
+        &lt;!doctype html&gt;
+        &lt;html lang="en"&gt;
+          &lt;head&gt;
+            &lt;title&gt;Hello, world!&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+            &lt;h1&gt;Hello, world!&lt;/h1&gt;
+            &lt;p&gt;Here is a very small and simple document.&lt;/p&gt;
+            &lt;h2&gt;Links I like:&lt;/h2&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="http://google.com/"&gt;Google&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="http://amazon.com/"&gt;Amazon&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="http://netflix.com"&gt;Netflix&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/body&gt;
+        &lt;/html&gt;
+    </code></pre>
+</section>
 <section id="tree">
-    <p>Remember the DOM!</p>
+    <p>And remember the document object model (DOM) representation as a tree?</p>
     <img src="images/HTML-tree.png">
 </section>
 <section id="dom-layers">
     <p>Browsers expose two ways for web<br>developers to do things with the DOM</p>
     <ul>
-        <li>JavaScript: interaction</li>
-        <li>Cascading Style Sheets (CSS): styling</li>
+        <li>JavaScript: interaction &amp; dynamically modifying the HTML tree</li>
+        <li>Cascading Style Sheets (CSS): styling elements in the HTML tree</li>
     </ul>
 </section>
 <section id="css-facts">
+    <h3>CSS</h3>
     <ul>
         <li>Not a programming language; a "stylesheet language"</li>
         <li>Initial release of CSS circa 1996 (the web is already  approx. 5 years old at this point)</li>
@@ -62,6 +84,18 @@
         <hr>
         <h4>HTML → adding <em>semantic meaning</em>&nbsp;&nbsp;to a text document</h4>
         <h4>CSS → adding <em>presentational information</em>&nbsp;&nbsp;to an HTML document</h4>
+</section>
+<section id="define-style">
+    <h2>What do we mean by styling?</h2>
+    <ul>
+        <li>Typography</li>
+        <li>Color</li>
+        <li>Layout</li>
+        <li>Spacing &amp; positioning</li>
+        <li>Borders</li>
+        <li>inline vs. block</li>
+    </ul>
+
 </section>
 <section id="content-vs-presentation-example">
     <p>Consider <code>&lt;h1&gt;</code>: it's for indicating the most important heading.
@@ -76,14 +110,18 @@
     </div>
     <h2>...but content stays the same.</h2>
 </section>
+<section id="declutters">
+    <p>Separating presentation info into its own CSS file also makes the HTML far less cluttered and allows for far
+        more control over how things look with less code.</p>
+</section>
 <section id="how-css-works">
     <p>How does CSS work?</p>
     <ul>
         <li>write a rule that matches some part of the DOM tree</li>
         <li>specify attributes that style the matched nodes</li>
-        <li>Style is applied to <em>all</em> children</li>
+        <li>Style is applied to the matched nodes and <em>all</em> their children</li>
         <li>More specific rules always override less specific ones</li>
-        <li>Soure of rule also determines precedence...</li>
+        <li>Source of rule also determines precedence...</li>
         <li>(...that's the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade">cascading part</a>)</li>
     </ul>
 </section>
@@ -173,7 +211,7 @@
         &lt;p class="important" &gt;And more important text!&lt;/p&gt;
     </code></pre>
 </section>
-<section id="class-and-id-reveiw">
+<section id="class-and-id-review">
     <ul>
         <li><code>id</code> is meant for targeting a single element</li>
         <li><code>class</code> is meant for targeting multiple elements</li>
