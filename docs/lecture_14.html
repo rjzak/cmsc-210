@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 14</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+    .two-col ul.left {
+        float: left;
+        width: 50%;
+        margin: 0px;
+        padding: 0px;
+    }
+    .two-col ul.right {
+        float: right;
+        width: 50%;
+        margin: 0px;
+        padding: 0px;
+    }
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title" data-background-image="images/cobweb.png">
+    <h2>Web Scraping</h2>
+</section>
+<section id="structured-vs-unstructured">
+    <h2>Structured vs. Unstructured Data</h2>
+    <div class="two-col">
+        <ul class="left">
+            <li>Information is organized in some fashion</li>
+            <li>Format is readable by a machine directly</li>
+            <li>Examples: CSV, JSON</li>
+        </ul>
+        <ul class="right">
+            <li>Information is not organized in a pre-defined manner</li>
+            <li>Designed for humans, not machines.</li>
+            <li>Examples: web pages, documents</li>
+        </ul>
+    </div>
+</section>
+<section id="cheese">
+    <p>You can manually produce structured information from unstructured metadata.</p>
+    <p>Let's say I want to create a spreadsheet of the price and customer ratings of cheeses found on
+       cheese.com</p>
+    <img src="images/cheeses.png" width="1000">
+</section>
+<section id="scraping-definition">
+    <div style="background: url('images/cheese-bg.png') no-repeat center center; padding: 135px 0">
+        <p>But sometimes you want to gather all of that data <em>automatically</em> without having to click around on a site and copy and paste a lot of text.</p>
+        <p>Today we’re going to talking about web scraping:  the practice of automatically extracting interesting data from webpages into <em>a structured representation</em>.</p>
+    </div>
+</section>
+<section id="html-ss-python">
+    <h2>HTML &amp; CSS: Meet Python <img src="images/python_logo.png" height="120"></h2>
+</section>
+<section id="scraping-process">
+    <h2>Web scraping is a two-step process</h2>
+    <ol>
+        <li><strong>Acquire</strong> the web page (or pages)</li>
+        <li><strong>Extract</strong> structured data from the HTML</li>
+    </ol>
+</section>
+<section id="requests">
+    <h3>Acquiring Web Pages</h3>
+    <p>The <code>requests</code> library is an <a href="https://requests.readthedocs.io/en/master/">open-source package</a> for downloading web pages with Python</p>
+    <ul>
+        <li>Python's standard library comes with a module to do this, but it's much harder to use</li>
+        <li>Everybody uses requests</li>
+        <li><code>pip install requests</code></li>
+    </ul>
+</section>
+<section id="requests-example">
+    <h2>Example usage</h2>
+    <pre><code data-trim data-line-numbers>
+        import requests
+
+        response = requests.get("https://cheese.com")
+        response.text
+    </code></pre>
+</section>
+<section id="rendered-page">
+    <a href="https://cheese.com/bleu-dauvergne/"><img src="images/blue-auvergne.png"></a>
+</section>
+<section id="page-src">
+    <img src="images/blue-auvergne-src.png">
+</section>
+<section id="wrong-way">
+    <p>What you get back from </p>
+        <pre><code data-trim>
+            requests.get("https://cheese.com/bleu-dauvergne/").text
+        </code></pre>
+    <p>...is a huge string representing the HTML of the webpage.</p>
+    <p>Imagine that you have to use the string manipulation you already know to find all the links on that page and then list where they go.</p>
+    <p>Kinda scary, right? 😱</p>
+</section>
+<section id="beautiful-soup">
+    <h3>Extracting structured data</h3>
+    <p><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a> is a scraping library that takes an html string
+        and lets you, the programmer, do “easy” searches for interesting stuff in that string.</p>
+    <ul>
+        <li>BeautifulSoup can parse an HTML string into a parse tree in much the same way that a web browser does.</li>
+        <li>You can search and navigate through this tree to find what you want.</li>
+        <li><code>pip install beautifulsoup4</code></li>
+    </ul>
+</section>
+<section id="bs4-example">
+    <h2>Example usage</h2>
+    <pre><code data-trim data-line-numbers>
+        import requests
+        from bs4 import BeautifulSoup
+
+        html = requests.get("https://cheese.com/bleu-dauvergne/").text
+        soup = BeautifulSoup(html, 'html.parser')
+    </code></pre>
+</section>
+<section id="bs4-example-2">
+    <h3>How do I use this soup?</h3>
+    <p>So let’s say we still want to find all the links.<br>(The links are <code>&lta&gt</code> tags in HTML.)</p>
+    <pre><code data-trim data-line-numbers>
+soup.select("a")
+[&lt;a href="https://cheese.com/advertise/"&gt;&lt;img src="/media/img/advertise/cheese-banner-bottom.jpg"/&gt;&lt;/a&gt;,
+ &lt;a href="/"&gt;&lt;h1 class="logo" title="Cheese.com"&gt;&lt;/h1&gt;&lt;/a&gt;,
+ &lt;a href="/alphabetical/"&gt;Alphabetical&lt;/a&gt;,
+ &lt;a class="dropdown-toggle" data-toggle="dropdown" href="#"&gt;Cheeses by Category &lt;span&gt;&lt;/span&gt;&lt;/a&gt;,
+ &lt;a href="/by_type/"&gt;&lt;span&gt;&lt;/span&gt;Cheeses by type&lt;/a&gt;,
+ &lt;a href="/by_country/"&gt;&lt;span&gt;&lt;/span&gt;Cheeses by country&lt;/a&gt;,
+ &lt;a href="/by_milk/"&gt;&lt;span&gt;&lt;/span&gt;Cheeses by milk&lt;/a&gt;,
+ &lt;a href="/by_texture/"&gt;&lt;span&gt;&lt;/span&gt;Cheeses by texture&lt;/a&gt;,
+ &lt;a href="/by_color/"&gt;&lt;span&gt;&lt;/span&gt;Cheeses by color&lt;/a&gt;,
+...]
+    </code></pre>
+</section>
+<section id="bs4-example-3">
+    <h3>Attributes and Text</h3>
+    <p>Once you get a tag with <code>.select()</code>, you can access its attributes and text.<br>
+        Here’s an example:</p>
+    <pre><code data-trim data-line-numbers>
+for anchor in soup.select('a'):
+    print(anchor.text)
+    if 'href' in anchor.attrs:
+        print(anchor.attrs['href'])
+    </code></pre>
+
+    <p>Notice that <code>.attrs</code> is a dictionary, and we have to make sure that <code>href</code> is in it so we avoid key errors for links
+        that don’t have href attributes. (It happens, actually. A lot.)</p>
+</section>
+<section id="bs4-example-4">
+    <h3>What did that print?</h3>
+    <p>The text of a tag is the text that will actually get put on the webpage that is inside the tag.</p>
+    <p>The attribute value is whatever appears in the quotes in the tag attributes:</p>
+    <pre><code data-trim>
+    &lt;a href="http://umbc.edu"&gt;UMBC &lt;/a&gt;
+    </code></pre>
+    <p><code>tag.attrs["href"]</code> is "http://umbc.edu"<br><code>tag.text</code> is "UMBC".</p>
+</section>
+<section id="bs4-css-selectors">
+    <h3>Remember CSS Selectors?!</h3>
+    <p>BeautifulSoup understands these.</p>
+    <table class="medium">
+        <tr>
+            <td><code>soup.select("a.nav-links")</code></td>
+            <td>Gets all links with <code>class="nav-links"</code></td>
+        </tr>
+        <tr>
+            <td><code>soup.select("#firstHeader")</code></td>
+            <td>Gets the tag with <code>id="FirstHeader"</code> (there can only be one)</td>
+        </tr>
+        <tr>
+            <td><code>soup.select('[itemprop="name"]')</code></td>
+            <td>Gets all tags with the attribute "itemprop" set to "name"</td>
+        </tr>
+        <tr>
+            <td><code>soup.select('li a')</code></td>
+            <td>Gets all the links &lt;a&gt; that appear inside of list items &lt;li&gt;</td>
+        </tr>
+    </table>
+</section>
+<section id="demo-task">
+    <h3>Let's extract these lists from cheese pages:</h3>
+    <img src="images/cheese-excerpt.png" width="500">
+</section>
+<section id="demo-task-src">
+    <h3>Here's the HTML:</h3>
+    <img src="images/cheese-excerpt-src.png" width="1214">
+</section>
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
