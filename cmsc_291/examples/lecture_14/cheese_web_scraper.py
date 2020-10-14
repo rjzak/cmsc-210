@@ -1,8 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 
-
 URL = "https://cheese.com/bleu-dauvergne/"
+
+HTML = """
+<ul>
+    <li>This is <a href="http://example.com">link number 1</a>.</li>
+    <li id="foo">This is <a href="http://example.com">link number 2</a>.</li>
+</ul>
+"""
 
 
 def get_soup(url):

@@ -130,6 +130,78 @@ soup.select("a")
 ...]
     </code></pre>
 </section>
+<section id="bs4-example-2a">
+    <p>What does something like <code>soup.select("a")</code> give you?</p>
+    <ul>
+        <li>A sequence of tag objects which BeautifulSoup calls a <code>ResultSet</code></li>
+        <li>You can loop over it:<br><code>for tag in soup.select("a"):</code></li>
+        <li>Or you access it by index:<br><code>soup.select("a")[2]</code></li>
+    </ul>
+</section>
+<section id="bs4-example-2b">
+    <p>What are each of these things in the <code>ResultSet</code>?</p>
+    <ul>
+        <li>They are <code>Tag</code> elements</li>
+        <li>Each one is a Python object representing an HTML tag <em>and all its descendants.</em></li>
+    </ul>
+</section>
+<section id="bs4-example-2c">
+    <pre><code data-trim>
+        # will give you a ResultSet with three Tag objects:
+        soup.select("li")
+    </code></pre>
+    <img src="images/HTML-tree-soup-selector.png">
+</section>
+<section id="bs4-css-selectors">
+    <h3>Remember CSS Selectors?!</h3>
+    <p><code>.select()</code> understands these.</p>
+    <table class="medium">
+        <tr>
+            <td><code>soup.select("a.nav-links")</code></td>
+            <td>Gets all links with <code>class="nav-links"</code></td>
+        </tr>
+        <tr>
+            <td><code>soup.select("#firstHeader")</code></td>
+            <td>Gets the tag with <code>id="FirstHeader"</code> (there can only be one)</td>
+        </tr>
+        <tr>
+            <td><code>soup.select('[itemprop="name"]')</code></td>
+            <td>Gets all tags with the attribute "itemprop" set to "name"</td>
+        </tr>
+        <tr>
+            <td><code>soup.select('li a')</code></td>
+            <td>Gets all the links &lt;a&gt; that appear inside of list items &lt;li&gt;</td>
+        </tr>
+        <tr>
+            <td><code>soup.select('h1, h2, h3')</code></td>
+            <td>Select level 1, 2, or 3 headers</td>
+        </tr>
+
+    </table>
+</section>
+<section id="bs4-example-2d">
+    <p>Each <code>Tag</code> object is its own little mini tag soup:</p>
+    <pre><code data-trim data-line-numbers>
+        unordered_list = soup.select("ul")[0]
+        for list_item in unordered_list.select("li"):
+            for child in list_item.children:
+                # Each of these is going to an an &lt;a&gt; Tag instance.
+    </code></pre>
+    <img src="images/HTML-tree-soup-selector.png" height="400">
+</section>
+
+<section id="bs4-example-2e">
+    <p>Navigating around the HTML tree:</p>
+    <img src="images/HTML-tree bs4-nav.png">
+    <ol id="bs-4-nav">
+        <li><code style="color: #5eb53f"><span style="color: #608dc8">tag</span>.previous_sibling</code> (→<code>Tag</code>)</li>
+        <li><code style="color: #d5d233"><span style="color: #608dc8">tag</span>.next_sibling</code> (→<code>Tag</code>)</li>
+        <li><code style="color: #a63434"><span style="color: #608dc8">tag</span>.children</code> (→<code>ResultSet</code>)</li>
+        <li><code style="color: #b54ab5"><span style="color: #608dc8">tag</span>.parent</code> (→<code>Tag</code>)</li>
+    </ol>
+
+</section>
+
 <section id="bs4-example-3">
     <h3>Attributes and Text</h3>
     <p>Once you get a tag with <code>.select()</code>, you can access its attributes and text.<br>
@@ -152,28 +224,36 @@ for anchor in soup.select('a'):
     &lt;a href="http://umbc.edu"&gt;UMBC &lt;/a&gt;
     </code></pre>
     <p><code>tag.attrs["href"]</code> is "http://umbc.edu"<br><code>tag.text</code> is "UMBC".</p>
+    <p><code>tag.name</code> will be the tag itself. Here that's "a".</p>
 </section>
-<section id="bs4-css-selectors">
-    <h3>Remember CSS Selectors?!</h3>
-    <p>BeautifulSoup understands these.</p>
-    <table class="medium">
-        <tr>
-            <td><code>soup.select("a.nav-links")</code></td>
-            <td>Gets all links with <code>class="nav-links"</code></td>
-        </tr>
-        <tr>
-            <td><code>soup.select("#firstHeader")</code></td>
-            <td>Gets the tag with <code>id="FirstHeader"</code> (there can only be one)</td>
-        </tr>
-        <tr>
-            <td><code>soup.select('[itemprop="name"]')</code></td>
-            <td>Gets all tags with the attribute "itemprop" set to "name"</td>
-        </tr>
-        <tr>
-            <td><code>soup.select('li a')</code></td>
-            <td>Gets all the links &lt;a&gt; that appear inside of list items &lt;li&gt;</td>
-        </tr>
-    </table>
+
+<section id="bs4-example-4b">
+    <h3>Extracting text includes all child tags:</h3>
+    <p>Given this HTML:</p>
+    <pre><code data-trim>
+&lt;ul&gt;
+    &lt;li&gt;This is &lt;a href="example.com"&gt;link number 1&lt;/a&gt;.&lt;/li&gt;
+    &lt;li&gt;This is &lt;a href="example.com"&gt;link number 2&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+    </code></pre>
+    <p>This Python:</p>
+    <pre><code data-trim>
+        for li in soup.select("li"):
+            print(li.text)
+    </code></pre>
+    <p>...will print "This is link number 1." and "This is link number 2."</p>
+</section>
+
+<section id="bs4-find">
+    <p>In addition to <code>select</code>, you can also use the <code>find</code> method:</p>
+    <pre><code data-trim>
+        first_link = soup.find("a")
+        email_form = soup.find(id="email-form")
+    </code></pre>
+    <ul>
+        <li>Find always returns exactly one thing: the first matching element.</li>
+    <li>And since it returns one thing, it gives you a <code>Tag</code> object instead of a <code>ResultSet</code>.</li>
+        </ul>
 </section>
 <section id="demo-task">
     <h3>Let's extract these lists from cheese pages:</h3>
