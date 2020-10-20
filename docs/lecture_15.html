@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 15</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title" data-background-image="images/cobweb.png">
+    <h2>Web Scraping...continued</h2>
+</section>
+<section id="recap-1">
+    <h3>Recap</h3>
+    <ul>
+        <li>Using the HTML structure of pages to extract data from web pages</li>
+        <li>We use the <code><a href="https://requests.readthedocs.io">requests</a></code> library to aquire HTML</li>
+        <li>We use the <code><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a></code> library to parse and search HTML</li>
+    </ul>
+</section>
+<section id="recap-2">
+    <ul>
+        <li>BeautifulSoup lets us select HTML tags via a CSS selector with <code>.select()</code></li>
+        <li>This returns a <code>ResultSet</code> class we can loop over</li>
+        <li>Each item in the result set is a <code>Tag</code> object which is the subsection of the HTML tree consiting of our matched tag and all its children</li>
+    </ul>
+</section>
+<section id="recap-3">
+    <ul>
+        <li>We can access the tags attributes as a Python dictionary via the <code>.attrs</code> property</li>
+        <li>We can access all the text contained within a tag via the <code>.text</code> property</li>
+    </ul>
+</section>
+<section id="one-off">
+    <h2>Writing a web scraper tends<br>to be a one-off project</h2>
+</section>
+<section id="schema-org">
+    <a href="https://schema.org"><img src="images/schema-org-logo.png" width="600"></a>
+    <ul>
+        <li>Collaborative community to create, maintain, and promote schemas for structured data on the Internet</li>
+        <li>Launched by Bing, Google, &amp; Yahoo</li>
+        <li>Provide a common standard for HTML market to use for representing common kinds of structured information</li>
+    </ul>
+</section>
+<section id="schema-org-examples">
+    <p>Examples:</p>
+    <ul>
+        <li>Events</li>
+        <li>People</li>
+        <li>Consumer products</li>
+        <li>Books and movies</li>
+        <li>Local businesses and restaurants</li>
+        <li style="background-color: yellow">Recipes</li>
+    </ul>
+</section>
+<section id="schema-org-recipes">
+    <h3>Can we build a generic scraper for sites that use schema.org's <a href="https://schema.org/Recipe">schema for recipes</a>?</h3>
+    <h2 style="color: #41ca2e" class="fragment fade-left">Yes!</h2>
+</section>
+<section id="schema-org-recipes-link">
+    <p>Let's <a href="https://schema.org/Recipe">look at the schema</a>.</p>
+</section>
+<section id="how-it-works">
+    <p>If a page with a recipe has this information, it will put an <code>itemprop="attributeName"</code> on the tag enclosing that information.</p>
+    <p>This means we can call <code>soup.select('[itemprop="recipeIngredient"]')</code> to get all the ingredients on a recipe page!</p>
+</section>
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
