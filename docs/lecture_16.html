@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 15</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title">
+    <h2>List Comprehensions, Generators &amp; Decorators</h2>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li>Assignment 3 due wednesday next week</li>
+    </ul>
+</section>
+<section id="overview">
+    <h2>Intermediate Python Concepts</h2>
+    <ul>
+        <li>Nothing we're going to learn is absolutely necessary to be able to do something in Python</li>
+        <li>However they do make it much easier to do some things</li>
+        <li>If you spend any amount of time with other people's code, you are going to encounter these</li>
+        <li>Some packages make extensive use of these concepts (e.g. Django and decorators)</li>
+    </ul>
+</section>
+<section id="list-comprehension-motivation-mapping-1">
+    <p>A common task in python: you have a list of things and you want to go over each thing and change it somehow and create a new list of those changed things.</p>
+    <pre class="fragment fade-in"><code class="hlpython" data-trim data-line-numbers>
+        numbers = [1, 3, 5, 7, 9]
+        squares = []
+        for number in numbers:
+            squares.append(number * number)
+    </code></pre>
+</section>
+<section id="list-comprehension-motivation-mapping-2">
+    <p>There is a word for this operation; <strong>it's called a ma</strong>p.</p>
+    <p>As in "I want to map a function to square a number over a list of numbers."</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        numbers = [1, 3, 5, 7, 9]
+        squares = []
+        for number in numbers:
+            squares.append(number * number)
+    </code></pre>
+</section>
+<section id="list-comprehension-motivation-filter-1">
+    <p>A common task in python: you have a list of things and you want to filter some out based on some condition and keep the remaining things in a new list.</p>
+    <pre class="fragment fade-in"><code class="hlpython" data-trim data-line-numbers>
+        numbers = [1, 2, 3, 5, 6, 13, 21, 34]
+        even_numbers = []
+        for number in numbers:
+            if number % 2 == 0:
+                even_numbers.append(number)
+    </code></pre>
+</section>
+<section id="list-comprehension-motivation-filter-2">
+    <p>There is a word for this operation; <strong>it's called a filter</strong>.</p>
+    <p>As in "I want to filter a list of numbers so that it only contains even numbers."</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        numbers = [1, 3, 5, 7, 9]
+        squares = []
+        for number in numbers:
+            if number % 2 == 0:
+                even_numbers.append(number)
+    </code></pre>
+</section>
+<section id="list-comprehension-syntax">
+    <p>Python provides a syntactic tool to express mapping and filtering operations in a more concise way.</p>
+    <p>It's called a <strong>list comprehension</strong> and it looks like this:</p>
+    <p><code style="font-size: 98%">[<em>expression</em> for item in iterable]</code></p>
+</section>
+<section id="list-comprehension-mapping-example">
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        numbers = [1, 3, 5, 7, 9]
+        squares = []
+        for number in numbers:
+            squares.append(number * number)
+    </code></pre>
+    <p>We can simplify the above expression to this:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        numbers = [1, 3, 5, 7, 9]
+        squares = [number * number for number in numbers]
+    </code></pre>
+    <p>Instead of initializing a new list and building it up<br> over a for-loop, we generate the list all at once.</p>
+</section>
+<section id="list-comprehension-any-iterable">
+    <p>You can use any iterable in a list comprehension:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        numbers = (1, 3, 5, 7, 9)
+        squares = [number * number for number in numbers]
+    </code></pre>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        tags = soup.select("h1")
+        headers = [tag.text for tag in tags]
+    </code></pre>
+    <p>But as the name implies, the result of the comprehension will be a Python <code>list</code>.</p>
+</section>
+<section id="list-comprehension-expanded-syntax">
+    <p>List comprehensions have an expanded syntax that lets us do filtering too:</p>
+    <p><code style="font-size: 90%">[<em>expression</em> for item in iterable if <em>condition</em>]</code></p>
+</section>
+<section id="list-comprehension-filter-example">
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        numbers = [1, 2, 3, 5, 6, 13, 21, 34]
+        even_numbers = []
+        for number in numbers:
+            if number % 2 == 0:
+                even_numbers.append(number)
+    </code></pre>
+    <p>We can simplify the above expression to this:</p>
+    <pre><code class="hlpython" data-trim>
+        numbers = [1, 2, 3, 5, 6, 13, 21, 34]
+        even_numbers = [num for num in numbers if num % 2 == 0]
+    </code></pre>
+</section>
+<section id="list-comprehension-filter-and-map">
+    <p>We can filter and map in one line:</p>
+    <pre><code class="hlpython" data-trim>
+        numbers = [1, 2, 3, 5, 6, 13, 21, 34]
+        evens_squared = [num * num for num in numbers if num % 2 == 0]
+    </code></pre>
+</section>
+<section id="list-comprehension-tuple-unpack">
+    <p>Unpacking tuples works the same way it does in a for loop:</p>
+    <pre><code class="hlpython" data-trim>
+        # Find all pairs that add up to an even number:
+        pairs = [(1, 2), (2, 2), (1, 3), (2, 3)]
+        even_pairs = [(a, b) for a, b in pairs if a + b % 2 == 0]
+    </code></pre>
+</section>
+<section id="list-comprehension-questions">
+    <h2>What questions do you have?</h2>
+</section>
+<section id="function-calls">
+    <h2>When you call a function like this:</h2>
+    <pre><code class="hlpython" data-trim>
+        def add(a, b):
+            return a + b
+
+        add(1, 2)
+    </code></pre>
+    <p>...what actually happens?</p>
+</section>
+<section id="function-walk-through">
+    <p>Function calls are usually one-way</p>
+    <ol>
+        <li>You call a function</li>
+        <li>Memory is allocated on the stack for the function</li>
+        <li>Function returns result</li>
+        <li>Memory is reclaimed</li>
+    </ol>
+</section>
+<section id="function-diagram">
+    <img src="images/function.png">
+</section>
+<section id="generator-diagram">
+    <img src="images/generator.png">
+</section>
+<section id="function-returning-a-list">
+    <p>This function stores the result in a list and then returns it:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def evens_until(start, until):
+            result = []
+            current = start
+            while current <= until:
+                if current % 2 == 0:
+                    result.append(current)
+                current += 1
+            return result
+    </code></pre>
+    <p>Using this:</p>
+    <pre><code class="hlpython" data-trim>
+        for number in evens_until(2, 2000):
+            print(number)
+    </code></pre>
+</section>
+<section id="function-vs-gen">
+    <p>This function returns a generator:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def evens_until(start, until):
+            current = start
+            while current <= until:
+                if current % 2 == 0:
+                    yield current
+                current += 1
+    </code></pre>
+    <pre><code class="hlpython" data-trim>
+        for number in evens_until(2, 2000):
+            print(number)
+    </code></pre>
+</section>
+<section id="laziness">
+    <p>A generator is an example of what's called "lazy evaluation".
+        <br>Unlike in real life, in computation laziness can be a good
+        thing!</p>
+</section>
+<section id="generators">
+    <h2>Generators</h2>
+    <ul>
+        <li>A generator lets us compute one result in a sequence at a time</li>
+        <li>We can keep yielding control back to the function until we don't need more results...</li>
+        <li>...or until the function has no more results to give us.</li>
+        <li>If we reach that point, we say the generator is exhausted.</li>
+        <li>We don't have to exhaust a generator. We can stop earlier if we want:</li>
+    </ul>
+</section>
+<section id="infinity">
+    <p>Generators let us work with infinity:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def all_positive_integers():
+            current = 1
+            while True:
+                yield current
+                current += 1
+
+        for number in all_positive_integers():
+            print(number)
+            if number > 1000000:
+                break
+        print("Ok that's enough.")
+    </code></pre>
+</section>
+<section id="generator-limitations-1">
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def evens_until(start, until):
+            current = start
+            while current <= until:
+                if current % 2 == 0:
+                    yield current
+                current += 1
+
+        result = evens_until(2, 10)  # Result is a generator.
+        for number in result:
+            print(number)       # Prints 2, 4, 6, 8, 10
+        for number in result:
+            print(number)       # Prints nothing!
+    </code></pre>
+</section>
+<section id="generator-limitations-2">
+    <h2>Limitation 1:</h2>
+    <p>You can only iterator over a generator <strong>once</strong>.</p>
+</section>
+<section id="generator-limitations-3">
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def evens_until(start, until):
+            current = start
+            while current <= until:
+                if current % 2 == 0:
+                    yield current
+                current += 1
+
+        result = evens_until(2, 10)
+        result[1]
+        TypeError: 'generator' object is not subscriptable
+    </code></pre>
+</section>
+<section id="generator-limitations-4">
+    <h2>Limitation 2:</h2>
+    <p>You can't access an element via index.</p>
+</section>
+<section id="generator-limitations-5">
+    <p>Work-around:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def evens_until(start, until):
+            current = start
+            while current <= until:
+                if current % 2 == 0:
+                    yield current
+                current += 1
+
+        result = evens_until(2, 10)
+        result_as_list = list(result)
+    </code></pre>
+    <p>You can convert a generator to a list is a list is what you need.</p>
+</section>
+<section id="coroutines">
+    <p>This will really blow your mind:</p>
+    <img src="images/coroutine.png">
+    <p>A <strong>coroutine</strong> is like a generator, but for both ends.</p>
+</section>
+<section id="genertaor-questions">
+    <h2>What questions do you have?</h2>
+</section>
+<section id="variadic-functions-1">
+    So far, we have always operated under the assumption that when we write a function we have to know exactly
+    what the arguments can be:
+    <pre><code class="hlpython" data-trim>
+def scrape(html,
+           name_selector='[itemprop="name"]',
+           ingredient_selector='[itemprop="recipeIngredient"]',
+           step_selector='[itemprop="step"]'):
+        [...]
+    </code></pre>
+</section>
+<section id="variadic-functions-2">
+    <p>But what if we wanted to write a function where we don't know what the arguments would be in advance?</p>
+    <p>Or maybe we don't even care?</p>
+    <p class="fragment fade-in">This is called a <a href="https://en.wikipedia.org/wiki/Variadic_function">variadic function</a>, and python lets us create them.</p>
+</section>
+<section id="variadic-functions-3">
+    <p>Imagine I want to write a function that behaves like this:</p>
+    <pre><code class="hlpython" data-trim>
+        add(1, 2)        # Returns 3
+        add(1, 2, 3)     # Returns 6
+        add(1, 2, 3, 4)  # Returns 10
+    </code></pre>
+    <p>How can I write a function that takes different numbers of arguments?</p>
+</section>
+<section id="variadic-functions-4">
+    <p>Here's how:</p>
+    <pre><code class="hlpython" data-trim>
+        def add(*args):
+            total = 0
+            for number in args:
+                total += number
+            return total
+    </code></pre>
+    <p>The asterisk indicates that when the function is called the arguments, no matter how many they are, will be stored
+    in a list called <code>args</code>.</p>
+</section>
+<section id="variadic-functions-5">
+    <p>We can mix variadic and non-variadic arguments</p>
+    <pre><code class="hlpython" data-trim>
+        def what_things_are_there(first_thing,
+                                  second_thing,
+                                  *rest_of_things):
+            print(f"The first thing is: {first_thing}")
+            print(f"The second thing is: {second_thing}")
+            print("There are {} other things".format(len(rest_of_things))
+    </code></pre>
+    <p>But the <code>*args</code> part <em>has to be last</em>.</p>
+</section>
+<section id="variadic-functions-6">
+    <p>Keyword-arguments work too:</p>
+    <pre><code class="hlpython" data-trim>
+        # returns False:
+        is_there_a_cow(horse=True, chicken=True, emu=True)
+        is_there_a_cow(cow=False, chicken=True, emu=True)
+        # returns True:
+        is_there_a_cow(horse=True, cow=True, emu=True)
+    </code></pre>
+</section>
+<section id="variadic-functions-7">
+    <p>A double asterisk is used for variadic keyword arguments:</p>
+    <pre><code class="hlpython" data-trim>
+        def is_there_a_cow(**kwargs):
+            return "cow" in kwargs and kwargs["cow"] is True
+    </code></pre>
+    <p><code>**kwargs</code> will be a dictionary where the keys are the argument name and the value is the argument.</p>
+</section>
+<section id="decorators">
+    <h2>Decorators</h2>
+</section>
+<section id="decorators-motivation">
+    <p>Let's say I want to write a "magic" function that allows me to modify any given function so that we first print
+        out the arguments of the given function before calling it.</p>
+    <p>The magic function should work for <em>any function it's given</em>.</p>
+    <p>The magic function should return a new function that acts exactly like the given function except it prints out the arguments first.</p>
+</section>
+<section id="without-decorators-1">
+    <p>I can do this right now with the python we have learned:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def magic(some_function):
+
+            def wrap(*args, **kwargs):
+                print(f"Arguments are: {args}.")
+                print(f"Keyword-arguments are: {kwargs}.")
+                return some_function(*args, **kwargs)
+
+            return wrap
+    </code></pre>
+    <p><code>magic()</code> is an example of a higher-order function.</p>
+    <p>It takes another functions as an argument and returns a function as a result.</p>
+    <p>In python (and many languages) functions are just like any other thing.</p>
+</section>
+<section id="without-decorators-2">
+    <p>Let's see this in use:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        from requests import get
+
+        magical_get = magic(get)
+
+        # Will first print out:
+        #    Arguments are: ["http://www.google.com"].
+        #    Keyword-arguments are: {"auth": "password"}.
+        response = magical_get("http://www.google.com",
+                               auth="mypassword")
+
+    </code></pre>
+</section>
+<section id="without-decorators-3">
+    <p>Another example:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        # Remember this one?
+        def add(*args):
+            total = 0
+            for number in args:
+                total += number
+            return total
+
+        magic_add = magic(add)
+
+        # Will first print out:
+        #    Arguments are: [1, 2].
+        #    Keyword-arguments are: {}.
+        magic_add(1, 2)
+        # Will first print out:
+        #    Arguments are: [3, 4, 5].
+        #    Keyword-arguments are: {}.
+        magic_add(3, 4, 5)
+    </code></pre>
+</section>
+<section id="with-decorators">
+    <p>Python gives us some syntax to allow us to easily "decorate" our functions with <code>magic</code>:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        @magic
+        def add(*args):
+            total = 0
+            for number in args:
+                total += number
+            return total
+    </code></pre>
+    <p>Is equivalent to this:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        def add(*args):
+            total = 0
+            for number in args:
+                total += number
+            return total
+
+        add = magic(add)
+    </code></pre>
+</section>
+<section id="decorators-on-methods-1">
+    <p>We can also decorate class methods:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        from datetime import datetime
+
+        class Cat
+
+            def __init__(name, age):
+                self.name = name
+                self.age = age
+
+            def birth_year(self):
+                now = datetime.now()
+                return now.year - self.age
+    </code></pre>
+    <p>Usage:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        percy = Cat("Percy", 4)
+        percy.birth_year()  # 2016
+    </code></pre>
+</section>
+<section id="decorators-on-methods-2">
+    <p>But we can also do this:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        from datetime import datetime
+
+        class Cat
+
+            def __init__(name, age):
+                self.name = name
+                self.age = age
+
+            @property
+            def birth_year(self):
+                now = datetime.now()
+                return now.year - self.age
+    </code></pre>
+    <p>Usage:</p>
+    <pre><code class="hlpython" data-trim data-line-numbers>
+        percy = Cat("Percy", 4)
+        percy.birth_year  # 2016
+    </code></pre>
+</section>
+<section id="why-decorators">
+    <h3>What's the point of decorators?</h3>
+    <ul>
+        <li>They allow you to easily change the way a function behaves without needing to change the function itself.</li>
+        <li>Can be useful for logging, error handling, debugging</li>
+        <li>They can also be useful for certain domain-specific cases, as we'll see soon</li>
+        <li>You don't <em>need</em> decorators, but they can make life much easier.</li>
+    </ul>
+</section>
+<section id="decorator-questions">
+    <h2>What questions do you have?</h2>
+</section>
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
