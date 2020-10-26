@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 17</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title">
+    <h2>Web Development with Python</h2>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li>Assignment 3 due tomorrow</li>
+    </ul>
+</section>
+<section id="lets-build-an-application">
+    <p>We are going to learn how to build web applications with Python</p>
+    <ul>
+        <li>Applications run on a web server</li>
+        <li>They listen for web (HTTP) requests and returns responses</li>
+        <li>The responses are often dynamically generated in response to the request</li>
+    </ul>
+</section>
+<section id="request-response">
+    <h2>Anatomy of the HTTP request/response cycle</h2>
+    <ol>
+        <li>Web browser makes a <strong>request</strong> to a server for a URL</li>
+        <li>Server parses request, generates a <strong>response</strong> to the request and returns it to the browser</li>
+        <li>Browser parses the response, renders the page, and downloads any media files (CSS, JavaScript, or images) referenced in the HTML</li>
+    </ol>
+</section>
+<section id="request">
+    <h3>An HTTP Request</h3>
+    <p>I visit <code>http://example.com/some-url/</code>,<br> the request includes:</p>
+    <ul>
+        <li>The protocol (<code>http/https</code>)</li>
+        <li>The hostname (<code>example.com</code>)</li>
+        <li>The path (<code>/some-url/</code>)</li>
+        <li>The method (<code>GET/POST</code>)</li>
+        <li>Headers
+            <ul>
+                <li>User agent</li>
+                <li>Referrer</li>
+                <li>*Username/password</li>
+                <li>*Cookies</li>
+            </ul>
+        </li>
+        <li>*Form content</li>
+    </ul>
+</section>
+<section id="response">
+    <h3>An HTTP Response</h3>
+    <p>The server's response includes:</p>
+    <ul>
+        <li>A status code
+            <ul>
+                <li>2xx - request was successful</li>
+                <li>3xx - redirection: further action needs to be taken</li>
+                <li>4xx - client error</li>
+                <li>5xx - server error</li>
+            </ul>
+        </li>
+        <li>Headers
+            <ul>
+                <li>Content type server is returning (<code>text/html</code>)</li>
+                <li>Size of the response</li>
+                <li>*How long the content can be cached for</li>
+                <li>*Cookies to set</li>
+            </ul>
+        </li>
+        <li>The body of the response (i.e. the HTML itself)</li>
+    </ul>
+</section>
+<section id="status-codes">
+    <h3>A little more on the common status codes</h3>
+    <ul>
+        <li>200 - OK</li>
+        <li>301 - moved permanently</li>
+        <li>302 - moved temporarily</li>
+        <li>401 - unauthorized</li>
+        <li>404 - not found</li>
+        <li>500 - generic server error</li>
+    </ul>
+</section>
+<section id="web-application-basics">
+    <h2>What does a web application do?</h2>
+    <p>In a nutshell: receive HTTP requests and generate HTTP responses</p>
+    <p>It's generally a long-running python process (or multiple processes) that sits there waiting for HTTP requests so it can return a response.</p>
+</section>
+<section id="web-application-building">
+    <h2>How do you make a web application?</h2>
+    <p>You could write everything from scratch (not advised)</p>
+    <p>Or you could use a web application framework</p>
+</section>
+<section id="web-application-framework">
+    <h3>What does a web application framework do?</h3>
+    <p>At minimum:</p>
+    <ul>
+        <li>Parse an HTTP request into its constituent pieces</li>
+        <li>Provide a way to map URLs to code that can handle them</li>
+        <li>Provide a way to generate HTML (templating)</li>
+        <li>Provide a way to create an HTTP response</li>
+    </ul>
+</section>
+<section id="web-application-framework-extra">
+    <h3>What else <em>might</em> a web application framework do?</h3>
+    <ul>
+        <li>Provide a way to store state (most commonly in a database)
+            <ul>
+                <li>Connect to a database (DB)</li>
+                <li>Generate DB queries</li>
+                <li>Translate from DB query to Python objects</li>
+                <li>Translate Python objects to a DB query to store them</li>
+            </ul>
+        </li>
+        <li>Provide a way to generate HTML forms/validate input</li>
+        <li>Provide a way to authenticate users</li>
+        <li>Handle caching</li>
+        <li>Ensure security</li>
+        <li>Send emails</li>
+    </ul>
+</section>
+<section id="full-stack">
+    <h3>Typically these are called full-stack web application frameworks</h3>
+    <h3 class="fragment fade-left">Django is one such full-stack Python framework</h3>
+</section>
+
+<section id="django">
+    <a href="https://www.djangoproject.com/"><img src="images/django-logo.png" height="120"></a>
+    <ul>
+        <li>A free, open-source full-stack web framework</li>
+        <li>Create in 2003, open-sourced in 2005</li>
+        <li>Latest release is 3.1 (August 2020)</li>
+        <li>Most common full-stack framework for Python</li>
+        <li>Includes all the components we talked about (and more)</li>
+        <li>Designed to be flexible: use the pieces you need, ignore the ones you don't.</li>
+        <li>Has many plugins you can install to extend it even further</li>
+    </ul>
+</section>
+<section id="django-request-response">
+    <h3>Key Django Concepts</h3>
+    <ul>
+        <li><strong>Project</strong>: a single web application (often project = website)</li>
+        <li><strong>App</strong>: a single unit of functionality (one project can contain multiple apps)</li>
+        <li><strong>Router</strong>: code that maps URLs to views that handle them</li>
+        <li><strong>View</strong>: function (or class) that receives an HTTP request as its argument and returns an HTTP response</li>
+        <li><strong>Model</strong>: a python class that maps to a database table</li>
+    </ul>
+</section>
+<section id="why-a-database">
+    <h2>Why do we need a database?</h2>
+    <p class="fragment fade-left">In a word: <strong>state</strong>. Web applications need a place to store things.</p>
+    <p class="fragment fade-right">What kinds of things?</p>
+</section>
+<section id="resource-state">
+    <h3>Websites will usually provide resources</h3>
+    <ul>
+        <li>An e-commerce site will have a catalog of items, with names, descriptions, prices, dimensions, etc.</li>
+        <li>A news site will have articles, sections, videos, and photo galleries</li>
+        <li>A banking website will have accounts, balances, statements</li>
+    </ul>
+    <p>All this "stuff" has to be stored somewhere. This is called the application's <strong>resource state</strong>.</p>
+</section>
+<section id="why-a-database-2">
+    <p>The other type of state that is common in web apps is called <strong>application state</strong>:</p>
+    <ul>
+        <li>A user signs into a site and the site remembers they have signed in for subsequent page visits.</li>
+        <li>A user adds and item to their cart in an e-commerce site, then goes to a checkout page; the item is still there in their cart</li>
+        <li>A user comes back to a site after a few days, the site remembers who they are and shows them new things it thinks they might like</li>
+        <li>Application state is how we remember how users have <em>interacted</em> with our app.</li>
+    </ul>
+</section>
+<section id="app-vs-resource-state">
+    <p>An app might have resource state, but not have a concept of users, and thus no application state.</p>
+</section>
+<section id="resource-state-options-memory">
+    <h3>Idea 1: Just keep it all in memory in python objects</h3>
+    <ul>
+        <li class="fragment fade-in">If the server crashes everything is lost.</li>
+        <li class="fragment fade-in">The may be too much resource state to fit in memory.</li>
+        <li class="fragment fade-in">If we load-balance requests among N servers, then we have to keep N copies of everything and find ways to synchronize it.</li>
+    </ul>
+</section>
+<section id="resource-state-options-files">
+    <h3>Idea 1: Just keep it all a file</h3>
+    <ul>
+        <li class="fragment fade-in">How do we convert what's in the file to Python objects?</li>
+        <li class="fragment fade-in">How do we find a specific resource in the file fast enough?</li>
+        <li class="fragment fade-in">We probably can't create or update resources without re-writing the whole file.</li>
+        <li class="fragment fade-in">If we load-balance requests among N servers, we have to find ways to synchronize the file.</li>
+    </ul>
+</section>
+<section id="what-databases-do">
+    <h3>What we need is:</h3>
+    <ul>
+        <li class="fragment fade-in">A way to store structured information on disk that can be translated to/from Python in-memory objects easily</li>
+        <li class="fragment fade-in">A way to create, update, or delete individual resources easily and quickly</li>
+        <li class="fragment fade-in">A way to query resources based on their properties</li>
+        <li class="fragment fade-in">A way store store resources separately from a web server so multiple servers can all have access to the same resources</li>
+        <li class="fragment fade-in">This is exactly what databases were designed for!</li>
+    </ul>
+</section>
+
+<section id="different-databases">
+    <ul>
+        <li>There are different kinds of databases</li>
+        <li>Django is intended to be used with a relational database</li>
+        <li>Relational databases store resources in tables</li>
+        <li>You can think of a database table as being kind of like a Pandas Dataframe</li>
+        <li>Relational databases have their own query language: SQL
+            <ul>
+                <li>Django can generate SQL for us</li>
+                <li>And translate table rows to Python objects</li>
+                <li>Or translate Python objects to table rows</li>
+            </ul>
+        </li>
+        <li>Databases often run on a separate server of their own</li>
+    </ul>
+</section>
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
