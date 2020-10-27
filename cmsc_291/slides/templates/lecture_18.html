@@ -1,0 +1,231 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 18{% endblock %}
+
+{% block extra_style %}
+<style>
+    .filelist {
+        padding-top: 20px;
+        background-color: #f0f0f0;
+    }
+    #localhost span { color: #ccd9dd; }
+</style>
+
+{% endblock %}
+
+{% block slides %}
+<section id="title">
+    <h2>Web Development with<br>Python &amp; Django II</h2>
+    <p class="fragment fade-up">Creating a simple app</p>
+</section>
+<section id="django-concepts">
+    <h3>Quick recap of key Django Concepts</h3>
+    <ul>
+        <li><strong>Project</strong>: a single web application (often project = website)</li>
+        <li><strong>App</strong>: a single unit of functionality (one project can contain multiple apps). Apps should do one thing and do it well.</li>
+        <li><strong>Router</strong>: code that maps URLs to views that handle them</li>
+        <li><strong>View</strong>: function (or class) that receives an HTTP request as its argument and returns an HTTP response</li>
+        <li><strong>Model</strong>: a python class that maps to a database table</li>
+    </ul>
+</section>
+<section id="pip-install">
+    <p>What happens when you do this?</p>
+    <pre><code>
+    $> pip install Django
+    </code></pre>
+</section>
+<section id="what-Django-installs">
+    <ul>
+        <li>The Django package is installed in your environment:
+        <pre><code>
+            import django
+            django.VERSION  # gives you 3.1.2
+        </code></pre>
+        </li>
+        <li>A command-line executable called <code>django-admin</code> is installed in your environment.</li>
+
+        <li>It's Django’s <a href="https://docs.djangoproject.com/en/3.1/ref/django-admin/">command-line utility</a> for administrative tasks. It can:
+            <ul>
+                <li>Create a new project</li>
+                <li>Create a new application in the project</li>
+                <li>Manage your database</li>
+                <li>Run a development webserver</li>
+                <li>&amp; lots more!</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="startproject">
+    <p>Let's create a new project so that users can browse our painstakingly curated collection of information cheeses and rate cheeses they have tried.</p>
+    <pre><code>
+        $> django-admin startproject cheeseshop
+    </code></pre>
+    <p>Run this command in the directory where you want to create your Django project.<p>
+    Generally it's a good idea to run it in the root directory of a Github project you want to keep your site in.</p>
+</section>
+<section id="new-project-contents">
+    <p>What did <code>startproject</code> do?</p>
+    <pre class="filelist">
+        cheeseshop/
+            manage.py
+            cheeseshop/
+                __init__.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py
+    </pre>
+    <p>It created some files.</p>
+</section>
+<section id="manage.py">
+    <p>What is <code>manage.py</code> for?</p>
+    <pre class="filelist">
+        cheeseshop/
+        <strong>manage.py</strong>
+            cheeseshop/
+                __init__.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py
+    </pre>
+    <ul>
+        <li>Think of if as being a clone of <code>django-admin</code>; it does all the same things but specific to your project.</li>
+        <li>Once you create a new project, you can generally stop using <code>django-admin</code> and start using <code>manage.py</code> to do things.</li>
+        <li>You should rarely, if ever, need to edit this.</li>
+    </ul>
+</section>
+<section id="runserver">
+    <p>Let's use this utility to start up a Django webserver:</p>
+    <pre><code>
+        $> python manage.py runserver
+    </code></pre>
+    <p>This will start up a small, simple webserver you can use for local development.
+    You can visit you website at <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a></p>
+</section>
+<section id="localhost">
+    <p>What is <code>127.0.0.1</code>, aka <code>localhost</code>?</p>
+    <ul>
+        <li>It's a special IP or hostname that always points at your own computer.</li>
+        <li>You can use it to access web services that are running on your own computer.</li>
+        <li>You don't even need an internet connection</li>
+        <li>Django's built-in server will automatically run this on port 8000</li>
+        <li>The standard HTTP port is 80 or 443
+            <ul>
+                <li>http://www.google.com<span>:80</span> 👈🏻implied, don't need</li>
+                <li>https://www.google.com<span>:443</span> 👈🏻implied, don't need</li>
+                <li>http://localhost:8080 👈🏻non-standard, must specify</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="sqlite">
+    <p>Let's look at our files again:</p>
+    <pre class="filelist">
+        cheeseshop/
+            manage.py
+            cheeseshop/
+                __init__.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py
+            <strong>db.sqlite3</strong>
+    </pre>
+    <p class="medium">Wait, where did this <code>db.sqlite3</code> come from? It wasn't there before.</p>
+    <ul class="medium">
+        <li>This is our database.</li>
+        <li>When we started our webserver, Django created it for us.</li>
+        <li>By default, Django uses a very small simple database program called <a href="https://sqlite.org/index.html">SQLite</a></li>
+        <li>It comes bundled with Python</li>
+        <li>It stores everything in one file.</li>
+    </ul>
+</section>
+<section id="settings.py">
+    <p>What is <code>settings.py</code> for?</p>
+    <pre class="filelist">
+        cheeseshop/
+            manage.py
+            cheeseshop/
+                __init__.py
+                <strong>settings.py</strong>
+                urls.py
+                asgi.py
+                wsgi.py
+            db.sqlite3
+    </pre>
+    <ul>
+        <li>Settings/configuration for this Django project</li>
+        <li>What apps are there?</li>
+        <li>Where is the database?</li>
+        <li>Where are certain kinds of files located?</li>
+        <li>And much more.</li>
+    </ul>
+</section>
+<section id="urls.py">
+    <p>What is <code>urls.py</code> for?</p>
+    <pre class="filelist">
+        cheeseshop/
+            manage.py
+            cheeseshop/
+                __init__.py
+                settings.py
+                <strong>urls.py</strong>
+                asgi.py
+                wsgi.py
+            db.sqlite3
+    </pre>
+    <ul>
+        <li>This is how we route URLs or groups of URLs to views.</li>
+        <li>Django calls this the <a href="https://docs.djangoproject.com/en/3.1/topics/http/urls/">URL dispatcher</a></li>
+    </ul>
+</section>
+<section id="wsgi.py">
+    <p>What about <code>asgi.py</code> and <code>wsgi.py</code>?</p>
+    <pre class="filelist">
+        cheeseshop/
+            manage.py
+            cheeseshop/
+                __init__.py
+                settings.py
+                urls.py
+                <strong>asgi.py</strong>
+                <strong>wsgi.py</strong>
+            db.sqlite3
+    </pre>
+    <ul>
+        <li>An entry-point for ASGI-compatible web servers to serve your project. We wont' be using this.</li>
+        <li>An entry-point for WSGI-compatible web servers to serve your project.</li>
+        <li>You should rarely, if ever, need to edit these.</li>
+    </ul>
+</section>
+<section id="wsgi">
+    <h3>What is WSGI? <img src="images/whisky.png" height="150" style="vertical-align: bottom"></h3>
+
+    <p>WSGI stands for <a href="https://wsgi.readthedocs.io">Web Server Gateway Interface</a>. It is a specification that describes how a web server communicates
+        with Python web applications.</p>
+    <p>So far we've used the Django development web server, but if you were to deploy your app in production, you would use a real server.</p>
+    <p>This server would communicate without our Django app via WSGI, and use the <code>wsgi.py</code> file to do it.</p>
+</section>
+<section id="create-a-view">
+    <p>Let's create a view to replace the default Django one.</p>
+    <ul>
+        <li>This will be the view for the main site landing page</li>
+        <li>We want the root or index URL—"/"—to route to this view</li>
+        <li>We haven't created an app yet. For now we'll just create a view in the project itself:</li>
+    </ul>
+    <pre class="filelist">
+        cheeseshop/
+            manage.py
+            cheeseshop/
+                __init__.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py
+                <strong>views.py</strong>
+            db.sqlite3
+    </pre>
+</section>
+<section id="example-view">
+</section>
+{% endblock %}
