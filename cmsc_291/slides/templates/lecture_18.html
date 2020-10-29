@@ -7,7 +7,10 @@
         padding-top: 20px;
         background-color: #f0f0f0;
     }
+    .filelist strong { color: #bf2fb6; }
     #localhost span { color: #ccd9dd; }
+
+
 </style>
 
 {% endblock %}
@@ -16,6 +19,9 @@
 <section id="title">
     <h2>Web Development with<br>Python &amp; Django II</h2>
     <p class="fragment fade-up">Creating a simple app</p>
+</section>
+<section id="announcements">
+    <p><a href="assignment_04.html">Assignment 4</a> is out. It is due in one week.</p>
 </section>
 <section id="django-concepts">
     <h3>Quick recap of key Django Concepts</h3>
@@ -34,7 +40,7 @@
     </code></pre>
 </section>
 <section id="what-Django-installs">
-    <ul>
+    <ol style="font-size: 90%">
         <li>The Django package is installed in your environment:
         <pre><code>
             import django
@@ -42,8 +48,8 @@
         </code></pre>
         </li>
         <li>A command-line executable called <code>django-admin</code> is installed in your environment.</li>
-
-        <li>It's Django’s <a href="https://docs.djangoproject.com/en/3.1/ref/django-admin/">command-line utility</a> for administrative tasks. It can:
+    </ol>
+        <p>It's Django’s <a href="https://docs.djangoproject.com/en/3.1/ref/django-admin/">command-line utility</a> for administrative tasks. It can:
             <ul>
                 <li>Create a new project</li>
                 <li>Create a new application in the project</li>
@@ -51,11 +57,19 @@
                 <li>Run a development webserver</li>
                 <li>&amp; lots more!</li>
             </ul>
-        </li>
-    </ul>
+        </p>
+</section>
+<section id="project-idea">
+    <img src="images/cheese-bg.png" height="200">
+    <ol>
+        <li class="fragment fade-up">I am really into cheese.</li>
+        <li class="fragment fade-left">I painstakingly maintain a database of cheeses.</li>
+        <li class="fragment fade-right">I would like to share my encyclopedic knowledge of cheeses and cheese-related information with the world.</li>
+        <li class="fragment fade-down">I would like to solicit the thoughts and opinions of others regarding various cheeses.</li>
+    </ol>
 </section>
 <section id="startproject">
-    <p>Let's create a new project so that users can browse our painstakingly curated collection of information cheeses and rate cheeses they have tried.</p>
+    <p>Let's create a new project so that users can browse this painstakingly curated collection of information about cheeses and rate cheeses they have tried.</p>
     <pre><code>
         $> django-admin startproject cheeseshop
     </code></pre>
@@ -80,7 +94,7 @@
     <p>What is <code>manage.py</code> for?</p>
     <pre class="filelist">
         cheeseshop/
-        <strong>manage.py</strong>
+            <strong>manage.py</strong>
             cheeseshop/
                 __init__.py
                 settings.py
@@ -100,7 +114,7 @@
         $> python manage.py runserver
     </code></pre>
     <p>This will start up a small, simple webserver you can use for local development.
-    You can visit you website at <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a></p>
+    You can visit your website at <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a></p>
 </section>
 <section id="localhost">
     <p>What is <code>127.0.0.1</code>, aka <code>localhost</code>?</p>
@@ -113,7 +127,7 @@
             <ul>
                 <li>http://www.google.com<span>:80</span> 👈🏻implied, don't need</li>
                 <li>https://www.google.com<span>:443</span> 👈🏻implied, don't need</li>
-                <li>http://localhost:8080 👈🏻non-standard, must specify</li>
+                <li>http://localhost:8000 👈🏻non-standard, must specify</li>
             </ul>
         </li>
     </ul>
@@ -123,13 +137,14 @@
     <pre class="filelist">
         cheeseshop/
             manage.py
+            <strong>db.sqlite3</strong>
             cheeseshop/
                 __init__.py
                 settings.py
                 urls.py
                 asgi.py
                 wsgi.py
-            <strong>db.sqlite3</strong>
+
     </pre>
     <p class="medium">Wait, where did this <code>db.sqlite3</code> come from? It wasn't there before.</p>
     <ul class="medium">
@@ -145,13 +160,13 @@
     <pre class="filelist">
         cheeseshop/
             manage.py
+            db.sqlite3
             cheeseshop/
                 __init__.py
                 <strong>settings.py</strong>
                 urls.py
                 asgi.py
                 wsgi.py
-            db.sqlite3
     </pre>
     <ul>
         <li>Settings/configuration for this Django project</li>
@@ -166,13 +181,13 @@
     <pre class="filelist">
         cheeseshop/
             manage.py
+            db.sqlite3
             cheeseshop/
                 __init__.py
                 settings.py
                 <strong>urls.py</strong>
                 asgi.py
                 wsgi.py
-            db.sqlite3
     </pre>
     <ul>
         <li>This is how we route URLs or groups of URLs to views.</li>
@@ -184,13 +199,13 @@
     <pre class="filelist">
         cheeseshop/
             manage.py
+            db.sqlite3
             cheeseshop/
                 __init__.py
                 settings.py
                 urls.py
                 <strong>asgi.py</strong>
                 <strong>wsgi.py</strong>
-            db.sqlite3
     </pre>
     <ul>
         <li>An entry-point for ASGI-compatible web servers to serve your project. We wont' be using this.</li>
@@ -216,6 +231,7 @@
     <pre class="filelist">
         cheeseshop/
             manage.py
+            db.sqlite3
             cheeseshop/
                 __init__.py
                 settings.py
@@ -223,7 +239,6 @@
                 asgi.py
                 wsgi.py
                 <strong>views.py</strong>
-            db.sqlite3
     </pre>
 </section>
 <section id="example-view">
