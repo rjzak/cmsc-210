@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 19</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title">
+    <h2>Web Development with<br>Python &amp; Django III</h2>
+    <p class="fragment fade-up">Improving our web application</p>
+</section>
+<section id="announcements">
+    <ul>
+        <li>Assignment 3 grades are out</li>
+        <li>Assignment 4 is due this Wednesday</li>
+        <li>Pick a time on Thursday to meet with Agatha for 10 minutes to demonstrate what you have</li>
+        <li>10-11am</li>
+        <li>or 12:30-1pm</li>
+        <li>Meetings will be on Discord. See the #assignment-4-signup channel</li>
+    </ul>
+</section>
+<section id="what-we-are-building">
+    <h2>Our Example Project</h2>
+    <p>We're playing the role of a cheese enthusiast<br> who wants to build a site to:</p>
+    <ul>
+        <li>Make our database of cheeses available to visitors</li>
+        <li>Allow visitors to rate cheeses they have tried</li>
+    </ul>
+    <img src="images/cheese-selection.png">
+</section>
+<section id="previous-class">
+    <p>We created three views + templates:</p>
+    <ol>
+        <li>A view for the homepage</li>
+        <li>A view listing cheeses we had data for</li>
+        <li>A detail page with the name, country of origin and a description for individual cheeses</li>
+    </ol>
+    <img src="images/cheese-selection-2.png">
+</section>
+<section id="templates-closer-look">
+    <h2>A closer look at templates</h2>
+    <pre class="medium"><code data-trim data-line-numbers>
+        
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Cheeses We Have&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Cheeses We Have&lt;/h1&gt;
+    &lt;ul&gt;
+    {% for slug, name, country in cheeses %}
+        &lt;li&gt;
+            &lt;a href="{% url 'cheese_detail' slug %}"&gt;{{ name }}&lt;/a&gt;, from {{ country }}
+        &lt;/li&gt;
+    {% endfor %}
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        
+    </code></pre>
+</section>
+<section id="template-features">
+    <p>Templates:</p>
+    <ul>
+        <li>HTML files containing the static part of the page (what doesn't change from request to request)</li>
+        <li>Allow Python variables to be interpolated into the content when the template is rendered</li>
+        <li>Templates are rendered with a <em>context</em>, which is a dictionary of variable names mapped to values.</li>
+    </ul>
+</section>
+<section id="templates-context">
+    <p>An example context:</p>
+    <pre class="medium"><code data-trim data-line-numbers>
+        context = {
+            "first_name": "Sally",
+            "last_name": "Smith,
+            "age": 35
+        }
+    </code></pre>
+    <p>...and its accompanying template:</p>
+    <pre class="medium"><code data-trim data-line-numbers>
+        
+        {{ first_name }} {{ last_name }} is {{ age }} years old.
+        
+    </code></pre>
+</section>
+<section id="templates-control-flow-conditionals">
+    <h3>Control Flow: Conditionals</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+        {% if user.is_active %}
+            Hello, active user.
+        {% else %}
+            Your user is no longer active.
+        {% endif %}
+    </code></pre>
+    <pre class="medium fragment fade-up"><code data-trim data-line-numbers>
+        {% if user.age < 18 %}
+            This user is not an adult.
+        {% else %}
+            This user is an adult.
+        {% endif %}
+    </code></pre>
+    <pre class="medium fragment fade-up"><code data-trim data-line-numbers>
+        {% if user.is_active and user.age >= 18 %}
+            This active user is an adult.
+        {% endif %}
+    </code></pre>
+</section>
+<section id="templates-control-flow-loops">
+    <h3>Control Flow: Loops</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+        &lt;ul&gt;{% for user in users %}
+            &lt;li&gt;{{ user.name }}&lt;/li&gt;
+        {% empty %}
+            &lt;li&gt;No users found.&lt;/li&gt;
+        {% endfor %}&lt;/ul&gt;
+    </code></pre>
+    <pre class="medium fragment fade-up"><code data-trim data-line-numbers>
+        {% for key, value in some_dictionary.items() %}
+            {{ key }} #{{ forloop.counter }} is {{ value }}
+        {% endfor %}
+    </code></pre>
+</section>
+<section id="templates-filters">
+    <h3>Template Filters</h3>
+    <ul>
+        <li>Django template filters allow you to change how values are displayed</li>
+        <li>Filters look like this: <code>{{ name|lower }}</code>.
+        <li>This displays the value of the <code>{{ name }}</code> variable after being filtered through the lower filter, which converts text to lowercase.</li>
+        <li>Use a pipe (|) to apply a filter.</li>
+    </ul>
+</section>
+<section id="templates-filter-examples">
+    <h3>Filter Examples</h3>
+    <ul>
+        <li><code>{{ value|default:"nothing" }}</code> displays the <code>value</code> or a default if it's <code>None</code>.</li>
+        <li><code>{{ value|length }}</code> displays the length of <code>value</code>.</li>
+        <li><code>{{ value|date:"Y-M-D" }}</code> formats a date/datetime object</li>
+        <li><code>{{ value|first }}</code> prints the first thing in a list <code>{{ value|last }}</code> does the opposite</li>
+        <li><code>{{ value|floatformat }}</code> rounds a floating-point number. </li>
+        <li>There are <a href="https://docs.djangoproject.com/en/3.1/ref/templates/builtins/#ref-templates-builtins-filters">many more</a>!</li>
+    </ul>
+</section>
+<section id="template-design-philosophy">
+    <h3>Template Philosophy</h3>
+    <ul>
+        <li>Django’s template language is deliberately simple.</li>
+        <li><strong>Keep logic and code separate from design</strong>.</li>
+        <li>Django’s templates are not Python code embedded into HTML; you can't do even a small fraction of what you can do in Python in a template</li>
+        <li>You can't paste Python code into a template</li>
+        <li>Templates are designed to be usable by non-programmers</li>
+    </ul>
+</section>
+<section id="templates-inheritance">
+    <h3>Template Inheritance</h3>
+    <ul>
+        <li>Most HTML pages on a site will share at least some common parts</li>
+        <li>Remember D.R.Y — don't repeat yourself</li>
+        <li>Template inheritance allows you to build a base “skeleton” template that contains all the common elements of your site</li>
+        <li>You can then define blocks that child templates can override.</li>
+    </ul>
+</section>
+<section id="inheritance-example-1">
+    <p>Here's an example <code>base.html</code> file</p>
+    <pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+    &lt;title&gt;{% block title %}Cheese Shop{% endblock %}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="logo"&gt;The Cheese Shop&lt;/h1&gt;
+    &lt;div id="navigation"&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/cheeses/"&gt;Cheeses&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id="content"&gt;
+        {% block content %}{% endblock %}
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</section>
+<section id="inheritance-example-2">
+    <p>A child template for an individual<br>cheese detail page might look like this:</p>
+<pre><code>{% extends "base.html" %}
+{% block title %}{{ name }}{% endblock %}
+
+{% block content %}
+&lt;h2&gt;{{ name }}&lt;/h2&gt;
+&lt;p&gt;Country of origin: {{ name }}&lt;/p&gt;
+&lt;p&gt;{{ description }}&lt;/p&gt;
+{% endblock %}</code></pre>
+</section>
+<section id="bootstrap-aside">
+    <h2>Bootstrap <img src="images/bootstrap-logo.png" height="200" style="vertical-align: middle"></h2>
+    <ul>
+        <li>Good design is difficult &amp; CSS is hard</li>
+        <li><a href="https://getbootstrap.com/">Bootstrap</a> is a popular front-end open source toolkit</li>
+        <li>Provides nice looking defaults for typography, forms, navigation, etc.</li>
+        <li>Provides flexible and mobile-friendly page layouts</li>
+        <li>Easy way to make a site look nice without much work</li>
+        <li>We'll use this to make our site look a little better</li>
+    </ul>
+</section>
+<section id="cheeseshop">
+    Let's go back to where we left off last week...
+    <img src="images/cheese-bg.png" height="200">
+</section>
+<section id="cheeseshop-before">
+    <a target="_blank" href="http://127.0.0.1:8000"><img src="images/cheese-shop-before.png"></a>
+</section>
+<section id="models">
+    <h2>Django Models</h2>
+</section>
+<section id="model-properties">
+    <ul>
+        <li>Django models map your data between Python and a database without you having to know SQL</li>
+        <li>A database consists of tables
+            <ul>
+                <li>Tables have rows and columns</li>
+                <li>Columns have a type (e.g. number, string, datetime, bool)</li>
+                <li>Similar to a Pandas DataFrames</li>
+            </ul>
+        </li>
+        <li>You can define a database table in Python as a class</li>
+        <li>Django can create a database table from this class</li>
+        <li>You can create an instance of the class and ask Django to store that as a row in the database table</li>
+        <li>You can query the database for one or more rows and Django will convert each row to an instance of the class</li>
+        <li>This is object-relational mapping (ORM)</li>
+    </ul>
+</section>
+<section id="model-interpretation">
+    <ul>
+        <li>Each model is a Python class that subclasses <code>django.db.models.Model</code></li>
+        <li>Each attribute of the model represents a database table's field</li>
+        <li>Django gives you an automatically-generated database-access interface for each model</li>
+    </ul>
+</section>
+<section id="model-example">
+    <h3>An Example Model</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django.db import models
+
+class Cheese(models.Model):
+    name = models.CharField()
+    country_of_origin = models.CharField()
+    fat_content = models.FloatField()
+    last_updated = models.DateField()
+    </code></pre>
+    <img src="images/cheese_spreadsheet.png">
+</section>
+<section id="model-example-improved">
+    <h3>Improving the model</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django.db import models
+
+class Cheese(models.Model):
+    slug = models.SlugField(primary_key=True)
+    name = models.CharField(unique=True)
+    country_of_origin = models.CharField()
+    fat_content = models.FloatField(null=True)
+    last_updated = models.DateField(auto_now=True)
+    </code></pre>
+    <img src="images/cheese_spreadsheet.png">
+</section>
+<section id="pk">
+    <h3>What is a primary key?</h3>
+    <ul>
+        <li>Database tables can have a column with a value that uniquely identifies each row</li>
+        <li>This is called the primary key</li>
+        <li>Django <strong>requires</strong> each table to have a primary key</li>
+        <li>If you don't define this on your model, Django creates an automatic primary key field
+            <ul>
+                <li>The field looks like this:</li>
+                <li><code>id = models.AutoField(primary_key=True)</code></li>
+            </ul>
+        </li>
+        <li>You can use <code>primary_key=True</code> on a column of your model if it has one</li>
+    </ul>
+</section>
+<section id="model-methods">
+    <h3>Model methods</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django.db import models
+
+class Cheese(models.Model):
+    slug = models.SlugField(primary_key=True, max_length=200)
+    name = models.CharField(unique=True, max_length=200)
+    country_of_origin = models.CharField(max_length=200)
+    fat_content = models.FloatField(null=True)
+    last_updated = models.DateField(auto_now=True)
+
+    def is_high_fat(self):
+        if self.fat_content is None:
+            return False
+        return self.fat_content >= 0.5
+    </code></pre>
+</section>
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
