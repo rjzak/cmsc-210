@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from cheeseshop.views import index, cheese_detail, cheese_list
 
 urlpatterns = [
+    path('', index),
+    path('cheeses/', cheese_list),
+    path('cheeses/<slug:cheese_id>/', cheese_detail, name="cheese_detail"),
     path('admin/', admin.site.urls),
 ]

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cheeses We Have</title>
+</head>
+<body>
+    <h1>Cheeses We Have</h1>
+    <ul>
+    {% for slug, name, country in cheeses %}
+        <li><a href="{% url 'cheese_detail' slug %}">{{ name }}</a>, from {{ country }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
