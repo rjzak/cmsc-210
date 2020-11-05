@@ -10,7 +10,7 @@
 {% block slides %}
 <section id="title">
     <h2>Web Development with<br>Python &amp; Django III</h2>
-    <p class="fragment fade-up">Improving our web application</p>
+    <p class="fragment fade-up">Templating</p>
 </section>
 <section id="announcements">
     <ul>
@@ -211,92 +211,5 @@
 </section>
 <section id="cheeseshop-before">
     <a target="_blank" href="http://127.0.0.1:8000"><img src="images/cheese-shop-before.png"></a>
-</section>
-<section id="models">
-    <h2>Django Models</h2>
-</section>
-<section id="model-properties">
-    <ul>
-        <li>Django models map your data between Python and a database without you having to know SQL</li>
-        <li>A database consists of tables
-            <ul>
-                <li>Tables have rows and columns</li>
-                <li>Columns have a type (e.g. number, string, datetime, bool)</li>
-                <li>Similar to a Pandas DataFrames</li>
-            </ul>
-        </li>
-        <li>You can define a database table in Python as a class</li>
-        <li>Django can create a database table from this class</li>
-        <li>You can create an instance of the class and ask Django to store that as a row in the database table</li>
-        <li>You can query the database for one or more rows and Django will convert each row to an instance of the class</li>
-        <li>This is object-relational mapping (ORM)</li>
-    </ul>
-</section>
-<section id="model-interpretation">
-    <ul>
-        <li>Each model is a Python class that subclasses <code>django.db.models.Model</code></li>
-        <li>Each attribute of the model represents a database table's field</li>
-        <li>Django gives you an automatically-generated database-access interface for each model</li>
-    </ul>
-</section>
-<section id="model-example">
-    <h3>An Example Model</h3>
-    <pre class="medium"><code data-trim data-line-numbers>
-from django.db import models
-
-class Cheese(models.Model):
-    name = models.CharField()
-    country_of_origin = models.CharField()
-    fat_content = models.FloatField()
-    last_updated = models.DateField()
-    </code></pre>
-    <img src="images/cheese_spreadsheet.png">
-</section>
-<section id="model-example-improved">
-    <h3>Improving the model</h3>
-    <pre class="medium"><code data-trim data-line-numbers>
-from django.db import models
-
-class Cheese(models.Model):
-    slug = models.SlugField(primary_key=True)
-    name = models.CharField(unique=True)
-    country_of_origin = models.CharField()
-    fat_content = models.FloatField(null=True)
-    last_updated = models.DateField(auto_now=True)
-    </code></pre>
-    <img src="images/cheese_spreadsheet.png">
-</section>
-<section id="pk">
-    <h3>What is a primary key?</h3>
-    <ul>
-        <li>Database tables can have a column with a value that uniquely identifies each row</li>
-        <li>This is called the primary key</li>
-        <li>Django <strong>requires</strong> each table to have a primary key</li>
-        <li>If you don't define this on your model, Django creates an automatic primary key field
-            <ul>
-                <li>The field looks like this:</li>
-                <li><code>id = models.AutoField(primary_key=True)</code></li>
-            </ul>
-        </li>
-        <li>You can use <code>primary_key=True</code> on a column of your model if it has one</li>
-    </ul>
-</section>
-<section id="model-methods">
-    <h3>Model methods</h3>
-    <pre class="medium"><code data-trim data-line-numbers>
-from django.db import models
-
-class Cheese(models.Model):
-    slug = models.SlugField(primary_key=True, max_length=200)
-    name = models.CharField(unique=True, max_length=200)
-    country_of_origin = models.CharField(max_length=200)
-    fat_content = models.FloatField(null=True)
-    last_updated = models.DateField(auto_now=True)
-
-    def is_high_fat(self):
-        if self.fat_content is None:
-            return False
-        return self.fat_content >= 0.5
-    </code></pre>
 </section>
 {% endblock %}

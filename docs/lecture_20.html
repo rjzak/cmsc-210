@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 20</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title">
+    <h2>Web Development with<br>Python &amp; Django III</h2>
+    <p class="fragment fade-up">Models</p>
+</section>
+<section id="what-we-are-building">
+    <h2>Our Example Project</h2>
+    <p>We're playing the role of a cheese enthusiast<br> who wants to build a site to:</p>
+    <ul>
+        <li>Make our database of cheeses available to visitors</li>
+        <li>Allow visitors to rate cheeses they have tried</li>
+    </ul>
+    <img src="images/cheese-selection.png">
+</section>
+<section id="previous-class">
+    <p>We created three views + templates:</p>
+    <ol>
+        <li>A view for the homepage</li>
+        <li>A view listing cheeses we had data for</li>
+        <li>A detail page with the name, country of origin and a description for individual cheeses</li>
+    </ol>
+    <img src="images/cheese-selection-2.png">
+</section>
+<section id="models">
+    <h2>Django Models</h2>
+</section>
+<section id="model-properties">
+    <ul>
+        <li>Django models map your data between Python and a database without you having to know SQL</li>
+        <li>A database consists of tables
+            <ul>
+                <li>Tables have rows and columns</li>
+                <li>Columns have a type (e.g. number, string, datetime, bool)</li>
+                <li>Similar to a Pandas DataFrames</li>
+            </ul>
+        </li>
+        <li>You can define a database table in Python as a class</li>
+        <li>Django can create a database table from this class</li>
+        <li>You can create an instance of the class and ask Django to store that as a row in the database table</li>
+        <li>You can query the database for one or more rows and Django will convert each row to an instance of the class</li>
+        <li>This is object-relational mapping (ORM)</li>
+    </ul>
+</section>
+<section id="model-interpretation">
+    <ul>
+        <li>Each model is a Python class that subclasses <code>django.db.models.Model</code></li>
+        <li>Each attribute of the model represents a database table's field</li>
+        <li>Django gives you an automatically-generated database-access interface for each model</li>
+    </ul>
+</section>
+<section id="model-example">
+    <h3>An Example Model</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django.db import models
+
+class Cheese(models.Model):
+    name = models.CharField(max_length=200)
+    country_of_origin = models.CharField(max_length=200)
+    fat_content = models.FloatField()
+    last_updated = models.DateField()
+    </code></pre>
+    <img src="images/cheese_spreadsheet.png">
+</section>
+<section id="model-example-improved">
+    <h3>Improving the model</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django.db import models
+
+class Cheese(models.Model):
+    slug = models.SlugField(primary_key=True, max_length=200)
+    name = models.CharField(unique=True, max_length=200)
+    country_of_origin = models.CharField(max_length=200)
+    fat_content = models.FloatField(null=True)
+    last_updated = models.DateField(auto_now=True)
+    </code></pre>
+    <img src="images/cheese_spreadsheet.png">
+</section>
+<section id="pk">
+    <h3>What is a primary key?</h3>
+    <ul>
+        <li>Database tables can have a column with a value that uniquely identifies each row</li>
+        <li>This is called the primary key</li>
+        <li>Django <strong>requires</strong> each table to have a primary key</li>
+        <li>If you don't define this on your model, Django creates an automatic primary key field
+            <ul>
+                <li>The field looks like this:</li>
+                <li><code>id = models.AutoField(primary_key=True)</code></li>
+            </ul>
+        </li>
+        <li>You can use <code>primary_key=True</code> on a column of your model if it has one</li>
+    </ul>
+</section>
+<section id="model-methods">
+    <h3>Model methods</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django.db import models
+
+class Cheese(models.Model):
+    slug = models.SlugField(primary_key=True, max_length=200)
+    name = models.CharField(unique=True, max_length=200)
+    country_of_origin = models.CharField(max_length=200)
+    fat_content = models.FloatField(null=True)
+    last_updated = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    def is_high_fat(self):
+        if self.fat_content is None:
+            return False
+        return self.fat_content >= 0.5
+    </code></pre>
+</section>
+<section id="querying">
+    <h3>Querying</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+# Get a list of every cheese in the table.
+Cheese.objects.all()
+
+# Get a specific cheese
+Cheese.objects.get(slug="brie")
+
+# Get a cheese that may or may not exist
+try:
+    cheese = Cheese.objects.get(slug="apple")
+except Cheese.DoesNotExist:
+    cheese = None
+    </code></pre>
+</section>
+<section id="exceptions-1">
+    <h3>A quick detour: Exceptions</h3>
+    <ul>
+        <li>Python (and many other languages) use a concept called exceptions to handle errors.</li>
+        <li>If the interpreter tries to execute a line of code and it fails, it will raise an exception
+            <ul>
+                <li>The one exception here are syntax errors in the code, those don't raise an exception; a program just cannot be run with syntax errors</li>
+            </ul>
+        </li>
+        <li>The exception contains information about what failed</li>
+        <li>If the exception is not "caught" then the program will exit</li>
+    </ul>
+</section>
+<section id="exceptions-2">
+    <h3>A quick detour: Exceptions</h3>
+    <ul>
+        <li>You can catch a specific exception using a try block.</li>
+        <li>This allows you to recover from some failure and continue running the program.</li>
+    </ul>
+    <pre class="medium"><code data-trim data-line-numbers>
+try:
+    result = numerator / denominator
+except ZeroDivisionError:
+    print("Cannot divide by zero.")
+    </code></pre>
+    <pre class="medium fragment fade-up"><code data-trim data-line-numbers>
+try:
+    with open("nonexistent_file.txt", "r") as fh:
+        content = fh.read()
+except FileNotFoundError:
+        content = None
+    </code></pre>
+</section>
+<section id="exceptions-3">
+    <h3>A quick detour: Exceptions</h3>
+    <ul>
+        <li>Exceptions are python classes.</li>
+        <li>All inherit from a base <code>Exception</code> class</li>
+        <li>You can use this to catch any exception:</li>
+    </ul>
+    <pre class="medium"><code data-trim data-line-numbers>
+try:
+    evil_genie_function()
+except Exception as err:
+    print("The evil genie function failed: {err}.")
+    </code></pre>
+    <ul>
+        <li><code>except SomeException <strong>as err</strong></code> allows you to get the instance of the exception</li>
+    </ul>
+</section>
+<section id="exceptions-4">
+    <ul>
+        <li>Exceptions are very useful but they should only be used when you can't know beforehand whether an error will occur</li>
+        <li>In cases whether you can check something yourself, you should.</li>
+    </ul>
+    <pre class="medium"><code data-trim data-line-numbers>
+if denominator != 0:
+    result = numerator / denominator
+else:
+    print("Cannot divide by zero.")
+    </code></pre>
+    <pre class="medium fragment fade-up"><code data-trim data-line-numbers>
+from os.path import isfile
+if isfile("nonexistent_file.txt"):
+    with open("nonexistent_file.txt", "r") as fh:
+        content = fh.read()
+else:
+        content = None
+    </code></pre>
+</section>
+<section id="django-exceptions">
+    <h3>Django exceptions</h3>
+    <ul>
+        <li>Exceptions make sense here, where we want something from a database but we may not know what's actually in the DB</li>
+        <li>DB queries can be "slow" so we should avoid doing two queries when we can get by with one</li>
+    </ul>
+    <pre class="medium"><code data-trim data-line-numbers>
+# Get a cheese that may or may not exist
+try:
+    cheese = Cheese.objects.get(slug="apple")
+except Cheese.DoesNotExist:
+    cheese = None
+
+# Same thing, but makes 2 DB queries
+cheese_exists = Cheese.objects.filter(slug="apple").exists()
+if cheese_exists:
+        cheese = Cheese.objects.get(slug="apple")
+else:
+        cheese = None
+    </code></pre>
+</section>
+<section id="field-lookups">
+    <h3>Field lookups</h3>
+    <ul>
+        <li>You can specify how a field should be queried for by adding to its name when specifying arguments to <code>.filter()</code></li>
+        <li>The follow the format "{field name}__{lookup}"</li>
+        <li>Example lookups:
+            <ul>
+                <li>"__lt", "__gt", "__lte", "__gte", which are &lt;, &gt;, &lt;= and &gt;=</li>
+                <li>"__in": is the column value in a list?</li>
+                <li>"__startswith"/"__istartswith": Does a column value start with a string?</li>
+                <li>"__range": is a value between a start and end value?</li>
+            </ul>
+        </li>
+        <li>There are <a href="https://docs.djangoproject.com/en/3.1/ref/models/querysets/#field-lookups">many of these</a></li>
+    </ul>
+</section>
+<section id="querying-continued">
+    <h3>Querying</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+# Pick cheeses from a list of countries
+Cheese.objects.filter(
+        country_of_origin__in=["France", "Greece", "Italy"]
+)
+
+# Cheeses whose name starts with "Brie"
+Cheese.objects.filter(name__startswith="Brie")
+
+# High-fat cheeses that are not from France.
+Cheese.objects
+        .filter(fat_content__gte=0.5)
+        .exclude(country_of_origin="France")
+    </code></pre>
+</section>
+<section id="model-meta">
+    <h3>Model <code>Meta</code></h3>
+    <ul>
+        <li>Sometimes you want to specify additional metadata about your model</li>
+        <li>Examples:
+            <ul>
+                <li>How you data should be sorted by default</li>
+                <li>What the underlying DB table should be</li>
+                <li>If there is a date field that specifies temporal ordering</li>
+                <li>If some fields must be unique together</li>
+            </ul>
+        </li>
+        <li>Model metadata is “anything that’s not a field”</li>
+        <li>You specify it using an inner `Meta` class for your model</li>
+    </ul>
+</section>
+<section id="model-meta-example">
+    <h3>Model <code>Meta</code> Example</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django.db import models
+
+class Cheese(models.Model):
+    slug = models.SlugField(primary_key=True, max_length=200)
+    name = models.CharField(unique=True, max_length=200)
+    country_of_origin = models.CharField(max_length=200)
+    fat_content = models.FloatField(null=True)
+    last_updated = models.DateField(auto_now=True)
+
+    class Meta
+        ordering = ["name"]
+        get_latest_by = "last_updated"
+    </code></pre>
+</section>
+<section id="model-meta-usage">
+    <h3>Model <code>Meta</code> Usage</h3>
+    <pre class="medium"><code data-trim data-line-numbers>
+# Will be alphabetically ordered by the cheese name.
+Cheese.objects.all()
+
+# The cheese with the most
+# recent "last_updated" date.
+Cheese.objects.latest()
+
+# The cheese with the
+# earliest "last_updated" date.
+ Cheese.objects.earliest()
+    </code></pre>
+</section>
+</div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
