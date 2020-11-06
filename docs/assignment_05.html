@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Assignment Five</title>
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+	    <link rel="stylesheet" href="dist/bootstrap.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="stylesheet" href="dist/document.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+	</head>
+	<body>
+    <div class="container">
+    
+<h1>Assignment 5</h1>
+<h2>Modifying Django Walkthrough</h2>
+<hr>
+<img src="images/django-pony-dark.png" width="500" style="float: right">
+<p><strong>Due Date</strong>: Wednesday, November 20th, 11:59:59 PM
+<p><strong>Value</strong>: 150 points<br>
+<p><strong>Github Invite</strong>: <a href="https://classroom.github.com/a/3pp2nuAn">Click Here</a></p>
+<p><strong>Collaboration</strong>: For Assignment 5, <em>collaboration is not allowed</em>; you must work individually.
+    You may still see your TA and come to office hours for help, but you may not work with any other CMSC 291 students. You may post questions on Discord, <strong>but you may not post code</strong>.</p>
+<h2>Objectives:</h2>
+<ul>
+    <li>Practicing interaction with a database in Django</li>
+    <li>Reinforce web development concepts</li>
+    <li>Propose a concept for a web application</li>
+</ul>
+
+<h2>Instructions</h2>
+
+<p>Your starting point for this assignment is the django tutorial you went through for assignment 4. In this assignment,
+    we are going to update our web app so that users can add and remove questions and choices themselves (rather than going through the admin interface).
+</p>
+<p>Change your web app such that:</p>
+<ol>
+    <li>Each question has a "remove" button after it. Clicking that button will remove the question from the database and
+        refresh the page (refreshing the page can be accomplished with a RedirectResponse)</li>
+    <li>The page where your questions are listed should have a text field with a button.  Clicking the button will submit the form, adding a question with the text from the text field.</li>
+    <li>Repeat this process for choices.  NOTE:  choices will be slightly more complex, because each choice must be associated with a question.</li>
+    <li>Lastly, you will write a brief description of a website that you would like to make for assignment 6.
+        You MAY work with other students on this part.
+        Put your description of the website and the names of any collaborators in a file called
+        <code>proposal.txt</code> in your assignment submission on Github.</li>
+    <li>You website should include some ability for users to interact with it (in other words, it should not be a <a href="https://techterms.com/definition/staticwebsite">static</a> site.</a>) </li>
+</ol>
+<p>The length of your proposal should be relatively short&mdash;how would you describe what your website does to a
+    friend that you are trying to get to use it?   Just the name of the website is insufficient.</p>
+
+<p>As always, feel free to ask questions in Discord if you get stuck or stumped.</p>
+
+<h2>Grading</h2>
+<p>You will be doing a 1:1 Google Hangout or Discord Session with your TA, Agatha. You will then run your project and
+    navigate around your sample web app, demonstrating that it works.  Don't worry! You will not be judged for any
+    criteria beyond "does it work?" and "is this all the stuff covered in the tutorial?"
+</p>
+
+<h2>Grading Rubric</h2>
+<table class="table">
+        <tbody>
+                <tr>
+                    <td>Add a question</td>
+                    <td>30 points</td>
+                </tr>
+                <tr>
+                    <td>Remove question</td>
+                    <td>30 points</td>
+                </tr>
+                <tr>
+                    <td>Add choice</td>
+                    <td>30 points</td>
+                </tr>
+                <tr>
+                    <td>Remove choice</td>
+                    <td>30 points</td>
+                </tr>
+                <tr>
+                    <td>Proposal</td>
+                    <td>30 points</td>
+                </tr>
+                <tr>
+                    <td><strong>Total:</strong></td>
+                    <td><strong>150 points</strong></td>
+                </tr>
+        </tbody>
+</table>
+
+    </div>      
+	</body>
+</html>

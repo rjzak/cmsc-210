@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from cheeseshop.views import index, cheese_detail, cheese_list
+from cheeseshop.views import index
+from catalog.views import cheese_detail, cheese_list
 
 
 urlpatterns = [
