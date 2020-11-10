@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 21</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title">
+    <h2>Web Development with<br>Python &amp; Django: Part IV</h2>
+    <p class="fragment fade-up">The Admin Interface &amp; Forms</p>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li><a href="https://mazelife.github.io/cmsc-291/assignment_05.html">Assignment #5</a> is out</li>
+        <li>It is due Friday, November 20th</li>
+        <li>Now is a good time to start thinking<br> about assignment #6
+            <ul>
+                <li>Create your own website/web application using Django</li>
+                <li>It can be about anything you like</li>
+                <li>You may work in groups if you want, or you can go solo</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="admin-image">
+    <h2>The Django Admin Interface</h2>
+    <img src="images/django-admin.png">
+</section>
+<section id="admin">
+<ul>
+    <li>The admin interface provides a web-based graphical user interface to create, update and delete records from the database using Django models</li>
+    <li>It reads metadata from your models when you register them and generates the interface from that</li>
+    <li>The admin’s recommended use is as an <em>internal</em> management tool for a site.</li>
+    <li>The admin isn’t intended to be used by site visitors. It’s for site managers.</li>
+</ul>
+</section>
+<section id="admin-customization">
+    <h2>Admin Customizations</h2>
+    <p>The admin interface is <a href="https://docs.djangoproject.com/en/3.1/ref/contrib/admin/">heavily customizable</a>.</p>
+    <ul>
+        <li>List views can be customized to allow for filtering and searching</li>
+        <li>Editing views can be customized with different HTML form field types and validation behavior</li>
+    </ul>
+    <p>Let's take a look at some examples...</p>
+
+</section>
+<section id="forms">
+    <h2>Forms</h2>
+    <ul>
+        <li>HTML forms are one of the main ways users can interact with a site</li>
+        <li>Examples:
+            <ul>
+                <li>Logging into an account with your username and password</li>
+                <li>Filling out billing and shipping information to purchase something</li>
+                <li>Posting an image or text on a social media site</li>
+                <li>Sending an email to someone in a web-based client (like Gmail)</li>
+            </ul>
+        </li>
+        <li>HTML forms are everywhere</li>
+    </ul>
+</section>
+<section id="form-tasks">
+    <h2>Using Forms</h2>
+    <ol>
+        <li>Render an HTML form on a page that a user can submit</li>
+        <li>Parse the form contents when the user submits them</li>
+        <li>Validate that the contents are valid</li>
+        <li>If they are valid, do something with the contents. If they are not, re-display the original form to the user indicating what they did wrong.</li>
+    </ol>
+    <p>Django's <code>Form</code> class can help us with all these things.</p>
+</section>
+<section id="form-facts">
+    <p>A form consists of a series of fields. What do we need to know about these fields to make a form?</p>
+    <ul>
+        <li>The name of the field (how we will refer to it internally)</li>
+        <li>The label of the field (may be different from the name)</li>
+        <li>The type of the value (text, number, boolean)</li>
+        <li>The type of HTML widget (text box, drop down, check box, etc.)</li>
+        <li>Whether the value is required or not</li>
+        <li>What valid values are</li>
+    </ul>
+</section>
+<section id="form-class">
+    <p>Django's <code>Form</code> class let's us specify all these things (and more).</p>
+    <pre class="medium"><code data-trim data-line-numbers>
+from django import forms
+
+class MyForm(forms.Form):
+    name = forms.CharField(label="Your name",
+                           max_length=200)
+    age = forms.IntegerField(label="Your age",
+                             min_value=1,
+                             max_value=150,
+                             required=True)
+    shirt_size = forms.ChoiceField(choices=(("S", "small"),
+                                            ("M", "medium"),
+                                            ("L", "large"),
+                                            ("XL", "x-large")))
+    double_order = forms.BooleanField(label="Double order?")
+    </code></pre>
+</section>
+<section id="form-template">
+    <pre class="medium"><code data-trim data-line-numbers>
+        
+&lt;form action="/url/" method="post"&gt;
+{% csrf_token %}
+{{ form.as_p }}
+&lt;input type="submit" value="Save"&gt;
+&lt;/form&gt;
+        
+    </code></pre>
+</section>
+<section id="form-html">
+    <pre class="medium"><code data-trim>
+&lt;form action="/url/" method="post"&gt;
+    &lt;input type="hidden" name="csrfmiddlewaretoken" value="KrsfY"&gt;
+
+    &lt;label for="id_name"&gt;Your name:&lt;/label&gt;
+    &lt;input type="text" name="name" maxlength="200" required id="id_name"&gt;
+
+    &lt;label for="id_age"&gt;Your age:&lt;/label&gt;
+    &lt;input type="number" name="age" min="1" max="150" required id="id_age"&gt;
+
+    &lt;label for="id_shirt_size"&gt;Shirt size:&lt;/label&gt;
+    &lt;select name="shirt_size" id="id_shirt_size"&gt;
+        &lt;option value="S"&gt;small&lt;/option&gt;
+        &lt;option value="M"&gt;medium&lt;/option&gt;
+        &lt;option value="L"&gt;large&lt;/option&gt;
+        &lt;option value="XL"&gt;extra large&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;label for="id_double_order"&gt;Double your order?&lt;/label&gt;
+    &lt;input type="checkbox" name="double_order" required id="id_double_order"&gt;
+
+    &lt;input type="submit" value="Save"&gt;
+&lt;/form&gt;
+    </code></pre>
+</section>
+<section id="form-in-browser">
+    <img src="images/django-form.png" height="400">
+    <p class="fragment fade-in">Now what happens when we hit "save"?</p>
+</section>
+<section id="post-contents">
+    <h3>Django stores the form values in a dictionary-like class on the <code>request</code> object</h3>
+    <pre><code data-trim data-line-numbers>
+>>> request.POST)
+{'age': ['29'],
+ 'csrfmiddlewaretoken': ['TXFKW5m4vOsJjg0LXOrP3hNsiXI8XrOa'],
+ 'double_order': ['on'],
+ 'name': ['Ruth Smith'],
+ 'shirt_size': ['M']}
+    </code></pre>
+</section>
+<section id="post-to-form">
+    <h3>We can hand this data directly to the form class:</h3>
+    <pre><code data-trim data-line-numbers>
+form = MyForm(request.POST)
+    </code></pre>
+    <p>Because the form object generated the HTML <code>&lt;form&gt;</code>, it knows how to handle
+        the contents of the form when we submit it.</p>
+</section>
+<section id="form-validation">
+    <p>Validating the data is an important step:</p>
+    <pre><code data-trim data-line-numbers>
+def form_view(request):
+    if request.method == 'POST':
+        form = MyForm(request.POST)
+        if form.is_valid():
+            # Handle valid form here
+            pass
+    else:
+        form = MyForm()
+    return render(request, "form.html", {"form": form})
+    </code></pre>
+    <p>Calling <code>form.is_valid()</code> will check that the contents of the form are what we expect.
+        If the contents are not valid, we can send that <code>form</code> back to the template to be rendered...</p>
+    <p></p>
+</section>
+<section id="form-errors">
+    <img src="images/form-errors.png" height="400">
+</section>
+<section id="form-validation-performed">
+    <h3>What validation does the form class do?</h3>
+    <ul>
+        <li>Checks that the type is correct</li>
+        <li>Makes sure required fields are present</li>
+        <li>Ensures min/max length or number size is followed</li>
+        <li>For choice fields, ensures what was chosen is valid.</li>
+        <li>For date/time fields, ensures date is valid.</li>
+        <li>Check <a href="https://docs.djangoproject.com/en/3.1/ref/forms/fields/">the docs</a> for other field type validation</li>
+    </ul>
+</section>
+<section id="validator-functions">
+    <p>You can also customize validation on a per-field basis:</p>
+    <pre><code data-trim data-line-numbers>
+from django.core.exceptions import ValidationError
+
+def is_named_bob(value):
+        if "Bob" not in value:
+            raise ValidationError(
+                "Only people named Bob may apply!"
+        )
+
+class MyForm(forms.Form):
+    name = forms.CharField(label="Your name",
+                           max_length=200,
+                           validators=[is_named_bob])
+    age = forms.IntegerField(label="Your age")
+    </code></pre>
+</section>
+<section id="validator-methods">
+    <p>Sometimes fields may depend on each other for validation:</p>
+    <pre><code data-trim data-line-numbers>
+class MyForm(forms.Form):
+    name = forms.CharField(label="Your name",
+                           max_length=200,
+                           required=True)
+    age = forms.IntegerField(label="Your age",
+                             required=True)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        if cleaned_data["name"] == "Bob" \
+            and cleaned_data["age"] <= 30:
+            raise ValidationError(
+                "If you name is Bob, you must be over 30 "
+            )
+    </code></pre>
+    <p>The validity of the form here depends on how age and name relate.</p>
+</section>
+<section id="widgets">
+    <p>You can specify a custom widget:</p>
+    <pre><code data-trim data-line-numbers>
+class MyForm(forms.Form):
+    name = forms.CharField(label="Your name",
+                           max_length=200)
+    age = forms.IntegerField(label="Your age",
+                             min_value=1,
+                             max_value=150,
+                             required=True)
+    shirt_size = forms.ChoiceField(choices=(("S", "small"),
+                                            ("M", "medium"),
+                                            ("L", "large"),
+                                            ("XL", "xlarge")),
+                                   widget=forms.RadioSelect)
+    double_order = forms.BooleanField(label="Double order?")
+    </code></pre>
+    <p>A <em>widget</em> is Django’s representation of an HTML input element. </p>
+</section>
+<section id="compare-widget">
+    <div style="float: left">
+        <h3>Before</h3>
+        <img src="images/django-form.png" height="240">
+    </div>
+        <div>
+        <h3>After</h3>
+        <img src="images/form-radio-widget.png" height="300">
+    </div>
+
+</section>
+<section id="widget-examples">
+    <div style="float: left">
+        <p>Calendar:</p>
+        <img src="images/django-calendar-widget.png" height="220">
+    </div>
+    <div style="float: left">
+        <p>Rich Text:</p>
+        <img src="images/django-richtext-widget.png" width="310">
+    </div>
+    <div style="float: right">
+        <p>Map:</p>
+        <img src="images/django-map-widget.png" width="290">
+    </div>
+</section>
+<section id="model-forms">
+    <ul>
+        <li>Sometime forms will map very closely (or even exactly) to models.</li>
+        <li>Forms and models have a lot in common:
+            <ul>
+                <li>The name of a property</li>
+                <li>The human-readable label of the property</li>
+                <li>The type of the value (text, number, boolean)</li>
+                <li>Whether the value is required or not</li>
+                <li>What valid values are</li>
+            </ul>
+        </li>
+        <li>Declaring all this twice in a model would be redundant.</li>
+        <li>Instead, use a <a href="https://docs.djangoproject.com/en/3.1/topics/forms/modelforms/"><code>ModelForm</code></a></li>
+    </ul>
+</section>
+<section id="model-form-example">
+    <pre><code data-trim data-line-numbers>
+from django.db import models
+from django.forms import ModelForm
+
+class MyModel(models.Model):
+    name = models.CharField("Your Name", primary_key=True)
+    age = models.IntegerField("Your age", blank=False)
+    shirt_size = models.CharField(max_length=6,
+                                  choices=(("S", "small"),
+                                           ("M", "medium"),
+                                           ("L", "large")))
+    double_order = models.BooleanField("Double order?")
+
+class MyModelForm(ModelForm):
+    class Meta:
+        model = MyModel
+
+    </code></pre>
+</section>
+<section id="model-form-extra">
+    <ul>
+        <li>You can customize model forms:
+            <ul>
+                <li>Include a subset of the fields in a form</li>
+                <li>Specify what widgets to use</li>
+                <li>Declare custom validators</li>
+            </ul>
+        </li>
+        <li>Every ModelForm also has a <code>save()</code> method. This method creates and saves a database object from the data bound to the form.</li>
+        <li>Django uses model forms to create the admin automatically form your models</li>
+        <li>Model forms enable D.R.Y. programming</li>
+    </ul>
+</section>
+
+    </div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
