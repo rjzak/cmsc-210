@@ -15,7 +15,6 @@ class CheeseAdminForm(forms.ModelForm):
         return fat_content
 
 
-
 @admin.register(Cheese)
 class CheeseAdmin(admin.ModelAdmin):
 

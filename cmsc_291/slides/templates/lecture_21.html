@@ -66,15 +66,15 @@
 <section id="form-tasks">
     <h2>Using Forms</h2>
     <ol>
-        <li>Render an HTML form on a page that a user can submit</li>
+        <li>Render an HTML form on a page for a user to fill out</li>
         <li>Parse the form contents when the user submits them</li>
-        <li>Validate that the contents are valid</li>
+        <li>Determine if the contents are valid</li>
         <li>If they are valid, do something with the contents. If they are not, re-display the original form to the user indicating what they did wrong.</li>
     </ol>
     <p>Django's <code>Form</code> class can help us with all these things.</p>
 </section>
 <section id="form-facts">
-    <p>A form consists of a series of fields. What do we need to know about these fields to make a form?</p>
+    <p>A form consists of a series of fields/inputs. What do we need to know about these fields to make a form?</p>
     <ul>
         <li>The name of the field (how we will refer to it internally)</li>
         <li>The label of the field (may be different from the name)</li>
@@ -104,11 +104,12 @@ class MyForm(forms.Form):
     </code></pre>
 </section>
 <section id="form-template">
+    <h3>Rendering a form in a template</h3>
     <pre class="medium"><code data-trim data-line-numbers>
         {% raw %}
-&lt;form action="/url/" method="post"&gt;
+&lt;form action="/some-url/" method="post"&gt;
 {% csrf_token %}
-{{ form.as_p }}
+{{ form }}
 &lt;input type="submit" value="Save"&gt;
 &lt;/form&gt;
         {% endraw %}
@@ -161,7 +162,7 @@ class MyForm(forms.Form):
 form = MyForm(request.POST)
     </code></pre>
     <p>Because the form object generated the HTML <code>&lt;form&gt;</code>, it knows how to handle
-        the contents of the form when we submit it.</p>
+        the contents of the form when the user submits it.</p>
 </section>
 <section id="form-validation">
     <p>Validating the data is an important step:</p>
@@ -227,7 +228,7 @@ class MyForm(forms.Form):
         if cleaned_data["name"] == "Bob" \
             and cleaned_data["age"] <= 30:
             raise ValidationError(
-                "If you name is Bob, you must be over 30 "
+                "If you name is Bob, you must be over 30"
             )
     </code></pre>
     <p>The validity of the form here depends on how age and name relate.</p>
@@ -279,13 +280,14 @@ class MyForm(forms.Form):
 <section id="model-forms">
     <ul>
         <li>Sometime forms will map very closely (or even exactly) to models.</li>
-        <li>Forms and models have a lot in common:
+        <li>Forms and models both consist of a series of fields.</li>
+        <li>These fields have a lot in common:
             <ul>
-                <li>The name of a property</li>
-                <li>The human-readable label of the property</li>
-                <li>The type of the value (text, number, boolean)</li>
-                <li>Whether the value is required or not</li>
-                <li>What valid values are</li>
+                <li>a name and a value</li>
+                <li>a human-readable label</li>
+                <li>a type for the value the value (text, number, boolean)</li>
+                <li>whether the value is required or not</li>
+                <li>what valid values are</li>
             </ul>
         </li>
         <li>Declaring all this twice in a model would be redundant.</li>
@@ -322,7 +324,7 @@ class MyModelForm(ModelForm):
             </ul>
         </li>
         <li>Every ModelForm also has a <code>save()</code> method. This method creates and saves a database object from the data bound to the form.</li>
-        <li>Django uses model forms to create the admin automatically form your models</li>
+        <li>Django uses model forms to create the admin automatically from your models</li>
         <li>Model forms enable D.R.Y. programming</li>
     </ul>
 </section>
