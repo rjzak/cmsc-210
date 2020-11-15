@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 
 
 class Cheese(models.Model):
@@ -20,3 +21,16 @@ class Cheese(models.Model):
         if self.fat_content is None:
             return False
         return self.fat_content >= 0.5
+
+    def avg_rating(self):
+        avg_rating = self.rating_set.all().aggregate(Avg('rating'))["rating__avg"]
+        if not avg_rating:
+            return "not rated"
+        else:
+            return round(avg_rating, 2)
+
+
+class Rating(models.Model):
+
+    cheese = models.ForeignKey(Cheese, on_delete=models.CASCADE)
+    rating = models.IntegerField()

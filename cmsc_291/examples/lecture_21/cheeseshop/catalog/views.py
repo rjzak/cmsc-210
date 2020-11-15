@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Cheese
+from .forms import RateCheeseForm
+from .models import Cheese, Rating
 
 
 def cheese_list(request):
@@ -10,4 +11,11 @@ def cheese_list(request):
 
 def cheese_detail(request, cheese_id):
     cheese = get_object_or_404(Cheese, slug=cheese_id)
-    return render(request, "cheese_detail.html", {"cheese": cheese})
+    if request.method == "POST":
+        form = RateCheeseForm(request.POST)
+        if form.is_valid():
+            rating = Rating(cheese=cheese, rating=form.cleaned_data["rating"])
+            rating.save()
+    else:
+        form = RateCheeseForm()
+    return render(request, "cheese_detail.html", {"cheese": cheese, "form": form})

@@ -6,4 +6,13 @@
 <p>Country of origin: {{ cheese.country_of_origin }}</p>
 <p>{{ cheese.description }}</p>
 <p>Fat Content: {% if cheese.fat_content %}{% widthratio cheese.fat_content 1.0 100 %}%{% else %}unknown{% endif %}</p>
+<p>Avg rating: {{ cheese.avg_rating }}</p>
+<hr>
+<h2>Rate this cheese:</h2>
+<form method="POST" action="{% url 'cheese_detail' cheese.slug %}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Rate">
+</form>
+
 {% endblock %}
