@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CMSC 291: Lecture 22</title>
+        <link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/solarized.css">
+		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" href="dist/base.css">
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		
+<style>
+</style>
+
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+<section id="title">
+    <h2>Web Development with<br>Python &amp; Django: Part V</h2>
+    <p class="fragment fade-up">Deploying Django Applications</p>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li><a href="https://mazelife.github.io/cmsc-291/assignment_05.html">Assignment #5</a> is due this friday</li>
+        <li>Now is a good time to start thinking<br> about assignment #6
+            <ul>
+                <li>Create your own website/web application using Django</li>
+                <li>It can be about anything you like</li>
+                <li>You may work in groups if you want, or you can go solo</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="deployment">
+    <h2>Deploying Django Applications</h2>
+    <ul>
+        <li>We've learned how to build a Django-based site</li>
+        <li>But how do we make it available on the world-wide web?</li>
+        <li class="fragment fade-in">There are lots of ways...</li>
+    </ul>
+</section>
+<section id="deployment-a">
+    <img src="images/web-deployment-a.png">
+    <p>1-100k daily requests</p>
+</section>
+<section id="what-is-a-server">
+    <h2>What do we mean by server?</h2>
+    <ul>
+        <li>A physical machine</li>
+        <li>A virtual machine</li>
+        <li>A container</li>
+    </ul>
+</section>
+<section id="deployment-b">
+    <img src="images/web-deployment-b.png">
+    <p>100k-1 million daily requests</p>
+</section>
+<section id="deployment-c">
+    <img src="images/web-deployment-c.png">
+    <p>1-100 million daily requests</p>
+</section>
+<section id="deployment-d">
+    <img src="images/web-deployment-d.png">
+    <p>1 billion daily requests</p>
+</section>
+<section id="webserver-admin">
+    <h3>Administering a webserver takes know-how</h3>
+    <ul>
+        <li>Configuring networking and security</li>
+        <li>Installing and running a webserver</li>
+        <li>Installing and running a database</li>
+        <li>Applying security updates to the OS</li>
+    </ul>
+    <p class="fragment fade-left">Is there a viable alternative to having to learn all this?</p>
+</section>
+<section id="paas">
+    <h2>Platform as a service (PaaS)</h2>
+    <ul>
+        <li>A cloud-based provider</li>
+        <li>the consumer controls software deployment with minimal configuration options</li>
+        <li>multi-tenant</li>
+        <li>applications are hosted within containers</li>
+    </ul>
+</section>
+<section id="paas-tradeoffs">
+    <table>
+        <thead>
+            <tr><th></th><th>👍🏻</th><th>☹️</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>setup:</strong></td>
+                <td>requires little expertise</td>
+                <td>lack fine-grained control of infrastructure</td>
+            </tr>
+            <tr>
+                <td><strong>support:</strong></td>
+                <td>ongoing maintenance is handled for you</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>cost:</strong></td>
+                <td></td>
+                <td>can be quite expensive</td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+<section id="heroku">
+   <a href="heroku.com"><img src="images/heroku-logo.png"></a>
+</section>
+<section id="heroku-facts">
+   <img src="images/heroku-logo.png" height="200">
+    <ul>
+        <li>One of the earliest PaaS providers</li>
+        <li class="fragment">Supports Python...</li>
+        <li class="fragment">...and Ruby, Go, Java, PHP, and more</li>
+        <li class="fragment">Has a free tier</li>
+    </ul>
+</section>
+<section id="heroku-pricing">
+    <table>
+        <thead>
+            <tr><th>Tier</th><th>Cost</th><th>What you get</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hobby</td>
+                <td>$7/month</td>
+                <td>SSL</td>
+            </tr>
+            <tr>
+                <td>Standard</td>
+                <td>$25-50/month</td>
+                <td>More RAM</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<section id="alternatives">
+    <h2>Alternatives:</h2>
+    <a href="https://www.digitalocean.com/"><img src="images/digital-ocean-logo.png" height="200" style="margin-right: 50px"></a>
+    <a href="https://aws.amazon.com/"><img src="images/aws-logo.png" height="150"></a>
+</section>
+<section id="heroku-vocab">
+    <h2>Terminology</h2>
+    <ul>
+        <li><strong>App</strong>: a web application (in this case a Django project)</li>
+        <li><strong>Dyno</strong>: a container that runs a web application (like a Django app)</li>
+    </ul>
+</section>
+<section id="heroku-install">
+    <h3>Using Heroku</h3>
+    <ol>
+        <li><a href="https://signup.heroku.com/">Create an account</a> and confirm your email</li>
+        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-python#set-up">Install</a> the Heroku command-line interface (CLI)</li>
+        <li>run <code>heroku login</code></li>
+        <li>Create a <code>Procfile</code> in the root of your Github repository</li>
+    </ol>
+</section>
+<section id="about-procfile">
+    <h3>The Procfile</h3>
+    <ul>
+        <li>Heroku apps include a <strong>Procfile</strong> that specifies the commands that are executed by Heroku on startup...</li>
+        <li>...for example starting a Django webserver</li>
+        <li>The Procfile is always a simple text file that is named <code>Procfile</code> (no file extension)</li>
+        <li>The Procfile must live in your GitHub project's root directory. It does not function if placed anywhere else.</li>
+    </ul>
+</section>
+<section id="example-procfile">
+    <h3>Example Procfile</h3>
+    <pre><code>
+release: python manage.py migrate
+web: gunicorn cheeseshop.wsgi --log-file -
+    </code></pre>
+</section>
+<section id="heroku-install-part2">
+    <h3>Using Heroku (continued)</h3>
+    <ol start="5">
+        <li>Add two libraries to <code>requirements.txt</code>:
+            <pre><code data-trim>
+                django-heroku
+                gunicorn
+            </code></pre>
+            <span style="font-size: 70%">(<a href="https://gunicorn.org/">Gunicorn</a> is a production-grade Python WSGI HTTP Server for UNIX</a>)</span>
+        </li>
+        <li>Add a <code>runtime.txt</code> specifying the version of Python to use:
+            <pre><code data-trim>
+                python-3.7.8
+            </code></pre>
+        </li>
+        <li>Adjust your <code>settings.py</code> file a bit.</li>
+        <li>Commit everything to your Git repo.</li>
+    </ol>
+</section>
+<section id="deploying-1">
+    <p>Create an app on Heroku, which prepares Heroku to receive your source code. Run the following in the terminal:</p>
+    <pre><code data-trim>
+$> heroku create cmsc-291-cheese-shop
+    </code></pre>
+</section>
+<section id="deploying-2">
+    <p>You need to create a <code>SECRET_KEY</code> for your app:</p>
+    <pre><code data-trim>
+heroku config:set SECRET_KEY="9&%l8tqlhr4ibpq86#gcq_wxtr8272fd"
+    </code></pre>
+    <p>Any settings that:</p>
+    <ul>
+        <li>you don't want to store in version control (like passwords) can be set this way</li>
+        <li>you want to vary by environment</li>
+    </ul>
+    <p>...can be specified this way</p>
+</section>
+<section id="deploying-3">
+    <p>When you create an app, a git remote (called heroku) is also created and associated with your local git repository.</p>
+    <p>To deploy your app, you just push to this remote git repo:</p>
+    <pre><code data-trim>
+$> git push heroku
+    </code></pre>
+</section>
+<section id="heroku-install-part3">
+    <h3>Using Heroku (continued)</h3>
+    <ol start="7">
+        <li>Next, you'll need to adjust your <code>settings.py</code> file a bit.
+            <ul>
+                <li>import django_heroku</li>
+                <li>django_heroku.settings(locals())</li>
+            </ul>
+
+        </li>
+    </ol>
+</section>
+    </div>
+		</div>
+		<script src="dist/jquery.js"></script>
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/highlight/highlight.js"></script>
+		<script src="dist/plugin/math/math.js"></script>
+		<script>
+			$.noConflict();
+			Reveal.initialize({
+				plugins: [RevealHighlight, RevealMath]
+			});
+			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
+			jQuery(document).on("keypress", function(e) { 
+    			if(e.shiftKey && (e.which === 66 ))  {
+					var slide = Reveal.getCurrentSlide();
+					window.location.href = "#" + slide.id;
+				}
+			});
+		</script>
+
+	</body>
+</html>
