@@ -1,0 +1,270 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 21{% endblock %}
+
+{% block extra_style %}
+<style>
+    #title h1, #title p { color: #fff; }
+    .warning h3 { color: #203d7d; }
+    .warning h3 span { color: #fca311; font-size: 120%; }
+    #ml-definition div { text-align: right; font-size: 85%}
+    #input-data h2 { color: #4ecdc4; }
+    .abstraction h2 { color: #ff6b6b; }
+    #generalization h2 { color: #ddc75b; }
+</style>
+
+{% endblock %}
+
+{% block slides %}
+<section id="title" data-background-image="images/ml.jpeg">
+    <h1>Machine Learning</h1>
+    <p class="fragment fade-up">Introduction</p>
+</section>
+<section id="data-science">
+    <img src="images/data-science.png" height="700">
+</section>
+<section id="warning" class="warning">
+    <h3>This is a <span>huge</span> topic</h3>
+</section>
+<section id="history">
+    <p>So how do <strong>people</strong> learn?</p>
+    <ul>
+        <li>We <em>gain information</em> through observation or instruction</li>
+        <li>We <em>apply</em> this information to tasks</li>
+        <li>We <em>generalize</em> this information to related domains</li>
+    </ul>
+    <p class="fragment">"Machine Learning" is&mdash;obviously&mdash;far more simplistic.</p>
+</section>
+<section id="ml-definition">
+    <div>"A computer program is said to learn from experience <em>E</em> with respect to some class of tasks <em>T</em> and performance
+        measure P, if its performance at tasks in <em>T</em>, as measured by <em>P</em>, improves with experience <em>E</em>."<br>
+        <div>&mdash;Tom Mitchell,<br> Professor of Machine Learning, CMU</div>
+    </div>
+</section>
+<section id="ml-flow">
+    <img src="images/ml-flow.png">
+</section>
+<section id="input-data">
+    <h2>Input Data</h2>
+    <ul>
+        <li><strong>Features</strong>: individual measurable property or characteristic of a phenomenon being observed</li>
+        <li>Numeric data</li>
+        <li>Labeled images, documents, or audio</li>
+        <li>Graphs/Relationships</li>
+    </ul>
+</section>
+<section id="abstraction" class="abstraction">
+    <h2>Abstraction</h2>
+    <ul>
+        <li><strong>Features</strong> are used to derive a <strong>model</strong></li>
+        <li>A model is a summarized/generalized knowledge representation of the input data</li>
+        <li>Computational blocks (like if/else rules)</li>
+        <li>Math equations</li>
+        <li>Data structures like trees and graphs</li>
+        <li>Logical groupings of similar features</li>
+    </ul>
+</section>
+<section id="abstraction-2" class="abstraction">
+    <h2>Abstraction, Cont'd</h2>
+    <p>Different problems require different modeling approaches:</p>
+    <ul>
+        <li>Characterize the relationship between features</li>
+        <li>Predict some value given other information</li>
+        <li>Classify a thing by category</li>
+        <li>Group similar things together</li>
+    </ul>
+</section>
+<section id="generalization">
+    <h2>Generalization</h2>
+    <ul>
+        <li>Apply the model to new data</li>
+        <li>Evaluate the performance of the model</li>
+        <li>Make improvements</li>
+        <li>Try again</li>
+        <li>A model <em>generalizes</em> well when we can apply it to new data and it gives us the right answers</li>
+    </ul>
+</section>
+<section id="warning-2" class="warning">
+    <h3>None of this is <span>magic</span>.</h3>
+    <ul>
+        <li class="fragment fade-up">You need quality input data</li>
+        <li class="fragment fade-up">You need to be able to formulate a problem in a way that ML can work with</li>
+        <li class="fragment fade-up">You may need to spend time creating data to learn from</li>
+        <li class="fragment fade-up">You will need to spend time evaluating the result</li>
+    </ul>
+</section>
+<section id="lin-reg">
+    <h2>Remember this?</h2>
+    <img src="images/linear-regression-height-weight.png" height="371" width="601">
+    <p style="font-size: 40%">(Lecture 10: <a href="https://github.com/mazelife/cmsc-291/blob/master/cmsc_291/examples/lecture_10/notebooks/Exploratory-Data-Analysis.ipynb">Exploratory Data Analysis</a>)</p>
+</section>
+<section id="lin-reg-is-ml">
+    <img src="images/ml-flow.png" height="150">
+    <ul>
+        <li>Input data: height and width measurements</li>
+        <li>Abstraction: we have a prediction problem
+            <ul>
+                <li>"Given their height, can we predict someone's weight?"</li>
+                <li>Output is a math equation: <code>y = mx + b</code></li>
+                <li>Our model <em>learns</em> the value of <code>m</code> and <code>b</code></li>
+            </ul>
+        </li>
+        <li>Generalization: test with real data. How well does it predict?</li>
+    </ul>
+</section>
+<section id="residuals">
+    <img src="images/lin-reg-residuals.png" height="350">
+    <ul>
+        <li>We can formulate this problem (and a <strong>lot</strong> of ML problems) as trying to minimize a loss function</li>
+        <li>How much does our model miss the target?</li>
+        <li>Keep adjusting until our model is as close as it can be.</li>
+    </ul>
+</section>
+<section id="mse">
+    <h3>Mean Squared Error (MSE)</h3>
+    <img src="images/lin-reg-residuals.png" height="250">
+     \[\begin{aligned}
+    MSE = \frac{1}{n}\sum_{i=1}^{n} ({Y_{i} - \hat{Y_{i}}})^2
+    \end{aligned} \]
+</section>
+<section id="mse-code">
+    <h3>Mean Squared Error (MSE)</h3>
+    <img src="images/lin-reg-residuals.png" height="250">
+    <pre><code data-trim>
+total =  0
+for point in points:
+    err = distance(point, line)
+    total += (err * err)
+MSE = total / len(points)
+    </code></pre>
+</section>
+<section id="mse-compared">
+    <h3>MSE is <strong>not</strong> the only loss function.</h3>
+    <ul>
+        <li>There are many</li>
+        <li>Some work better than others depending on:
+            <ul>
+                <li>Kind of data</li>
+                <li>Kind of ML task</li>
+                <li>How you want penalize (or weight) certain kinds of error</li>
+            </ul>
+        </li>
+        <li>Mean absolute error (MAE) - doesn't penalize large errors</li>
+        <li>Likelihood Loss: good for comparing different models</li>
+        <li>Hinge Loss: good for classification</li>
+    </ul>
+</section>
+<section id="ols">
+    <p>There is a solution that will find the slope (<em>m</em>) and y-intercept (<em>b</em>) of a
+        line that minimizes MSE. It is called <a href="https://towardsdatascience.com/linear-regression-simplified-ordinary-least-square-vs-gradient-descent-48145de2cf76">Ordinary least squares</a> (OLS) regression</p>
+     \[\begin{aligned}
+    m = \frac{\sum_{(x_{i} - \overline{x})(y_{i} - \overline{y})}}{\sum_(x_{i} - \overline{x})^2} \\
+    b = \overline{y} - m * \overline{x} \\
+    \end{aligned} \]
+</section>
+<section id="ols-limits">
+    <ul>
+        <li>OLS is easy because it is a closed-form solution</li>
+        <li>You have a formula, you plug in the values, you get an answer</li>
+        <li>It is also very fast to compute (with you have a univariate solution)</li>
+        <li>It <strong>only</strong> useful for linear regression</li>
+        <li>What if we have a multivariate problem? (e.g. age, and height to predict weight)</li>
+        <li>What if the solution is non-linear? </li>
+    </ul>
+</section>
+<section id="gradient-descent">
+    <h3>Gradient Descent</h3>
+    <p>Another (more general method) to minimize a loss function like MSE</p>
+    <ul>
+        <li>Faster to compute with multivariate regression</li>
+        <li>Can minimize loss function for non-linear solutions too</li>
+    </ul>
+</section>
+<section id="gradient-descent-2">
+    <img src="images/gradient-descent.png">
+</section>
+<section id="gradient-descent-3">
+    <img src="images/gradient-descent-handmade.jpeg" height="600">
+</section>
+<section id="gradient-descent-4">
+    <img src="images/gradient-descent.png">
+</section>
+<section id="gradient-descent-5">
+    <p>When the slope is zero, we know we have minimized our loss function</p>
+    <img src="images/error-curve.jpeg">
+    <p>As we get closer, our steps get smaller and smaller</p>
+</section>
+<section id="gradient-descent-6">
+    <img src="images/gradient-descent.gif">
+</section>
+<section id="types">
+    <p>There are two main categories of machine learning algorithms</p>
+    <ol>
+        <li>Supervised Learning</li>
+        <li>Unsupervised Learning</li>
+    </ol>
+</section>
+<section id="supervised-learning">
+    <h3>Supervised Learning</h3>
+    <ul>
+        <li>Algorithms that "learn" from past information</li>
+        <li>Needs <strong>training</strong> data</li>
+        <li>Linear regression in an example
+            <ul>
+                <li>We gave it training data (height/width measurements)</li>
+                <li>It learned to predict height based of width from this data</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="supervised-learning-flow">
+    <img src="images/supervised-learning.png">
+</section>
+<section id="regression-and-classification">
+    <h3>Supervised Learning Tasks</h3>
+    <ul>
+        <li>Prediction (AKA <strong>regression</strong>)
+            <ul>
+                <li>What is our forecasted earnings growth?</li>
+                <li>What is the likelihood it will rain?</li>
+                <li>What is the most effective dosage for this patient?</li>
+                <li>We are predicting <strong>continuous</strong> values</li>
+            </ul>
+        </li>
+        <li>Classification
+            <ul>
+                <li>Image classification</li>
+                <li>Handwriting recognition</li>
+                <li>Is this email spam or not? (binary)</li>
+                <li>We are predicting <strong>discrete</strong> values</li>
+            </ul>
+        </li>
+
+    </ul>
+</section>
+<section id="warning-about-data">
+    <h2 style="color: #233d4d">Bad training data makes <span style="color: #fe7f2d; font-size: 120%">bad</span> models</h2>
+</section>
+<section id="unsupervised-learning">
+    <h3>Unsupervised Learning</h3>
+    <ul>
+        <li>No labelled training data to learn from, no prediction to be made</li>
+        <li>Primarily about looking for patterns in data</li>
+        <li>Can we group things together?</li>
+        <li>Are there hidden relationships among things?</li>
+    </ul>
+</section>
+<section id="unsupervised-learning-flow">
+    <img src="images/unsupervised-learning.png" height="600">
+</section>
+<section id="clustering">
+    <h3>Clustering</h3>
+
+    <ul>
+        <li>Group or organize similar objects together</li>
+        <li>Can we draw boundaries around objects in N-dimensional space?</li>
+
+    </ul>
+    <img src="images/clustering.png" height="300">
+</section>
+
+{% endblock %}
