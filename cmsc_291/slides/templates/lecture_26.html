@@ -1,0 +1,136 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 21{% endblock %}
+
+{% block extra_style %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block slides %}
+<section id="title">
+    <h2>Machine Learning: Classification</h2>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li>Assignment 6: Deadline extended to Tuesday December 8.
+            <ul>
+                <li>This is our last day of class</li>
+                <li>No extensions</li>
+            </ul>
+        </li>
+        <li>Assignment 7: I'm dropping it.
+            <ul>
+                <li>Your grade will be based on assignments 1-6</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="recap">
+    <h2>Let's recap regression.</h2>
+</section>
+<section id="univariate-regression-inputs">
+    <h3>Input Data: univariate regression</h3>
+    <img src="images/regression_inputs.png" height="500">
+</section>
+<section id="univariate-regression-training">
+    <h3>Model training</h3>
+    <img src="images/model_training.png">
+</section>
+<section id="univariate-regression-prediction">
+    <h3>Predicting with the model</h3>
+    <img src="images/model_prediction.png">
+</section>
+<section id="multivariate-regression-inputs">
+    <h3>Input Data: multivariate regression</h3>
+    <img src="images/multivariate_regression_inputs.png" height="500">
+</section>
+<section id="multivariate-regression-training">
+    <h3>Model training</h3>
+    <img src="images/multivariate_model_training.png">
+</section>
+<section id="multivariate-regression-prediction">
+    <h3>Predicting with the model</h3>
+    <img src="images/multivariate_model_prediction.png">
+</section>
+
+<section id="polynomial-regression">
+    <h3>Let's talk about polynomial regression...</h3>
+</section>
+
+<section id="naive-bayes">
+    <h3>Naive Bayesian Classifier</h3>
+    <img src="images/bayes.jpg">
+    <p>Thomas Bayes</p>
+</section>
+<section id="naive-bayes-why">
+    <h3>What makes the Naive Bayes Classifier Good?</h3>
+    <ul>
+        <li>Simple</li>
+        <li>Intuitive</li>
+        <li>Works surprisingly well</li>
+    </ul>
+</section>
+<section id="naive-bayes-method-1">
+    <h3>How does it work?</h3>
+    <ul>
+        <li>Let's say we have three categories: 1, 2, and 3</li>
+        <li>And we have a bunch of features, <br><code>X =[x1,x2,x3...x4]</code></li>
+        <li>Every <code>x</code> belongs to one of three categories: 1, 2, or 3</li>
+        <li>We want to calculate <em>probability</em>. Given a single x, what is the probability of it's being a y?</li>
+        <li>Which value of y has the highest probability? That's the one we choose to classify our x as.</li>
+        <li class="fragment">But <strong>how</strong> do we do that?</li>
+    </ul>
+</section>
+<section id="naive-bayes-method-2">
+    <h3>Enter Bayes' theorem</h3>
+     \[\begin{aligned}
+    P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
+    \end{aligned} \]
+</section>
+<section id="naive-bayes-method-3">
+    <img src="images/bayes-table.png">
+</section>
+    {% raw %}
+<section id="naive-bayes-method-4">
+    <h3>We can calculate <code>P(Y)</code></h3>
+\[\begin{aligned}
+P(Y\equiv Play) = \frac{\#Play}{\#Play + \#NoPlay}
+\end{aligned} \]
+</section>
+<section id="naive-bayes-method-5">
+    <h3>We can calculate <code>P(X)</code></h3>
+\[\begin{aligned}
+P(Y\equiv Sunny) = \frac{\#Sunny}{\#Sunny + \#Overcast + \#Rainy}
+\end{aligned} \]
+</section>
+<section id="naive-bayes-method-6">
+    <h3>We can calculate <code>P(X|Y)</code></h3>
+\[\begin{aligned}
+P(X \equiv Sunny|Y\equiv Play) = \frac{\#Play \& \#Sunny}{\#Play}
+\end{aligned} \]
+</section>
+<section id="naive-bayes-method-7">
+    <h3>The problem is that this gets huge</h3>
+    <ul>
+        <li>For a model with k <em>binary</em> features, there are:
+            \[\begin{aligned}
+            2^{k+1} - 1
+            \end{aligned} \]
+            ...parameters to calculate
+        </li>
+        <li>7 parameters are needed for a 2-feature binary dataset</li>
+        <li>To get around this we pretend all features are independent</li>
+        <li>This is the "naive" part of the algorithm. Parameters to calculate now:
+            \[\begin{aligned}
+            2k
+            \end{aligned} \]
+        </li>
+    </ul>
+</section>
+{% endraw %}
+{% endblock %}
+
+
+
