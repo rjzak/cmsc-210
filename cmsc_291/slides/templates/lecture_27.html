@@ -1,0 +1,97 @@
+{% extends "slides_base.html" %}
+{% block title %}CMSC 291: Lecture 27{% endblock %}
+
+{% block extra_style %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block slides %}
+<section id="title">
+    <h2>Machine Learning: Decision Trees &amp Clustering</h2>
+</section>
+<section id="announcements">
+    <h2>Announcements</h2>
+    <ul>
+        <li>Assignment 6: Due tonight at midnight</li>
+        <li>Please take a few minutes to complete a course eval
+            <ul>
+                <li>You should have received an email from <code>StudentCourseEvaluations@umbc.edu</code> with a link to the surveys for classes in which you are enrolled</li>
+                <li>Deadline is December 8th</li>
+            </ul>
+        </li>
+    </ul>
+</section>
+<section id="decision-trees">
+    <h3>Decision Trees</h3>
+    <ul>
+        <li>Last time we looked at the naive Bayes classifier</li>
+        <li>Before we move on to clustering, let's look at one other type of classifier</li>
+        <li>The <strong>decision tree</strong> classifier is another common type of classifier
+            <ul>
+                <li>Simple</li>
+                <li>Intuitive</li>
+                <li>Works well in many scenarios</li>
+                <li>Is <em>explicable</em></li>
+            </ul>
+        </li>
+
+    </ul>
+</section>
+<section id="decision-tree-example">
+    <p>Decision trees mirror how humans approach decision making:</p>
+    <img src="images/decision-tree.png" height="500">
+</section>
+
+<section id="decision-tree-example-2">
+    <img src="images/iris-decision-tree.png">
+</section>
+<section id="how-built">
+    <h2>How is a decision tree built?</h2>
+</section>
+<section id="steps-1">
+    <h3>Overview</h3>
+    <ul>
+        <li>Make decision based on the feature data that splits the data into two subsets</li>
+        <li>For each subset, make another decision that further splits the data</li>
+        <li>When you reach small enough subsets where all data points that fall under one label, stop</li>
+    </ul>
+</section>
+<section id="steps-2">
+    <h3>How do we decide how to make the split?</h3>
+    <ul>
+        <li>There are actually a number of ways to decide this</li>
+        <li><strong>entropy</strong>: a measure of randomness. what split will reduce entropy the most?
+            <ul>
+                <li>If the sample is completely homogeneous the entropy is zero (lowest)</li>
+                <li>If the sample is an equally divided it has entropy of one (highest)</li>
+                <li>Works best for cleaner, low dimensional data sets</li>
+
+            </ul>
+        </li>
+        <li><strong>Gini Impurity</strong>: a measure of homogeneity
+            <ul>
+                <li>Works best for noisier, higher dimensional data sets</li>
+            </ul>
+        </li>
+        <li>As always, the best answer is arrived at experimentally: try both and see which works better.</li>
+    </ul>
+</section>
+<section id="steps-3">
+    <h3>When do we stop splitting?</h3>
+    <ul>
+        <li>The goal is to find the <em>smallest tree</em> that fits the data.</li>
+        <li>We reach a <strong>terminal node</strong> when a node cannot be split into further sub-nodes</li>
+        <li>The deeper your tree goes, the more likely you are to over-fit</li>
+        <li>Specify a maximum depth can be a good way to stop a tree from growing too deep</li>
+        <li>Pruning: chopping down the branches which consider features having low importance</li>
+    </ul>
+</section>
+<section>
+    <h2>Clustering</h2>
+</section>
+{% endblock %}
+
+
+
