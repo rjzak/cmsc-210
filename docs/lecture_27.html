@@ -100,8 +100,71 @@
         <li>Pruning: chopping down the branches which consider features having low importance</li>
     </ul>
 </section>
-<section>
+<section id="decision-tree-time">
+    <h2>Let's make a decision tree...</h2>
+</section>
+<section id="clustering">
     <h2>Clustering</h2>
+</section>
+<section id="clustering-defined">
+    <h3>Clustering</h3>
+    <ul>
+        <li>Clustering is an <strong>unsupervised</strong> ML method</li>
+        <li>Clustering algorithms will attempt to divide a set of data into 2 or more segments</li>
+        <li>Data <em>within</em> clusters should be as similar as possible</li>
+        <li>Data <em>between</em> clusters should be as different as possible</li>
+    </ul>
+</section>
+<section id="clustering-example">
+    <p>How can we best draw <em>N</em> boundaries around this data?</p>
+    <img src="images/clustering.png">
+</section>
+<section id="clustering-algorithms">
+    <ul>
+        <li>Most algorithms require you to say how many clusters you want in advance</li>
+        <li>But there are also methods to suggest an optimum number of clusters from the data</li>
+    </ul>
+</section>
+<section id="k-means-1">
+    <h3>K-Means Clustering</h3>
+    <ul>
+        <li>Simple, works fairly well</li>
+        <li>Pick <em>N</em> random points in your data where N=number of clusters</li>
+        <li>Each of these points is called the <em>centroid</em></li>
+        <li>Go through every other point and assign it to the nearest centroid</li>
+        <li>For each of the clusters, find the new center of the cluster</li>
+        <li>Now go through each point and re-assign to the closest centroid</li>
+        <li>Keep doing this till the clusters stop changing</li>
+    </ul>
+</section>
+<style>
+#k-means-2 div p {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    }
+</style>
+<section id="k-means-2">
+    <div>
+        <p class="fragment fade-out"><img src="images/k-means-1.png"></p>
+        <p class="fragment fade-in-then-out"><img src="images/k-means-2.png"></p>
+    </div>
+    <div>
+        <p class="fragment fade-in-then-out"><img src="images/k-means-3.png"></p>
+        <p class="fragment fade-in"><img src="images/k-means-4.png"></p>
+    </div>
+</section>
+<section id="clustering-uses">
+    <h2>Uses of clustering</h2>
+    <ul>
+        <li>Segmentation (audience/customer)</li>
+        <li>Document clustering</li>
+        <li>Image segmentation</li>
+        <li>Recommendation engines</li>
+    </ul>
+</section>
+<section id="clustering-time">
+    <h2>Let's do some clustering...</h2>
 </section>
 </div>
 		</div>
