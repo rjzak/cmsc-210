@@ -3,7 +3,7 @@ Baltimore City 311 Request Data Exploration
 
 To get started, make sure you install these libraries::
 
-    $> conda install numpy scikit-learn pandas jupyterlab ipywidgets matplotlib plotly Nodejs
+    $> conda install numpy scikit-learn pandas seaborn jupyterlab ipywidgets matplotlib plotly python-graphviz Nodejs
 
 
 Next, you'll need to install some Jupyterlab extensions::
