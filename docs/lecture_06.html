@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>CMSC 291: Lecture 8</title>
+		<title>CMSC 210: Lecture 8</title>
         <link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/solarized.css">
 		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
@@ -87,13 +87,13 @@
 from setuptools import setup
 
 setup(
-    name='cmsc-291',
+    name='cmsc-210',
     version='1.0.0',
-    url='https://github.com/umbc/cmsc291.git',
+    url='https://github.com/umbc/cmsc210.git',
     author='James Stevenson',
     author_email='author@gmail.com',
-    description='All code written in CMSC-291',
-    packages=["cmsc291"],
+    description='All code written in CMSC-210',
+    packages=["cmsc210"],
     install_requires=['dependencyA == 1.11.1',
                       'dependencyB >= 1.5.0'],
 )
@@ -117,17 +117,17 @@ setup(
 import sys
 >>> print('\n'.join(sys.path))
 
-/opt/anaconda3/envs/cmsc-291/lib/python38.zip
-/opt/anaconda3/envs/cmsc-291/lib/python3.8
-/opt/anaconda3/envs/cmsc-291/lib/python3.8/lib-dynload
-/opt/anaconda3/envs/cmsc-291/lib/python3.8/site-packages
+/opt/anaconda3/envs/cmsc-210/lib/python38.zip
+/opt/anaconda3/envs/cmsc-210/lib/python3.8
+/opt/anaconda3/envs/cmsc-210/lib/python3.8/lib-dynload
+/opt/anaconda3/envs/cmsc-210/lib/python3.8/site-packages
     </code></pre>
     <p>When using the Python distribution supplied with conda, <code>site-packages</code> is where most things will go.</p>
 </section>
 <section id="srcdist">
     <p style="text-align: center">
         <img src="images/file-icon.png" width="300"><br>
-        <code style="margin-top: -43px; display: block;">cmsc-291-1.0.0.tar.gz</code>
+        <code style="margin-top: -43px; display: block;">cmsc-210-1.0.0.tar.gz</code>
     </p>
     <p>If you have a source distribution, python can install it for you.<br>
         But where do you get a source distribution?
@@ -192,10 +192,10 @@ import sys
 from setuptools import setup
 
 setup(
-    name='cmsc-291',
+    name='cmsc-210',
     version='1.0.0',
-    description='All code written in CMSC-291',
-    packages=['cmsc291'],
+    description='All code written in cmsc-210',
+    packages=['cmsc210'],
     install_requires=['seaborn == 0.11.0',
                       'scikit-learn == 0.23' ],
 )

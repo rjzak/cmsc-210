@@ -20,7 +20,7 @@ def build_index(location: str = "build") -> None:
             if source.suffix == ".html":
                 template = env.get_template(source.name)
                 with open(build_dir / source.name, "w") as fh:
-                    html = template.render()
+                    html = template.render(course_number=210, season="spring", year=2022)
                     fh.write(html)
 
 

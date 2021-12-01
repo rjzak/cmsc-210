@@ -1,4 +1,4 @@
-name: cmsc-291
+name: cmsc-210
 dependencies:
   - python=3.8
   - numpy
