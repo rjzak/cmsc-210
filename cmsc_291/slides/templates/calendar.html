@@ -1,6 +1,6 @@
 {% extends "document_base.html" %}
-{% block title %}CMSC 291: Course Calendar{% endblock %}
+{% block title %}CMSC {{ course_number }}: Course Calendar{% endblock %}
 {% block body %}
-<h1>CMSC 291 Course Calendar</h1>
+<h1>CMSC {{ course_number }} Course Calendar</h1>
 <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23fdf6e3&amp;ctz=America%2FNew_York&amp;src=YzBkaHBxZmc4dXNpZHJjN2F2cDMzdTZrMDBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23EF6C00&amp;showTitle=0&amp;showNav=1" style="border-width:0" width="1130" height="800" frameborder="0" scrolling="no"></iframe>
 {% endblock %}

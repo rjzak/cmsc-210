@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>CMSC 291: Lecture 22</title>
+		<title>CMSC 210: Lecture 22</title>
         <link rel="stylesheet" href="dist/reveal.css">
 		<link rel="stylesheet" href="dist/theme/solarized.css">
 		<link rel="stylesheet" href="dist/plugin/highlight/zenburn.css">
@@ -205,7 +205,7 @@ web: gunicorn cheeseshop.wsgi --log-file -
         <li>Create an app on Heroku, which prepares Heroku to receive your source code. Run the following in the terminal:</li>
     </ol>
     <pre><code data-trim>
-$> heroku create cmsc-291-cheese-shop
+$> heroku create cmsc-210-cheese-shop
     </code></pre>
 </section>
 <section id="deploying-2">
@@ -262,7 +262,7 @@ heroku-postgresql (postgresql-corrugated-17723)  hobby-dev  free   created
     <h3>Let's find out about our database</h3>
     <pre><code data-trim>
 $> heroku config
-=== cmsc-291-cheese-shop Config Vars
+=== cmsc-210-cheese-shop Config Vars
 DATABASE_URL: postgres://**********:b4c39d26b9f48a5b989c7efe46bb677f7cc7b1a50affab89b5c26529d7c87602@ec2-3-216-89-250.compute-1.amazonaws.com:5432/d94mllmcnmq0lu
 SECRET_KEY:   9&%l8tqlhr4ibpq86#gcq_wxtr8572fdHJI
     </code></pre>
