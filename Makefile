@@ -27,10 +27,10 @@ help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 build: ## build HTML slides from sources
-	@python -c "from cmsc_291.slides import build; build()"
+	@python -c "from cmsc_210.slides import build; build()"
 
 build-gh-pages: ## build HTML slides from sources to the Github Pages directory (docs)
-	@python -c "from cmsc_291.slides import build; build(location='docs')"
+	@python -c "from cmsc_210.slides import build; build(location='docs')"
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
@@ -63,7 +63,7 @@ test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source cmsc_291 setup.py test
+	coverage run --source cmsc_210 setup.py test
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
