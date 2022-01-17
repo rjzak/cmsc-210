@@ -6,7 +6,6 @@ from .models import Cheese
 
 
 class CheeseAdminForm(forms.ModelForm):
-
     def clean_fat_content(self):
         # do something that validates your data
         fat_content = self.cleaned_data["fat_content"]
@@ -25,5 +24,3 @@ class CheeseAdmin(admin.ModelAdmin):
     form = CheeseAdminForm
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ["name", "description"]
-
-

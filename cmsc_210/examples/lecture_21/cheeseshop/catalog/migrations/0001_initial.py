@@ -7,22 +7,24 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Cheese',
+            name="Cheese",
             fields=[
-                ('slug', models.SlugField(max_length=200, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=200, unique=True)),
-                ('country_of_origin', models.CharField(max_length=200)),
-                ('fat_content', models.FloatField(null=True)),
-                ('last_updated', models.DateField(auto_now=True)),
+                (
+                    "slug",
+                    models.SlugField(max_length=200, primary_key=True, serialize=False),
+                ),
+                ("name", models.CharField(max_length=200, unique=True)),
+                ("country_of_origin", models.CharField(max_length=200)),
+                ("fat_content", models.FloatField(null=True)),
+                ("last_updated", models.DateField(auto_now=True)),
             ],
             options={
-                'ordering': ['name'],
-                'get_latest_by': 'last_updated',
+                "ordering": ["name"],
+                "get_latest_by": "last_updated",
             },
         ),
     ]

@@ -1,10 +1,10 @@
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # CMSC 291 Lecture 10: Default Application configuration for Jupyter Lab
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 
 ## The directory to use for notebooks and kernels.
-c.NotebookApp.notebook_dir = 'notebooks'
+c.NotebookApp.notebook_dir = "notebooks"
 
 ## Forces users to use a password for the Notebook server. This is useful in a
 #  multi user environment, for instance when everybody in the LAN can access each
@@ -16,5 +16,3 @@ c.NotebookApp.password_required = False
 
 ## The port the notebook server will listen on (env: JUPYTER_PORT).
 c.NotebookApp.port = 8888
-
-

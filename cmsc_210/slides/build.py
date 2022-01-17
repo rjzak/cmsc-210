@@ -35,8 +35,10 @@ def images_dir_path() -> Path:
 
 def copy_static_files(location: str = "build"):
     with build_directory(location) as build_dir:
-        pairs = ((static_dir_path(), build_dir / "dist"),
-                 (images_dir_path(), build_dir / "images"))
+        pairs = (
+            (static_dir_path(), build_dir / "dist"),
+            (images_dir_path(), build_dir / "images"),
+        )
         for src, dest in pairs:
             if not same_contents(src, dest):
                 print(f"Copying {src} to {dest}...")

@@ -6,4 +6,3 @@ from .models import Cheese
 @admin.register(Cheese)
 class CheeseAdmin(admin.ModelAdmin):
     pass
-

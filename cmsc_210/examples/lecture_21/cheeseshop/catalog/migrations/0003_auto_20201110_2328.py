@@ -7,21 +7,32 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0002_cheese_description'),
+        ("catalog", "0002_cheese_description"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='cheese',
-            name='fat_content',
+            model_name="cheese",
+            name="fat_content",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.CreateModel(
-            name='Rating',
+            name="Rating",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('rating', models.IntegerField()),
-                ('cheese', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.cheese')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("rating", models.IntegerField()),
+                (
+                    "cheese",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="catalog.cheese"),
+                ),
             ],
         ),
     ]

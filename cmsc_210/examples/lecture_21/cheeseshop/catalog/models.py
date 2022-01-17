@@ -23,7 +23,7 @@ class Cheese(models.Model):
         return self.fat_content >= 0.5
 
     def avg_rating(self):
-        avg_rating = self.rating_set.all().aggregate(Avg('rating'))["rating__avg"]
+        avg_rating = self.rating_set.all().aggregate(Avg("rating"))["rating__avg"]
         if not avg_rating:
             return "not rated"
         else:

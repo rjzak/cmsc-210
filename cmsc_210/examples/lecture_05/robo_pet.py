@@ -2,7 +2,6 @@ import sys
 
 
 class Animal:
-
     def __init__(self, age, weight, name, breed):
         self.age = age
         self.weight = weight
@@ -17,13 +16,11 @@ class Animal:
 
 
 class Cat(Animal):
-
     def change_litter(self):
         print(f"Changing litter for {self.name}...")
 
 
 class Dog:
-
     def __init__(self, age, weight, name, breed, housebroken=True):
         self.animal = Animal(age, weight, name, breed)
         super().__init__(age, weight, name, breed)
@@ -37,9 +34,7 @@ class Dog:
         print(f"Walking {self.name}...")
 
 
-
 class Pen:
-
     def __init__(self):
         self.pen = []
 
@@ -52,7 +47,7 @@ class Pen:
     def remove(self, name):
         for animal in self.pen:
             if animal.name == name:
-                return  animal
+                return animal
         print("Animal not found.")
 
     def feed(self):
@@ -75,8 +70,9 @@ def read_csv(filename):
 
 if __name__ == "__main__":
     import csv
+
     filename = sys.argv[1]
     read_csv(filename)
     with open(filename) as filehandle:
         for row in csv.reader(filehandle):
-           pass
+            pass

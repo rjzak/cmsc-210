@@ -10,7 +10,7 @@ def template_dir_path() -> Path:
 
 env = Environment(
     loader=FileSystemLoader(str(template_dir_path())),
-    autoescape=select_autoescape(['html', 'xml'])
+    autoescape=select_autoescape(["html", "xml"]),
 )
 
 
@@ -24,7 +24,6 @@ def build_index(location: str = "build") -> None:
                         course_number=210,
                         season="spring",
                         year=2022,
-                        student_github_project_name="cmsc-210-spring-2022")
+                        student_github_project_name="cmsc-210-spring-2022",
+                    )
                     fh.write(html)
-
-

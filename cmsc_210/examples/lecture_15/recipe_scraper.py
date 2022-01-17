@@ -3,7 +3,6 @@ import requests
 
 
 class Recipe:
-
     def __init__(self, name, ingredients, steps):
         self.name = name
         self.ingredients = ingredients
@@ -27,10 +26,12 @@ def clean_string(tag):
     return new_string
 
 
-def scrape(html,
-           name_selector='[itemprop="name"]',
-           ingredient_selector='[itemprop="recipeIngredient"]',
-           step_selector='[itemprop="step"]'):
+def scrape(
+    html,
+    name_selector='[itemprop="name"]',
+    ingredient_selector='[itemprop="recipeIngredient"]',
+    step_selector='[itemprop="step"]',
+):
     soup = BeautifulSoup(html, "html.parser")
     name = clean_string(soup.select(name_selector)[0])
     ingredients = []
@@ -43,18 +44,21 @@ def scrape(html,
 
 
 def scrape_epicurious(html):
-    return scrape(html,
-                  name_selector="h1",
-                  ingredient_selector='[itemprop="ingredients"]',
-                  step_selector=".preparation-step")
+    return scrape(
+        html,
+        name_selector="h1",
+        ingredient_selector='[itemprop="ingredients"]',
+        step_selector=".preparation-step",
+    )
 
 
 def scrape_allrecipe(html):
-    return scrape(html,
-                  name_selector="h1.headline",
-                  ingredient_selector='.ingredients-item-name',
-                  step_selector=".instructions-section-item")
-
+    return scrape(
+        html,
+        name_selector="h1.headline",
+        ingredient_selector=".ingredients-item-name",
+        step_selector=".instructions-section-item",
+    )
 
 
 if __name__ == "__main__":

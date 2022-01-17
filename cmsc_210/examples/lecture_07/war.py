@@ -33,7 +33,6 @@ SUITS = ("Clubs", "Diamonds", "Hearts", "Spades")
 
 @total_ordering
 class Card:
-
     def __init__(self, suit, value):
         self.suit = suit
         self.value = value
@@ -49,7 +48,6 @@ class Card:
 
 
 class FaceCard(Card):
-
     def __init__(self, suit, face):
         value = FACES.index(face) + 11
         super().__init__(suit, value)
@@ -60,7 +58,6 @@ class FaceCard(Card):
 
 
 class Player:
-
     def __init__(self, name):
         self.name = name
         self.score = 0
@@ -80,7 +77,6 @@ class Player:
 
 
 class Deck:
-
     def __init__(self):
         self.cards = []
         for suit in SUITS:
@@ -99,7 +95,6 @@ class Deck:
 
 
 class Game:
-
     def __init__(self):
         self.deck = Deck()
         self.player_1 = Player("Sid")

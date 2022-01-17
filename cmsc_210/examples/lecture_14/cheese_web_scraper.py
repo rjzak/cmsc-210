@@ -13,7 +13,7 @@ def get_html(url):
 def get_info(html):
     """Fetch the summary points of information from an individual cheese page as a Python dictionary."""
     properties = {}
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
     for li in soup.select(".summary-points li"):
         text = li.text
         if ":" in text:

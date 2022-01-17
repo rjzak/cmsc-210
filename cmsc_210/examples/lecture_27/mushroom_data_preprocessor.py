@@ -27,7 +27,7 @@ import re
 from typing import List, Dict, Tuple
 
 
-key =__doc__
+key = __doc__
 
 
 def get_column_defs(key: str) -> List[Tuple[str, Dict[str, str]]]:
@@ -37,7 +37,7 @@ def get_column_defs(key: str) -> List[Tuple[str, Dict[str, str]]]:
         if line:
             match = column_def.match(line)
             if not match:
-                raise ValueError(f"Failed to match line: \"{line}\".")
+                raise ValueError(f'Failed to match line: "{line}".')
             column = match.groupdict()["column"]
             key_string = match.groupdict()["keys"]
             abbreviation_map: Dict[str, str] = {}

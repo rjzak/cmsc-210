@@ -20,4 +20,8 @@ def cheese_detail(request, cheese_id):
     if cheese_id not in CHEESES:
         return HttpResponseNotFound(f"I don't know about a cheese called {cheese_id}.")
     name, country, description = CHEESES[cheese_id]
-    return render(request, "cheese_detail.html", {"name": name, "country": country, "description": description})
+    return render(
+        request,
+        "cheese_detail.html",
+        {"name": name, "country": country, "description": description},
+    )
