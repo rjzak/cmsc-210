@@ -24,8 +24,7 @@
 """
 import csv
 import re
-from typing import List, Dict, Tuple
-
+from typing import Dict, List, Tuple
 
 key = __doc__
 

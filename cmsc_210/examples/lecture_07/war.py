@@ -26,7 +26,6 @@ Let's implement a simple card game: https://en.wikipedia.org/wiki/War_(card_game
 from functools import total_ordering
 from random import shuffle
 
-
 FACES = ("Jack", "Queen", "King", "Ace")
 SUITS = ("Clubs", "Diamonds", "Hearts", "Spades")
 

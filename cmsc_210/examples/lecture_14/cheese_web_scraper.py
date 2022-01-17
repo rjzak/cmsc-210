@@ -1,5 +1,5 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
 URL = "https://cheese.com/bleu-dauvergne/"
 

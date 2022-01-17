@@ -1,9 +1,8 @@
 from datetime import datetime
 
+from cheeseshop.cheeses import CHEESES
 from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
-
-from cheeseshop.cheeses import CHEESES
 
 
 def index(request):
