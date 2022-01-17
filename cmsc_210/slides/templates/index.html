@@ -3,6 +3,14 @@
 {% block body %}
         <h1>CMSC {{ course_number }}</h1>
         <h2>Advanced Computing: {{ season }} {{ year }}</h2>
+        <dl class="row">
+            <dt class="col-sm-2">Meeting Times:</dt>
+            <dd class="col-sm-9">Tuesday &amp; Thursday 5:30pm - 6:45pm</dd>
+            <dt class="col-sm-2">Location:</dt>
+            <dd class="col-sm-9">Sherman Hall 013</dd>
+
+        </dl>
+
         <hr>
         <h2>Useful Links</h2>
         <ul>
@@ -22,7 +30,7 @@
             <dt class="col-sm-2">Office Hours:</dt>
             <dd class="col-sm-9">Monday 5:30 - 6:45 (by appointment)</dd>
         </dl>
-        <h3>Agatha Turyahikayo</h3>
+        <h3>TBD</h3>
         <dl class="row">
             <dt class="col-sm-2">Role:</dt>
             <dd class="col-sm-9">Teaching Assistant</dd>
@@ -33,53 +41,56 @@
         </dl>
         <h2>Lecture Topics</h2>
         <ol>
-            <li><a href="lecture_01.html">Course overview &amp; python review</a> — August 27</li>
-            <li><a href="lecture_02.html">Fancy python</a> — September 1</li>
-            <li><a href="installation_guide.html">Installfest</a> — September 3</li>
-            <li><a href="lecture_03.html">Local development &amp; Git</a> — September 8</li>
-            <li><a href="lecture_04.html">Types, Classes, &amp; objects</a> — September 10</li>
-            <li><a href="lecture_05.html">Object-Oriented Programming</a> — September 15</li>
-            <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_07/war.py">Object-oriented Programming Design Lab</a> — September 17</li>
-            <li><a href="lecture_06.html">Python Packaging</a> - September 22</li>
-            <li><a href="lecture_07.html">Data formats &amp; plotting</a> — September 29</li>
+            <li><a href="lecture_01.html">Course overview &amp; python review</a> — February 1</li>
+            <li><a href="lecture_02.html">Fancy python</a> — February 3</li>
+            <li><a href="installation_guide.html">Installfest</a> — February 8</li>
+            <li><a href="lecture_03.html">Local development &amp; Git</a> — February 10</li>
+            <li><a href="lecture_04.html">Types, Classes, &amp; objects</a> — February 15</li>
+            <li><a href="lecture_05.html">Object-Oriented Programming</a> — February 17</li>
+            <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_07/war.py">Object-oriented Programming Design Lab</a> — February 22</li>
+            <li><a href="lecture_06.html">Python Packaging</a> - February 24</li>
+            <li><a href="lecture_07.html">Data formats &amp; plotting</a> — March 1</li>
             <li><a href="lecture_10.html">Exploratory Data Analysis slides</a>
-                and <a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_10/notebooks/Exploratory-Data-Analysis.ipynb">notebook</a> — October 1. </li>
-            <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_11/notebooks/Baltimore%20Data%20Exploration.ipynb">Design Lab: Data Viz Project</a> — October 6</li>
-            <li><a href="lecture_12.html">HTML</a> — October 8</li>
-            <li><a href="lecture_13.html">CSS</a> — October 13</li>
-            <li><a href="lecture_14.html">Web Scraping</a> — October 15</li>
-            <li><a href="lecture_15.html">Web scraping: Design Lab</a> — October 20</li>
-            <li><a href="lecture_16.html">Generators, Decorators, and List Comprehensions</a> — October 22</li>
-            <li><a href="lecture_17.html">Web development with Django</a> — October 27</li>
-            <li><a href="lecture_18.html">Web development with Django: II</a> — October 29</li>
-            <li><a href="lecture_19.html">Web development with Django: Templates</a> — November 3</li>
-            <li><a href="lecture_20.html">Web development with Django: Models/Admin</a> — November 5</li>
-            <li><a href="lecture_21.html">Web development with Django: Admin &amp; Forms</a> — November 10</li>
-            <li><a href="lecture_22.html">Web development with Django: Deployment</a> — November 17 + <a href="https://github.com/{{ student_github_project_name }}/cheeseshop">Final version</a> of in-class project</li>
-            <li><a href="lecture_23.html">Machine Learning: Intro</a> — November 19</li>
-            <li>Django Review (using <a href="https://github.com/{{ student_github_project_name }}/cheeseshop">in-class project</a>) — November 24</li>
+                and <a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_10/notebooks/Exploratory-Data-Analysis.ipynb">notebook</a> — March 3. </li>
+            <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_11/notebooks/Baltimore%20Data%20Exploration.ipynb">Design Lab: Data Viz Project</a> — March 8</li>
+            <li><a href="lecture_12.html">HTML</a> — March 10</li>
+            <li><a href="lecture_13.html">CSS</a> — March 15</li>
+            <li><a href="lecture_14.html">Web Scraping</a> — March 17</li>
+            <li><a href="lecture_15.html">Web scraping: Design Lab</a> — March 29</li>
+            <li><a href="lecture_16.html">Generators, Decorators, and List Comprehensions</a> — March 31</li>
+            <li><a href="lecture_17.html">Web development with Django</a> — April 5</li>
+            <li><a href="lecture_18.html">Web development with Django: II</a> — April 7</li>
+            <li><a href="lecture_19.html">Web development with Django: Templates</a> — April 12</li>
+            <li><a href="lecture_20.html">Web development with Django: Models/Admin</a> — April 14</li>
+            <li><a href="lecture_21.html">Web development with Django: Admin &amp; Forms</a> — April 19</li>
+            <li><a href="lecture_22.html">Web development with Django: Deployment</a> — April 21 + <a href="https://github.com/{{ student_github_project_name }}/cheeseshop">Final version</a> of in-class project</li>
+            <li>Django Review (using <a href="https://github.com/{{ student_github_project_name }}/cheeseshop">in-class project</a>) — April 26</li>
+            <li><a href="lecture_23.html">Machine Learning: Intro</a> — April 28</li>
+
             <li>Machine Learning: <a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_25/notebooks/Linear-Regression.ipynb">Univariate</a> and
-                <a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_25/notebooks/Multivariate-Regression.ipynb">Multivariate</a> Regression — December 1</li>
-            <li><a href="lecture_26.html">Machine Learning: Classification</a>  — December 3. With notebooks:
+                <a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_25/notebooks/Multivariate-Regression.ipynb">Multivariate</a> Regression — May 3</li>
+            <li><a href="lecture_26.html">Machine Learning: Classification</a>  — May 5. With notebooks:
                 <ul>
                     <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_27/notebooks/PolynomialFeatureTransforms.ipynb">Polynomial Regression Review</a></li>
                     <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_27/notebooks/NaiveBayesClassification.ipynb">Naive Bayes Classifier</a></li>
                 </ul>
             </li>
-            <li><a href="lecture_27.html">Machine Learning: Classification Continued &amp; Clustering</a> — December 8. With notebooks:
+            <li><a href="lecture_27.html">Machine Learning: Classification Continued &amp; Clustering</a> — May 10. With notebooks:
                 <ul>
                     <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_27/notebooks/DecisionTreeClassification.ipynb">Decision Tree Classifier</a></li>
                     <li><a href="https://github.com/mazelife/cmsc-210/blob/master/cmsc_210/examples/lecture_27/notebooks/Clustering.ipynb">K-Means Clustering</a></li>
                 </ul>
             </li>
+            <li>TBD - May 12</li>
         </ol>
         <h2>Assignments</h2>
         <ol>
+            <li><a href="https://forms.gle/ZEEi8zWp8ZRRz2DL9">Intro Survey</a></li>
             <li><a href="assignment_01.html">Python Review</a></li>
-            <li><a href="assignment_02.html">Grittify</a></li>
+            <!--li><a href="assignment_02.html">Grittify</a></li>
             <li><a href="assignment_03.html">Ramen Time</a></li>
             <li><a href="assignment_04.html">Django Tutorial</a></li>
             <li><a href="assignment_05.html">Modifying Django</a></li>
-            <li><a href="assignment_06.html">Django Project</a></li>
+            <li><a href="assignment_06.html">Django Project</a></li-->
         </ol>
 {% endblock %}
