@@ -54,7 +54,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with flake8
-	flake8 cmsc_291 tests
+	flake8 cmsc_210
 
 test: ## run tests quickly with the default Python
 	python setup.py test
