@@ -75,3 +75,7 @@ dist: clean ## builds source and wheel package
 
 install: clean ## install the package to the active Python's site-packages
 	python setup.py install
+
+format:  ## Apply auto-formatting and sort imports.
+	black --line-length=120 cmsc_210/
+	isort cmsc_210/
