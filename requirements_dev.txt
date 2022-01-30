@@ -2,4 +2,3 @@ pip==21.3.1
 flake8==4.0.1
 ipython==8.0.0
 black[jupyter]==21.12b0
-
