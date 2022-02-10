@@ -12,6 +12,17 @@
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 		
+    <style>
+        .bash {
+            font-size: 17px;
+            line-height: 22px;
+        }
+        p > code, li > code {
+            background: #e8e5db;
+            color: #538699;
+        }
+    </style>
+
 	</head>
 	<body>
 		<div class="reveal">
@@ -24,6 +35,7 @@
 	<h2>Announcements</h2>
     <ul>
         <li>Assignment 1 is due next week (Wednesday, February 16, before midnight)</li>
+        <li>Office hours Monday (by appointment)</li>
     </ul>
 </section>
 <section id="local-dev">
@@ -74,11 +86,11 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td><span class="good">Pro</span>: you can configure you development environment however you like</td>
+                <td><span class="good">Pro</span>: you can configure your development environment however you like</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td><span class="bad">Con</span>: you can configure you development environment however you like</td>
+                <td><span class="bad">Con</span>: you can configure your development environment however you like</td>
             </tr>
 
         </tbody>
@@ -117,11 +129,11 @@
 <section id="command-line-3">
     <h3>You have two options on Windows</h3>
     <ul>
-        <li>The command prompt (aka CMD):<br>
+        <li>The command prompt (aka CMD): 👎🏻<br>
             <img src="images/win_cmd.png">
         </li>
         <li>
-            PowerShell:<br>
+            PowerShell: 👍🏻<br>
             <img src="images/win_powershell.png">
         </li>
     </ul>
@@ -129,13 +141,13 @@
 
 <section id="command-line-4">
     <ul>
-        <li>Command Prompt
+        <li>Command Prompt 👎🏻
             <ul>
                 <li>is an interface used to basically execute older DOS (Disk Operating System) commands</li>
                 <li>allows the execution of batch files (.BAT)</li>
             </ul>
         </li>
-        <li>PowerShell
+        <li>PowerShell 👍🏻
             <ul>
                 <li>Runs a totally different shell</li>
                 <li>is available by default (i.e. doesn't need to be installed) starting with Windows 10</li>
@@ -267,9 +279,23 @@
         <tbody>
             <tr>
                 <td>Python<br>
+                (check version)</td>
+                <td><pre><code data-trim class="bash hljs">python -V</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">
+                    python3 -V
+                    python -V  # YMMV
+                </code></pre></td>
+                <td><pre><code data-trim class="bash hljs">python -V</code></pre></td>
+            </tr>
+
+            <tr>
+                <td>Python<br>
                 (interactive shell or REPL)</td>
                 <td><pre><code data-trim class="bash hljs">python</code></pre></td>
-                <td><pre><code data-trim class="bash hljs">python3</code></pre></td>
+                <td><pre><code data-trim class="bash hljs">
+                    python3
+                    python
+                </code></pre></td>
                 <td><pre><code data-trim class="bash hljs">python</code></pre></td>
             </tr>
             <tr>
@@ -343,7 +369,7 @@
 
 <section id="git-concepts-branch">
     <p><strong>branch</strong>: a way of launching a separate line of development within a project. Think of it as an alternate timeline, but you can merge it back to the original</p>
-    <p><strong>master</strong>: every project has at least one branch, and it's this one. Think of it as the "original" timeline and you can branch and rejoin it as many times as you want</p>
+    <p><strong>master/main</strong>: every project has at least one branch, and it's this one. Think of it as the "original" timeline and you can branch and rejoin it as many times as you want</p>
 </section>
 
 <section id="git-concepts-remote">
@@ -384,7 +410,7 @@
 
 <section id="git-ignore">
     <h3>Telling git to ignore files</h3>
-    <p>Some files you don't want to version some things (like <code>.pyc</code> files, editor/IDE config, etc).</p>
+    <p>Some files you don't want to version (like <code>.pyc</code> files, editor/IDE config, etc).</p>
     <p>Create a <code>.gitignore</code> file in the root of you project to tell Git which files it should ignore:</p>
     <pre><code data-trim>
 *.pyc
@@ -418,7 +444,7 @@
     </ul>
 </section>
 <section id="github-project">
-    <h3>Let's look at a real Github <a href="https://github.com/mazelife/cmsc-210">project</a></h3>
+    <h3>Let's look at a real Github <a target="_blank" href="https://github.com/mazelife/cmsc-210">project</a></h3>
 </section>
 <section id="final-questions">
     <h2>Final Questions?</h2>
