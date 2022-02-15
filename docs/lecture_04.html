@@ -36,6 +36,7 @@
         <li><code>float</code></li>
         <li><code>str</code></li>
         <li><code>bool</code></li>
+        <li><code>None</code></li>
     </ul>
 </section>
 <section id="types-101-3">
@@ -147,7 +148,6 @@
     <ul>
         <li>You can update them in-place (mutable)</li>
         <li>You reference values within the type by name rather than position (easier to read)</li>
-        <li>You just need to remember the order of your parameters</li>
     </ul>
 </section>
 <section id="dict-disadvantages">
@@ -355,7 +355,7 @@
                 time_delta = datetime.now() - self.date
                 return time_delta.days
 
-            def apply_processing_fee(fee=Decimal("0.25")):
+            def apply_processing_fee(self, fee=Decimal("0.25")):
                 self.amount = self.amount + fee
                 self.processing_fee_applied = True
     </code></pre>
