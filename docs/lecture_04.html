@@ -69,6 +69,14 @@
         <li>The date of the transfer (<code>???</code>)</li>
     </ol>
 </section>
+<section id="tuples-as-types-complete">
+    <ol>
+        <li>The user the transfer is coming <em>from</em> (<code>str</code>)</li>
+        <li>The user the transfer is going <em>to</em> (<code>str</code>)</li>
+        <li>The amount being transferred (<code>Decimal</code>)</li> <!-- 1.2 - 1.0 == 0.19999999999999996 -->
+        <li>The date of the transfer (<code>datetime</code>)</li>
+    </ol>
+</section>
 <section id="floats-are-scary">
     <p>What will this expression evaluate to?</p>
     <pre><code class="hlpython" data-trim>
@@ -98,11 +106,11 @@
         sender, receiver, amount, date = transfer
     </code></pre>
 </section>
-<section id="tuples-advatages">
+<section id="tuples-advantages">
     <h3>Advantages to using tuples to model our <code>transfer</code> type:</h3>
     <ul>
         <li>They are simple and small (not much memory)</li>
-        <li>You can't acidentally mutate your data: <code>transfer.append([1, 2, 3])</code> will error</li>
+        <li>You can't accidentally mutate your data: <code>transfer.append([1, 2, 3])</code> will error</li>
         <li>You just need to remember the order of your parameters</li>
     </ul>
 </section>
@@ -117,6 +125,38 @@
                 new_transfer = transfer[:2] + (Decimal(36.50), ) + transfer[3:]
             </code></pre>
         </li>
+    </ul>
+</section>
+<section id="dict-alternative">
+    <h3>Another option: we could use a dictionary</h3>
+    <pre><code class="hlpython" data-trim>
+        t1 = {"from": "Sally",
+              "to": "Bob",
+              "amount": Decimal("25.50"),
+              "date": datetime(2020, 8, 5)
+        }
+        t2 = {"from": "Bob",
+              "to": "Fran",
+              "amount": Decimal("15.20"),
+              "date": datetime(2020, 8, 6)
+        }
+    </code></pre>
+</section>
+<section id="dict-advantages">
+    <h3>Advantages to using dictionaries to model our <code>transfer</code> type:</h3>
+    <ul>
+        <li>You can update them in-place (mutable)</li>
+        <li>You reference values within the type by name rather than position (easier to read)</li>
+        <li>You just need to remember the order of your parameters</li>
+    </ul>
+</section>
+<section id="dict-disadvantages">
+    <h3>Dictionaries have some disadvantages too:</h3>
+    <ul>
+        <li>You can add things to the type that aren't supposed to be there:
+            <pre><code>t2["invalid_property"] = True</code></pre>
+        </li>
+        <li>Uses more memory than a tuple...but that's only any issue if you have <em>a lot</em> of objects.</li>
     </ul>
 </section>
 <section id="classes">
