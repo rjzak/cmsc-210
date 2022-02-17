@@ -269,7 +269,6 @@ class Animal:
 <section id="cat-class-with-inheritance">
     <p>Subclasses <em>automatically</em> have the methods of the superclass.</p>
     <pre><code class="hlpython" data-trim data-line-numbers>
-
 class Cat(Animal):
 
     def change_litter(self):
@@ -289,12 +288,12 @@ class Dog(Animal):
     </code></pre>
 </section>
 <section id="super">
-    <p>In Python, the <code>super</code> function will return the <em>parent</em> class instance of the current class.</p>
+    <p>In Python, the <code>super</code> function will return the <em>parent</em> class.</p>
     <pre><code class="hlpython" data-trim>
 class Child(Parent):
 
     def some_method(self):
-        # Super gives us access to the Parent object.
+        # Super gives us access to the Parent class.
         parent_obj = super()
 
     </code></pre>
