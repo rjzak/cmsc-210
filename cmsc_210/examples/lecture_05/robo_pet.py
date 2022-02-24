@@ -33,20 +33,31 @@ class Dog(Animal):
 
 class Pen:
 
+    max_size = 4
+
     def __init__(self):
-        pass
+        self.animals = []
 
     def add(self, animal):
-        pass
+        if len(self.animals) >= self.max_size:
+            print("Pen is full.")
+        else:
+            self.animals.append(animal)
 
     def remove(self, name):
-        pass
+        for idx, animal in enumerate(self.animals):
+            if animal.name == name:
+                return self.animals.pop(idx)
+        print("Not in here")
 
     def feed(self):
-        pass
+        for animal in self.animals:
+            animal.feed()
 
     def groom(self):
         pass
 
     def walk(self):
-        pass
+        for animal in self.animals:
+            if isinstance(animal, Dog):
+                animal.walk()
