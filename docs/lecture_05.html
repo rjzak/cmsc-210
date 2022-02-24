@@ -11,7 +11,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-
+		
 <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 <style>
     .emphasized-block {
@@ -281,7 +281,6 @@ class Animal:
 <section id="cat-class-with-inheritance">
     <p>Subclasses <em>automatically</em> have the methods of the superclass.</p>
     <pre><code class="hlpython" data-trim data-line-numbers>
-
 class Cat(Animal):
 
     def change_litter(self):
@@ -301,7 +300,7 @@ class Dog(Animal):
     </code></pre>
 </section>
 <section id="super">
-    <p>In Python, the <code>super</code> function will return the <em>parent</em> class instance of the current class.</p>
+    <p>In Python, the <code>super</code> function will return the <em>parent</em> class.</p>
     <pre><code class="hlpython" data-trim>
 class Child(Parent):
 
@@ -482,7 +481,7 @@ class Pen:
 				plugins: [RevealHighlight, RevealMath]
 			});
 			// Make it so that pressing SHIFT-B resets the page anchor to the current slide.
-			jQuery(document).on("keypress", function(e) {
+			jQuery(document).on("keypress", function(e) { 
     			if(e.shiftKey && (e.which === 66 ))  {
 					var slide = Reveal.getCurrentSlide();
 					window.location.href = "#" + slide.id;
