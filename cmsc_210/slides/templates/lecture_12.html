@@ -20,7 +20,7 @@
 
 {% block slides %}
 <section id="title">
-	<h2>Lecture 7: HTML & CSS</h2>
+	<h2>Lecture 12: HTML & CSS</h2>
     <p>The backbone of the web.</p>
     <img src="images/interblag.png">
 </section>
@@ -32,6 +32,11 @@
         <li>Semantics:  section headers, form inputs, navigation</li>
         <li>Typography: size, bold, italic, color, typeface</li>
     </ol>
+</section>
+<section id="why-html-and-css">
+    <h3>Why are we learning HTML and CSS in a class about programming?</h3>
+    <p class="fragment fade-up">If you want to use a programming language to extract data from the web you'll need to know it.</p>
+    <p class="fragment fade-up">If you want to create your own web applications or sites you'll need to know it.</p>
 </section>
 <section id="html-is-old">
     <img src="images/the_90s.jpg" height="155">
@@ -170,7 +175,7 @@
     <div class="html-code"><pre><code data-trim>
         &lt;input type="text" placeholder="What's your name?"&gt;
         &lt;input type="checkbox"&gt;
-        &lt;select class="form-control"&gt;
+        &lt;select&gt;
           &lt;option&gt;1&lt;/option&gt;
           &lt;option&gt;2&lt;/option&gt;
           &lt;option&gt;3&lt;/option&gt;
@@ -260,12 +265,14 @@
       </div>
       <div class="html-rendered">
           <p>Doge is a slang term for "dog" that is primarily associated with pictures of Shiba Inus
-              <div><img src="images/doge.jpg" style="vertical-align: middle;" height="50"></div> Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font. </p>
+            <div><img src="images/doge.jpg" style="vertical-align: middle;" height="50"></div>
+            Photos may be photoshopped to change the dog's face or captioned with interior monologues in Comic Sans font.
+          </p>
       </div>
 </section>
 <section id="inline-vs-block">
     <p><strong>Block elements</strong> take up the full width available on a page, effectively blocking
-    out any other elements from sitting next to on either side.</p>
+    out any other elements from sitting next to either side.</p>
     <p><strong>Inline elements</strong> only take up as much width as is required to display the contents
         of the element, thereby allowing other elements to be in-line with it.</p>
     </section>
@@ -294,8 +301,8 @@
         </code></pre>
     </section>
     <section id="page-link">
-        <p>Let's <a href="simple-page.html">look at that page</a>...</p>
-        <p class="fragment fade-up">Default styling is pretty primitive...</p>
+        <p>Let's <a href="simple-page.html" target="_blank">look at that page</a>...</p>
+        <p class="fragment fade-up">Default styling is pretty primitive.<br>We'll worry about that later.</p>
     </section>
     <section id="tree">
         <img src="images/HTML-tree.png">
@@ -325,9 +332,9 @@
     <section id="html-examples">
         <h3>Let's look at some real-world HTML!</h3>
         <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a></li>
-            <li><a href="https://www.youtube.com/">YouTube</a></li>
-            <li><a href="https://www.google.com/">Google</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank">Wikipedia</a></li>
+            <li><a href="https://www.youtube.com/" target="_blank">YouTube</a></li>
+            <li><a href="https://www.google.com/" target="_blank">Google</a></li>
         </ul>
 
     </section>
