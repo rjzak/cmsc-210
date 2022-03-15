@@ -42,6 +42,7 @@
     <h2>Announcements</h2>
     <ul>
         <li>Assignment 3 is due Tomorrow, March 16.</li>
+        <li>No late assignments.</li>
     </ul>
 </section>
 <section id="whole-page">
@@ -81,8 +82,9 @@
     <ul>
         <li>Not a programming language; a "stylesheet language"</li>
         <li>Initial release of CSS circa 1996 (the web is already  approx. 5 years old at this point)</li>
-        <li>Wasn't widely (and correctly) supported by browsers till early 2000s</li>
-        <li>CSS support among browsers has gotten pretty good.</li>
+        <li>Wasn't widely supported by browsers till early 2000s</li>
+        <li>Wasn't <em>correctly</em> supported by many browsers for years after that</li>
+        <li>CSS support among browsers has gotten pretty good in the last 10 years or so.</li>
     </ul>
 </section>
 <section id="content-vs-presentation">
@@ -106,6 +108,16 @@
 <section id="content-vs-presentation-example">
     <p>Consider <code>&lt;h1&gt;</code>: it's for indicating the most important heading.
         "Important" doesn't imply anything about color, typeface, size, etc.</p>
+</section>
+<section id="presentation-with-html-onlt">
+    <p>You <em>could</em> do this...</p>
+    <pre class="css"><code data-trim>
+    &lt;h1&gt;
+        &lt;font size="16" face="Times" color="red"&gt;Big Headline&lt;/font&gt;
+    &lt;/h1&gt;
+    </code></pre>
+    <p class="fragment fade-up">But it's extremely limited.</p>
+    <p class="fragment fade-up">And not a good idea.</p>
 </section>
 <section id="presentation-context">
     <h2>Context & Presentation May Vary</h2>
@@ -144,6 +156,15 @@
 </section>
 <section id="rule-2-result">
     <img src="images/simple-page-green-orange.png">
+</section>
+<section id="rule-syntax">
+        <p>What a CSS rule looks like</p>
+        <pre class="css"><code data-trim>
+            &lt;selector&gt; {
+                &lt;property-1&gt;: &lt;value-1&gt;;
+                &lt;property-2&gt;: &lt;value-2&gt;;
+            }
+        </code></pre>
 </section>
 <section id="selectors-universal">
         <p>Universal selector</p>
@@ -213,7 +234,7 @@
     <p>The <code>class</code> attribute is used to specify a class or grouping for one or more HTML elements</p>
     <pre class="html"><code data-trim>
         &lt;p class="important" &gt;Here's some important text!&lt;/p&gt;
-        &lt;p&gt;Here's some regular tex!&lt;/p&gt;
+        &lt;p&gt;Here's some regular tex&lt;/p&gt;
         &lt;p class="important" &gt;And more important text!&lt;/p&gt;
     </code></pre>
 </section>
@@ -224,7 +245,7 @@
     </ul>
 </section>
 <section id="semantic-naming">
-    <p>Remember: HTML is intended to add <em>semantic</em> meaning to documents, so try to chose you names accordingly.</p>
+    <p>Remember: HTML is intended to add <em>semantic</em> meaning to documents, so try to choose you names accordingly.</p>
     <ul>
         <li>Good class names: <code>important</code>, <code>logo</code>, <code>warning</code>, <code>signup-button</code></li>
         <li>Bad class names: <code>abc123</code>, <code>redText</code>, <code>paragraph</code>, <code>bold</code></li>
@@ -248,6 +269,17 @@
     </code></pre>
     <p style="font-size: 60%">Units of measurement should generally be in pixels (<code>px</code>). There are others, but they are more complex to work with.</p>
 </section>
+<section id="div-targeting">
+    <h3>What if you need to arbitrarily<br>group some elements together?</h3>
+    <p class="fragment fade-in">Use a &lt;div&gt; (probably with a class name or id)</p>
+</section>
+<section id="span-targeting">
+    <h3>What if you need to <span style="color: red">arbitrarily<br>style</span> some text selection?</h3>
+    <pre class="fragment fade-in"><code class="hlhtml" data-trim>
+        &lt;h3&gt;What if you need to &lt;span class=&quot;important&quot;&gt;arbitrarily
+        style&lt;/span&gt; some text selection?&lt;/h3&gt;
+    </code></pre>
+</section>
 <section id="ugly-doc">
     <h3>Remember this ugly thing?</h3>
     <img src="images/simple-page-green.png" height="300">
@@ -255,9 +287,30 @@
 </section>
 <section id="nice-doc">
     <a href="https://mazelife.github.io/cmsc-210/fancy-page.html"><img src="images/simple-page-stylish.png" height="500"></a>
-    <p>View the HTML and CSS <a href="https://raw.githubusercontent.com/mazelife/cmsc-210/master/docs/fancy-page.html">here</a>.</p>
+    <p>View the HTML and CSS <a href="https://raw.githubusercontent.com/mazelife/cmsc-210/master/docs/fancy-page.html" target="_blank">here</a>.</p>
 </section>
-
+<section id="including-css">
+    <h3>There are two ways two include CSS in an HTML document that browsers will understand.</h3>
+</section>
+<section id="embedding-css">
+    <p>Embed directly in the document's <code>&lt;head&gt;</code> section:</p>
+    <pre><code class="hlhtml" data-trim>
+&lt;style&gt;
+    h1 {
+        color: #fefefe;
+    }
+    p, ul, ol {
+        font-face: Helvetica;
+    }
+&lt;/style&gt;
+    </code></pre>
+</section>
+<section id="linking-css">
+    <p>Link a file in the document's <code>&lt;head&gt;</code> section:</p>
+    <pre><code class="hlhtml" data-trim>
+        &lt;link rel=&quot;stylesheet&quot; src=&quot;style.css&quot;&gt;
+    </code></pre>
+</section>
 </div>
 		</div>
 		<script src="dist/jquery.js"></script>
