@@ -1,3 +1,6 @@
+"""
+Go through all the cheeses listed on cheese.com and gather data about them.
+"""
 import string
 
 import requests
