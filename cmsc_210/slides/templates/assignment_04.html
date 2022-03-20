@@ -1,17 +1,6 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>CMSC 210: Assignment Four</title>
-		<link rel="stylesheet" href="dist/theme/solarized.css">
-	    <link rel="stylesheet" href="dist/bootstrap.css">
-        <link rel="stylesheet" href="dist/base.css">
-        <link rel="stylesheet" href="dist/document.css">
-        <link rel="shortcut icon" href="images/favicon.ico">
-        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-		
+{% extends "document_base.html" %}
+{% block title %}CMSC {{ course_number }}: Assignment Four{% endblock %}
+{% block extra_style %}
 <style>
     body {
         font-size: 110%;
@@ -44,11 +33,9 @@
     }
 
 </style>
+{% endblock %}
 
-	</head>
-	<body>
-    <div class="container">
-    
+{% block body %}
 <h1>Assignment 4</h1>
 <h2>Getting to know some butterflies</h2>
 <hr>
@@ -57,7 +44,7 @@
 <p><strong>Value</strong>: 150 points<br>
 <p><strong>Github Invite</strong>: <a href="https://classroom.github.com/a/unBNYJI2">Click Here</a></p>
 <p><strong>Collaboration</strong>: For Assignment 4, <em>collaboration is not allowed</em>; you must work individually.
-    You may still see your TA and come to office hours for help, but you may not work with any other CMSC 210 students. You may post questions on Discord, <strong>but you may not post code</strong>.</p>
+    You may still see your TA and come to office hours for help, but you may not work with any other CMSC {{ course_number }} students. You may post questions on Discord, <strong>but you may not post code</strong>.</p>
 <h2>Objectives:</h2>
 <ul>
     <li>Scrape some data from the web with Python</li>
@@ -133,7 +120,4 @@
                 </tr>
         </tbody>
 </table>
-
-    </div>      
-	</body>
-</html>
+{% endblock %}
