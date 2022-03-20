@@ -3,16 +3,18 @@ import string
 import requests
 from bs4 import BeautifulSoup
 
-LISTING_URL = "https://cheese.com/alphabetical/?per_page=100"
-
 
 def get_soup(url):
+    """Retrieve the HTML from a URL and convert it to tag soup."""
     return BeautifulSoup(requests.get(url).text, "html.parser")
 
 
 def get_detail_urls():
+    """Retrieve a list of detail page URLs for all cheeses on the site."""
     urls = []
-    for letter in string.ascii_lowercase:
+    print("Getting cheese detail URLs...")
+    for letter in string.ascii_lowercase:  # Loop through each letter of the alphabet.
+        # Construct the URL for the page listing all cheeses by letter of the alphabet:
         alphabet_index_url = f"https://cheese.com/alphabetical/?i={letter}"
         soup = get_soup(alphabet_index_url)
         for tag in soup.select(".cheese-item"):
@@ -23,6 +25,7 @@ def get_detail_urls():
 
 
 def get_cheese_data(url):
+    """Retrieve cheese data from a detail page URL."""
     soup = get_soup(url)
     div = soup.find(class_="unit")
     data = {"name": div.find("h1").text.strip()}
@@ -38,3 +41,7 @@ def main():
     for url in get_detail_urls():
         data = get_cheese_data(url)
         print(data)
+
+
+if __name__ == "__main__":
+    main()
