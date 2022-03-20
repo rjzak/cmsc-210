@@ -1,43 +1,40 @@
+import string
+
 import requests
 from bs4 import BeautifulSoup
 
-URL = "https://cheese.com/bleu-dauvergne/"
+LISTING_URL = "https://cheese.com/alphabetical/?per_page=100"
 
 
-def get_html(url):
-    """Retrieve a URL and return the HTML content."""
-    reponse = requests.get(url)
-    return reponse.text
+def get_soup(url):
+    return BeautifulSoup(requests.get(url).text, "html.parser")
 
 
-def get_info(html):
-    """Fetch the summary points of information from an individual cheese page as a Python dictionary."""
-    properties = {}
-    soup = BeautifulSoup(html, "html.parser")
-    for li in soup.select(".summary-points li"):
-        text = li.text
-        if ":" in text:
-            key, value = text.split(":")
-            key = key.strip()
-            value = value.strip()
-            properties[key] = value
-    return properties
+def get_detail_urls():
+    urls = []
+    for letter in string.ascii_lowercase:
+        alphabet_index_url = f"https://cheese.com/alphabetical/?i={letter}"
+        soup = get_soup(alphabet_index_url)
+        for tag in soup.select(".cheese-item"):
+            link = tag.select("h3 a")[0]
+            href = link.attrs["href"]
+            urls.append(f"https://cheese.com{href}")
+    return urls
 
 
-def get_links():
-    """Individual cheese detail page links from the listing of all cheeses."""
-    links = []
-    url = "https://cheese.com/alphabetical/?per_page=100&i=&page=1#top"
-    soup = BeautifulSoup(get_html(url), "html.parser")
-    for div in soup.select(".cheese-item"):
-        link = div.find("a")
-        if "href" in link.attrs:
-            links.append("https://cheese.com{href}".format(href=link.attrs["href"]))
-    return links
+def get_cheese_data(url):
+    soup = get_soup(url)
+    div = soup.find(class_="unit")
+    data = {"name": div.find("h1").text.strip()}
+    for tag in soup.find(class_="summary-points").children:
+        cheese_property = tag.text
+        if ":" in cheese_property:
+            key, value = cheese_property.split(":")
+            data[key] = value.strip()
+    return data
 
 
-if __name__ == "__main__":
-    for link in get_links():
-        html = get_html(link)
-        props = get_info(html)
-        print(props)
+def main():
+    for url in get_detail_urls():
+        data = get_cheese_data(url)
+        print(data)
