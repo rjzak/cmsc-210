@@ -25,6 +25,9 @@
         margin: 0px;
         padding: 0px;
     }
+    #scraping-definition {
+        color: #264c59;
+    }
 </style>
 
 
@@ -46,20 +49,37 @@
         <ul class="right">
             <li>Information is not organized in a pre-defined manner</li>
             <li>Designed for humans, not machines.</li>
-            <li>Examples: web pages, documents</li>
+            <li>Examples: documents, images</li>
         </ul>
     </div>
 </section>
+<section id="semi-structured">
+    <p>Remember, HTML provides a way to add structure and semantic meaning to a document.</p>
+    <p class="fragment fade-in">It's not exactly structured...but at least semi-structured.</p>
+</section>
 <section id="cheese">
-    <p>You can manually produce structured information from unstructured data.</p>
-    <p>Let's say I want to create a spreadsheet of the price and customer ratings of cheeses found on
-       cheese.com</p>
-    <img src="images/cheeses.png" width="1000">
+    <p>You can manually produce structured<br>information from semi-structured data.</p>
+    <div class="fragment fade-up">
+        <p>Let's say I want to create a spreadsheet of the price and customer ratings of cheeses found on
+           <a href="https://www.gourmetfoodstore.com">gourmetfoodstore.com</a></p>
+        <img src="images/cheeses.png" width="1000">
+    </div>
+</section>
+<section id="manual-data-entry">
+    <h3>The Manual Solution</h3>
+    <p>You could click through evey page of<br>cheese and manually collect the data.</p>
+    <p>😞 This will be:</p>
+    <ul>
+        <li>Slow</li>
+        <li>Tedious</li>
+        <li>Error-prone</li>
+    </ul>
 </section>
 <section id="scraping-definition">
-    <div style="background: url('images/cheese-bg.png') no-repeat center center; padding: 135px 0">
-        <p>But sometimes you want to gather all of that data <em>automatically</em> without having to click around on a site and copy and paste a lot of text.</p>
-        <p>Today we’re going to talking about web scraping:  the practice of automatically extracting interesting data from webpages into <em>a structured representation</em>.</p>
+    <div style="background: url('images/cheese-bg.png') no-repeat center center; padding: 154px 0">
+        <p>Today we’re going to talking about web scraping:<br>the practice of automatically extracting<br>
+            data of interest from webpages into <em>a structured representation</em>.</p>
+        <p>Python is a great language for doing this.</p>
     </div>
 </section>
 <section id="html-ss-python">
@@ -269,12 +289,27 @@ for anchor in soup.select('a'):
 </section>
 <section id="demo-task">
     <h3>Let's extract these lists from cheese pages:</h3>
-    <img src="images/cheese-excerpt.png" width="500">
+    <a href="https://cheese.com/bleu-dauvergne/" target="_blank"><img src="images/cheese-excerpt.png" width="500"></a>
 </section>
-<section id="demo-task-src">
-    <h3>Here's the HTML:</h3>
+<section id="demo-task-list">
+    <h3>Here's a page with links to all the cheeses:</h3>
+    <p><a href="https://cheese.com/alphabetical/?per_page=100&i=&page=1" target="_blank">
+        https://cheese.com/alphabetical/?per_page=100&i=&page=1
+    </a></p>
+</section>
+<section id="demo-task-src-listing">
+    <p>Here's the HTML with cheese links:</p>
+    <img src="images/cheese-excerpt-src-3.png" width="1214">
+</section>
+<section id="demo-task-src-title">
+    <p>Here's the HTML where the cheese name appears:</p>
+    <img src="images/cheese-excerpt-src-2.png" width="1214">
+</section>
+<section id="demo-task-src-data">
+    <p>Here's the HTML where the cheese properties are:</p>
     <img src="images/cheese-excerpt-src.png" width="1214">
 </section>
+
 </div>
 		</div>
 		<script src="dist/jquery.js"></script>
