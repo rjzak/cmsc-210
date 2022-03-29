@@ -27,7 +27,7 @@
     <h3>Recap</h3>
     <ul>
         <li>Using the HTML structure of pages to extract data from web pages</li>
-        <li>We use the <code><a href="https://requests.readthedocs.io">requests</a></code> library to aquire HTML</li>
+        <li>We use the <code><a href="https://requests.readthedocs.io">requests</a></code> library to acquire HTML</li>
         <li>We use the <code><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">BeautifulSoup</a></code> library to parse and search HTML</li>
     </ul>
 </section>
@@ -75,8 +75,62 @@
 </section>
 <section id="how-it-works">
     <p>If a page with a recipe has this information, it will put an <code>itemprop="attributeName"</code> on the tag enclosing that information.</p>
-    <p>This means we can call <code>soup.select('[itemprop="recipeIngredient"]')</code> to get all the ingredients on a recipe page!</p>
+    <pre><code class="hlhtml" data-trim>
+&lt;ul&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;3 garlic cloves minced&lt;/li&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;1 stalk celery, diced&lt;/li&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;1 carrot, diced&lt;/li&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;2 tbsp. of olive oil&lt;/li&gt;
+&lt;/ul&gt;
+    </code></pre>
 </section>
+<section id="soup-usage">
+    <p>This means we can call:</p>
+    <pre><code data-trim>
+        soup.select('[itemprop="recipeIngredient"]')
+    </code></pre>
+        <p>...to get all the ingredients on a recipe page</p>
+</section>
+<section id="recipe-page">
+    <h3>Let's look at a test recipe.</h3>
+    <p>This <a href="test_recipe.html" target="_blank">simple recipe</a> follows the schema.org standard.</p>
+</section>
+<section id="recipe-title">
+    <p>Example Recipe Title</p>
+    <pre><code class="hlhtml" data-trim>
+    &lt;h1 itemprop=&quot;name&quot;&gt;Mom's World Famous Banana Bread&lt;/h1&gt;
+    </code></pre>
+</section>
+<section id="recipe-ingredients">
+    <p>Example Recipe Ingredient List</p>
+    <pre><code class="hlhtml" data-trim>
+&lt;h2&gt;Ingredients:&lt;/h2&gt;
+&lt;ul&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;3 or 4 ripe bananas&lt;/li&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;1 egg&lt;/li&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;3/4 cup of sugar&lt;/li&gt;
+    &lt;li itemprop=&quot;recipeIngredient&quot;&gt;1 1/2 cup of flour&lt;/li&gt;
+&lt;/ul&gt;
+    </code></pre>
+</section>
+<section id="recipe-steps">
+    <p>Example Recipe Ingredient List</p>
+    <pre><code class="hlhtml" data-trim>
+&lt;div itemprop=&quot;recipeInstructions&quot;&gt;
+    &lt;span itemprop=&quot;step&quot;&gt;Preheat the oven to 350 degrees.&lt;/span&gt;
+    &lt;span itemprop=&quot;step&quot;&gt;Mix in the ingredients in a bowl.&lt;/span&gt;
+    &lt;span itemprop=&quot;step&quot;&gt;Add the flour last.&lt;/span&gt;
+    &lt;span itemprop=&quot;step&quot;&gt;Pour the mixture into a loaf pan and bake for one hour.&lt;/span&gt;
+&lt;/div&gt;
+</code></pre>
+</section>
+<section id="allrecipes">
+    <a href="https://www.allrecipes.com/recipe/232552/caldereta-filipino-beef-and-chorizo-stew/" target="_blank"><img src="images/allrecipes-logo.png" height="70"></a>
+</section>
+<section id="serious-eats">
+    <a href="https://www.seriouseats.com/pommes-dauphine-recipe-5217321" target="_blank"><img src="images/serious-eats-logo.png" height="170"></a>
+</section>
+
 </div>
 		</div>
 		<script src="dist/jquery.js"></script>
