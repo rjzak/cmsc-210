@@ -21,11 +21,12 @@
 		<div class="reveal">
 			<div class="slides">
 <section id="title">
-    <h2>List Comprehensions, Generators &amp; Decorators</h2>
+    <h2>List Comprehensions, Generators, Variadic Arguments, &amp; Decorators</h2>
 </section>
 <section id="announcements">
     <h2>Announcements</h2>
     <ul>
+        <li>Assignment 4 due April 1</li>
         <li>Assignment 5 due April 13</li>
     </ul>
 </section>
@@ -39,7 +40,7 @@
     </ul>
 </section>
 <section id="list-comprehension-motivation-mapping-1">
-    <p>A common task in python: you have a list of things and you want to go over each thing and change it somehow and create a new list of those changed things.</p>
+    <p><em>A common task in python:</em> you have a list of things and you want to go over each thing and change it somehow and create a new list of those changed things.</p>
     <pre class="fragment fade-in"><code class="hlpython" data-trim data-line-numbers>
         numbers = [1, 3, 5, 7, 9]
         squares = []
@@ -48,7 +49,7 @@
     </code></pre>
 </section>
 <section id="list-comprehension-motivation-mapping-2">
-    <p>There is a word for this operation; <strong>it's called a ma</strong>p.</p>
+    <p>There is a word for this operation; <strong>it's called a map</strong>.</p>
     <p>As in "I want to map a function to square a number over a list of numbers."</p>
     <pre><code class="hlpython" data-trim data-line-numbers>
         numbers = [1, 3, 5, 7, 9]
@@ -58,7 +59,7 @@
     </code></pre>
 </section>
 <section id="list-comprehension-motivation-filter-1">
-    <p>A common task in python: you have a list of things and you want to filter some out based on some condition and keep the remaining things in a new list.</p>
+    <p><em>A common task in python:</em> you have a list of things and you want to filter some out based on some condition and keep only the remaining things.</p>
     <pre class="fragment fade-in"><code class="hlpython" data-trim data-line-numbers>
         numbers = [1, 2, 3, 5, 6, 13, 21, 34]
         even_numbers = []
@@ -71,8 +72,8 @@
     <p>There is a word for this operation; <strong>it's called a filter</strong>.</p>
     <p>As in "I want to filter a list of numbers so that it only contains even numbers."</p>
     <pre><code class="hlpython" data-trim data-line-numbers>
-        numbers = [1, 3, 5, 7, 9]
-        squares = []
+        numbers = [1, 2, 3, 5, 6, 13, 21, 34]
+        even_numbers = []
         for number in numbers:
             if number % 2 == 0:
                 even_numbers.append(number)
@@ -80,10 +81,13 @@
 </section>
 <section id="list-comprehension-syntax">
     <p>Python provides a syntactic tool to express mapping and filtering operations in a more concise way.</p>
-    <p>It's called a <strong>list comprehension</strong> and it looks like this:</p>
-    <p><code style="font-size: 98%">[<em>expression</em> for item in iterable]</code></p>
+    <div class="fragment fade-in">
+        <p>It's called a <strong>list comprehension</strong> and it looks like this:</p>
+        <p><code style="font-size: 98%">[<em>expression</em> for item in iterable]</code></p>
+    </div>
 </section>
 <section id="list-comprehension-mapping-example">
+    <h3>Simplify Mapping Operations</h3>
     <pre><code class="hlpython" data-trim data-line-numbers>
         numbers = [1, 3, 5, 7, 9]
         squares = []
@@ -114,6 +118,7 @@
     <p><code style="font-size: 90%">[<em>expression</em> for item in iterable if <em>condition</em>]</code></p>
 </section>
 <section id="list-comprehension-filter-example">
+    <h3>Simplify Filter Operations</h3>
     <pre><code class="hlpython" data-trim data-line-numbers>
         numbers = [1, 2, 3, 5, 6, 13, 21, 34]
         even_numbers = []
@@ -128,7 +133,7 @@
     </code></pre>
 </section>
 <section id="list-comprehension-filter-and-map">
-    <p>We can filter and map in one line:</p>
+    <p>We can filter and map in one line.<br>Let's say we want to filter a list of numbers down to<br> just the even numbers then square them:</p>
     <pre><code class="hlpython" data-trim>
         numbers = [1, 2, 3, 5, 6, 13, 21, 34]
         evens_squared = [num * num for num in numbers if num % 2 == 0]
@@ -156,7 +161,6 @@
     <p>...what actually happens?</p>
 </section>
 <section id="function-walk-through">
-    <p>Function calls are usually one-way</p>
     <ol>
         <li>You call a function</li>
         <li>Memory is allocated on the stack for the function</li>
@@ -165,10 +169,8 @@
     </ol>
 </section>
 <section id="function-diagram">
+    <h2>Function calls are usually a one-way process</h2>
     <img src="images/function.png">
-</section>
-<section id="generator-diagram">
-    <img src="images/generator.png">
 </section>
 <section id="function-returning-a-list">
     <p>This function stores the result in a list and then returns it:</p>
@@ -187,6 +189,17 @@
         for number in evens_until(2, 2000):
             print(number)
     </code></pre>
+</section>
+<section id="function-returning-a-huge-list">
+    <p>What about this?</p>
+    <pre><code class="hlpython" data-trim>
+        for number in evens_until(2, 2_000_000_000):
+            print(number)
+    </code></pre>
+    <p class="fragment fade-in">This used up 15 GB of memory.</p>
+</section>
+<section id="generator-diagram">
+    <img src="images/generator.png">
 </section>
 <section id="function-vs-gen">
     <p>This function returns a generator:</p>
@@ -296,7 +309,7 @@
     <h2>What questions do you have?</h2>
 </section>
 <section id="variadic-functions-1">
-    So far, we have always operated under the assumption that when we write a function we have to know exactly
+    So far, we have always operated under the assumption that when we define a function we have to know exactly
     what the arguments can be:
     <pre><code class="hlpython" data-trim>
 def scrape(html,
