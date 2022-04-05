@@ -27,15 +27,22 @@
     <h2>Announcements</h2>
     <ul>
         <li>Assignment 5 due April 13th</li>
+        <li>I will get your assignment 4 grades back this week.</li>
     </ul>
 </section>
 <section id="lets-build-an-application">
     <p>We are going to learn how to build web applications with Python</p>
     <ul>
         <li>Applications run on a web server</li>
-        <li>They listen for web (HTTP) requests and returns responses</li>
+        <li>The webserver uses a protocol—hyper text transfer protocol (HTTP)—to communicate with clients</li>
+        <li>It listens for HTTP requests and return responses</li>
         <li>The responses are often dynamically generated in response to the request</li>
     </ul>
+</section>
+<section id="http-layer-cake">
+    <h3>The internet is layers on top of layers</h3>
+    <img src="images/http-layers.png" height="550">
+
 </section>
 <section id="request-response">
     <h2>Anatomy of the HTTP request/response cycle</h2>
@@ -52,7 +59,7 @@
         <li>The protocol (<code>http/https</code>)</li>
         <li>The hostname (<code>example.com</code>)</li>
         <li>The path (<code>/some-url/</code>)</li>
-        <li>The method (<code>GET/POST</code>)</li>
+        <li>The method (<code>GET/POST/Etc.</code>)</li>
         <li>Headers
             <ul>
                 <li>User agent</li>
@@ -113,7 +120,7 @@
     <p>At minimum:</p>
     <ul>
         <li>Parse an HTTP request into its constituent pieces</li>
-        <li>Provide a way to map URLs to code that can handle them</li>
+        <li>Provide a way to map URLs (or URL patterns) to code that can handle them</li>
         <li>Provide a way to generate HTML (templating)</li>
         <li>Provide a way to create an HTTP response</li>
     </ul>
@@ -145,8 +152,8 @@
     <a href="https://www.djangoproject.com/"><img src="images/django-logo.png" height="120"></a>
     <ul>
         <li>A free, open-source full-stack web framework</li>
-        <li>Create in 2003, open-sourced in 2005</li>
-        <li>Latest release is 3.1 (August 2020)</li>
+        <li>Created in 2003, open-sourced in 2005</li>
+        <li>Latest release is 4.0.3 (March 1, 2022)</li>
         <li>Most common full-stack framework for Python</li>
         <li>Includes all the components we talked about (and more)</li>
         <li>Designed to be flexible: use the pieces you need, ignore the ones you don't.</li>
@@ -188,6 +195,27 @@
 </section>
 <section id="app-vs-resource-state">
     <p>An app might have resource state, but not have a concept of users, and thus no application state.</p>
+</section>
+<section id="http-stateless">
+    <h3>HTTP is a stateless protocol</h3>
+    <ul>
+        <li>There is no link between two requests being successively carried out on the same connection</li>
+        <li>How does something like you Amazon shopping basked work then?</li>
+        <li class="fragment fade-in">Cookies!</li>
+    </ul>
+</section>
+<section id="cookies">
+    <h3>Cookies to the rescue</h3>
+    <ul>
+        <li>A cookie is data that a server sends to a user's web browser.</li>
+        <li>The browser stores the cookie and sends it back to the same server with later requests.</li>
+        <li>Think of it as a unique name-tag the server pins on your browser</li>
+        <li>Cookies are small. Max size: 4KB</li>
+        <li>This is why application state needs to be stored on the server.</li>
+    </ul>
+</section>
+<section id="back-to-state">
+    <h2>Let's talk about state some more, resource or application state...</h2>
 </section>
 <section id="resource-state-options-memory">
     <h3>Idea 1: Just keep it all in memory in python objects</h3>
@@ -232,6 +260,10 @@
         </li>
         <li>Databases often run on a separate server of their own</li>
     </ul>
+</section>
+<section id="next-time">
+    <h2>Next up...</h2>
+    <p>Let's create a Django project of our own.</p>
 </section>
 </div>
 		</div>
