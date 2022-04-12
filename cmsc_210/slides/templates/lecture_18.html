@@ -9,19 +9,20 @@
     }
     .filelist strong { color: #bf2fb6; }
     #localhost span { color: #ccd9dd; }
-
+    p code, li code { color: #bf6991; }
 
 </style>
 
 {% endblock %}
 
 {% block slides %}
-<section id="title">
-    <h2>Web Development with<br>Python &amp; Django II</h2>
+<section id="title" data-background-position="top center" data-background-image="images/django-pony-blue.png" data-background-size="300px">
+    <h3>Web Development with<br>Python &amp; Django II</h3>
     <p class="fragment fade-up">Creating a simple app</p>
 </section>
 <section id="announcements">
-    <p><a href="assignment_04.html">Assignment 4</a> is out. It is due in one week.</p>
+    <h3>Announcements</h3>
+    <p><a href="assignment_05.html">Assignment 5</a> is due tomorrow.</p>
 </section>
 <section id="django-concepts">
     <h3>Quick recap of key Django Concepts</h3>
@@ -44,7 +45,7 @@
         <li>The Django package is installed in your environment:
         <pre><code>
             import django
-            django.VERSION  # gives you 3.1.2
+            django.VERSION  # gives you 4.0.4
         </code></pre>
         </li>
         <li>A command-line executable called <code>django-admin</code> is installed in your environment.</li>
@@ -104,7 +105,7 @@
     <ul>
         <li>Think of if as being a clone of <code>django-admin</code>; it does all the same things but specific to your project.</li>
         <li>Once you create a new project, you can generally stop using <code>django-admin</code> and start using <code>manage.py</code> to do things.</li>
-        <li>You should rarely, if ever, need to edit this.</li>
+        <li>You should basically never need edit <code>manage.py</code>.</li>
     </ul>
 </section>
 <section id="runserver">
@@ -114,6 +115,9 @@
     </code></pre>
     <p>This will start up a small, simple webserver you can use for local development.
     You can visit your website at <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a></p>
+</section>
+<section id="startpage">
+    <img src="images/django_startpage.png" width="800">
 </section>
 <section id="localhost">
     <p>What is <code>127.0.0.1</code>, aka <code>localhost</code>?</p>
@@ -241,5 +245,170 @@
     </pre>
 </section>
 <section id="example-view">
+    <p><code>cheeseshop/views.py</code></p>
+    <pre><code class="hlpython" data-trim>
+from datetime import datetime
+from django.http import HttpResponse
+
+
+def index(request):
+    now = datetime.now()
+    return HttpResponse(f"It is now {now}.")
+    </code></pre>
+
 </section>
+<section id="example-urlconf">
+    <p><code>cheeseshop/urls.py</code></p>
+    <pre><code class="hlpython" data-trim>
+from django.contrib import admin
+from django.urls import path
+
+from cheeseshop.views import index
+
+urlpatterns = [
+    path("", index),
+]
+    </code></pre>
+</section>
+<section id="boring-app">
+    <img src="images/django_time_of_day.png" width="800">
+</section>
+<section id="server-reload">
+    <p>Note that we didn't have to do anything ohter than go to our browser and reload the page.</p>
+    <p>The Django webserver restarts whenever it sees your Python code has changed.</p>
+</section>
+<section id="templates">
+    <p>This is pretty boring. Can we spice it up a bit? Maybe add some HTML?</p>
+</section>
+<section id="add-templates">
+    <p>Create a folder in the Django project root called "templates".</p>
+    <ul>
+        <li>The name can be anything, but "templates" is standard.</li>
+        <li>Create a file called <code>index.html</code> inside that.</li>
+    </ul>
+    <pre class="filelist">
+        cheeseshop/
+            manage.py
+            db.sqlite3
+            cheeseshop/
+                __init__.py
+                settings.py
+                urls.py
+                asgi.py
+                wsgi.py
+                views.py
+            <strong>templates/</strong>
+                <strong>index.html</strong>
+    </pre>
+</section>
+<section id="view-with-template">
+    <p><code>cheeseshop/views.py</code></p>
+    <pre><code class="hlpython" data-trim>
+from datetime import datetime
+
+from django.shortcuts import render
+
+
+def index(request):
+    now = datetime.now()
+    return render(request, "index.html", {"now": now})
+    </code></pre>
+
+</section>
+<section id="template-context">
+    <p>Templates are rendered with a <strong>context</strong>.</p>
+    <p>A context is a list of variables that will be available in a template. It's represented as a dictionary
+    where the keys are the variable names and the values are the variable values.</p>
+    <pre><code class="hlpython" data-trim>
+{
+    "date": datetime.now(),
+    "name": "Bob Smith",
+    "age": 28
+}
+    </code></pre>
+</section>
+<section id="template-example">
+    <pre><code data-trim class="hlhtml">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Cheese Shop&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Cheese Shop&lt;/h1&gt;
+    &lt;p&gt;Welcome!&lt;/p&gt;
+    &lt;p&gt;Today is: &lcub;&lcub; now &rcub;&rcub; &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+</section>
+<section id="template-to-do-list-partial">
+    <p>So far we've...</p>
+    <ol>
+        <li>Defined a view in <code>cheeseshop/views.py</code></li>
+        <li>Defined a URL route in <code>cheeseshop/urls.py</code></li>
+        <li>Defined a template in <code>templates/index.html</code></li>
+    </ol>
+</section>
+<section id="template-error">
+    <img src="images/django_template_error.png" width="800">
+</section>
+<section id="zen">
+<p><img src="images/zen.png" height=50 style="vertical-align: middle;"><br>Explicit is better than implicit.</p>
+</section>
+<section id="template-to-do-list-full">
+    <p>We forgot a step</p>
+    <ol>
+        <li>Defined a view in <code>cheeseshop/views.py</code></li>
+        <li>Defined a URL route in <code>cheeseshop/urls.py</code></li>
+        <li>Defined a template in <code>templates/index.html</code></li>
+        <li><strong>Tell Django where to look for templates.</strong></li>
+    </ol>
+</section>
+<section id="bad-settings">
+    <p><code>cheeseshop/settings.py</code> (partial)</p>
+    <pre><code class="hlpython" data-trim>
+TEMPLATES = [
+  {
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [],
+    'APP_DIRS': True,
+    'OPTIONS': {
+      'context_processors': [
+         'django.template.context_processors.debug',
+         'django.template.context_processors.request',
+         'django.contrib.auth.context_processors.auth',
+         'django.contrib.messages.context_processors.messages',
+      ],
+    },
+  },
+]
+    </code></pre>
+</section>
+<section id="good-settings">
+    <p><code>cheeseshop/settings.py</code> (partial)</p>
+    <pre><code class="hlpython" data-trim>
+TEMPLATES = [
+  {
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': ['templates'],
+    'APP_DIRS': True,
+    'OPTIONS': {
+      'context_processors': [
+         'django.template.context_processors.debug',
+         'django.template.context_processors.request',
+         'django.contrib.auth.context_processors.auth',
+         'django.contrib.messages.context_processors.messages',
+      ],
+    },
+  },
+]
+    </code></pre>
+</section>
+<section id="template-success">
+    <img src="images/django_templated_view.png" width="800">
+</section>
+
 {% endblock %}
+

@@ -7,8 +7,8 @@
 <body>
     <h1>Cheeses We Have</h1>
     <ul>
-    {% for slug, name, country in cheeses %}
-        <li><a href="{% url 'cheese_detail' slug %}">{{ name }}</a>, from {{ country }}</li>
+    {% for cheese in cheeses %}
+        <li><a href="{% url 'cheese_detail' cheese.url_name %}">{{ cheese.name }}</a>, from {{ cheese.country }}</li>
     {% endfor %}
     </ul>
 </body>

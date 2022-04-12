@@ -12,7 +12,7 @@ CHEESES = {
     "monterey-jack": (
         "Monterey Jack",
         "USA",
-        "An American white, semi-hard cheese made using cow's milk. It is noted for its mild flavor and slight sweetness.",
+        "An American white, semi-hard cheese made using cow's milk. It's noted for a mild flavor and slight sweetness.",
     ),
     "brillat-savarin": (
         "Brillat-Savarin",
