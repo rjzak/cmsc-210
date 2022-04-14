@@ -1,78 +1,75 @@
 {% extends "document_base.html" %}
-{% block title %}CMSC {{ course_number }}: Assignment Five{% endblock %}
+{% block title %}CMSC {{ course_number }}: Assignment Six{% endblock %}
 {% block extra_style %}
 <style>
 </style>
 {% endblock %}
 
 {% block body %}
-<h1>Assignment 5</h1>
+<h1>Assignment 6</h1>
 <h2>Modifying Django Walkthrough</h2>
 <hr>
 <img src="images/django-pony-dark.png" width="500" style="float: right">
-<p><strong>Due Date</strong>: Friday, <strike>November 20th</strike> November 27th, 11:59:59 PM
+<p><strong>Due Date</strong>: Wednesday, April 27th, 11:59:59 PM
 <p><strong>Value</strong>: 150 points<br>
-<p><strong>Github Invite</strong>: <a href="https://classroom.github.com/a/3pp2nuAn">Click Here</a></p>
-<p><strong>Collaboration</strong>: For Assignment 5, <em>collaboration is not allowed</em>; you must work individually.
-    You may still see your TA and come to office hours for help, but you may not work with any other CMSC {{ course_number }} students. You may post questions on Discord, <strong>but you may not post code</strong>.</p>
+<p><strong>Github Invite</strong>: <a href="https://classroom.github.com/a/ca5PT1g_">Click Here</a></p>
+<p><strong>Collaboration</strong>: For Assignment 6, <em>collaboration is not allowed</em>; you must work individually.
+    You may still come to office hours for help, but you may not work with any other CMSC {{ course_number }} students. You may post questions on Discord, <strong>but you may not post code</strong>.</p>
 <h2>Objectives:</h2>
 <ul>
     <li>Practicing interaction with a database in Django</li>
     <li>Reinforce web development concepts</li>
-    <li>Propose a concept for a web application</li>
 </ul>
 
 <h2>Instructions</h2>
 
-<p>Your starting point for this assignment is the django tutorial you went through for assignment 4. In this assignment,
+<p>Your starting point for this assignment is the django tutorial you went through for assignment 5. In this assignment,
     we are going to update our web app so that users can add and remove questions and choices themselves (rather than going through the admin interface).
 </p>
-<p>Change your web app such that:</p>
-<ol>
-    <li>Each question has a "remove" button after it. Clicking that button will remove the question from the database and
-        refresh the page (refreshing the page can be accomplished with a RedirectResponse)</li>
-    <li>The page where your questions are listed should have a text field with a button.  Clicking the button will submit the form, adding a question with the text from the text field.</li>
-    <li>Repeat this process for choices.  NOTE:  choices will be slightly more complex, because each choice must be associated with a question.</li>
-    <li>Lastly, you will write a brief description of a website that you would like to make for assignment 6.
-        You MAY work with other students on this part.
-        Put your description of the website and the names of any collaborators in a file called
-        <code>proposal.txt</code> in your assignment submission on Github.</li>
-    <li>Your website should include some ability for users to interact with it (in other words, it should not be a <a href="https://techterms.com/definition/staticwebsite">static</a> site.</a>) </li>
-    <li>Your website must be built with Django</li>
-</ol>
-<p>The length of your proposal should be relatively short&mdash;how would you describe what your website does to a
-    friend that you are trying to get to use it?   Just the name of the website is insufficient.</p>
-
-<p>As always, feel free to ask questions in Discord if you get stuck or stumped.</p>
-
-<h2>Grading</h2>
-<p><strike>You will be doing a 1:1 Google Hangout or Discord Session with your TA, TBD. You will then run your project and
-    navigate around your sample web app, demonstrating that it works.  Don't worry! You will not be judged for any
-    criteria beyond "does it work?" and "is this all the stuff covered in the tutorial?"</strike>
+<p>When you check this assignment out on GitHub, you will find a fully-functioning web app that includes all the work done as part of the tutorial.
+This completed tutorial will form the starting point for this assignment. There will be four tasks to complete.
 </p>
+<p>Change the web app such that:</p>
+<ol>
+    <li>On the page where poll questions are listed (<code>polls.views.IndexView</code>) each question should have a "remove" button after it. Clicking that button will remove the question from the database and
+        refresh the page (refreshing the page can be accomplished with a view that returns a <code>RedirectResponse</code>)</li>
+    <li>Also on the page where poll questions are, there should be an empty text form field with a button at the end of the list of questions.
+        Clicking the button will submit the form, adding a new poll question with the text from the text field to the database.</li>
+    <li>On the page where poll responses are listed (<code>polls.views.DetailView</code>) there should be an empty text form field with a button to add a new choice to the poll.
+        When clicked, this should refresh the page, showing the poll with the new chocie added.</li>
+    <li>On the pgae where the results/votes are listed (<code>polls.views.ResultsView</code>) each response should have a "remove" button after it. Clicking that button will remove the response from the database and
+        refresh the page (refreshing the page can be accomplished with a view that returns a <code>RedirectResponse</code>)</li>
+</ol>
+    <p>As always, feel free to ask questions in Discord if you get stuck or stumped. Here's a mock-up of how the pages cuold look after your changes:</p>
+    <h2>Mockup with task #1 and #2 done:</h2>
+    <img src="images/assignment_6_delete_add_poll.png">
+    <h2>Mockup with task #3 done:</h2>
+    <img src="images/assignment_6_add_response.png">
+    <h2>Mockup with task #4 done:</h2>
+    <img src="images/assignment_6_delete_response.png">
 
 <h2>Grading Rubric</h2>
 <table class="table">
         <tbody>
                 <tr>
-                    <td>Add a question</td>
-                    <td>30 points</td>
+                    <td>Following the style guide</td>
+                    <td>10 points</td>
                 </tr>
                 <tr>
-                    <td>Remove question</td>
-                    <td>30 points</td>
+                    <td>Task #1: Add a question</td>
+                    <td>35 points</td>
                 </tr>
                 <tr>
-                    <td>Add choice</td>
-                    <td>30 points</td>
+                    <td>Task #2: Remove question</td>
+                    <td>35 points</td>
                 </tr>
                 <tr>
-                    <td>Remove choice</td>
-                    <td>30 points</td>
+                    <td>Task #3: Add choice</td>
+                    <td>35 points</td>
                 </tr>
                 <tr>
-                    <td>Proposal</td>
-                    <td>30 points</td>
+                    <td>Task #4: Remove choice</td>
+                    <td>35 points</td>
                 </tr>
                 <tr>
                     <td><strong>Total:</strong></td>
