@@ -1,6 +1,13 @@
-{% extends "base.html" %}
-{% block content }%
-<p>Welcome to the cheese shop, a databases of cheese info!</p>
-<p>Today is: {{ now }} </p>
-<p><a href="/cheeses/" class="btn btn-primary">Browse cheeses</a></p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cheese Shop</title>
+</head>
+<body>
+    <h1>Cheese Shop</h1>
+    <p>Welcome!</p>
+    <p>Today is: {{ now }} </p>
+    <p>Would you like to browse some cheeses? <a href="{% url 'cheese_list' %}">Click here</a></p>
+</body>
+</html>

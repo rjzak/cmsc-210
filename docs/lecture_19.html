@@ -120,11 +120,13 @@
 <section id="templates-control-flow-loops">
     <h3>Control Flow: Loops</h3>
     <pre class="medium"><code data-trim data-line-numbers>
-        &lt;ul&gt;{% for user in users %}
+        &lt;ul&gt;
+        {% for user in users %}
             &lt;li&gt;{{ user.name }}&lt;/li&gt;
         {% empty %}
             &lt;li&gt;No users found.&lt;/li&gt;
-        {% endfor %}&lt;/ul&gt;
+        {% endfor %}
+        &lt;/ul&gt;
     </code></pre>
     <pre class="medium fragment fade-up"><code data-trim data-line-numbers>
         {% for key, value in some_dictionary.items() %}
@@ -195,12 +197,14 @@
 <section id="inheritance-example-2">
     <p>A child template for an individual<br>cheese detail page might look like this:</p>
 <pre><code>{% extends "base.html" %}
-{% block title %}{{ name }}{% endblock %}
+
+{% block title %}{{ cheese.name }}{% endblock %}
+
 
 {% block content %}
-&lt;h2&gt;{{ name }}&lt;/h2&gt;
-&lt;p&gt;Country of origin: {{ name }}&lt;/p&gt;
-&lt;p&gt;{{ description }}&lt;/p&gt;
+&lt;h2&gt;{{ cheese.name }}&lt;/h2&gt;
+&lt;p&gt;Country of origin: {{ cheese.country }}&lt;/p&gt;
+&lt;p&gt;{{ cheese.description }}&lt;/p&gt;
 {% endblock %}</code></pre>
 </section>
 <section id="bootstrap-aside">

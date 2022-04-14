@@ -1,11 +1,15 @@
-{% extends "base.html" %}
-{% block title %}Cheese Listing {% endblock %}
-
-{% block content %}
-        <h1>Cheeses We Have</h1>
-        <ul>
-        {% for slug, name, country in cheeses %}
-            <li><a href="{% url 'cheese_detail' slug %}">{{ name }}</a>, from {{ country }}</li>
-        {% endfor %}
-        </ul>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cheeses We Have</title>
+</head>
+<body>
+    <h1>Cheeses We Have</h1>
+    <ul>
+    {% for cheese in cheeses %}
+        <li><a href="{% url 'cheese_detail' cheese.url_name %}">{{ cheese.display_name }}</a>, from {{ cheese.country }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
