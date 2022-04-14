@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from cheeseshop.cheeses import CHEESES
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
+from cheeseshop.cheeses import CHEESES
 
 
 def index(request):
@@ -12,18 +12,25 @@ def index(request):
 
 def cheese_list(request):
     cheeses = []
-    for url_name in CHEESES:
-        name, country, description = CHEESES[url_name]
-        cheeses.append({"url_name": url_name, "name": name, "country": country})
+    for url_name in CHEESES.keys():
+        name, country, desc = CHEESES[url_name]
+        cheeses.append({
+            "url_name": url_name,
+            "display_name": name,
+            "country": country
+        })
     return render(request, "cheese_list.html", {"cheeses": cheeses})
 
 
 def cheese_detail(request, url_name):
     if url_name not in CHEESES:
-        return HttpResponseNotFound(f"I don't know about a cheese called {url_name}.")
-    name, country, description = CHEESES[url_name]
-    return render(
-        request,
-        "cheese_detail.html",
-        {"name": name, "country": country, "description": description},
-    )
+        return HttpResponseNotFound(f"I don't know about {url_name}")
+    name, country, desc = CHEESES[url_name]
+    cheese = {"name": name, "country": country, "description": desc}
+    return render(request, "cheese_detail.html", cheese)
+
+
+"""
+http://localhost:8000/cheeses/
+http://localhost:8000/cheeses/cheddar/
+"""

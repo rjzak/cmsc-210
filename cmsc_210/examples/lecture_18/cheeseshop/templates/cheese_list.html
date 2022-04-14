@@ -8,7 +8,7 @@
     <h1>Cheeses We Have</h1>
     <ul>
     {% for cheese in cheeses %}
-        <li><a href="{% url 'cheese_detail' cheese.url_name %}">{{ cheese.name }}</a>, from {{ cheese.country }}</li>
+        <li><a href="{% url 'cheese_detail' cheese.url_name %}">{{ cheese.display_name }}</a>, from {{ cheese.country }}</li>
     {% endfor %}
     </ul>
 </body>
