@@ -1,6 +1,6 @@
-from datetime import datetime
+from datetime import datetime, date
 
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, Http404
 from django.shortcuts import render
 from cheeseshop.cheeses import CHEESES
 
@@ -28,3 +28,15 @@ def cheese_detail(request, url_name):
     name, country, desc = CHEESES[url_name]
     cheese = {"name": name, "country": country, "description": desc}
     return render(request, "cheese_detail.html", cheese)
+
+
+def get_date(request, year, month=1, day=1):
+    try:
+        dt = date(year, month, day)
+    except (ValueError, IOError) as exc:
+        raise
+    return render(request, "get_date.html", {"date": dt})
+
+
+class MyError(Exception):
+    pass

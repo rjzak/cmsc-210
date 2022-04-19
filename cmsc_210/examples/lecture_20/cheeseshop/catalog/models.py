@@ -19,4 +19,4 @@ class Cheese(models.Model):
     def is_high_fat(self):
         if self.fat_content is None:
             return False
-        return self.fat_content >= 0.5
+        return self.fat_content >= 50.0

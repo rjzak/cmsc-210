@@ -5,4 +5,9 @@
 <h1>{{ cheese.name }}</h1>
 <p>From: {{ cheese.country_of_origin }}</p>
 <p>{{ cheese.description }}</p>
+
+{% if cheese.is_high_fat %}
+<div class="alert alert-danger" role="alert">This is a high-fat cheese!</div>
+{% endif %}
+<p>Fat Content: {{ cheese.fat_content }}%</p>
 {% endblock %}
