@@ -15,14 +15,8 @@
 <section id="announcements">
     <h2>Announcements</h2>
     <ul>
-        <li><a href="https://mazelife.github.io/cmsc-{{ course_number }}/assignment_05.html">Assignment #5</a> is due this friday</li>
-        <li>Don't forget to start thinking<br> about assignment #6
-            <ul>
-                <li>Create your own website/web application using Django</li>
-                <li>It can be about anything you like</li>
-                <li>You may work in groups if you want, or you can go solo</li>
-            </ul>
-        </li>
+        <li><a href="assignment_06.html">Assignment #6</a> is due tomorrow (April 27th)</li>
+        <li>Next up: machine learning!</li>
     </ul>
 </section>
 <section id="deployment">
@@ -160,6 +154,7 @@
         <li>...for example starting a Django webserver</li>
         <li>The Procfile is always a simple text file that is named <code>Procfile</code> (no file extension)</li>
         <li>The Procfile must live in your GitHub project's root directory. It does not function if placed anywhere else.</li>
+        <li>Here's an example <a href="https://github.com/mazelife/cmsc-210-cheeseshop/blob/main/Procfile" target="_blank">Procfile</a> from our in-class project</li>
     </ul>
 </section>
 <section id="example-procfile">
@@ -172,55 +167,68 @@ web: gunicorn cheeseshop.wsgi --log-file -
 <section id="heroku-install-part2">
     <h3>Using Heroku (continued)</h3>
     <ol start="5">
-        <li>Add two libraries to <code>requirements.txt</code>:
+        <li>Add a few libraries to <code>requirements.txt</code>:
             <pre><code data-trim>
-                django-heroku
-                gunicorn
+Django~=4.0
+# Easily configure a DB in Heroku:
+dj-database-url~=0.5
+# Webserver for WSGI apps
+gunicorn~=20.1
+# Database driver for PostgreSQL
+psycopg2~=2.9
             </code></pre>
-            <span style="font-size: 70%">(<a href="https://gunicorn.org/">Gunicorn</a> is a production-grade Python WSGI HTTP Server for UNIX</a>)</span>
+            <!--span style="font-size: 70%">(<a href="https://gunicorn.org/">Gunicorn</a> is a production-grade Python WSGI HTTP Server for UNIX</a>)</span-->
         </li>
-        <li>Add a <code>runtime.txt</code> to the project root, specifying the version of Python to use:
+        <li>Add a <code>runtime.txt</code> to project root, specifying Python version to use:
             <pre><code data-trim>
-                python-3.7.8
+                python-3.10.4
             </code></pre>
         </li>
-        <li>Adjust your <code>settings.py</code> file a bit.</li>
+        <li>Adjust your <code>settings.py</code> file a bit. (more soon...)</li>
         <li>Commit everything to your Git repo.</li>
     </ol>
 </section>
 <section id="deploying-1">
     <ol start="9">
-        <li>Create an app on Heroku, which prepares Heroku to receive your source code. Run the following in the terminal:</li>
+        <li>Create an app on Heroku, which prepares Heroku to receive your source code. You can do this on the Heroku site:</li>
     </ol>
-    <pre><code data-trim>
+    <img src="images/heroku-create-app.png">
+    <!--pre><code data-trim>
 $> heroku create cmsc-210-cheese-shop
-    </code></pre>
+    </code></pre-->
 </section>
 <section id="deploying-2">
     <ol start="10">
         <li>You need to create a <code>SECRET_KEY</code> for your app:</li>
     </ol>
+    <p>You can do this on the command-line with the <code>heroku</code> app:</p>
     <pre><code data-trim>
 heroku config:set SECRET_KEY="9&%l8tqlhr4ibpq86#gcq_wxtr8272fd"
     </code></pre>
-    <p>Any settings that:</p>
-    <ul>
-        <li>you don't want to store in version control (like passwords) can be set this way</li>
-        <li>you want to vary by environment</li>
-    </ul>
-    <p>...can be specified this way</p>
+    <p>Any settings that you don't want to store in version control (like passwords)
+         or that you want to vary by environment can be specified this way</p>
+</section>
+<section id="deploying-2b">
+    <p>You can also set these through the Heroku website</p>
+    <img src="images/heroku-config.png" height="500" style="margin-top: 0px">
 </section>
 <section id="deploying-3">
-    <p>When you create an app, a git remote (called heroku) is also created and associated with your local git repository.</p>
+    <p>Heroku uses Git to get your app from your local machine up to Heroku's servers.</p>
     <ol start="11">
-        <li>To deploy your app, you just push to a remote git repo:</li>
+        <li>When you create an app, you should add Heroku as an additional git remote:
+            <pre><code data-trim>
+$> heroku git:remote -a cmsc-210-cheeseshop
+            </code></pre>
+        </li>
+        <li>To deploy your app, you just push to a remote git repo:
+            <pre><code data-trim>
+$> git push heroku main
+            </code></pre>
+        </li>
     </ol>
-    <pre><code data-trim>
-$> git push heroku
-    </code></pre>
 </section>
 <section id="heroku-install-part3">
-    <p>About that <a href="https://github.com/{{ student_github_project_name }}/cheeseshop/blob/master/cheeseshop/settings.py">settings.py</a> file...</p>
+    <p>About that <a href="https://github.com/mazelife/cmsc-210-cheeseshop/blob/main/cheeseshop/settings.py">settings.py</a> file...</p>
 </section>
 <section id="app-python-shell">
     You can connect to your Dyno and run commands on it:
@@ -266,7 +274,7 @@ $> heroku pg
         <li>It is running Postgres 10.5, with no data.</li>
         <li>A connection URL is already setup in the config store</li>
     </ul>
-    <p class="fragment fade-in">Now we need to adjust our settings to use this database.</p>
+    <p class="fragment fade-in">Now we need to adjust <a href="https://github.com/mazelife/cmsc-210-cheeseshop/blob/c9aeb75a37fed46c525e933a13359c60007a9f4d/cheeseshop/settings.py#L78-L82">our settings</a> to use this database.</p>
 </section>
     {% endblock %}
 
