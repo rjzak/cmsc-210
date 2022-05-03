@@ -1,0 +1,84 @@
+{% extends "document_base.html" %}
+{% block title %}CMSC {{ course_number }}: Assignment Seven{% endblock %}
+{% block extra_style %}
+<style>
+</style>
+{% endblock %}
+
+{% block body %}
+<h1>Assignment 7</h1>
+<h2>Machine Learning: Regression and Classification</h2>
+<hr>
+<img src="images/smart_bot.png" width="500" style="float: right">
+<p><strong>Due Date</strong>: Wednesday, May 18th, 11:59:59 PM
+<p><strong>Value</strong>: 150 points<br>
+<p><strong>Github Invite</strong>: <a href="https://classroom.github.com/a/jTBKP444">Click Here</a></p>
+<p><strong>Collaboration</strong>: For Assignment 7, <em>collaboration is not allowed</em>; you must work individually.
+    You may still come to office hours for help, but you may not work with any other CMSC {{ course_number }} students. You may post questions on Discord, <strong>but you may not post code</strong>.</p>
+<h2>Objectives:</h2>
+<ul>
+    <li>Bivariate, Multivariate, and Polynomial Linear regression</li>
+    <li>Classification with Naive Bayes and Decision Trees</li>
+</ul>
+
+<h2>Instructions</h2>
+
+<p>This assignment is to be done in Jupyter lab notebooks. Instructions for setting this up are in the <code>README</code> of the assignment Github repo.</p>
+<p>The assignment consists of two parts, each contained in a notebook file. Part one involves linear regression and is contained in <code>gas-mileage.ipynb</code>.
+    Part two involves classification and is contained in <code>seed-classification.ipynb</code>.</p>
+
+<p>To complete the assignment, start up the Jupyter Lab server, update the two notebooks listed above with your work, save them, commit the results, and push to GitHub.</p>
+
+<h2>Grading Rubric</h2>
+<table class="table">
+        <tbody>
+                <tr>
+                    <td>Bivariate Linear Regression: MSE calculated</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Bivariate Linear Regression: data plotted</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Polynomial Regression: MSE calculated</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Polynomial Regression: data plotted</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Multivariate Linear Regression: MSE calculated</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Multivariate Linear Regression: predictions made</td>
+                    <td>15 points</td>
+                </tr>
+
+                <tr>
+                    <td>Classification: Naive Bayes Model Trained</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Classification: Decision Tree Model Trained</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Classification: Naive Bayes Accuracy Calculated</td>
+                    <td>15 points</td>
+                </tr>
+                <tr>
+                    <td>Classification: Decision Tree Accuracy Calculated</td>
+                    <td>15 points</td>
+                </tr>
+
+
+                <tr>
+                    <td><strong>Total:</strong></td>
+                    <td><strong>150 points</strong></td>
+                </tr>
+        </tbody>
+</table>
+{% endblock %}
