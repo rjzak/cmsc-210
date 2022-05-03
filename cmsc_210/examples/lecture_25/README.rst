@@ -3,7 +3,7 @@ Baltimore City 311 Request Data Exploration
 
 To get started, make sure you install these three libraries::
 
-    $> conda install numpy scikit-learn  pandas jupyterlab matplotlib
+    $> pip install -r requirements.txt
 
 
 Next you'll want to start up the `Jupyter Lab <https://jupyterlab.readthedocs.io/en/latest/>`_ webserver::
