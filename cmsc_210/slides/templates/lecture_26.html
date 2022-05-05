@@ -14,21 +14,12 @@
 <section id="announcements">
     <h2>Announcements</h2>
     <ul>
-        <li>Assignment 6: Deadline extended to Tuesday December 8.
-            <ul>
-                <li>This is our last day of class</li>
-                <li>No extensions</li>
-            </ul>
-        </li>
-        <li>Assignment 7: I'm dropping it.
-            <ul>
-                <li>Your grade will be based on assignments 1-6</li>
-            </ul>
-        </li>
+        <li>Assignment 7: Due Wednesday May 18th</li>
+        <li>Grades are up for assignment #6</li>
         <li>Please take a few minutes to complete a course eval
             <ul>
                 <li>You should have received an email from <code>StudentCourseEvaluations@umbc.edu</code> with a link to the surveys for classes in which you are enrolled</li>
-                <li>Deadline is December 8th</li>
+                <li>Deadline is May 17th</li>
             </ul>
         </li>
     </ul>
@@ -61,10 +52,15 @@
     <img src="images/multivariate_model_prediction.png">
 </section>
 
-<section id="polynomial-regression">
-    <h3>Let's talk about polynomial regression...</h3>
+<section id="classifiers-1">
+    <h3>Let's talk about classifiers...</h3>
 </section>
-
+<section id="classifiers-2">
+    <ul>
+        <li>Regression is about finding a function that models the relationship between features and predictor</li>
+        <li>Classification is about finding a function gives us a <strong>decision boundary</strong></li>
+    </ul>
+</section>
 <section id="naive-bayes">
     <h3>Naive Bayesian Classifier</h3>
     <img src="images/bayes.jpg">
@@ -82,7 +78,7 @@
     <h3>How does it work?</h3>
     <ul>
         <li>Let's say we have three categories: 1, 2, and 3</li>
-        <li>And we have a bunch of features, <br><code>X =[x1,x2,x3...x4]</code></li>
+        <li>And we have a bunch of features, <br><code>X =[x1,x2,x3...xn]</code></li>
         <li>Every <code>x</code> belongs to one of three categories: 1, 2, or 3</li>
         <li>We want to calculate <em>probability</em>. Given a single x, what is the probability of it's being a y?</li>
         <li>Which value of y has the highest probability? That's the one we choose to classify our x as.</li>
@@ -108,7 +104,7 @@ P(Y\equiv Play) = \frac{\#Play}{\#Play + \#NoPlay}
 <section id="naive-bayes-method-5">
     <h3>We can calculate <code>P(X)</code></h3>
 \[\begin{aligned}
-P(Y\equiv Sunny) = \frac{\#Sunny}{\#Sunny + \#Overcast + \#Rainy}
+P(X\equiv Sunny) = \frac{\#Sunny}{\#Sunny + \#Overcast + \#Rainy}
 \end{aligned} \]
 </section>
 <section id="naive-bayes-method-6">
@@ -122,17 +118,30 @@ P(X \equiv Sunny|Y\equiv Play) = \frac{\#Play \& \#Sunny}{\#Play}
     <ul>
         <li>For a model with k <em>binary</em> features, there are:
             \[\begin{aligned}
-            2^{k+1} - 1
+            2^{k+1}
             \end{aligned} \]
             ...parameters to calculate
         </li>
-        <li>7 parameters are needed for a 2-feature binary dataset</li>
+        <li>8 parameters are needed for a 2-feature binary dataset</li>
         <li>To get around this we pretend all features are independent</li>
         <li>This is the "naive" part of the algorithm. Parameters to calculate now:
             \[\begin{aligned}
             2k
             \end{aligned} \]
         </li>
+    </ul>
+</section>
+<section id="knn-1">
+    <h3>k-Nearest Neighbors</h3>
+    <p>A <em>lazy</em> learner</p>
+</section>
+<section id="knn-2">
+    <ul>
+        <li>How do we chose a value for <code>k</code>?</li>
+        <li>This is called a hyperparameter</li>
+        <li>If <code>k</code> is too low, noise will have higher influence on the result. Overrfitting</li>
+        <li>High value for <code>k</code> is expensive to compute</li>
+        <li>Use the elbow method</li>
     </ul>
 </section>
 {% endraw %}
