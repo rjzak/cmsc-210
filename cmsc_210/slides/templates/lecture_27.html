@@ -4,30 +4,35 @@
 {% block extra_style %}
 <style>
 
+#irises div {
+    float: left;
+    font-size: 50%;
+    width: 150px;
+    margin: 0 50px;
+}
+#irises h4 { clear: both; }
+
+section .MathJax_Display {
+    margin: 0.5em 0;
+}
 </style>
 {% endblock %}
 
 {% block slides %}
 <section id="title">
-    <h2>Machine Learning: Decision Trees &amp Clustering</h2>
+    <h2>Machine Learning: Decision Trees &amp Random Forests</h2>
 </section>
 <section id="announcements">
     <h2>Announcements</h2>
     <ul>
-        <li>Assignment 6: Due tonight at midnight</li>
-        <li>Please take a few minutes to complete a course eval
-            <ul>
-                <li>You should have received an email from <code>StudentCourseEvaluations@umbc.edu</code> with a link to the surveys for classes in which you are enrolled</li>
-                <li>Deadline is December 8th</li>
-            </ul>
-        </li>
+        <li>Assignment 7: Due Wednesday May 18th</li>
     </ul>
 </section>
 <section id="decision-trees">
     <h3>Decision Trees</h3>
     <ul>
-        <li>Last time we looked at the naive Bayes classifier</li>
-        <li>Before we move on to clustering, let's look at one other type of classifier</li>
+        <li>Last time we looked at the naive Bayes classifier and k-Nearest Neighbors (kNN) classifier</li>
+        <li>Let's look at one other type of classifier</li>
         <li>The <strong>decision tree</strong> classifier is another common type of classifier
             <ul>
                 <li>Simple</li>
@@ -36,12 +41,57 @@
                 <li>Is <em>explicable</em></li>
             </ul>
         </li>
-
+    </ul>
+</section>
+<section id="explicability-1">
+    <h3>Explicability</h3>
+    <ul>
+        <li>A big challenge in the era of ML and AI is explicability &amp; interpretability</li>
+        <li><em>Why</em> do predictive models behave the way they do?</li>
+    </ul>
+    <img src="images/black-box.png">
+    <ul>
+        <li>If we can't understand how a model works, how do we know <em>if</em> it works?</li>
+    </ul>
+</section>
+<section id="explicability-2">
+    <h3>Supervised learning algorithms are being used for crucial decision-making:</h3>
+    <ul>
+        <li><a href="https://www.nature.com/articles/s43856-021-00028-w">Medical diagnoses</a></li>
+        <li><a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Criminal sentencing</a></li>
+        <li><a href="https://apnews.com/article/lifestyle-technology-business-race-and-ethnicity-mortgages-2d3d40d5751f933a88c1e17063657586">Decisions on whether to provide a loan</a></li>
+        <li><a href="https://www.inc.com/guadalupe-gonzalez/amazon-artificial-intelligence-ai-hiring-tool-hr.html">Hiring decisions</a></li>
+    </ul>
+</section>
+<section id="explicability-3">
+    <h3>Explainable algorithms...</h3>
+    <ul>
+        <li>can be more easily audited</li>
+        <li>facilitate trust</li>
+        <li>are easier to debug</li>
+        <li>make hidden bias more obvious</li>
+        <li>...but <em>are not a silver bullet</em>!</li>
     </ul>
 </section>
 <section id="decision-tree-example">
-    <p>Decision trees mirror how humans approach decision making:</p>
+    <p>Decision trees mirror how humans approach decision-making:</p>
     <img src="images/decision-tree.png" height="500">
+</section>
+<section id="irises">
+    <h3>Remember those irises?</h3>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg" alt="Iris Setosa"/>
+        Iris Setosa
+    </div>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Iris_versicolor_3.jpg"  alt="Iris Versicolor"/>
+        Iris Versicolor
+    </div>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Iris_virginica.jpg" alt="Iris Virginica"/>
+        Iris Viginica
+    </div>
+    <h4>We have measurements of sepal &amp; petal length and width.</h4>
 </section>
 
 <section id="decision-tree-example-2">
@@ -91,68 +141,82 @@
 <section id="decision-tree-time">
     <h2>Let's make a decision tree...</h2>
 </section>
-<section id="clustering">
-    <h2>Clustering</h2>
+<section id="random-forest-1">
+    <h2>Random Forests</h2>
+    <p>An advancement on decision trees</p>
 </section>
-<section id="clustering-defined">
-    <h3>Clustering</h3>
+<section id="random-forest-2">
     <ul>
-        <li>Clustering is an <strong>unsupervised</strong> ML method</li>
-        <li>Clustering algorithms will attempt to divide a set of data into 2 or more segments</li>
-        <li>Data <em>within</em> clusters should be as similar as possible</li>
-        <li>Data <em>between</em> clusters should be as different as possible</li>
+        <li>The random forest algorithm is an example of an <em>ensemble</em> method</li>
+        <li>Take <code>N</code> random samples from our training data and create <code>m</code> subsets of data</li>
+        <li>Train <code>m</code> independent decision trees</li>
+        <li>For a given classification, each tree provides a classification and the final prediction is determined by voting</li>
     </ul>
 </section>
-<section id="clustering-example">
-    <p>How can we best draw <em>N</em> boundaries around this data?</p>
-    <img src="images/clustering.png">
+<section id="random-forest-3">
+    <p>Basically, it’s a large number of Decision Trees making predictions that should be close to each other, yet not exactly the same.</p>
 </section>
-<section id="clustering-algorithms">
+<section id="random-forest-4">
+    <h3>Why bother to do this?</h3>
     <ul>
-        <li>Most algorithms require you to say how many clusters you want in advance</li>
-        <li>But there are also methods to suggest an optimum number of clusters from the data</li>
+        <li>Where one machine learning model can sometimes be wrong, the average prediction of a large number of machine learning models is less likely to be wrong. </li>
+        <li>Random forest classifiers are more accurate than single decision trees</li>
+        <li>Random forest classifiers are less prone to over-fitting than single decision trees</li>
     </ul>
 </section>
-<section id="k-means-1">
-    <h3>K-Means Clustering</h3>
+<section id="random-forest-5">
+    <h3>Bagging (AKA bootstrap aggregation)</h3>
     <ul>
-        <li>Simple, works fairly well</li>
-        <li>Pick <em>N</em> random points in your data where N=number of clusters</li>
-        <li>Each of these points is called the <em>centroid</em></li>
-        <li>Go through every other point and assign it to the nearest centroid</li>
-        <li>For each of the clusters, find the new center of the cluster</li>
-        <li>Now go through each point and re-assign to the closest centroid</li>
-        <li>Keep doing this till the clusters stop changing</li>
+        <li><strong>Bootstrap</strong> - data is created by resampling, <em>with replacement</em>.</li>
+        <li><strong>Aggregation</strong> - training multiple models (hyper-parameter: number of estimators)</li>
+        <li>This reduces <em>variance</em></li>
     </ul>
 </section>
-<style>
-#k-means-2 div p {
-    float: left;
-    margin: 0px;
-    padding: 0px;
-    }
-</style>
-<section id="k-means-2">
-    <div>
-        <p class="fragment fade-out"><img src="images/k-means-1.png"></p>
-        <p class="fragment fade-in-then-out"><img src="images/k-means-2.png"></p>
-    </div>
-    <div>
-        <p class="fragment fade-in-then-out"><img src="images/k-means-3.png"></p>
-        <p class="fragment fade-in"><img src="images/k-means-4.png"></p>
-    </div>
-</section>
-<section id="clustering-uses">
-    <h2>Uses of clustering</h2>
+<section id="bias-and-variance">
     <ul>
-        <li>Segmentation (audience/customer)</li>
-        <li>Document clustering</li>
-        <li>Image segmentation</li>
-        <li>Recommendation engines</li>
+        <li><strong>Bias</strong> is the error between the average model prediction and the ground truth</li>
+        <li>High bias means the algorithm is missing important trends in the data.</li>
+        <li><strong>variance</strong> describes how much the estimate of the target function will alter if different training data were used</li>
+        <li>High variance means the model won't generalize to anything beyond the training data</li>
+    </ul>
+    <img src="images/model-fitting.png">
+</section>
+<section id="classification-metrics">
+    <h3>Classification metrics</h3>
+    <ul>
+        <li>accuracy: correct predictions / total predictions</li>
+        <li>confusion matrix: proportion of true positives, tre negatives, false positives, and false negatives</li>
+        <li>FP and FN are also called Type-1 and Type-2 errors</li>
     </ul>
 </section>
-<section id="clustering-time">
-    <h2>Let's do some clustering...</h2>
+<section id="classification-metrics-2">
+    <h3>Classification metrics continued...</h3>
+    <ul>
+        <li>precision: % of positive identifications that was correct
+            \[\begin{aligned}
+            \frac{TP}{TP + FP}
+            \end{aligned} \]
+        </li>
+        <li>recall: % actual positives that was correct?
+            \[\begin{aligned}
+            \frac{TP}{TP + FN}
+            \end{aligned} \]
+        </li>
+        <li>Precision and recall can be a tug of war.</li>
+    </ul>
+</section>
+<section id="roc-curve">
+    <h3>ROC Curves</h3>
+    <img src="images/roc-curve.png">
+</section>
+<section id="roc-curve-2">
+    <h3>ROC Curves</h3>
+    <ul>
+        <li>Only for probabilistic classifiers</li>
+        <li>Probabilistic classifiers give a probability for a given class prediction</li>
+        <li>Naive Bayes, Logistic Regression, SVMs</li>
+        <li></li>
+    </ul>
 </section>
 {% endblock %}
 
