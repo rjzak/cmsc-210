@@ -65,6 +65,9 @@
     margin: 0px;
     padding: 0px;
     }
+#dbscan-2 img {
+    width: 400px;
+}
 </style>
 <section id="k-means-2">
     <div>
@@ -85,8 +88,49 @@
         <li>Recommendation engines</li>
     </ul>
 </section>
+<section id="clustering-metrics">
+    <h3>How "well" have we clustered data?</h3>
+    <ul>
+        <li>Common measure: <em>inertia</em></li>
+        <li>To calculate:
+            <ol>
+                <li>measure the distance between each data point and its centroid</li>
+                <li>square this distance</li>
+                <li>sum the squares across all points</li>
+            </ol>
+    </ul>
+</section>
 <section id="clustering-time">
     <h2>Let's do some clustering...</h2>
+</section>
+<section id="dbscan-1">
+    <h2>DBSCAN</h2>
+    <p>density-based spatial clustering of applications with noise</p>
+</section>
+<section id="dbscan-2">
+    <h3>k-Means vs. DBSCAN</h3>
+    <img src="images/k-means-example.png">
+    <img src="images/dbscan-example.png">
+</section>
+<section id="dbscan-3">
+    <ul>
+        <li><strong>density</strong> - number of points in a circle of specific radius (<em>epsilon</em>)</li>
+        <li><strong>minimum points</strong> - minimum density for a point to be considered a core point</li>
+        <li><strong>core point</strong> - points that meet minimum density metric</li>
+        <li><strong>border point</strong> - points that don't meet minimum density metric but are inside a circle for a core point</li>
+        <li><strong>noise</strong> - points that are not inside any other circle</li>
+    </ul>
+</section>
+<section id="dbscan-4">
+    <img src="images/dbscan-animation.gif">
+</section>
+<section id="dbscan-5">
+    <h3>Advantages over k-Means</h3>
+    <ul>
+        <li>no need to <em>a priori</em> specify number of clusters in data</li>
+        <li>can find clusters of arbitrary shapes</li>
+        <li>has a concept of noise, good for data with outliers</li>
+    </ul>
 </section>
 {% endblock %}
 
