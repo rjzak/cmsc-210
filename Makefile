@@ -21,16 +21,16 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 
-BROWSER := python -c "$$BROWSER_PYSCRIPT"
+BROWSER := python3 -c "$$BROWSER_PYSCRIPT"
 
 help:
-	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
+	@python3 -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
 build: ## build HTML slides from sources
-	@python -c "from cmsc_210.slides import build; build()"
+	@python3 -c "from cmsc_210.slides import build; build()"
 
 build-gh-pages: ## build HTML slides from sources to the Github Pages directory (docs)
-	@python -c "from cmsc_210.slides import build; build(location='docs')"
+	@python3 -c "from cmsc_210.slides import build; build(location='docs')"
 
 clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
 
@@ -57,7 +57,7 @@ lint: ## check style with flake8
 	flake8 cmsc_210
 
 test: ## run tests quickly with the default Python
-	python setup.py test
+	python3 setup.py test
 
 test-all: ## run tests on every Python version with tox
 	tox
@@ -69,12 +69,12 @@ coverage: ## check code coverage quickly with the default Python
 	$(BROWSER) htmlcov/index.html
 
 dist: clean ## builds source and wheel package
-	python setup.py sdist
-	python setup.py bdist_wheel
+	python3 setup.py sdist
+	python3 setup.py bdist_wheel
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
-	python setup.py install
+	python3 setup.py install
 
 format:  ## Apply auto-formatting and sort imports.
 	black --line-length=120 cmsc_210/
