@@ -23,8 +23,8 @@ def build_index(location: str = "build") -> None:
                 with open(build_dir / source.name, "w") as fh:
                     html = template.render(
                         course_number=210,
-                        season="spring",
-                        year=2022,
-                        student_github_project_name="cmsc-210-spring-2022",
+                        season="Fall",
+                        year=2023,
+                        student_github_project_name="UMBC-CMSC210-F23",
                     )
                     fh.write(html)

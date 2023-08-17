@@ -29,9 +29,6 @@
     <div class="container">
     
 
-<h3 class="short-url">https://tinyurl.com/cmsc210</h3>
-
-
 <h1>1. Install Miniconda</h1>
 
 <p>Miniconda is a free minimal installer for Anaconda. Anaconda is a free and open-source Python platform that contains:</p>
@@ -42,10 +39,10 @@
 </ol>
 
 <p>Note that while some operating systems come with Python already installed, it's likely to be a much older version.
-    We will be using Python 3.9, which is a recent Python version, and which is what will be installed by Minicdonda.</p>
+    We will be using Python 3.11, which is a recent Python version, and which is what will be installed by Minicdonda.</p>
 
-<p><a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda Installer</a> (OS X and Windows).
-    Be sure to install the version labeled "Python 3.9", <strong>not</strong> the version labeled "Python 2.7".</p>
+<p><a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank">Miniconda Installer</a> (OS X and Windows).
+    Be sure to install the version labeled "Python 3.11", <strong>not</strong> the version labeled "Python 2.7".</p>
 
 <h2>Windows Instructions</h2>
 <ol>
@@ -63,7 +60,7 @@
 <ol>
     <li>If you haven't installed Apple's Xcode Command Line Tools, do that now. Open a terminal, run <code>xcode-select --install</code>, and follow the prompts.</li>
     <li>Download the installer from the above link.
-        Be sure to choose the "Miniconda3 MacOSX 64-bit <strong>pkg</strong>" link</li>
+        Be sure to choose the "Miniconda3 MacOSX 64-bit <strong>pkg</strong>" link. If you have an Apple Silicon system, make sure you download the version for <strong>M1</strong>.</li>
     <li>Double-click the <strong>.pkg</strong> file.</li>
     <li>Follow the prompts on the installer screens.</li>
 </ol>
@@ -75,7 +72,7 @@
 
 <h2>Windows Instructions</h2>
 <ol>
-    <li><a href="https://git-scm.com/download/win">Download</a> the git installer</li>
+    <li><a href="https://git-scm.com/download/win" target="_blank">Download</a> the git installer</li>
     <li>Double-click the <code>.exe</code> file.</li>
     <li>Follow the instructions on the screen.</li>
 </ol>
@@ -85,10 +82,8 @@
 
 <h2>OS X Instructions</h2>
 <ol>
-    <li><a href="https://sourceforge.net/projects/git-osx-installer/files/">Download</a> the installer for your version of OS X.
-        You will want Git version <code>2.33.0</code></li>
-    <li>Double-click the <strong>.pkg</strong> file.</li>
-    <li>Follow the prompts on the installer screens.</li>
+    <li>Install <a href="https://brew.sh/" target="_blank">Homebrew</a>.</li>
+    <li>Once installed, run <code>brew install git</code>, accepting the prompts.</li>
 </ol>
 <h3>Verifying your installation</h3>
 <p>Open the terminal and type <code>git --version</code>. You should see something like <code>git version 2.33 (Apple Git-117)</code></p>
@@ -97,8 +92,8 @@
 <p>PyCharm is a free integrated development environment for Python that is created by a company called JetBrains.</p>
 
 <ol>
-    <li>Go to the <a href="https://www.jetbrains.com/pycharm/">PyCharm</a> home page and click the "Download" link</li>
-    <li>Select the "Community Edition" download as it is free. The "Professional Edition" is not.</li>
+    <li>Go to the <a href="https://www.jetbrains.com/pycharm/" target="_blank">PyCharm</a> home page and click the "Download" link</li>
+    <li>Select the "Community Edition" download as it is free. The "Professional Edition" is free for <a href="https://www.jetbrains.com/community/education/#students" target="_blank">educational</a>a use.</li>
     <li>Follow the installer instructions.</li>
 </ol>
 
