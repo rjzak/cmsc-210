@@ -1,0 +1,203 @@
+% Copyright 2002-2023 The University of Maryland Baltimore County (UMBC)
+% 1000 Hilltop Circle, Baltimore, Maryland, 21250, USA
+% https://www.csee.umbc.edu/
+
+\documentclass[letter,11pt]{article}
+\usepackage[breaklinks,pdfa=true,bookmarks=true,pdfdisplaydoctitle=true]{hyperref}
+\hypersetup{
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={XYZ null null 1.00},    % disable zoom
+    pdftitle={Advanced Computing},    % title
+    pdfauthor={Richard Zak},     % author
+    pdfsubject={UMBC CMSC210: Advanced Computing},   % subject of the document
+    pdfkeywords={Computer Science, Programming, Advanced Computing, CSEE}, % list of keywords
+    pdfnewwindow=true,      % links in new PDF window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\pagestyle{fancy}
+\usepackage[letterpaper, margin=1in]{geometry}
+\geometry{letterpaper}
+\usepackage{parskip} % Disable initial indent
+\usepackage{color,soul} % Highligher
+\usepackage[normalem]{ulem} % Strikethrough with \sout{}
+
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+
+\renewcommand{\today}{\number \day \ \ifcase \month \or January\or February\or March\or %
+April\or May \or June\or July\or August\or September\or October\or November\or %
+December\fi \ \number \year} 
+
+\usepackage[utf8]{inputenc}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt} % Remove default underline from header package
+\rhead{CMSC 210 Section 01: Advanced Computing}
+\lhead{\begin{picture}(0,0) \put(-65,-8){\includegraphics[width=1.1cm]{UMBC-vertical}} \end{picture}}
+\cfoot{\thepage}
+\rfoot{\input{semester}}
+\lfoot{CMSC 210 Section 01}
+%\AtEndDocument{\vfill \LaTeX \hfill}
+\AtEndDocument{\hfill \vfill Last modified: \today}
+
+\begin{document}
+
+\textbf{Semester:} \input{semester}\\
+\textbf{Location:} Information Technology (ITE) 241 \\
+\textbf{Website:} \url{https://rjzak.github.io/cmsc-210/} \\
+\textbf{Time:} Tuesdays \& Thursdays 5:30 -- 6:45p \\
+\textbf{Instructor:} Richard Zak \\
+\textbf{Email:} \href{mailto:richard.zak@umbc.edu?Subject=CMSC104}{richard.zak@umbc.edu} \\
+\textbf{Teaching Fellow:} TBA \\
+\textbf{Email:} TBA
+
+\section*{Day/Hours Available}
+\begin{itemize}
+\item Approximately 30 minutes prior to class, if planned ahead.
+\item At least 30 minutes after class, possibly longer.
+\item Virtual meeting MWF by appointment. Schedule via email, or at \url{https://calendly.com/rjzak/meeting}.
+\item In Email: Anytime, and we will respond within 48 hours.
+\end{itemize}
+
+%\section*{Blackboard Collaborate}
+%\paragraph{}Do to the COVID-19 pandemic, class will meet virtually. Blackboard Collaborate is accessible via \url{https://blackboard.umbc.edu}, displayed on the side menu bar as "Bb Collaborate". For information on UMBC's response to the Coronavirus outbreak, visit the UMBC website for the Coronavirus at \url{https://covid19.umbc.edu/}.
+
+\section*{Course Description}
+\paragraph{}This course strengthens and extends the student's programming and problem-solving skills through the use of advanced programming language constructs, pre-defined libraries, and proper software engineering techniques. Topics include program design, debugging, and testing, source code versioning control, use of a software development environment, data formats, web programming, web data extraction, and data visualization. This is the second course for non-computer science, non-computer engineering majors interested in pursuing further study in applied computing.
+
+The following is a list of the topics that will be covered:
+\begin{itemize}
+\item Python Programming
+\item Web Development
+\item Source Code Repositories (Git)
+\item Machine Learning
+\item Data Visualization
+\end{itemize}
+
+\section*{Overall Course Objectives}
+\paragraph{}After completion of this course, students will be able to:
+\begin{itemize}
+    \item Solve more complex programming problems using the Python programming language;
+    \item Use Python predefined libraries;
+    \item Make use of problem-solving skills, especially in the use of computers to solve real-world problems;
+    \item Understand and apply the software engineering concepts of design, testing, debugging, and source code control;
+    \item Use their own computers to edit, test, debug, and execute Python programs;
+    \item Use an integrated development environment (IDE);
+    \item Develop basic graphical user interfaces (GUIs);
+    \item Understand and implement general data storage, retrieval, and manipulation techniques;
+    \item Understand and implement basic web applications;
+    \item Transfer the skills learned to achieve success in future courses, projects, and employment.
+\end{itemize}
+
+\section*{Attendance}
+\paragraph{}You are expected to attend all lectures. Although lecture attendance is not a direct component of your grade, students who attend class generally \textbf{and} ask questions perform much better than their non-attending peers. Class discussion may cover important topics not explicitly contained in the lecture materials.
+
+\section*{Course Work}\label{sec:coursework}
+\paragraph{Assignments} Assignments are due approximately every two weeks, and are due on on Wednesdays before midnight (11:59PM). Assignments may be completed early, but \underline{late assignments will \textbf{not} be accepted}\footnote{Late assignments may be accepted \textit{only} in the event of a documented extenuating circumstance.}.
+
+Each assignment indicates what the task is, and most assignments have examples as to how the program should behave. \textbf{Therefore, for coding assignments, there's no reason why each student shouldn't get 100\% on each assignment, since you'll know \underline{before} turning it in whether or not your code works, and the assignments indicate how the program should work!}
+
+\paragraph{Exams}There will be one exam, the final, which will use the LockDown Browser. It is designed to reinforce the topics discussed throughout the semester in order to promote retention of the information.
+
+\section*{Course Policies}
+\subsection*{Grading}
+
+\begin{center}
+\begin{tabular}{ c c} \\
+\textbf{Score} & \textbf{Grade} \\
+\hline
+90\%-100\% & A \\
+80\%-89\% & B \\
+70\%-79\% & C \\ 
+60\%-69\% & D \\
+$<$60\%   & F 
+\end{tabular}
+\end{center}
+
+\paragraph{}For borderline grades, there may be adjustments in the student's favor based on attendance, but under no circumstances will the letter grades be lower than in the standard formula. Grades will not be ``curved'' in the sense that the percentages of A's, B's and C's are not fixed. As a guideline, a student receiving an ``A'' should be able to produce correct programs for the homework assignments and quizzes with ease. As stated previously, late work will not be accepted.
+
+\subsection*{Academic Integrity}
+\paragraph{}By enrolling is this course, each student assumes the responsibilities of an active participant in UMBC's scholarly community in which everyone's academic work and behavior are held to the highest standards of honesty. Cheating, fabrication, plagiarism, and helping others to commit these acts are all forms of academic dishonesty, and they are wrong. Academic misconduct could result in disciplinary action that may include, but is not limited to, suspension or dismissal. To find useful information about avoiding plagiarism infractions through appropriate citations, or to read the full policy regarding student academic misconduct for the graduate school, please see \url{http://www.umbc.edu/provost/integrity}.
+
+\paragraph{}You are allowed \& \textit{encouraged} to discuss course materials with your peers! However, \underline{all assignments} \underline{are an individual effort!} Assignments will be checked for evidence of shared or copied code. If you have questions, or find that you are struggling, please ask questions, \underline{do not share code}\textbf{!}
+
+\begin{itemize}
+\item You may not download or obtain anyone else’s work.
+\begin{itemize}
+\item You should think carefully about the assignment, and the assignment you turn in should be entirely a product of your own understanding of the material.
+\item You may not Google or search for the solution to an assignment, even if it’s ``only for reference,'' even if you put it aside before programming, and even if that code is not from another student.
+\item You may not copy code other than that provided in the course materials (slides, book, labs, etc.).
+\item You may not purchase or otherwise contract someone else to do the assignment (in whole or in part) for you. If we find that you have done so, it will result in an automatic `F' in the course. (This includes paying a tutor to solve your assignment.)
+\end{itemize}
+\item You may not share or upload the work you do on this course’s assignments.
+\begin{itemize}
+\item You may not email code, in whole or in part. Do not even email code to course staff!
+\item You may not post screenshots of your code, in whole or in part.
+\item You may not post code to public repositories or forums, in whole or in part.
+\item You may not allow anyone to access your files. This means properly protecting your work! Do not leave your computer unlocked if you step away; do not allow someone to copy code from your monitor; do not give your password to another student.
+\end{itemize}
+\end{itemize}
+
+\subsubsection*{AI/ChatGPT}
+\paragraph{}Please do \underline{not} use AI generative models, such as ChatGPT, to do your work. These models may seem appealing, but they can be misleading, and they don't provide anything education to you, the student. The point of taking a course is to learn, so using an AI model to do the programming for you is a waste.
+
+\paragraph{}That's not to say these models can't be useful to a programmer. They can often help a programmer be more productive, or figure out some challenging algorithms. But they are best left to situations where you know what you're doing, not for situations where you're starting out and still learning.
+
+\section*{Title IX Statement}
+\paragraph{}As an instructor, I am considered a Responsible Employee, per UMBC’s Policy on Prohibited Sexual Misconduct, Interpersonal Violence, and Other Related Misconduct \footnote{\url{http://humanrelations.umbc.edu/sexual-misconduct/umbc-resource-page-for-sexual-misconduct-and-other-related-misconduct/}}. While my goal is for you to be able to share information related to your life experiences through discussion and written work, I want to be transparent that as a Responsible Employee I am required to report disclosures of sexual assault, domestic violence, relationship violence, stalking, and/or gender-based harassment to the University’s Title IX Coordinator.
+
+\paragraph{}As an instructor, I also have a mandatory obligation to report disclosures of or suspected instances of child abuse or neglect\footnote{\url{http://www.usmh.usmd.edu/regents/bylaws/SectionVI/VI150.pdf}}.
+
+\paragraph{}The purpose of these reporting requirements is for the University to inform you of options, supports and resources; you will not be forced to file a report with the police. Further, you are able to receive supports and resources, even if you choose to not want any action taken. Please note that in certain situations, based on the nature of the disclosure, the University may need to take action.
+
+\section*{Accessibility \& Disability Accommodations, Guidance \& Resources}
+\paragraph{}Accommodations for students with disabilities are provided for all students with a qualified disability under the Americans with Disabilities Act (ADA \& ADAAA) and Section 504 of the Rehabilitation Act who request and are eligible for accommodations. The Office of Student Disability Services (SDS) is the UMBC department designated to coordinate accommodations that creates equal access for students when barriers to participation exist in University courses, programs, or activities.
+
+\paragraph{}If you have a documented disability and need to request academic accommodations in your courses, please refer to the SDS website at \url{http://sds.umbc.edu} for registration information and office procedures.
+\begin{itemize}
+\item SDS email: \href{mailto:disAbility@umbc.edu}{disAbility@umbc.edu}
+\item SDS phone: \href{tel:+14104552459}{(410) 455-2459}
+\end{itemize}
+If you will be using SDS approved accommodations in this class, please contact the instructor to discuss implementation of the accommodations. During remote instruction requirements due to COVID, communication and flexibility will be essential for success.
+
+\section*{Sexual Assault, Sexual Harassment, \& Gender Based Violence \& Discrimination}
+\paragraph{}UMBC Policy\footnote{\url{https://oei.umbc.edu/gender-discrimination-sexual-misconduct/}} and Federal law (Title IX) prohibit discrimination and harassment on the basis of sex, sexual orientation, and gender identity in University programs and activities. Any student who is impacted by sexual harassment, sexual assault, domestic violence, dating violence, stalking, sexual exploitation, gender discrimination, pregnancy discrimination, gender-based harassment or retaliation should contact the University’s Title IX Coordinator\footnote{\url{https://oei.umbc.edu/title-ix-coordinator/}} to make a report and/or access support and resources:
+\begin{itemize}
+\item Mikhel A. Kushner, Title IX Coordinator (she/they)
+\item \href{tel:+14104551250}{(410) 455-1250} (direct line), \href{mailto:kushner@umbc.edu?Subject=Title\%20IX}{kushner@umbc.edu}
+\end{itemize}
+
+\paragraph{}You can access support and resources even if you do not want to take any further action. You will not be forced to file a formal complaint or police report. Please be aware that the University may take action on its own if essential to protect the safety of the community. If you are interested in or thinking about making a report, please use the Online Reporting/Referral Form. Please note that, if you report anonymously,  the University’s ability to respond will be limited.
+
+\section*{Resources to Help you Succeed}
+\paragraph{}Click on the following links for helpful resources:
+UMBC’s Academic Success Center (ASC) \url{https://academicsuccess.umbc.edu/} provides a range of resources to support students as they progress toward degree completion. They will continue to offer all of their services online. 
+The ASC has created a specialized set of Online Learning Resources \url{https://lrc.umbc.edu/online_learning/}, including videos and guides to help students succeed while learning online.
+In addition, check out the following resources:
+
+\begin{itemize}
+\item Academic Success Center Resources \url{https://academicsuccess.umbc.edu/asc-business-continuity/} include: Online tutoring and writing support, supplemental instruction/peer-assisted study sessions (SI PASS), placement testing, FYI academic alerts, success courses, academic advocacy, academic policy and academic success meetings.
+
+\item Tutoring and Writing Center Appointments \url{https://lrc.umbc.edu/tutor/}b will be online; students can make appointments by going to \url{https://saml2.go-redrock.com/relay.php}.
+
+\item SI PASS \url{https://si.lrc.umbc.edu/} Supplemental Instruction (SI)/ Peer Assisted Study Sessions (PASS). The SI PASS program targets traditionally difficult academic courses, providing regularly scheduled, out-of-class review sessions, happening in Blackboard Collaborate inside your existing Blackboard course.
+
+\item Academic Advocates: Advocates work one-on-one with students who need support navigating academic and institutional challenges, no matter how complex the concerns (i.e., personal, academic, or financial). \url{https://academicadvocacy.umbc.edu/student-referrals/submit-a-referral/}
+
+\item Academic Success Meetings - Schedule a one-to-one virtual meeting with an Academic Success Center Professional who can help you with time management, study skills, and accessing campus resources. \url{https://lrc.umbc.edu/academic-success-meeting/}
+
+\end{itemize}
+
+If you have a question, please contact the ASC at \href{mailto:academicsuccess@umbc.edu}{academicsuccess@umbc.edu}.
+
+%\paragraph{}Additional resources: \url{https://docs.google.com/document/d/1xWWGAR8qEzKYr7qaVHoEhvO6lyXIyn6M3M7EFZPJQgA/edit?usp=sharing}
+\end{document}
+
