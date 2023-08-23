@@ -1,0 +1,45 @@
+# Source: https://davidegerosa.com/githubforlatex/
+
+name: writeapaper
+on: [push]
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    env:
+      # This is both the name of the subdirectory and the file
+      FILE: syllabus
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install TeXlive
+        run: sudo apt-get update && sudo apt-get install texlive texlive-publishers texlive-science latexmk cm-super
+      - name: LaTeX compile
+        working-directory: ${{ env.FILE }}
+        #run: latexmk -pdf -bibtex ${{ env.FILE }}
+        run: pdflatex ${{ env.FILE }}.tex
+      - name: move
+        run: mkdir -p github_artifacts && mv ${{ env.FILE }}/${{ env.FILE }}.pdf ./github_artifacts/
+      - name: Upload pdf as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.FILE }}.pdf
+          path: ./github_artifacts
+  #deploy:
+  #  # Edit here if compiling multiple papers
+  #  needs: [paper]
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: Checkout
+  #      uses: actions/checkout@v2
+  #    - uses: actions/download-artifact@v2
+  #      with:
+  #        path: github_artifacts
+  #    - name: move
+  #      run: mkdir -p github_deploy && mv github_artifacts/*.pdf github_deploy
+  #    - name: deploy on main branch
+  #      uses: peaceiris/actions-gh-pages@v3
+  #      with:
+  #        github_token: ${{ secrets.GITHUB_TOKEN }}
+  #        publish_dir: ./github_deploy
+  #        publish_branch: zak_main # Need to figure out deployment target, can't be the same as source branch
+  #        force_orphan: true
